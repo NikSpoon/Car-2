@@ -43,7 +43,7 @@ public class CarMovement : MonoBehaviour
     public void Move(float VerticalInput )
     {
         _speed = _rb.linearVelocity.magnitude;
-        Debug.Log(_speed);
+        //Debug.Log(_speed);
 
         _VerticalInput = VerticalInput;
 

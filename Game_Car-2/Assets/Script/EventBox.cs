@@ -9,8 +9,8 @@ public class EventBox : MonoBehaviour
     private Rigidbody _carRigidbody;
     private bool random;
 
-    [SerializeField] private CarControler _carControler;
-    [SerializeField] private Wheel[] _wheels;
+    private CarControler _carControler;
+    private Wheel[] _wheels;
 
     [SerializeField] private Transform _targetTo;
     [SerializeField] private int _bosst = 25000;
@@ -18,11 +18,11 @@ public class EventBox : MonoBehaviour
     [SerializeField] private int _jump = 5000;
     [SerializeField] private int _oil = 25000;
     [SerializeField] private int _oilTime = 5;
-   
+
 
 
     [SerializeField] private EffectType _effectType;
-    
+
     private enum EffectType
     {
         Teleport,
@@ -32,7 +32,7 @@ public class EventBox : MonoBehaviour
         Oil,
         Random
     }
-   
+
 
 
     private void Start()
@@ -40,8 +40,14 @@ public class EventBox : MonoBehaviour
         _car = GameObject.FindGameObjectWithTag("Player");
         _carBody = GameObject.FindGameObjectWithTag("Body");
 
+
+
         if (_car != null)
+        {
             _carRigidbody = _car.GetComponent<Rigidbody>();
+            _carControler = _car.GetComponent<CarControler>();
+            _wheels = _carControler.GetComponent<Wheel[]>();
+        }
 
         random = false;
     }
@@ -52,8 +58,8 @@ public class EventBox : MonoBehaviour
         {
             if (_effectType == EffectType.Random)
             {
-                
-                _effectType = (EffectType)Random.Range(0, System.Enum.GetValues(typeof(EffectType)).Length - 1); 
+
+                _effectType = (EffectType)Random.Range(0, System.Enum.GetValues(typeof(EffectType)).Length - 1);
                 random = true;
                 Debug.Log(_effectType);
             }
@@ -97,7 +103,7 @@ public class EventBox : MonoBehaviour
                     Debug.Log("Автомобиль скользит по маслу!");
                     break;
 
-              
+
             }
 
             if (random)
@@ -114,10 +120,10 @@ public class EventBox : MonoBehaviour
     {
         WheelFrictionCurve startValueForvord = new WheelFrictionCurve();
         WheelFrictionCurve startValueRoad = new WheelFrictionCurve();
-       
+
         foreach (Wheel wheel in _wheels)
         {
-            
+
             if (wheel.IsForward)
             {
                 WheelFrictionCurve stForvord = wheel._wheelCollider.forwardFriction;
@@ -139,8 +145,8 @@ public class EventBox : MonoBehaviour
         {
             if (wheel.IsForward)
             {
-                 wheel._wheelCollider.forwardFriction = startValueForvord;
-                
+                wheel._wheelCollider.forwardFriction = startValueForvord;
+
             }
             else
             {

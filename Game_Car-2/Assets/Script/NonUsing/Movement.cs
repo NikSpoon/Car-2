@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] InputServis _inputServis;
+   
     [SerializeField] Rigidbody _rigidbody;
+    [SerializeField] float speed = 10;
 
-    [SerializeField] float speed = 1;
+    public Vector3 direction { get;  set; }
 
     void FixedUpdate()
     {
-        var nextPosition = _rigidbody.position + _inputServis.Direction * speed * Time.fixedDeltaTime;
+        var nextPosition = _rigidbody.position + direction * speed * Time.fixedDeltaTime;
         _rigidbody.MovePosition(nextPosition);
     }
 }
