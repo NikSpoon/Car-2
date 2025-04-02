@@ -5,18 +5,17 @@ using System.Collections.Generic;
 public class EventBox : MonoBehaviour
 {
     private GameObject _car;
-    private GameObject _carBody;
     private Rigidbody _carRigidbody;
     private bool random;
 
-    private CarControler _carControler;
+    private CarMovement _carControler;
     private Wheel[] _wheels;
 
     [SerializeField] private Transform _targetTo;
     [SerializeField] private int _bosst = 25000;
     [SerializeField] private int _slow = 15000;
     [SerializeField] private int _jump = 5000;
-    [SerializeField] private int _oil = 25000;
+    [SerializeField] private float _oil = 0.3f;
     [SerializeField] private int _oilTime = 5;
 
 
@@ -38,27 +37,20 @@ public class EventBox : MonoBehaviour
     private void Start()
     {
         _car = GameObject.FindGameObjectWithTag("Player");
-        _carBody = GameObject.FindGameObjectWithTag("Body");
+        _carRigidbody = _car.GetComponent<Rigidbody>();
+        _carControler = _car.GetComponent<CarMovement>();
 
-
-
-        if (_car != null)
-        {
-            _carRigidbody = _car.GetComponent<Rigidbody>();
-            _carControler = _car.GetComponent<CarControler>();
-            _wheels = _carControler.GetComponent<Wheel[]>();
-        }
-
-        random = false;
+        _wheels = _carControler.GetComponentsInChildren<Wheel>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == _carBody)
+        var ifRandom = false;
+        if (other.gameObject == _car)
         {
             if (_effectType == EffectType.Random)
             {
-
+                ifRandom = true;
                 _effectType = (EffectType)Random.Range(0, System.Enum.GetValues(typeof(EffectType)).Length - 1);
                 random = true;
                 Debug.Log(_effectType);
@@ -68,7 +60,8 @@ public class EventBox : MonoBehaviour
 
                 case EffectType.Teleport:
 
-                    if (random) break;
+                    if (ifRandom) break;
+
                     _carRigidbody.linearVelocity = Vector3.zero;
                     _carRigidbody.angularVelocity = Vector3.zero;
 
@@ -80,21 +73,21 @@ public class EventBox : MonoBehaviour
 
                 case EffectType.Boost:
 
-                    _carRigidbody.AddForce(_carBody.transform.forward * _bosst, ForceMode.Impulse);
+                    _carRigidbody.AddForce(_car.transform.forward * _bosst, ForceMode.Impulse);
 
                     Debug.Log("Сила применена к автомобилю!");
                     break;
 
                 case EffectType.Slow:
 
-                    _carRigidbody.AddForce(-_carBody.transform.forward * _slow, ForceMode.Impulse);
+                    _carRigidbody.AddForce(-_car.transform.forward * _slow, ForceMode.Impulse);
 
                     Debug.Log("Сила применена к автомобилю!");
                     break;
 
                 case EffectType.Jump:
 
-                    _carRigidbody.AddForce(_carBody.transform.up * _jump, ForceMode.Impulse);
+                    _carRigidbody.AddForce(_car.transform.up * _jump, ForceMode.Impulse);
                     Debug.Log("Автомобиль подпрыгнул!");
                     break;
                 case EffectType.Oil:
@@ -108,7 +101,7 @@ public class EventBox : MonoBehaviour
 
             if (random)
             {
-                random = false;
+                ifRandom = false;
             }
         }
 
@@ -128,14 +121,14 @@ public class EventBox : MonoBehaviour
             {
                 WheelFrictionCurve stForvord = wheel._wheelCollider.forwardFriction;
                 startValueForvord = stForvord;
-                stForvord.stiffness = 0.1f;
+                stForvord.stiffness = _oil;
                 wheel._wheelCollider.forwardFriction = stForvord;
             }
             else
             {
                 WheelFrictionCurve st = wheel._wheelCollider.forwardFriction;
                 startValueRoad = st;
-                st.stiffness = 0.1f;
+                st.stiffness = _oil;
                 wheel._wheelCollider.forwardFriction = st;
             }
         }
