@@ -28,7 +28,7 @@ public class CarControler : MonoBehaviour
     private void IsPlayer()
     {
         _carMovement.Move(_inputServis.VerticalInput);
-        _carMovement.Steeting(_inputServis.HorizontalInput);
+        _carMovement.Steering(_inputServis.HorizontalInput);
         _carMovement.Brake(_inputServis.Brake);
 
     }

@@ -20,7 +20,7 @@ public class CarTransfer : MonoBehaviour
     {
         foreach (var wheel in _wheels)
         {
-            if (wheel._isForvord)
+            if (wheel.IsForward)
             {
 
             }

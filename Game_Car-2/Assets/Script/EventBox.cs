@@ -118,7 +118,7 @@ public class EventBox : MonoBehaviour
         foreach (Wheel wheel in _wheels)
         {
             
-            if (wheel._isForvord)
+            if (wheel.IsForward)
             {
                 WheelFrictionCurve stForvord = wheel._wheelCollider.forwardFriction;
                 startValueForvord = stForvord;
@@ -137,7 +137,7 @@ public class EventBox : MonoBehaviour
 
         foreach (Wheel wheel in _wheels)
         {
-            if (wheel._isForvord)
+            if (wheel.IsForward)
             {
                  wheel._wheelCollider.forwardFriction = startValueForvord;
                 
