@@ -47,7 +47,7 @@ public class GunController : MonoBehaviour
     {
 
         GameObject bullet = Instantiate(_Bullet, _gunPointer.position,_gunPointer.rotation);
-        var mov = bullet.GetComponent<Movement>();
+        var mov = bullet.GetComponent<Movement>();  
         mov.direction = _gunPointer.forward;
         StartCoroutine(DelleyShot());
     }
