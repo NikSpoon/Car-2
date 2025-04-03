@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 365571526562370017}
   - component: {fileID: 365571526562370016}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightTireSkid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7035829804229806764}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Meshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8456347054779734503}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 2017073937014113328}
   - component: {fileID: 2017073936994755764}
   - component: {fileID: 2017073936996136814}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftTireSmoke_PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5014,7 +5014,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2046515724141926871}
   - component: {fileID: 2046515724141926870}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftTireSkid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5152,7 +5152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6050690590170142219}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CentrOfMass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5185,7 +5185,7 @@ GameObject:
   - component: {fileID: 3170649024455251088}
   - component: {fileID: 3170649024473707540}
   - component: {fileID: 3170649024473507790}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightTireSmoke_PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9978,7 +9978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3254307225149017827}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10011,7 +10011,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1470613876139579394}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10049,7 +10049,7 @@ GameObject:
   - component: {fileID: 3242695978812359490}
   - component: {fileID: 25751731050433650}
   - component: {fileID: 3658364532441510625}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RearRightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10153,7 +10153,7 @@ GameObject:
   - component: {fileID: 1399309445325308572}
   - component: {fileID: 3694058981117797054}
   - component: {fileID: 952772779072007378}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RearLeftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10255,7 +10255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8036874088533948037}
   - component: {fileID: 9204230516439761160}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RearLeftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10326,7 +10326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2633060702331853555}
   - component: {fileID: 4469572627600883404}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontRightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10397,7 +10397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6180536078091095264}
   - component: {fileID: 8279647386858443587}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RearRightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10471,7 +10471,8 @@ GameObject:
   - component: {fileID: 8233842917085734057}
   - component: {fileID: 3984314562018358326}
   - component: {fileID: 3455640836076022259}
-  m_Layer: 0
+  - component: {fileID: 4215652491055253250}
+  m_Layer: 3
   m_Name: FirstCar
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -10495,6 +10496,7 @@ Transform:
   - {fileID: 3254307225149017827}
   - {fileID: 1470613876139579394}
   - {fileID: 6050690590170142219}
+  - {fileID: 1828396276162498275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2676958029817744801
@@ -10627,6 +10629,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.87, y: 0.6, z: 5.01}
   m_Center: {x: 0, y: 0.64, z: 0}
+--- !u!114 &4215652491055253250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6573399981537970874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ed86f374333154187f13e965d4f0a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!1 &6990351856979625669
 GameObject:
   m_ObjectHideFlags: 0
@@ -10638,7 +10653,7 @@ GameObject:
   - component: {fileID: 6266314140798859990}
   - component: {fileID: 5267935999158019433}
   - component: {fileID: 901205605277841141}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10702,7 +10717,7 @@ GameObject:
   - component: {fileID: 8979603707197739817}
   - component: {fileID: 8767152331092504106}
   - component: {fileID: 5881861100290004103}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontLeftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10804,7 +10819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5001354805273630425}
   - component: {fileID: 290364302040045519}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontLeftWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10876,7 +10891,7 @@ GameObject:
   - component: {fileID: 2931930388897595763}
   - component: {fileID: 6003400578571515752}
   - component: {fileID: 8701679591630795918}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Body
   m_Icon: {fileID: 0}
@@ -10965,7 +10980,7 @@ GameObject:
   - component: {fileID: 4589453993289808996}
   - component: {fileID: 2831553277037180906}
   - component: {fileID: 4558446899625228957}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FrontRightWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11057,3 +11072,65 @@ MonoBehaviour:
   IsForward: 1
   BrakeForceForwardWheel: 2000
   BrakeForceRearWheel: 800
+--- !u!1001 &6454448609635939174
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2997386541376787248}
+    m_Modifications:
+    - target: {fileID: 4106684384018836778, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_Name
+      value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+--- !u!4 &1828396276162498275 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4669399838550211973, guid: e4bf465ee6801814694171f7e89dac47, type: 3}
+  m_PrefabInstance: {fileID: 6454448609635939174}
+  m_PrefabAsset: {fileID: 0}

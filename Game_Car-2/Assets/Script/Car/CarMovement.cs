@@ -32,6 +32,8 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private bool Drifft;
     [SerializeField] private bool Real;
     [SerializeField] private bool Rally;
+
+    private Vector3 CurrentTarget;
     private void Start()
     {
         _rb.centerOfMass = _centreOfMass.position;
@@ -91,7 +93,7 @@ public class CarMovement : MonoBehaviour
 
 
     public void Steering(float HorizontalInput)
-    
+        
     {
         _HorizontalInput = HorizontalInput;
         float steeringAngle = _HorizontalInput * _steeringCuve.Evaluate(_speed);
@@ -146,8 +148,24 @@ public class CarMovement : MonoBehaviour
         _BrakeForce = ((movingDorection < -0.5f && _VerticalInput > 0) || (movingDorection > 0.5f && _VerticalInput < 0)) ? Mathf.Abs(_VerticalInput) : 0;
     }
 
-    
-    
+    public void LookAtCheckpoint(Vector3 vector)
+    {
+       
+        Vector3 directionToTarget = vector; 
+
+        
+        float angleToTarget = Vector3.SignedAngle(transform.forward, directionToTarget, Vector3.up);
+
+        
+        foreach (Wheel wheel in _wheels)
+        {
+            if (wheel.IsForward) 
+            {
+                wheel._wheelCollider.steerAngle = angleToTarget;
+            }
+        }
+    }
+
     private void TupeOfCar()
     {
         if (Drifft)
