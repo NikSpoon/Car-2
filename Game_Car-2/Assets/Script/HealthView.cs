@@ -1,6 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class HealthView : MonoBehaviour
@@ -9,11 +9,13 @@ public class HealthView : MonoBehaviour
     [SerializeField] private Health _health;
 
     [SerializeField] private Image _image;
-    [SerializeField] private TextMeshPro _text;
+    [SerializeField] private TextMeshProUGUI _text;
 
     private void Start()
     {
         _health.OnHealthChanged += OnDamaged;
+        if (_text != null)
+            _text.text = "Health = " + _health.CurrentHeath;
     }
     private void OnDestroy()
     {
