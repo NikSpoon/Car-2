@@ -58,7 +58,7 @@ public class EnemyCar : MonoBehaviour
             }
             else
             {
-                Debug.Log("++");
+                
                 _currentTargetIndex++;
             }
 
@@ -66,10 +66,7 @@ public class EnemyCar : MonoBehaviour
             CurrentTarget = _target[_currentTargetIndex].transform;
             
             VerticalInput = SetVerticalInput();
-            Debug.Log("______________________");
-            Debug.Log("_currentTargetIndex =" + _currentTargetIndex);
-            Debug.Log("____________________");
-            Debug.Log("CurrentTarget = " + CurrentTarget);
+           
         }
         else
         {

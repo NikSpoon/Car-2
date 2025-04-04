@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class CarMovement : MonoBehaviour
 {
@@ -20,33 +22,43 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private int _wheelsAngleMax = 50;
     [SerializeField] private int _brakeTorque = 100000;
 
-    [SerializeField] private bool _fourWheelDrive;
-    [SerializeField] private bool _frontWheelDrive;
-    [SerializeField] private bool _rearWheelDrive;
+    [Header("Привід")]
+    [SerializeField] private bool _fourWheelDrive; 
+    [SerializeField] private bool _frontWheelDrive; 
+    [SerializeField] private bool _rearWheelDrive; 
 
     [SerializeField] private float _accelerationRate = 5f; 
     [SerializeField] private float _decelerationRate = 7f; 
     private float _currentMotorForce = 0f; 
     float movingDorection;
-
     [SerializeField] private bool Drifft;
     [SerializeField] private bool Real;
     [SerializeField] private bool Rally;
 
     private Vector3 CurrentTarget;
-    private void Start()
+    public event Action<float> OnSpeadChanged;
+    private void Awake()
     {
         _rb.centerOfMass = _centreOfMass.position;
         TupeOfCar();
-
+        
+        
+        
+        if (_wheels == null || _wheels.Length == 0)
+        {
+            Debug.LogWarning("Колеса не задані!");
+            return;
+        }
     }
 
   
     public void Move(float VerticalInput )
     {
         _speed = _rb.linearVelocity.magnitude;
-        //Debug.Log(_speed);
+        OnSpeadChanged?.Invoke(_speed);
 
+        Debug.Log(_speed + " - Spead");
+        Debug.Log(VerticalInput +  " - VerticalInput");
         _VerticalInput = VerticalInput;
 
         if (_VerticalInput != 0)
@@ -95,6 +107,7 @@ public class CarMovement : MonoBehaviour
     public void Steering(float HorizontalInput)
         
     {
+        
         _HorizontalInput = HorizontalInput;
         float steeringAngle = _HorizontalInput * _steeringCuve.Evaluate(_speed);
         float slipAngle = Vector3.Angle(_Car.forward, _rb.linearVelocity.normalized - _Car.forward);
@@ -273,4 +286,8 @@ public class CarMovement : MonoBehaviour
 
         }
     }
+    
+    
+
+    
 }

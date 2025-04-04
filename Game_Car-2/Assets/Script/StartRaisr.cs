@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class StartRaisr : MonoBehaviour
 {
-    [SerializeField] private Transform _enemiesParent; // задай в інспекторі порожній GameObject
+    [SerializeField] private Transform _enemiesParent; 
 
 
 
