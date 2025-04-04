@@ -1,12 +1,12 @@
-using Unity.VisualScripting;
-using UnityEditor.UIElements;
+
 using UnityEngine;
-using static UnityEngine.LightTransport.InputExtraction;
+
 
 public class CarControler : MonoBehaviour
 {
     [SerializeField] private CarMovement _carMovement;
     [SerializeField] private InputServis _inputServis;
+    [SerializeField] private EnemyCar _enemyCar;
 
     [SerializeField] private bool IsPlayerControl;
     [SerializeField] private bool IsEnamyControl;
@@ -15,15 +15,20 @@ public class CarControler : MonoBehaviour
     {
         if (gameObject.tag == ("Player"))
             IsPlayerControl = true;
-
+        else if (gameObject.tag == "Enemy")
+            IsEnamyControl = true;
     }
     void Update()
     {
         if (IsPlayerControl)
+        {
             IsPlayer();
-        else
+        }
+      
+        else if (IsEnamyControl)
+        {
             IsEnamy();
-
+        }
     }
     private void IsPlayer()
     {
@@ -35,7 +40,10 @@ public class CarControler : MonoBehaviour
 
     private void IsEnamy()
     {
-
+        _carMovement.LookAtCheckpoint((_enemyCar.CurrentTarget.position - transform.position).normalized);
+        _carMovement.Move(0.5f);
+       // _carMovement.Steering(_enemyCar.HorizontalInput);
+        _carMovement.Brake(false);
     }
 
 
