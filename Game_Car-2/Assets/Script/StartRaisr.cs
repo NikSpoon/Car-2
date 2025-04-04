@@ -1,8 +1,13 @@
+﻿using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class StartRaisr : MonoBehaviour
 {
+    [SerializeField] private Transform _enemiesParent; // задай в інспекторі порожній GameObject
+
+
+
     [SerializeField] private GameObject _enemy;
     [SerializeField] private Transform[] _startPoints;
     [SerializeField] private GameObject _player;
@@ -21,19 +26,30 @@ public class StartRaisr : MonoBehaviour
             }
             else
             {
-                var enemy  = Instantiate(_enemy, point.position, point.rotation);
-                var com = enemy.gameObject.GetComponent<EnemyCar>();
-                com.enabled = true;
                 _checkpointManager.CheckpointsWithStart[0] = point;
 
                 for (int i = 0; i < _checkpointManager.Len; i++)
                 {
                     _checkpointManager.CheckpointsWithStart[i + 1] = _checkpointManager.Checkpoints[i];
                 }
+
+
+                var enemy = Instantiate(_enemy, point.position, point.rotation, _enemiesParent);
+                var enemyCar = enemy.GetComponent<EnemyCar>();
+                enemyCar.InitializeTargets(ConvertToGameObjects(_checkpointManager.CheckpointsWithStart));
+                enemyCar.enabled = true;
             }
         }
     }
-
+    private GameObject[] ConvertToGameObjects(Transform[] transforms)
+    {
+        GameObject[] result = new GameObject[transforms.Length];
+        for (int i = 0; i < transforms.Length; i++)
+        {
+            result[i] = transforms[i].gameObject;
+        }
+        return result;
+    }
     private void StartPoint(Transform point)
     {
         _player.transform.position = point.position;

@@ -41,7 +41,7 @@ public class CarControler : MonoBehaviour
     private void IsEnamy()
     {
         _carMovement.LookAtCheckpoint((_enemyCar.CurrentTarget.position - transform.position).normalized);
-        _carMovement.Move(1f);
+        _carMovement.Move(0.5f);
        // _carMovement.Steering(_enemyCar.HorizontalInput);
         _carMovement.Brake(false);
     }

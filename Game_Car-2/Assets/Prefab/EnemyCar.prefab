@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2997386541376787248, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 2997386541376787248, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2997386541376787248, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 2997386541376787248, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,9 +48,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3984314562018358326, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: Real
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984314562018358326, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: Rally
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984314562018358326, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: Drifft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984314562018358326, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: _wheelsAngleMax
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984314562018358326, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: _steeringCuve.m_Curve.Array.data[0].time
+      value: -1.3678566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984314562018358326, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: _steeringCuve.m_Curve.Array.data[0].value
+      value: 96.02002
+      objectReference: {fileID: 0}
     - target: {fileID: 6573399981537970874, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
       propertyPath: m_Name
       value: EnemyCar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573399981537970874, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233842917085734057, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: _enemyCar
+      value: 
+      objectReference: {fileID: 7046167163228483526}
+    - target: {fileID: 8233842917085734057, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: IsEnamyControl
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233842917085734057, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      propertyPath: IsPlayerControl
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -59,8 +99,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2997386541376787248, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4104245963609542496}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6573399981537970874, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7046167163228483526}
   m_SourcePrefab: {fileID: 100100000, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+--- !u!1 &3886894724729282019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6573399981537970874, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}
+  m_PrefabInstance: {fileID: 7982751681483200345}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7046167163228483526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3886894724729282019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efb68e5e8c6bd03438a7ac879d7ec761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: []
 --- !u!4 &5138806674277631081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2997386541376787248, guid: d7403d14a566db142870076d3bd1d4f9, type: 3}

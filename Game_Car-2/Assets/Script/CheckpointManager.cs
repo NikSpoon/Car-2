@@ -4,7 +4,7 @@ public class CheckpointManager : MonoBehaviour
 {
 
     [SerializeField] private Transform _track;
-    public Transform[] CheckpointsWithStart { get; set; }
+    public Transform[] CheckpointsWithStart { get; private set; }
     public Transform[] Checkpoints { get; private set; }
     public int Len { get; private set; }
     private void Awake()

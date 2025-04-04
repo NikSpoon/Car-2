@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyCar : MonoBehaviour
 {
     [SerializeField] private GameObject[] _target;
+
     public Transform CurrentTarget { get; private set; }
 
     private int _currentTargetIndex = 0;
@@ -13,38 +14,47 @@ public class EnemyCar : MonoBehaviour
     private void Awake()
     {
 
-        if (_target.Length == 0)
+        if (_target != null && _target.Length != 0)
         {
-            Debug.LogError("EnemyCar: No waypoints assigned!");
-            enabled = false;
-            return;
-        }
-
         CurrentTarget = _target[_currentTargetIndex].transform;
-        transform.position = CurrentTarget.position + new Vector3(0, 10, 0);
+        transform.position = CurrentTarget.position ;
+        }
+       
+
+
 
     }
     void Start()
     {
-
-        _target[_currentTargetIndex].SetActive(true);
+       
     }
-    private void Update()
-    {
-        Debug.Log(_currentTargetIndex);
-    }
+  
     private void OnTriggerEnter(Collider collision)
    {
-   
+        if (_target == null || _target.Length == 0)
+        {
+            Debug.LogError("Target array is not initialized or is empty!");
+            return;
+        }
+
+
+        if (_currentTargetIndex < 0 || _currentTargetIndex >= _target.Length)
+        {
+            Debug.LogError($"Index {_currentTargetIndex} is out of bounds! Target length: {_target.Length}");
+            return;
+        }
+
         Debug.Log("Collision Detected with: " + collision.gameObject.name); 
         if (collision.gameObject == _target[_currentTargetIndex])
         {
-            Debug.Log("Correct target hit!");
-            _target[_currentTargetIndex].SetActive(false);
+
+            
+           
 
             if (_currentTargetIndex == _target.Length - 1)
             {
                 _currentTargetIndex = 0;
+                return;
             }
             else
             {
@@ -52,11 +62,18 @@ public class EnemyCar : MonoBehaviour
                 _currentTargetIndex++;
             }
 
-            _target[_currentTargetIndex].SetActive(true);
+            
             CurrentTarget = _target[_currentTargetIndex].transform;
             
             VerticalInput = SetVerticalInput();
-            HorizontalInput = SetHorizontalInput();
+            Debug.Log("______________________");
+            Debug.Log("_currentTargetIndex =" + _currentTargetIndex);
+            Debug.Log("____________________");
+            Debug.Log("CurrentTarget = " + CurrentTarget);
+        }
+        else
+        {
+            return;
         }
         
     }
@@ -66,11 +83,15 @@ public class EnemyCar : MonoBehaviour
         var verticalInput = Vector3.Dot(transform.forward, direction.normalized);
         return verticalInput;
     }
-    private float SetHorizontalInput()
+   
+    public void InitializeTargets(GameObject[] targets)
     {
-        Vector3 direction = CurrentTarget.position - transform.position;
-        float angelToTarget = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
-        return angelToTarget;
-    }
+        _target = targets;
 
+        if (_target != null && _target.Length > 0)
+        {
+            _target[0].SetActive(true);
+            CurrentTarget = _target[0].transform;
+        }
+    }
 }
