@@ -15,7 +15,7 @@ C:/Game_Unity_Car-2/Car-2/Game_Car-2
 -logFile
 Logs/AssetImportWorker3.log
 -srvPort
-58495
+50872
 -job-worker-count
 7
 -background-job-worker-count
@@ -59,12 +59,12 @@ C:/Game_Unity_Car-2/Car-2/Game_Car-2
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [29856]  Target information:
+Player connection [8884]  Target information:
 
-Player connection [29856]  * "[IP] 192.168.1.24 [Port] 0 [Flags] 2 [Guid] 3529790366 [EditorId] 3529790366 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-TS10LTIF) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [8884]  * "[IP] 192.168.1.24 [Port] 0 [Flags] 2 [Guid] 4133696491 [EditorId] 4133696491 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-TS10LTIF) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [29856] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [29856] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [8884] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [8884] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -76,7 +76,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 1.61 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.72 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.41f1 (46e447368a18)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/Resources/UnitySubsystems
@@ -92,45 +92,45 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56508
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56668
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003006 seconds.
-- Loaded All Assemblies, in  0.356 seconds
+Registered in 0.002798 seconds.
+- Loaded All Assemblies, in  0.339 seconds
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.267 seconds
-Domain Reload Profiling: 622ms
-	BeginReloadAssembly (138ms)
+- Finished resetting the current domain, in  0.287 seconds
+Domain Reload Profiling: 624ms
+	BeginReloadAssembly (119ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
 	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (45ms)
-	LoadAllAssembliesAndSetupDomain (129ms)
-		LoadAssemblies (134ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (43ms)
+	LoadAllAssembliesAndSetupDomain (135ms)
+		LoadAssemblies (116ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (127ms)
-			TypeCache.Refresh (125ms)
-				TypeCache.ScanAssembly (115ms)
+		AnalyzeDomain (132ms)
+			TypeCache.Refresh (130ms)
+				TypeCache.ScanAssembly (117ms)
 			BuildScriptInfoCaches (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (267ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (287ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (233ms)
+		SetupLoadedEditorAssemblies (249ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (18ms)
-			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (46ms)
-			ProcessInitializeOnLoadAttributes (124ms)
-			ProcessInitializeOnLoadMethodAttributes (39ms)
+			InitializePlatformSupportModulesInManaged (20ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (48ms)
+			ProcessInitializeOnLoadAttributes (136ms)
+			ProcessInitializeOnLoadMethodAttributes (40ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -142,11 +142,11 @@ Import Worker Mode flag is 0x00
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.704 seconds
+- Loaded All Assemblies, in  0.665 seconds
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 0.73 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.66 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
@@ -155,35 +155,35 @@ Package Manager log level set to [2]
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.669 seconds
-Domain Reload Profiling: 1370ms
-	BeginReloadAssembly (137ms)
+- Finished resetting the current domain, in  0.651 seconds
+Domain Reload Profiling: 1313ms
+	BeginReloadAssembly (140ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (23ms)
-	RebuildCommonClasses (27ms)
+		CreateAndSetChildDomain (25ms)
+	RebuildCommonClasses (29ms)
 	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (30ms)
-	LoadAllAssembliesAndSetupDomain (498ms)
-		LoadAssemblies (350ms)
+	initialDomainReloadingComplete (32ms)
+	LoadAllAssembliesAndSetupDomain (452ms)
+		LoadAssemblies (336ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (231ms)
-			TypeCache.Refresh (157ms)
-				TypeCache.ScanAssembly (143ms)
-			BuildScriptInfoCaches (54ms)
-			ResolveRequiredComponents (15ms)
-	FinalizeReload (669ms)
+		AnalyzeDomain (200ms)
+			TypeCache.Refresh (146ms)
+				TypeCache.ScanAssembly (133ms)
+			BuildScriptInfoCaches (40ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (651ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (572ms)
+		SetupLoadedEditorAssemblies (560ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (3ms)
 			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (142ms)
-			ProcessInitializeOnLoadAttributes (365ms)
-			ProcessInitializeOnLoadMethodAttributes (53ms)
+			BeforeProcessingInitializeOnLoad (150ms)
+			ProcessInitializeOnLoadAttributes (353ms)
+			ProcessInitializeOnLoadMethodAttributes (45ms)
 			AfterProcessingInitializeOnLoad (4ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -192,105 +192,217 @@ Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 second
 Refreshing native plugins compatible for Editor in 0.70 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 144 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6400 unused Assets / (6.3 MB). Loaded Objects now: 6980.
-Memory consumption went from 168.1 MB to 161.8 MB.
-Total: 7.144900 ms (FindLiveObjects: 0.504100 ms CreateObjectMapping: 0.477100 ms MarkObjects: 3.856100 ms  DeleteObjects: 2.306600 ms)
+Unloading 6399 unused Assets / (5.8 MB). Loaded Objects now: 6979.
+Memory consumption went from 173.8 MB to 168.0 MB.
+Total: 6.658600 ms (FindLiveObjects: 0.518300 ms CreateObjectMapping: 0.448300 ms MarkObjects: 3.718300 ms  DeleteObjects: 1.973100 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 84451.361893 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T2.fbx
-  artifactKey: Guid(a01324f0cc2335f42a151b4373240763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T2.fbx using Guid(a01324f0cc2335f42a151b4373240763) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9020757cc1059e5138231d03aafa13f3') in 0.3325824 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 244
+  Time since last request: 4656.379862 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/checkpoint.fbx
+  artifactKey: Guid(d698b6eb27c68514ba3cbc5e7ac74f14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/checkpoint.fbx using Guid(d698b6eb27c68514ba3cbc5e7ac74f14) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cc95e18efe5137b7e61af50a3739addd') in 0.2984431 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 37
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.479198 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T5 - Left.fbx
-  artifactKey: Guid(4f47553849a529d4ab2f951ee5d165f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T5 - Left.fbx using Guid(4f47553849a529d4ab2f951ee5d165f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9ab3e47d988de3a59c3de80b62494eb9') in 0.1995633 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 113
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obs_tunnel_barrier.prefab
+  artifactKey: Guid(fb0989b088faea34286a6465150233bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obs_tunnel_barrier.prefab using Guid(fb0989b088faea34286a6465150233bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1117b6256724e409449f2a86aa0f7e25') in 0.0386132 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.296440 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T8.fbx
-  artifactKey: Guid(983fbd4a7c5ee1743ad003852aeb3e4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T8.fbx using Guid(983fbd4a7c5ee1743ad003852aeb3e4d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '15e324e0e20b158abdfea2a1ccae7f4b') in 0.1709009 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 104
+  Time since last request: 0.000025 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obstacle_container_yellow.prefab
+  artifactKey: Guid(caa48a701147e8643822ced4f913992e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obstacle_container_yellow.prefab using Guid(caa48a701147e8643822ced4f913992e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2ce6b34305da79032f8440a3f0b3fbf3') in 0.0366726 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.268831 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T11 - Ground.fbx
-  artifactKey: Guid(43101d45613e7d245b3fd1973bd717ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T11 - Ground.fbx using Guid(43101d45613e7d245b3fd1973bd717ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '65c42989d251f2b96159d5fb22bcf987') in 0.1127437 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 160
+  Time since last request: 0.000016 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obs_tunnel_barrier.fbx
+  artifactKey: Guid(d64f038d47a3d394499db62152c647fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obs_tunnel_barrier.fbx using Guid(d64f038d47a3d394499db62152c647fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd97e375a552efeddc93fb03d0e68e0a1') in 0.0249811 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/jump_gate_area_curved_3.fbx
+  artifactKey: Guid(0e6da526b49be25498848fa1c27658cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/jump_gate_area_curved_3.fbx using Guid(0e6da526b49be25498848fa1c27658cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6804683e6f5643b6671ba082775db6a7') in 0.0822909 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 41
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obstacle_container_yellow.fbx
+  artifactKey: Guid(893bf3c8f05b09e4d9f459f6d3b581d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obstacle_container_yellow.fbx using Guid(893bf3c8f05b09e4d9f459f6d3b581d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c8edae51967b068ca9346923892c0b62') in 0.0311918 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/checkpoint.prefab
+  artifactKey: Guid(41502ae2443f6ec4598ecf6fc60915e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/checkpoint.prefab using Guid(41502ae2443f6ec4598ecf6fc60915e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4957f7e2ab3606d2c1d92b148159a105') in 0.0284863 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 37
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Prefab/FirstCar.prefab
+  artifactKey: Guid(d7403d14a566db142870076d3bd1d4f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/FirstCar.prefab using Guid(d7403d14a566db142870076d3bd1d4f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3adc1ae553846595a038db7f932ca0f8') in 0.0308862 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 108
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/jump_gate_landing.prefab
+  artifactKey: Guid(db999e13b490ec34ca49a70caf98a625) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/jump_gate_landing.prefab using Guid(db999e13b490ec34ca49a70caf98a625) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a79a0ae1ff799b0da0f18f3e53b304f2') in 0.0310801 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 36
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000022 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T12.fbx
-  artifactKey: Guid(2fad35f6ea2b52e4dbc915d17f17ce8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T12.fbx using Guid(2fad35f6ea2b52e4dbc915d17f17ce8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7cd7e4898b62a86d8abd0505d39b1b0f') in 0.1312992 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 236
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Finish Platform.fbx
+  artifactKey: Guid(cdb91c813414c6540a3b2185f9c0b755) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Finish Platform.fbx using Guid(cdb91c813414c6540a3b2185f9c0b755) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e54fd3cb37fef5e1959c4375c4b995d1') in 0.1190281 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 126
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.250420 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T15 - Ground.fbx
-  artifactKey: Guid(0186d4c3dc1d89548b97234c26f98d35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T15 - Ground.fbx using Guid(0186d4c3dc1d89548b97234c26f98d35) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '52523d81e690fa89946630617ce4d721') in 0.1134417 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 134
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obstacle_container_red.fbx
+  artifactKey: Guid(7967a16b4b69c89448842a1f0a3dc12a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obstacle_container_red.fbx using Guid(7967a16b4b69c89448842a1f0a3dc12a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '46888f0e9f0e86f4a538f54669ac30ed') in 0.0402508 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.349008 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T18 - Up.fbx
-  artifactKey: Guid(e7ebadcc1fa8f8c4a961a707c839623d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T18 - Up.fbx using Guid(e7ebadcc1fa8f8c4a961a707c839623d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6508aec09c68e8e1093a7dd526df984b') in 0.1426806 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 151
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obstacle_pillar_red.prefab
+  artifactKey: Guid(6bf8f92d03389f345b1f14eb2f4e5aab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obstacle_pillar_red.prefab using Guid(6bf8f92d03389f345b1f14eb2f4e5aab) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '127f3a1c3b621be103ca9993ab98c323') in 0.0267153 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.351558 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T22.fbx
-  artifactKey: Guid(19f42034330f2c847a0de82232026879) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T22.fbx using Guid(19f42034330f2c847a0de82232026879) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '32e126b7c6e97ab35cd43225225cb680') in 0.1483966 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 227
+  Time since last request: 0.000026 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/jump_gate_area_curved_2.prefab
+  artifactKey: Guid(31662d0542eccb84ead9ab630f012b50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/jump_gate_area_curved_2.prefab using Guid(31662d0542eccb84ead9ab630f012b50) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '965aca6d67ffc140119fd0f0290c17d4') in 0.0389289 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 41
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.729007 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T27 - Magnetic.fbx
-  artifactKey: Guid(e82676aaf7130a042884c6edc4d55518) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T27 - Magnetic.fbx using Guid(e82676aaf7130a042884c6edc4d55518) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5262ba540db276e214597ba01157ae8b') in 0.1199909 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 86
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obs_cor_barrier_lrg.prefab
+  artifactKey: Guid(549a4814533c4c243930e2b5bcc623b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obs_cor_barrier_lrg.prefab using Guid(549a4814533c4c243930e2b5bcc623b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cfda861b9b13aad70b2aa1b326980aad') in 0.0233694 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 22
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.534235 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T30 - Ground.fbx
-  artifactKey: Guid(ac8c8f2555e684b4fb5a33d4a2895248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T30 - Ground.fbx using Guid(ac8c8f2555e684b4fb5a33d4a2895248) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a64351b32972ccc412ef966ae6ac2f55') in 0.1362493 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 245
+  Time since last request: 0.000015 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/dress_corner_warning_right.prefab
+  artifactKey: Guid(8193b4767a2697c478fe0c226e2a8d36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/dress_corner_warning_right.prefab using Guid(8193b4767a2697c478fe0c226e2a8d36) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '19126f7a59192134ee85a8a92376f8e3') in 0.0252014 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 14
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.337753 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T33.fbx
-  artifactKey: Guid(00adb5b1ea50aeb4588e8e1ed37a8524) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T33.fbx using Guid(00adb5b1ea50aeb4588e8e1ed37a8524) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3cfbbc23f3992daa25b617ef48291f92') in 0.1478389 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 93
+  Time since last request: 0.000013 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/gat_sta_magnetic_bridge.fbx
+  artifactKey: Guid(bc4c7bfc838de624994cf4cede6f0486) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/gat_sta_magnetic_bridge.fbx using Guid(bc4c7bfc838de624994cf4cede6f0486) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b589445007fd4f689519e22ad17f88c5') in 0.0569778 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 34
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.756959 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T40.fbx
-  artifactKey: Guid(6126be379943ac04eb531f4099ee30fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/T40.fbx using Guid(6126be379943ac04eb531f4099ee30fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2529e5d7f3f19b01bd516766e7ce2bd8') in 0.1604151 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 202
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obstacle_container_red.prefab
+  artifactKey: Guid(56326bd3c1702ea4b955bd889505fa32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obstacle_container_red.prefab using Guid(56326bd3c1702ea4b955bd889505fa32) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '40b94bbf950d8567f3e31ad568d2de1d') in 0.0252125 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 24
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/gat_sta_boost_medium.prefab
+  artifactKey: Guid(dd0e5997832a0c94a8d5e1a3b59d7c76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/gat_sta_boost_medium.prefab using Guid(dd0e5997832a0c94a8d5e1a3b59d7c76) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '87f8cbfa4b3e652c806efed739ec3484') in 0.0389039 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obstacle_pillar_yellow.prefab
+  artifactKey: Guid(771e44792bdfc0547b0dab187c8b762f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/obstacle_pillar_yellow.prefab using Guid(771e44792bdfc0547b0dab187c8b762f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '93d8e941f335743c1f8631cda56f8f46') in 0.0276291 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Finish Platform.prefab
+  artifactKey: Guid(6ee09447f5679684db32c4af5532f70d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Finish Platform.prefab using Guid(6ee09447f5679684db32c4af5532f70d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5b7aa2cc973a706ac8dea6ccef03004c') in 0.0662283 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 126
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/jump_gate_area_curved.fbx
+  artifactKey: Guid(800faa79e8ba28f4887b572fcf49e51f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/jump_gate_area_curved.fbx using Guid(800faa79e8ba28f4887b572fcf49e51f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ce3265d5641b79fbb4194e3b9c6cbfd9') in 0.0656041 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 41
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obstacle_pillar_red.fbx
+  artifactKey: Guid(d41dbbcc5409d7f41bd2154f4e61ab47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obstacle_pillar_red.fbx using Guid(d41dbbcc5409d7f41bd2154f4e61ab47) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9373f92bd83bcacc7b8d8881dd995209') in 0.045584 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Prefab/EnemyCar.prefab
+  artifactKey: Guid(28f1297bd58b6554fbe3ce8daf9a7a2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefab/EnemyCar.prefab using Guid(28f1297bd58b6554fbe3ce8daf9a7a2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '98b2fad3dc4a8d988b1967e26a71764d') in 0.0289735 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 208
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obstacle_pillar_yellow.fbx
+  artifactKey: Guid(6a39cdbabc6d0de4c9f7e316f4d05ed1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/Supporting Props/obstacle_pillar_yellow.fbx using Guid(6a39cdbabc6d0de4c9f7e316f4d05ed1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd07a1d4117b4cd91febaae7077200ca8') in 0.0433614 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 30
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Ground.prefab
+  artifactKey: Guid(a9a486a9077b4624fac47df0c7f74395) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Ground.prefab using Guid(a9a486a9077b4624fac47df0c7f74395) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '984061c1e28c99891b658865a4e87069') in 0.020298 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/jump_gate_area.prefab
+  artifactKey: Guid(f2448341ab06b2a44be161767cbae76f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props/jump_gate_area.prefab using Guid(f2448341ab06b2a44be161767cbae76f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '00e741b1a51788ee0d3de4c2fd9734e7') in 0.0357514 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 41
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
