@@ -52,29 +52,6 @@ public class Wheel : MonoBehaviour
         else
             SetupStandardCarRear(_wheelCollider);
     }
-    void SetupDriftCarRear(WheelCollider wc)
-    {
-        wc.suspensionSpring = new JointSpring { spring = 25000f, damper = 2500f, targetPosition = 0.35f };
-        wc.suspensionDistance = 0.2f;
-
-        WheelFrictionCurve forwardFriction = wc.forwardFriction;
-        forwardFriction.extremumSlip = 0.45f;  // Возможность пробуксовки
-        forwardFriction.extremumValue = 1.2f;
-        forwardFriction.asymptoteSlip = 0.7f;
-        forwardFriction.asymptoteValue = 0.8f;
-        forwardFriction.stiffness = 1.0f;
-        wc.forwardFriction = forwardFriction;
-
-        WheelFrictionCurve sidewaysFriction = wc.sidewaysFriction;
-        sidewaysFriction.extremumSlip = 0.55f;  // Увеличенная пробуксовка
-        sidewaysFriction.extremumValue = 1.4f;
-        sidewaysFriction.asymptoteSlip = 0.8f;
-        sidewaysFriction.asymptoteValue = 0.7f;
-        sidewaysFriction.stiffness = 0.6f;  // Меньше сцепление для задних колёс
-        wc.sidewaysFriction = sidewaysFriction;
-    }
-
-
     void SetupDriftCarFront(WheelCollider wc)
     {
         wc.suspensionSpring = new JointSpring { spring = 30000f, damper = 3000f, targetPosition = 0.35f };
@@ -85,7 +62,7 @@ public class Wheel : MonoBehaviour
         forwardFriction.extremumValue = 1.5f;
         forwardFriction.asymptoteSlip = 0.6f;
         forwardFriction.asymptoteValue = 0.8f;
-        forwardFriction.stiffness = 1.5f;  // Больше сцепление для передних колёс
+        forwardFriction.stiffness = 1.5f;
         wc.forwardFriction = forwardFriction;
 
         WheelFrictionCurve sidewaysFriction = wc.sidewaysFriction;
@@ -96,6 +73,34 @@ public class Wheel : MonoBehaviour
         sidewaysFriction.stiffness = 1.0f;
         wc.sidewaysFriction = sidewaysFriction;
     }
+
+    void SetupDriftCarRear(WheelCollider wc)
+    {
+        wc.suspensionSpring = new JointSpring
+        {
+            spring = 28000f,
+            damper = 2800f,
+            targetPosition = 0.4f
+        };
+        wc.suspensionDistance = 0.2f;
+
+        WheelFrictionCurve forwardFriction = wc.forwardFriction;
+        forwardFriction.extremumSlip = 0f;         // раньше цепляется
+        forwardFriction.extremumValue = 1.8f;        // больше пиковое сцепление
+        forwardFriction.asymptoteSlip = 0.55f;
+        forwardFriction.asymptoteValue = 0.9f;
+        forwardFriction.stiffness = 2.2f;            // мощный grip
+        wc.forwardFriction = forwardFriction;
+
+        WheelFrictionCurve sidewaysFriction = wc.sidewaysFriction;
+        sidewaysFriction.extremumSlip = 0.6f;
+        sidewaysFriction.extremumValue = 1.3f;
+        sidewaysFriction.asymptoteSlip = 0.75f;
+        sidewaysFriction.asymptoteValue = 0.7f;
+        sidewaysFriction.stiffness = 0.5f;           // все еще дрифтует
+        wc.sidewaysFriction = sidewaysFriction;
+    }
+
 
     void SetupRallyCarRear(WheelCollider wc)
     {
