@@ -62,7 +62,7 @@ public class Wheel : MonoBehaviour
         forwardFriction.extremumValue = 1.5f;
         forwardFriction.asymptoteSlip = 0.6f;
         forwardFriction.asymptoteValue = 0.8f;
-        forwardFriction.stiffness = 1.5f;
+        forwardFriction.stiffness = 1.7f;
         wc.forwardFriction = forwardFriction;
 
         WheelFrictionCurve sidewaysFriction = wc.sidewaysFriction;
@@ -70,7 +70,7 @@ public class Wheel : MonoBehaviour
         sidewaysFriction.extremumValue = 1.3f;
         sidewaysFriction.asymptoteSlip = 0.7f;
         sidewaysFriction.asymptoteValue = 0.8f;
-        sidewaysFriction.stiffness = 1.0f;
+        sidewaysFriction.stiffness = 1.5f;
         wc.sidewaysFriction = sidewaysFriction;
     }
 
@@ -89,7 +89,7 @@ public class Wheel : MonoBehaviour
         forwardFriction.extremumValue = 1.8f;        // больше пиковое сцепление
         forwardFriction.asymptoteSlip = 0.55f;
         forwardFriction.asymptoteValue = 0.9f;
-        forwardFriction.stiffness = 2.2f;            // мощный grip
+        forwardFriction.stiffness = 3.2f;            // мощный grip
         wc.forwardFriction = forwardFriction;
 
         WheelFrictionCurve sidewaysFriction = wc.sidewaysFriction;
@@ -97,7 +97,7 @@ public class Wheel : MonoBehaviour
         sidewaysFriction.extremumValue = 1.3f;
         sidewaysFriction.asymptoteSlip = 0.75f;
         sidewaysFriction.asymptoteValue = 0.7f;
-        sidewaysFriction.stiffness = 0.5f;           // все еще дрифтует
+        sidewaysFriction.stiffness = 1.5f;           // все еще дрифтует
         wc.sidewaysFriction = sidewaysFriction;
     }
 
