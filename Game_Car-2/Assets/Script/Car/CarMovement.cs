@@ -40,15 +40,17 @@ public class CarMovement : MonoBehaviour
     private void Awake()
     {
         _rb.centerOfMass = _centreOfMass.position;
-        TupeOfCar();
-        
-        
         
         if (_wheels == null || _wheels.Length == 0)
         {
             Debug.LogWarning("Колеса не задані!");
             return;
         }
+        
+        if(Drifft == true || Real == true || Rally == true)
+        TupeOfCar();
+        
+        
     }
 
   
