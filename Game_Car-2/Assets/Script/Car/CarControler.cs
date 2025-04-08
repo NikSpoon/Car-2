@@ -19,7 +19,7 @@ public class CarControler : MonoBehaviour
         else if (gameObject.tag == "Enemy")
             IsEnamyControl = true;
     }
-    void Update()
+    void FixedUpdate()
     {
         if (IsPlayerControl)
         {

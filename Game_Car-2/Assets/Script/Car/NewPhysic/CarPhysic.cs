@@ -51,6 +51,8 @@ public class CarPhysic : MonoBehaviour
     [SerializeField] private float _rpmUpSpeed = 2000f;
     [SerializeField] private float _rpmDownSpeed = 3000f;
     public event Action<float,float,float> OnSpeadChanged;
+
+    bool isGasPresed;
     private void Awake()
     {
         if (!_AWD && !_RWD && !_FWD)
@@ -67,23 +69,27 @@ public class CarPhysic : MonoBehaviour
     public void Move(float vertical)
     {
         Engine(vertical);
-        OnSpeadChanged?.Invoke(_speed, _currentEngineRPM, _currentWhellTorque);
+
+            OnSpeadChanged?.Invoke(_speed, _currentEngineRPM, _currentWhellTorque);
     }
     private void Engine(float input)
     {
         UpdateGear();
 
-        input = CalculateEngineRPM(input);
+        verticalInput =  input;
+        
 
+        _currentMotorForce = verticalInput * _motorForce ;
 
-        _currentMotorForce = input * _motorForce * Time.deltaTime;
+        isGasPresed = Mathf.Abs(input) > 0.1f;
+        _currentEngineRPM = CalculateEngineRPM(isGasPresed);
 
         Gear currentGear = _gears[_currentGearIndex];
-        float torque = Mathf.Clamp(_currentMotorForce * currentGear.gearRatio, -_motorForce, _motorForce); // Ограничиваем крутящий момент
-       
+        
+        
+        float torque = input * currentGear.gearRatio * _motorForce;
         _currentWhellTorque = torque;
 
-        // Применяем мощность на колеса в зависимости от типа привода
         foreach (var wheel in _wheels)
         {
             if (_AWD || (_FWD && wheel.IsForward) || (_RWD && !wheel.IsForward))
@@ -91,31 +97,30 @@ public class CarPhysic : MonoBehaviour
                 wheel.ApplyMotorTorque(torque);
             }
         }
-
-       
-
         _speed = _rigidbody.linearVelocity.magnitude * 3.6f; // Convert m/s to km/h
+        if (_speed <= 1 && isGasPresed == false)
+        {
+            _rigidbody.linearVelocity = Vector3.zero;
+        }
+
+        Debug.Log($"currentGear {currentGear}");
         Debug.Log($"Speed: {_speed}, RPM: {_currentEngineRPM}, Torque: {_currentWhellTorque}, Motor Force: {_currentMotorForce}");
     }
 
-    // Debug.Log($"RPM: {_currentEngineRPM}, Torque: {_currentWhellTorque}, Speed: {_speed}");
+   
 
 
-private float CalculateEngineRPM(float input)
+private float CalculateEngineRPM(bool gas)
     {
-        bool isGasPresed = Mathf.Abs(input) > 0.1f;
-
-        if (isGasPresed)
+        
+        if (gas)
         {
-            _currentEngineRPM += _rpmUpSpeed * Time.deltaTime;
+            _currentEngineRPM += _rpmUpSpeed * Time.fixedDeltaTime;
         }
         else
         {
-            _currentEngineRPM -= _rpmDownSpeed * Time.deltaTime;
-            if (_speed < 0.1f)
-            {
-                _currentEngineRPM = 0;
-            }
+            _currentEngineRPM -= _rpmDownSpeed * Time.fixedDeltaTime;
+            
         }
         return _currentEngineRPM;
     }

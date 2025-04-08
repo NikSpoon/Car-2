@@ -39,6 +39,10 @@ public class Wheel : MonoBehaviour
     {
         _wheelCollider.steerAngle = angle;
     }
+    private void ApplyBrakeTorque(float brake)
+    {
+        _wheelCollider.brakeTorque = brake;
+    }
     private void SetupWheelCollider(WheelCollider wheelCollider)
     {
         // Радиус колеса
