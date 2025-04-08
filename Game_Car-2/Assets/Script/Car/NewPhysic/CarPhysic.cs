@@ -63,7 +63,7 @@ public class CarPhysic : MonoBehaviour
     private void Awake()
     {
         if (!_AWD && !_RWD && !_FWD)
-            _RWD = true;
+            _AWD = true;
 
         if (!_smolCar && !_normalCar && !_bigCar)
             _normalCar = true;
@@ -85,12 +85,15 @@ public class CarPhysic : MonoBehaviour
     }
     private void Start()
     {
+        _rigidbody.centerOfMass = _car.InverseTransformPoint(_centreOfMass.position);
+
         _currentEngineRPM = 0;
     }
-    public void Move(float vertical, float horisontal)
+    public void Move(float vertical, float horisontal, bool brake)
     {
         SteerWheels(horisontal);
         Engine(vertical);
+        ApplyHandbrake(brake);
 
         OnSpeadChanged?.Invoke(_speed, _currentEngineRPM, _currentWhellTorque);
     }
@@ -113,7 +116,8 @@ public class CarPhysic : MonoBehaviour
         _currentWhellTorque = torque;
 
         float brakeForce = ApplyIdleBraking();
-        ApplyHandbrake();
+       
+
 
         foreach (var wheel in _wheels)
         {
@@ -139,7 +143,7 @@ public class CarPhysic : MonoBehaviour
 
 
         Debug.Log($"currentGear {currentGear}");
-        Debug.Log($"Speed: {_speed}, RPM: {_currentEngineRPM}, Torque: {_currentWhellTorque}, Motor Force: {_currentMotorForce}");
+        // Debug.Log($"Speed: {_speed}, RPM: {_currentEngineRPM}, Torque: {_currentWhellTorque}, Motor Force: {_currentMotorForce}");
     }
     private float CalculateEngineRPM(bool gas)
     {
@@ -188,13 +192,6 @@ public class CarPhysic : MonoBehaviour
 
         float speedNormalized = Mathf.Clamp01(_speed / _maxSpead);
         return _brakeCurve.Evaluate(speedNormalized) * _brakeTorque;
-    }
-    private void ApplyHandbrake()
-
-    {
-        // TODO: ручник логика сюда
-        // Например, если Input.GetKey(KeyCode.Space)
-        // wheel.ApplyBrakeTorque(_handbrakeTorque);
     }
 
     [Header(" воздух")]
@@ -250,6 +247,28 @@ public class CarPhysic : MonoBehaviour
         {
             ApplySteering(steeringAngle);
            
+        }
+    }
+
+
+    [Header(" Braek ")]
+    [SerializeField] private float _handbrakeTorque = 500000f;
+    [SerializeField] private float _handbrakeRampSpeed = 2f;
+
+    private float _currentHandbrakeTorque = 0f;
+    private void ApplyHandbrake(bool brake)
+    {
+        
+        float targetTorque = brake ? _handbrakeTorque : 0f;
+        _currentHandbrakeTorque = Mathf.MoveTowards( _currentHandbrakeTorque,targetTorque,_handbrakeRampSpeed * Time.fixedDeltaTime * _handbrakeTorque );
+
+        foreach (var wheel in _wheels)
+        {
+            if (!wheel.IsForward) // Применяем только к задним колёсам
+            {
+                wheel.ApplyBrakeTorque(_currentHandbrakeTorque);
+                Debug.Log(brake);
+            }
         }
     }
 }
