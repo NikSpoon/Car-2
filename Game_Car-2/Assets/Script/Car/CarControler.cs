@@ -33,7 +33,7 @@ public class CarControler : MonoBehaviour
     }
     private void IsPlayer()
     {
-        _carPhysic.Move(_inputServis.VerticalInput);
+        _carPhysic.Move(_inputServis.VerticalInput,_inputServis.HorizontalInput);
     }
 
     private void IsEnamy()

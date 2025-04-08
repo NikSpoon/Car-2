@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class Wheel : MonoBehaviour
-{   
+{
     [SerializeField] private Transform _wheelMesh;
     [SerializeField] public WheelCollider _wheelCollider;
     [SerializeField] public bool IsForward;
@@ -15,9 +15,9 @@ public class Wheel : MonoBehaviour
     public void Update()
     {
         UpdateWheelPositionAndRotation();
-       
+
     }
-    
+
     private void UpdateWheelPositionAndRotation()
     {
         Vector3 position;
@@ -25,7 +25,7 @@ public class Wheel : MonoBehaviour
 
         _wheelCollider.GetWorldPose(out position, out rotation);
 
-        _wheelMesh.position = position; 
+        _wheelMesh.position = position;
         _wheelMesh.rotation = rotation;
 
     }
@@ -76,4 +76,4 @@ public class Wheel : MonoBehaviour
         sidewaysFrictionCurve.extremumValue = 1.2f;
         wheelCollider.sidewaysFriction = sidewaysFrictionCurve;
     }
-    }
+}
