@@ -1,7 +1,7 @@
-﻿using JetBrains.Annotations;
+﻿
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class CarPhysic : MonoBehaviour
@@ -26,8 +26,9 @@ public class CarPhysic : MonoBehaviour
     [Header("Other Values")]
     [SerializeField] private int _motorForce = 500000;
     [SerializeField] private int _maxSteerAngle = 50;
-    [SerializeField] private int _brakeTorque = 100000;
+    [SerializeField] private float _brakeTorque = 100000;
     [SerializeField] private float _engineMaxPowerRPM = 150000;
+    [SerializeField] private float _maxSpead = 200;
 
     private int _currentGearIndex = 0;
 
@@ -52,6 +53,11 @@ public class CarPhysic : MonoBehaviour
     [SerializeField] private float _rpmDownSpeed = 3000f;
     public event Action<float,float,float> OnSpeadChanged;
 
+    [Header("Graph Curves")]
+    [SerializeField] private AnimationCurve _brakeCurve; // Curve for braking
+    [SerializeField] private AnimationCurve _airResistanceCurve; // Curve for air resistance
+    [SerializeField] private AnimationCurve _inertiaCurve; // Curve for inertia
+
     bool isGasPresed;
     private void Awake()
     {
@@ -61,6 +67,18 @@ public class CarPhysic : MonoBehaviour
         if (!_smolCar && !_normalCar && !_bigCar)
             _normalCar = true;
 
+
+    
+        
+        if (_brakeCurve == null)
+            _brakeCurve = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(1f, 0f)); 
+
+        if (_airResistanceCurve == null)
+            _airResistanceCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, 1f)); 
+
+        if (_inertiaCurve == null)
+            _inertiaCurve = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(1f, 0f)); 
+    
     }
     private void Start()
     {
@@ -90,18 +108,31 @@ public class CarPhysic : MonoBehaviour
         float torque = input * currentGear.gearRatio * _motorForce;
         _currentWhellTorque = torque;
 
+        float brakeForce = ApplyIdleBraking();
+        ApplyHandbrake();                     
+
         foreach (var wheel in _wheels)
         {
             if (_AWD || (_FWD && wheel.IsForward) || (_RWD && !wheel.IsForward))
             {
                 wheel.ApplyMotorTorque(torque);
             }
+
+            wheel.ApplyBrakeTorque(brakeForce);
         }
+
+        SimulateResistance();
+
         _speed = _rigidbody.linearVelocity.magnitude * 3.6f; // Convert m/s to km/h
+       
+        
         if (_speed <= 1 && isGasPresed == false)
         {
             _rigidbody.linearVelocity = Vector3.zero;
         }
+        
+
+     
 
         Debug.Log($"currentGear {currentGear}");
         Debug.Log($"Speed: {_speed}, RPM: {_currentEngineRPM}, Torque: {_currentWhellTorque}, Motor Force: {_currentMotorForce}");
@@ -112,7 +143,13 @@ public class CarPhysic : MonoBehaviour
 
 private float CalculateEngineRPM(bool gas)
     {
-        
+        Gear currentGear = _gears[_currentGearIndex];
+        float wheelRPM = (_speed / 3.6f) * currentGear.gearRatio * 60f / (2 * Mathf.PI * 0.3f);
+        // 0.3f — примерный радиус колеса в метрах (настраивается!)
+
+        float smoothFactor = 5f; // настраивай от 2 до 10
+        _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, wheelRPM, Time.fixedDeltaTime * smoothFactor);
+
         if (gas)
         {
             _currentEngineRPM += _rpmUpSpeed * Time.fixedDeltaTime;
@@ -122,6 +159,7 @@ private float CalculateEngineRPM(bool gas)
             _currentEngineRPM -= _rpmDownSpeed * Time.fixedDeltaTime;
             
         }
+        _currentEngineRPM = Mathf.Clamp(_currentEngineRPM, 0f, _engineMaxPowerRPM);
         return _currentEngineRPM;
     }
 
@@ -146,5 +184,45 @@ private float CalculateEngineRPM(bool gas)
         }
       
     }
-    
+
+
+
+    private float ApplyIdleBraking()
+    {
+
+        float speedNormalized = Mathf.Clamp01(_speed / _maxSpead); // Нормализуем скорость от 0 до 1 (по максимуму 100 км/ч)
+        return _brakeCurve.Evaluate(speedNormalized) * _brakeTorque;
+    }
+
+    private void ApplyHandbrake()
+    {
+        // TODO: ручник логика сюда
+        // Например, если Input.GetKey(KeyCode.Space)
+        // wheel.ApplyBrakeTorque(_handbrakeTorque);
+    }
+
+    [Header(" воздух")]
+    [SerializeField] private float _dragCoefficient = 0.4257f; 
+    [SerializeField] private float _rollingResistance = 12.8f;
+
+    private void SimulateResistance()
+    {
+        if (_rigidbody == null) return;
+
+        float speedMS = _speed / 3.6f;  // Конвертируем скорость в м/с
+
+        // Получаем значение сопротивления воздуха с помощью кривой
+        float airDragFactor = _airResistanceCurve.Evaluate(Mathf.Clamp01(speedMS / _maxSpead));  // Нормализуем скорость для кривой
+        float airDrag = _dragCoefficient * speedMS * speedMS * airDragFactor;  // Используем значение из кривой для динамического сопротивления
+
+        // Получаем значение сопротивления качению с помощью кривой
+        float rollingDragFactor = _inertiaCurve.Evaluate(Mathf.Clamp01(speedMS / _maxSpead));  // Нормализуем скорость для кривой
+        float rollingDrag = _rollingResistance * speedMS * rollingDragFactor;  // Используем значение из кривой для сопротивления качению
+
+        // Объединяем сопротивление воздуха и качения
+        Vector3 resistance = -_rigidbody.linearVelocity.normalized * (airDrag + rollingDrag);
+        _rigidbody.AddForce(resistance);
+    }
+
+
 }

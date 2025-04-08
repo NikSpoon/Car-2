@@ -39,7 +39,7 @@ public class Wheel : MonoBehaviour
     {
         _wheelCollider.steerAngle = angle;
     }
-    private void ApplyBrakeTorque(float brake)
+    public void ApplyBrakeTorque(float brake)
     {
         _wheelCollider.brakeTorque = brake;
     }
