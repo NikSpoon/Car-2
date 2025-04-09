@@ -1,8 +1,8 @@
 ﻿
 using System;
 using System.Collections.Generic;
-
 using UnityEngine;
+
 
 public class CarPhysic : MonoBehaviour
 {
@@ -12,33 +12,27 @@ public class CarPhysic : MonoBehaviour
     [SerializeField] private Wheel[] _wheels;
     [SerializeField] private List<Gear> _gears;
     [SerializeField] private Transform _centreOfMass;
+    [SerializeField] private Wind _wind;
 
     [Header("Type of car")]
     [SerializeField] private bool _AWD;
     [SerializeField] private bool _RWD;
     [SerializeField] private bool _FWD;
 
-    [Header("Type of raes")]
-    [SerializeField] private bool _smolCar;
-    [SerializeField] private bool _normalCar;
-    [SerializeField] private bool _bigCar;
 
     [Header("Other Values")]
-    [SerializeField] private int _motorForce = 500000;
+    [SerializeField] private int _motorForce = 300;
     [SerializeField] private int _maxSteerAngle = 50;
-    [SerializeField] private float _brakeTorque = 100000;
-    [SerializeField] private float _engineMaxPowerRPM = 150000;
-    [SerializeField] private float _maxSpead = 200;
+    [SerializeField] private float _brakeTorque = 9000;
+    [SerializeField] private float _maxSpead = 220;
+    [SerializeField] private float _maxReverseSpeed = 40f;
 
+    private float _engineMaxPowerRPM = 9000;
     private int _currentGearIndex = 0;
+
 
     private float verticalInput;
     private float horizontalInput;
-    private float _currentMotorForce = 0f;
-
-    [Header("Acceleration/Deceleration Settings")]
-    [SerializeField] private float _accelerationRate = 500f; // Скорость ускорения
-    [SerializeField] private float _decelerationRate = 300f; // Скорость замедления
 
 
     [Header("Event Values")]
@@ -48,150 +42,130 @@ public class CarPhysic : MonoBehaviour
     [SerializeField] private float _currentSteeringAngle = 50f;
 
     [Header("Rmp Values")]
-    [SerializeField] private float _minRPM;
-    [SerializeField] private float _maxRPM;
     [SerializeField] private float _rpmUpSpeed = 2000f;
     [SerializeField] private float _rpmDownSpeed = 3000f;
     public event Action<float, float, float> OnSpeadChanged;
 
     [Header("Graph Curves")]
-    [SerializeField] private AnimationCurve _brakeCurve;
-    [SerializeField] private AnimationCurve _airResistanceCurve;
-    [SerializeField] private AnimationCurve _inertiaCurve;
     [SerializeField] private AnimationCurve _steeringCurve;
+
     bool isGasPresed;
     private void Awake()
     {
         if (!_AWD && !_RWD && !_FWD)
             _AWD = true;
 
-        if (!_smolCar && !_normalCar && !_bigCar)
-            _normalCar = true;
-
-
-
-
-        if (_brakeCurve == null)
-            _brakeCurve = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(1f, 0f));
-
-        if (_airResistanceCurve == null)
-            _airResistanceCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, 1f));
-
-        if (_inertiaCurve == null)
-            _inertiaCurve = new AnimationCurve(new Keyframe(0f, 1f), new Keyframe(1f, 0f));
-
-      
-      // _rigidbody.centerOfMass = _centreOfMass.position;
+        _gears = new List<Gear>
+        {
+            new Gear { minRPM = 1500f, maxRPM = 4000f, gearRatio = 3.8f },
+            new Gear { minRPM = 2000f, maxRPM = 4500f, gearRatio = 2.5f },
+            new Gear { minRPM = 2500f, maxRPM = 5000f, gearRatio = 1.8f },
+            new Gear { minRPM = 3000f, maxRPM = 5500f, gearRatio = 1.3f },
+            new Gear { minRPM = 3500f, maxRPM = 6000f, gearRatio = 1.0f },
+            new Gear { minRPM = 4000f, maxRPM = 6500f, gearRatio = 0.85f }
+        };
     }
     private void Start()
     {
         _rigidbody.centerOfMass = _car.InverseTransformPoint(_centreOfMass.position);
 
         _currentEngineRPM = 0;
+        _currentGearIndex = 1;
+
     }
     public void Move(float vertical, float horisontal, bool brake)
     {
+        isGasPresed = Mathf.Abs(verticalInput) > 0.1f;
+
         SteerWheels(horisontal);
         Engine(vertical);
         ApplyHandbrake(brake);
-
+        ApplyBrake();
         OnSpeadChanged?.Invoke(_speed, _currentEngineRPM, _currentWhellTorque);
     }
     private void Engine(float input)
     {
-        UpdateGear();
-
         verticalInput = input;
 
 
-        _currentMotorForce = verticalInput * _motorForce;
-
-        isGasPresed = Mathf.Abs(input) > 0.1f;
-        _currentEngineRPM = CalculateEngineRPM(isGasPresed);
-
         Gear currentGear = _gears[_currentGearIndex];
 
+        _currentEngineRPM = CalculateEngineRPM(isGasPresed, verticalInput);
 
-        float torque = input * currentGear.gearRatio * _motorForce;
+        float directionMultiplier = Mathf.Sign(verticalInput);
+        float torque = CalculateWheelTorque(_currentEngineRPM, currentGear.gearRatio) * directionMultiplier;
+
+        // Ограничим заднюю скорость
+        if (_speed > _maxReverseSpeed && verticalInput < 0)
+        {
+            torque = 0f;
+        }
+
         _currentWhellTorque = torque;
-
-        float brakeForce = ApplyIdleBraking();
-       
-
 
         foreach (var wheel in _wheels)
         {
             if (_AWD || (_FWD && wheel.IsForward) || (_RWD && !wheel.IsForward))
             {
-                wheel.ApplyMotorTorque(torque);
+                wheel.ApplyMotorTorque(_currentWhellTorque);
             }
 
-            wheel.ApplyBrakeTorque(brakeForce);
+
         }
+
+        _speed = _rigidbody.linearVelocity.magnitude * 3.6f;
 
         SimulateResistance();
 
-        _speed = _rigidbody.linearVelocity.magnitude * 3.6f; // Convert m/s to km/h
-
-
-        if (_speed <= 1 && isGasPresed == false)
+        if (_speed < 1 && !isGasPresed)
         {
             _rigidbody.linearVelocity = Vector3.zero;
+            _rigidbody.angularVelocity = Vector3.zero;
         }
 
+        UpdateGear();
 
-
-
-        Debug.Log($"currentGear {currentGear}");
-        // Debug.Log($"Speed: {_speed}, RPM: {_currentEngineRPM}, Torque: {_currentWhellTorque}, Motor Force: {_currentMotorForce}");
+        OnSpeadChanged?.Invoke(_speed, _currentEngineRPM, _currentWhellTorque);
     }
-    private float CalculateEngineRPM(bool gas)
+
+    private float CalculateWheelTorque(float engineRPM, float gearRatio)
+    {
+        if (!isGasPresed)
+            return 0f;
+
+        return engineRPM * (_motorForce * gearRatio);
+
+    }
+    private float CalculateEngineRPM(bool gas, float input)
     {
         Gear currentGear = _gears[_currentGearIndex];
-        float wheelRPM = (_speed / 3.6f) * currentGear.gearRatio * 60f / (2 * Mathf.PI * 0.3f);
+        float targetRPM = gas ? _engineMaxPowerRPM * Mathf.Abs(input) : 0f;
 
-
-        float smoothFactor = 5f; // настраивай от 2 до 10
-        _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, wheelRPM, Time.fixedDeltaTime * smoothFactor);
-
-        if (gas)
-        {
-            _currentEngineRPM += _rpmUpSpeed * Time.fixedDeltaTime;
-        }
-        else
-        {
-            _currentEngineRPM -= _rpmDownSpeed * Time.fixedDeltaTime;
-
-        }
+        _currentEngineRPM = Mathf.MoveTowards(_currentEngineRPM, targetRPM, (_rpmUpSpeed + _rpmDownSpeed) * Time.fixedDeltaTime);
         _currentEngineRPM = Mathf.Clamp(_currentEngineRPM, 0f, _engineMaxPowerRPM);
         return _currentEngineRPM;
     }
     private void UpdateGear()
     {
-        if (_gears == null || _gears.Count == 0)
-            return;
+        if (_gears == null || _gears.Count <= 1) return;
 
-        _currentGearIndex = Mathf.Clamp(_currentGearIndex, 0, _gears.Count - 1);
+        if (verticalInput < -0.1f) return;
 
+        Gear currentGear = _gears[_currentGearIndex];
 
-        Gear curentGear = _gears[_currentGearIndex];
-        if (_currentEngineRPM > curentGear.maxRPM && _currentGearIndex < _gears.Count - 1)
+        float maxSpeedForCurrentGear = currentGear.CalculateMaxSpeed(currentGear.maxRPM);
+        float minSpeedForCurrentGear = currentGear.CalculateMinSpeed(currentGear.minRPM);
+
+        if (_speed >= maxSpeedForCurrentGear && _currentGearIndex < _gears.Count - 1)
         {
             _currentGearIndex++;
-
+            _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, _gears[_currentGearIndex].minRPM, Time.deltaTime * 3f);
         }
-        else if (_currentEngineRPM < curentGear.minRPM && _currentGearIndex > 0)
+        else if (_speed < minSpeedForCurrentGear && _currentGearIndex > 0)
         {
             _currentGearIndex--;
-
+            _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, _gears[_currentGearIndex].maxRPM, Time.deltaTime * 3f);
         }
-
-    }
-    private float ApplyIdleBraking()
-    {
-
-        float speedNormalized = Mathf.Clamp01(_speed / _maxSpead);
-        return _brakeCurve.Evaluate(speedNormalized) * _brakeTorque;
     }
 
     [Header(" воздух")]
@@ -202,19 +176,29 @@ public class CarPhysic : MonoBehaviour
     {
         if (_rigidbody == null) return;
 
-        float speedMS = _speed / 3.6f;
+        float speedMS = _speed / 3.6f; // из км/ч в м/с
 
+        // Воздушное сопротивление с учетом ветра
+        Vector3 windResistance = Vector3.zero;
+        if (_wind != null)
+        {
+            windResistance = _wind.CalculateWindResistance(_rigidbody.position, _rigidbody.linearVelocity);  // используем linearVelocity
+        }
 
-        float airDragFactor = _airResistanceCurve.Evaluate(Mathf.Clamp01(speedMS / _maxSpead));
-        float airDrag = _dragCoefficient * speedMS * speedMS * airDragFactor;
+        float airDrag = _dragCoefficient * speedMS * speedMS;
+        Vector3 totalResistance = -_rigidbody.linearVelocity.normalized * (airDrag + windResistance.magnitude);
 
+        // Сопротивление качению
+        float rollingDrag = _rollingResistance * speedMS;
+        totalResistance += -_rigidbody.linearVelocity.normalized * rollingDrag;
 
-        float rollingDragFactor = _inertiaCurve.Evaluate(Mathf.Clamp01(speedMS / _maxSpead));
-        float rollingDrag = _rollingResistance * speedMS * rollingDragFactor;
+        // Добавим сопротивление при отсутствии газа
+        if (Mathf.Abs(verticalInput) < 0.1f)
+        {
+            totalResistance *= 1.5f; // Увеличиваем сопротивление на холостых
+        }
 
-
-        Vector3 resistance = -_rigidbody.linearVelocity.normalized * (airDrag + rollingDrag);
-        _rigidbody.AddForce(resistance);
+        _rigidbody.AddForce(totalResistance); // Применяем сопротивление
     }
     private void ApplySteering(float angle)
     {
@@ -230,7 +214,7 @@ public class CarPhysic : MonoBehaviour
 
     private void SteerWheels(float input)
     {
-        
+
         horizontalInput = input;
 
 
@@ -243,11 +227,10 @@ public class CarPhysic : MonoBehaviour
         steeringAngle = Mathf.Clamp(steeringAngle, -_maxSteerAngle, _maxSteerAngle);
 
 
-        foreach (Wheel wheel in _wheels)
-        {
-            ApplySteering(steeringAngle);
-           
-        }
+
+        ApplySteering(steeringAngle);
+
+
     }
 
 
@@ -258,17 +241,77 @@ public class CarPhysic : MonoBehaviour
     private float _currentHandbrakeTorque = 0f;
     private void ApplyHandbrake(bool brake)
     {
-        
+
         float targetTorque = brake ? _handbrakeTorque : 0f;
-        _currentHandbrakeTorque = Mathf.MoveTowards( _currentHandbrakeTorque,targetTorque,_handbrakeRampSpeed * Time.fixedDeltaTime * _handbrakeTorque );
+        _currentHandbrakeTorque = Mathf.MoveTowards(_currentHandbrakeTorque, targetTorque, _handbrakeRampSpeed * Time.fixedDeltaTime * _handbrakeTorque);
 
         foreach (var wheel in _wheels)
         {
-            if (!wheel.IsForward) // Применяем только к задним колёсам
+            if (!wheel.IsForward)
             {
                 wheel.ApplyBrakeTorque(_currentHandbrakeTorque);
-                Debug.Log(brake);
+
             }
+        }
+    }
+    private void ApplyBrake()
+    {
+        /*  if (_speed > 1f)  // Если скорость больше порога
+          {
+              // 1. Тормоз на холостом ходу, который зависит от скорости
+              float idleBrakeForce = Mathf.Lerp(0f, _brakeTorque, Mathf.Clamp01(_speed / _maxSpead));
+
+              // 2. Дополнительное торможение при движении назад
+              float reverseBrakeForce = 0f;
+              if (verticalInput < 0f && Mathf.Abs(_speed) > 0f) // Если движемся назад и есть скорость
+              {
+                  // Применяем тормоз в зависимости от скорости и усиления торможения на обратной передаче
+                  reverseBrakeForce = Mathf.Lerp(0f, _brakeTorque, Mathf.Clamp01(Mathf.Abs(_speed) / _maxReverseSpeed));
+              }
+
+              float totalBrakeForce = (idleBrakeForce + reverseBrakeForce )*3;
+
+              // Применяем общий тормозной момент
+              foreach (var wheel in _wheels)
+              {
+                  if (wheel)
+                  {
+                      wheel.ApplyBrakeTorque(totalBrakeForce);  // Применяем тормозной момент
+                  }
+              }
+          }
+          else
+          {
+              // Если скорость меньше порога, применяем минимальное сопротивление или вообще ничего
+              foreach (var wheel in _wheels)
+              {
+                  if (wheel)
+                  {
+                      wheel.ApplyBrakeTorque(0f);  // Не применяем тормоза, если скорость слишком низкая
+                  }
+              }
+
+            }
+         */
+        foreach (var wheel in _wheels)
+        {
+           var  _brakeTorqueS = Mathf.Lerp(0f, _brakeTorque, Mathf.Clamp01(_speed / _maxSpead));
+            if (_speed > 1f)
+            {
+                wheel.ApplyBrakeTorque(_brakeTorqueS);  // Применяем тормозной момент
+            }
+
+            else
+            {
+                // Если скорость меньше порога, применяем минимальное сопротивление или вообще ничего
+                
+               
+                    
+                        wheel.ApplyBrakeTorque(0f);  // Не применяем тормоза, если скорость слишком низкая
+                   
+              
+            }
+
         }
     }
 }

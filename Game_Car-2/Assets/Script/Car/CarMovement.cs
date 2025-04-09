@@ -19,7 +19,7 @@ public class CarMovement : MonoBehaviour
 
     [SerializeField] private int _brakeForse;
     [SerializeField] private int _motorForse;
-    [SerializeField] private int _wheelsAngleMax = 50;
+    
     [SerializeField] private int _brakeTorque = 100000;
 
     [Header("Привід")]
