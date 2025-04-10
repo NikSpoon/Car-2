@@ -319068,19 +319068,19 @@ MonoBehaviour:
   _centreOfMass: {fileID: 6036195506246878003}
   _wind: {fileID: 0}
   _AWD: 0
-  _RWD: 0
+  _RWD: 1
   _FWD: 0
-  _motorForce: 30
+  _motorForce: 2500
   _maxSteerAngle: 50
-  _brakeTorque: 7000
+  _brakeTorque: 0
   _maxSpead: 220
   _maxReverseSpeed: 40
   _speed: 0
   _currentEngineRPM: 0
   _currentWhellTorque: 0
   _currentSteeringAngle: 0
-  _rpmUpSpeed: 400
-  _rpmDownSpeed: 4000
+  _rpmUpSpeed: 1400
+  _rpmDownSpeed: 5000
   _steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -319105,6 +319105,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _rpmDropDuration: 0.5
+  _rpmDropFactor: 0.5
+  _manualGearMode: 0
   _dragCoefficient: 0.6
   _rollingResistance: 20
   _handbrakeTorque: 500000

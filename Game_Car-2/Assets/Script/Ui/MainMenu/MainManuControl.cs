@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainManuControl : MonoBehaviour
@@ -6,10 +6,19 @@ public class MainManuControl : MonoBehaviour
     [SerializeField] private GameObject _options;
     [SerializeField] private GameObject _save;
     [SerializeField] private GameObject _Multiplaer;
-     
-     public void OnClickPlay()
+
+    public void OnClickPlay()
     {
-        SceneManager.LoadScene(1);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentSceneIndex == 0)
+        {
+            SceneManager.LoadScene(1); // Переход с MainMenu на Level1, например
+        }
+        else if (currentSceneIndex == 1)
+        {
+            SceneManager.LoadScene(2); // Переход на следующую сцену
+        }
     }
 
     public void OnClickOptions()
@@ -25,13 +34,13 @@ public class MainManuControl : MonoBehaviour
 
     public void OnClickSave()
     {
-        if(_options.activeSelf != true && _Multiplaer.activeSelf != true)
+        if (_options.activeSelf != true && _Multiplaer.activeSelf != true)
         {
 
-        if (_save.activeSelf)
-            _save.SetActive(false);
-        else
-            _save.SetActive(true);
+            if (_save.activeSelf)
+                _save.SetActive(false);
+            else
+                _save.SetActive(true);
         }
     }
 
@@ -48,7 +57,7 @@ public class MainManuControl : MonoBehaviour
 
     public void OnClickExit()
     {
-        
+
     }
 
 }

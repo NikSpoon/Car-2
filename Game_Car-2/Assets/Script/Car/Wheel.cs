@@ -31,7 +31,7 @@ public class Wheel : MonoBehaviour
     }
     public void ApplyMotorTorque(float torque)
     {
-            //Debug.Log($"Wheel : {_wheelCollider.motorTorque}");
+           
         if (Mathf.Approximately(torque, 0f))
         {
             _wheelCollider.motorTorque = 0f;

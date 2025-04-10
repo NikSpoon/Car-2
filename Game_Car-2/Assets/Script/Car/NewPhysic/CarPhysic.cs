@@ -21,9 +21,9 @@ public class CarPhysic : MonoBehaviour
 
 
     [Header("Other Values")]
-    [SerializeField] private int _motorForce = 300;
+    [SerializeField] private int _motorForce = 2500;
     [SerializeField] private int _maxSteerAngle = 50;
-    [SerializeField] private float _brakeTorque = 9000;
+    [SerializeField] private float _brakeTorque = 0;
     [SerializeField] private float _maxSpead = 220;
     [SerializeField] private float _maxReverseSpeed = 40f;
 
@@ -42,28 +42,35 @@ public class CarPhysic : MonoBehaviour
     [SerializeField] private float _currentSteeringAngle = 50f;
 
     [Header("Rmp Values")]
-    [SerializeField] private float _rpmUpSpeed = 2000f;
-    [SerializeField] private float _rpmDownSpeed = 3000f;
+    [SerializeField] private float _rpmUpSpeed = 400f;
+    [SerializeField] private float _rpmDownSpeed = 400f;
     public event Action<float, float, float> OnSpeadChanged;
 
     [Header("Graph Curves")]
     [SerializeField] private AnimationCurve _steeringCurve;
 
     bool isGasPresed;
+
+    private bool _justShifted = false;
+    private float _rpmDropTimer = 0f;
+    [SerializeField] private float _rpmDropDuration = 0.5f;
+    [SerializeField] private float _rpmDropFactor = 0.5f; // Насколько сильно падают обороты
+
+    [SerializeField] private bool _manualGearMode = false;
     private void Awake()
     {
         if (!_AWD && !_RWD && !_FWD)
             _AWD = true;
 
         _gears = new List<Gear>
-        {
-            new Gear { minRPM = 1500f, maxRPM = 4000f, gearRatio = 3.8f },
-            new Gear { minRPM = 2000f, maxRPM = 4500f, gearRatio = 2.5f },
-            new Gear { minRPM = 2500f, maxRPM = 5000f, gearRatio = 1.8f },
-            new Gear { minRPM = 3000f, maxRPM = 5500f, gearRatio = 1.3f },
-            new Gear { minRPM = 3500f, maxRPM = 6000f, gearRatio = 1.0f },
-            new Gear { minRPM = 4000f, maxRPM = 6500f, gearRatio = 0.85f }
-        };
+{
+    new Gear { minRPM = 1000f, maxRPM = 3000f, gearRatio = 3.8f, minRecommendedSpeed = 0f, maxRecommendedSpeed = 30f },
+    new Gear { minRPM = 1500f, maxRPM = 3500f, gearRatio = 2.5f, minRecommendedSpeed = 25f, maxRecommendedSpeed = 50f },
+    new Gear { minRPM = 2000f, maxRPM = 4000f, gearRatio = 1.8f, minRecommendedSpeed = 45f, maxRecommendedSpeed = 70f },
+    new Gear { minRPM = 2500f, maxRPM = 4500f, gearRatio = 1.3f, minRecommendedSpeed = 65f, maxRecommendedSpeed = 90f },
+    new Gear { minRPM = 3000f, maxRPM = 5000f, gearRatio = 1.0f, minRecommendedSpeed = 85f, maxRecommendedSpeed = 120f },
+    new Gear { minRPM = 3500f, maxRPM = 5500f, gearRatio = 0.85f, minRecommendedSpeed = 110f, maxRecommendedSpeed = 220f }
+};
     }
     private void Start()
     {
@@ -80,7 +87,7 @@ public class CarPhysic : MonoBehaviour
         SteerWheels(horisontal);
         Engine(vertical);
         ApplyHandbrake(brake);
-        ApplyBrake();
+        
         OnSpeadChanged?.Invoke(_speed, _currentEngineRPM, _currentWhellTorque);
     }
     private void Engine(float input)
@@ -102,12 +109,16 @@ public class CarPhysic : MonoBehaviour
         }
 
         _currentWhellTorque = torque;
-
+        if(_currentEngineRPM == _engineMaxPowerRPM)
+        {
+            _currentEngineRPM = 0;
+        }
         foreach (var wheel in _wheels)
         {
             if (_AWD || (_FWD && wheel.IsForward) || (_RWD && !wheel.IsForward))
             {
                 wheel.ApplyMotorTorque(_currentWhellTorque);
+
             }
 
 
@@ -120,7 +131,7 @@ public class CarPhysic : MonoBehaviour
         if (_speed < 1 && !isGasPresed)
         {
             _rigidbody.linearVelocity = Vector3.zero;
-            _rigidbody.angularVelocity = Vector3.zero;
+
         }
 
         UpdateGear();
@@ -133,40 +144,81 @@ public class CarPhysic : MonoBehaviour
         if (!isGasPresed)
             return 0f;
 
-        return engineRPM * (_motorForce * gearRatio);
+        return (engineRPM / _engineMaxPowerRPM) * (_motorForce * gearRatio);
 
     }
     private float CalculateEngineRPM(bool gas, float input)
     {
         Gear currentGear = _gears[_currentGearIndex];
+
         float targetRPM = gas ? _engineMaxPowerRPM * Mathf.Abs(input) : 0f;
 
-        _currentEngineRPM = Mathf.MoveTowards(_currentEngineRPM, targetRPM, (_rpmUpSpeed + _rpmDownSpeed) * Time.fixedDeltaTime);
+        if (_justShifted && _rpmDropTimer > 0f)
+        {
+            // Если только что переключили передачу, устанавливаем обороты в 0
+            _rpmDropTimer -= Time.fixedDeltaTime;
+            _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, 0f, 1f - (_rpmDropTimer / _rpmDropDuration)); // Линейно снижаем до 0
+
+            if (_rpmDropTimer <= 0f)
+            {
+                _justShifted = false;
+            }
+        }
+        else
+        {
+            // Наращиваем или уменьшаем обороты по целевому значению
+            if (targetRPM > _currentEngineRPM)
+                _currentEngineRPM = Mathf.MoveTowards(_currentEngineRPM, targetRPM, _rpmUpSpeed * Time.fixedDeltaTime);
+            else
+                _currentEngineRPM = Mathf.MoveTowards(_currentEngineRPM, targetRPM, _rpmDownSpeed * Time.fixedDeltaTime);
+        }
+
+        // Убираем ограничения на минимальные обороты, так как теперь они будут уменьшаться до 0
         _currentEngineRPM = Mathf.Clamp(_currentEngineRPM, 0f, _engineMaxPowerRPM);
         return _currentEngineRPM;
     }
+
+
     private void UpdateGear()
     {
         if (_gears == null || _gears.Count <= 1) return;
-
-        if (verticalInput < -0.1f) return;
+        if (verticalInput < 0.1f) return;
 
         Gear currentGear = _gears[_currentGearIndex];
+        
 
-        float maxSpeedForCurrentGear = currentGear.CalculateMaxSpeed(currentGear.maxRPM);
-        float minSpeedForCurrentGear = currentGear.CalculateMinSpeed(currentGear.minRPM);
+        if (_currentEngineRPM >= currentGear.maxRPM && _currentGearIndex < _gears.Count - 1)
+        {
+            Gear nextGear = _gears[_currentGearIndex + 1];
+        
+            int minRecommendedSpeedInt = (int)nextGear.minRecommendedSpeed;
 
-        if (_speed >= maxSpeedForCurrentGear && _currentGearIndex < _gears.Count - 1)
-        {
-            _currentGearIndex++;
-            _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, _gears[_currentGearIndex].minRPM, Time.deltaTime * 3f);
+            // Переключаем только если скорость находится хотя бы рядом с рекомендуемым диапазоном
+            if (_speed >= nextGear.minRecommendedSpeed )
+            {
+                _currentGearIndex++;
+                _justShifted = true;
+                _rpmDropTimer = _rpmDropDuration;
+                Debug.Log("⏫ Shift up: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed 
+                    + " nextGear.minRecommendedSpeed " + nextGear.minRecommendedSpeed + ("RPM: " + _currentEngineRPM + " | maxRPM: " + currentGear.maxRPM));
+            }
         }
-        else if (_speed < minSpeedForCurrentGear && _currentGearIndex > 0)
+        else if (_currentEngineRPM <= currentGear.minRPM && _currentGearIndex > 0)
         {
-            _currentGearIndex--;
-            _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, _gears[_currentGearIndex].maxRPM, Time.deltaTime * 3f);
+            Gear prevGear = _gears[_currentGearIndex - 1];
+
+            // Переключаем только если скорость не превышает рекомендованный максимум предыдущей
+            if (_speed <= prevGear.maxRecommendedSpeed) // небольшой запас
+            {
+                _currentGearIndex--;
+                _justShifted = true;
+                _rpmDropTimer = _rpmDropDuration;
+                Debug.Log("⏬ Shift down: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed);
+            }
         }
+        
     }
+
 
     [Header(" воздух")]
     [SerializeField] private float _dragCoefficient = 0.4257f;
@@ -295,21 +347,21 @@ public class CarPhysic : MonoBehaviour
          */
         foreach (var wheel in _wheels)
         {
-           var  _brakeTorqueS = Mathf.Lerp(0f, _brakeTorque, Mathf.Clamp01(_speed / _maxSpead));
+            var _brakeTorqueS = Mathf.Lerp(0f, _brakeTorque, Mathf.Clamp01(_speed / _maxSpead));
             if (_speed > 1f)
             {
-                wheel.ApplyBrakeTorque(_brakeTorqueS);  // Применяем тормозной момент
+                wheel.ApplyBrakeTorque(_brakeTorque);  // Применяем тормозной момент
             }
 
             else
             {
                 // Если скорость меньше порога, применяем минимальное сопротивление или вообще ничего
-                
-               
-                    
-                        wheel.ApplyBrakeTorque(0f);  // Не применяем тормоза, если скорость слишком низкая
-                   
-              
+
+
+
+                wheel.ApplyBrakeTorque(0f);  // Не применяем тормоза, если скорость слишком низкая
+
+
             }
 
         }
