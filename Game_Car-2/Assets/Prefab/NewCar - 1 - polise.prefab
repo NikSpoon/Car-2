@@ -520,61 +520,49 @@ MonoBehaviour:
   - minRPM: 0
     maxRPM: 3000
     gearRatio: 8.3
+    minRecommendedSpeed: 0
+    maxRecommendedSpeed: 0
   - minRPM: 2500
     maxRPM: 4000
     gearRatio: 6.2
+    minRecommendedSpeed: 0
+    maxRecommendedSpeed: 0
   - minRPM: 3500
     maxRPM: 6000
     gearRatio: 4
+    minRecommendedSpeed: 0
+    maxRecommendedSpeed: 0
   - minRPM: 5500
     maxRPM: 10000
     gearRatio: 3
+    minRecommendedSpeed: 0
+    maxRecommendedSpeed: 0
   - minRPM: 9500
     maxRPM: 15000
     gearRatio: 2
+    minRecommendedSpeed: 0
+    maxRecommendedSpeed: 0
   - minRPM: 14500
     maxRPM: 20000
     gearRatio: 1.5
+    minRecommendedSpeed: 0
+    maxRecommendedSpeed: 0
   _centreOfMass: {fileID: 5171575987953172362}
+  _wind: {fileID: 0}
   _AWD: 0
   _RWD: 0
   _FWD: 0
-  _smolCar: 0
-  _normalCar: 0
-  _bigCar: 0
   _motorForce: 500
   _maxSteerAngle: 500
   _brakeTorque: 10
-  _engineMaxPowerRPM: 1000
   _maxSpead: 200
-  _accelerationRate: 500
-  _decelerationRate: 300
+  _maxReverseSpeed: 40
   _speed: 0
   _currentEngineRPM: 0
   _currentWhellTorque: 0
   _currentSteeringAngle: 0
-  _minRPM: 0
-  _maxRPM: 0
   _rpmUpSpeed: 200
   _rpmDownSpeed: 300
-  _brakeCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _airResistanceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _inertiaCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   _steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -599,8 +587,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _rpmDropDuration: 0.5
   _dragCoefficient: 0.4257
   _rollingResistance: 12.8
+  _handbrakeTorque: 500000
+  _handbrakeRampSpeed: 2
 --- !u!136 &4927289092250371291
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public class CarPhysic : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _currentEngineRPM; // Оборот двигателя — Engine RPM (RPM = Revolutions Per Minute)
     [SerializeField] private float _currentWhellTorque;
-    [SerializeField] private float _currentSteeringAngle = 50f;
+    [SerializeField] private float _currentSteeringAngle;
 
     [Header("Rmp Values")]
     [SerializeField] private float _rpmUpSpeed = 400f;
@@ -54,9 +54,9 @@ public class CarPhysic : MonoBehaviour
     private bool _justShifted = false;
     private float _rpmDropTimer = 0f;
     [SerializeField] private float _rpmDropDuration = 0.5f;
-    [SerializeField] private float _rpmDropFactor = 0.5f; // Насколько сильно падают обороты
+    
 
-    [SerializeField] private bool _manualGearMode = false;
+    
     private void Awake()
     {
         if (!_AWD && !_RWD && !_FWD)
