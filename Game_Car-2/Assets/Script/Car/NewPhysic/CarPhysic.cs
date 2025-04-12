@@ -109,10 +109,7 @@ public class CarPhysic : MonoBehaviour
         }
 
         _currentWhellTorque = torque;
-        if(_currentEngineRPM == _engineMaxPowerRPM)
-        {
-            _currentEngineRPM = 0;
-        }
+     
         foreach (var wheel in _wheels)
         {
             if (_AWD || (_FWD && wheel.IsForward) || (_RWD && !wheel.IsForward))
