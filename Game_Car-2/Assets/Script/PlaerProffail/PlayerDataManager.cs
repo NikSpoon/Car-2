@@ -1,13 +1,17 @@
-﻿using UnityEngine;
+﻿using Gameplay.App;
+using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager Instance; // глобальный доступ
 
     public PlayerProfile playerProfile = new PlayerProfile();
+    public IAppSystem AppSystem = new AppSystem();
 
     private void Awake()
     {
+        AppSystem.Trigger(AppTriger.ToMainMenu);
+        
         if (Instance == null)
         {
             Instance = this;
@@ -18,6 +22,7 @@ public class PlayerDataManager : MonoBehaviour
             Destroy(gameObject); // если уже есть — удаляем дубликат
         }
     }
+   
     public void AddMoney(int amount)
     {
         playerProfile.money += amount;

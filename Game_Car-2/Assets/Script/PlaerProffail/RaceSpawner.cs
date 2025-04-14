@@ -12,7 +12,7 @@ public class RaceSpawner : MonoBehaviour
         GameObject carPrefab = carDatabase.carPrefabs[profile.selectedCarIndex];
         GameObject upgradePrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
 
-        GameObject car = Instantiate(carPrefab, _start.position, _start.rotation);
+        GameObject car = Instantiate(upgradePrefab, _start.position, _start.rotation);
         //GameObject upgrade = Instantiate(upgradePrefab, car.transform);
     }
 }

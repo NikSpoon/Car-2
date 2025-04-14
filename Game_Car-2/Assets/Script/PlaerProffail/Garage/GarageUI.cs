@@ -11,5 +11,6 @@ public class GarageUI : MonoBehaviour
     public void SelectUpgraade(int index)
     {
         PlayerDataManager.Instance.playerProfile.selectedBodyUpgradeIndex = index;
+        Debug.Log("Выбрана машина: " + index);
     }
 }
