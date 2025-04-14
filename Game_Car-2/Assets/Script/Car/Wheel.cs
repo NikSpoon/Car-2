@@ -31,22 +31,28 @@ public class Wheel : MonoBehaviour
     }
     public void ApplyMotorTorque(float torque)
     {
-        _wheelCollider.motorTorque = torque;
-        Debug.Log($"torque: {torque}");
+           
+        if (Mathf.Approximately(torque, 0f))
+        {
+            _wheelCollider.motorTorque = 0f;
+        }
+        else
+            {
+                _wheelCollider.motorTorque = torque;
+            }
     }
-
     public void ApplySteerAngle(float angle)
     {
         _wheelCollider.steerAngle = angle;
     }
     public void ApplyBrakeTorque(float brake)
     {
-        _wheelCollider.brakeTorque = brake;
+        _wheelCollider.brakeTorque = brake;  
+      
     }
     private void SetupWheelCollider(WheelCollider wheelCollider)
     {
-        // Радиус колеса
-        wheelCollider.radius = 0.46f;
+       
 
         // Фрикционные силы
         WheelFrictionCurve forwardFriction = wheelCollider.forwardFriction;

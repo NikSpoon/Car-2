@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class EventBox : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class EventBox : MonoBehaviour
     private Rigidbody _carRigidbody;
     private bool random;
 
-    private CarMovement _carControler;
+    private CarPhysic _carControler;
     private Wheel[] _wheels;
 
     [SerializeField] private Transform _targetTo;
@@ -38,7 +37,7 @@ public class EventBox : MonoBehaviour
     {
         _car = GameObject.FindGameObjectWithTag("Player");
         _carRigidbody = _car.GetComponent<Rigidbody>();
-        _carControler = _car.GetComponent<CarMovement>();
+        _carControler = _car.GetComponent<CarPhysic>();
 
         _wheels = _carControler.GetComponentsInChildren<Wheel>();
     }

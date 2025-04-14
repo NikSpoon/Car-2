@@ -1,6 +1,5 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ViewPhisick : MonoBehaviour
 {
@@ -8,6 +7,23 @@ public class ViewPhisick : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _carSpeadText;
     [SerializeField] private TextMeshProUGUI _engineRPMText;
     [SerializeField] private TextMeshProUGUI _whellTorqueText;
+    private void Awake()
+    {
+        GameObject car = GameObject.FindGameObjectWithTag("Player");
+
+        if (car == null)
+        {
+            Debug.LogError("Не найден объект с тегом Player!");
+            return;
+        }
+
+        _carPhysic = car.GetComponent<CarPhysic>();
+
+        if (_carPhysic == null)
+        {
+            Debug.LogError("На объекте Player отсутствует компонент CarPhysic!");
+        }
+    }
 
     private void Start()
     {

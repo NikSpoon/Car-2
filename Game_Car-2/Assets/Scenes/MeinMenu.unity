@@ -2928,6 +2928,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375677951}
   m_CullTransparentMesh: 1
+--- !u!1 &1383789002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1383789003}
+  - component: {fileID: 1383789004}
+  m_Layer: 0
+  m_Name: 'PlayerManager '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1383789003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383789002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.077914, y: 18.223843, z: 2.116889}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1383789004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383789002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83cc4e822e49bbd43831017c751b2545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerProfile:
+    selectedCarIndex: 0
+    selectedBodyUpgradeIndex: 0
+    money: 1000
 --- !u!1 &1437099582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4348,3 +4396,4 @@ SceneRoots:
   - {fileID: 419744999}
   - {fileID: 1050965276}
   - {fileID: 1372902370}
+  - {fileID: 1383789003}
