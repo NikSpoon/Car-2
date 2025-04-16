@@ -15,7 +15,7 @@ C:/Game_Unity_Car-2/Car-2/Game_Car-2
 -logFile
 Logs/AssetImportWorker8.log
 -srvPort
-57116
+57370
 -job-worker-count
 7
 -background-job-worker-count
@@ -59,12 +59,12 @@ C:/Game_Unity_Car-2/Car-2/Game_Car-2
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [30376]  Target information:
+Player connection [11484]  Target information:
 
-Player connection [30376]  * "[IP] 192.168.1.24 [Port] 0 [Flags] 2 [Guid] 3482640584 [EditorId] 3482640584 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-TS10LTIF) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [11484]  * "[IP] 192.168.1.24 [Port] 0 [Flags] 2 [Guid] 4164381072 [EditorId] 4164381072 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-TS10LTIF) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [30376] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [30376] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [11484] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [11484] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -76,7 +76,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 1.94 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 6.29 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.41f1 (46e447368a18)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/Resources/UnitySubsystems
@@ -92,45 +92,45 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56496
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56272
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.005942 seconds.
-- Loaded All Assemblies, in  0.415 seconds
+Registered in 0.003156 seconds.
+- Loaded All Assemblies, in  0.855 seconds
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.336 seconds
-Domain Reload Profiling: 750ms
-	BeginReloadAssembly (177ms)
+- Finished resetting the current domain, in  0.289 seconds
+Domain Reload Profiling: 1143ms
+	BeginReloadAssembly (633ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (33ms)
+	RebuildCommonClasses (31ms)
 	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (46ms)
-	LoadAllAssembliesAndSetupDomain (146ms)
-		LoadAssemblies (174ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (136ms)
+		LoadAssemblies (631ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (143ms)
-			TypeCache.Refresh (141ms)
-				TypeCache.ScanAssembly (128ms)
+		AnalyzeDomain (133ms)
+			TypeCache.Refresh (132ms)
+				TypeCache.ScanAssembly (119ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (337ms)
+	FinalizeReload (289ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (290ms)
+		SetupLoadedEditorAssemblies (251ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (23ms)
+			InitializePlatformSupportModulesInManaged (20ms)
 			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (54ms)
-			ProcessInitializeOnLoadAttributes (160ms)
-			ProcessInitializeOnLoadMethodAttributes (47ms)
+			BeforeProcessingInitializeOnLoad (48ms)
+			ProcessInitializeOnLoadAttributes (134ms)
+			ProcessInitializeOnLoadMethodAttributes (43ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -142,11 +142,11 @@ Import Worker Mode flag is 0x00
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.944 seconds
+- Loaded All Assemblies, in  0.701 seconds
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 2.07 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.86 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
@@ -154,330 +154,698 @@ Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00025] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:22 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x0057d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00012] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00044] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x00037] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x0003f] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:48 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x0000d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.887 seconds
-Domain Reload Profiling: 1827ms
+- Finished resetting the current domain, in  1.082 seconds
+Domain Reload Profiling: 1780ms
 	BeginReloadAssembly (150ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
+		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (26ms)
+		CreateAndSetChildDomain (25ms)
 	RebuildCommonClasses (32ms)
 	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (34ms)
-	LoadAllAssembliesAndSetupDomain (713ms)
-		LoadAssemblies (560ms)
+	initialDomainReloadingComplete (35ms)
+	LoadAllAssembliesAndSetupDomain (471ms)
+		LoadAssemblies (350ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (244ms)
-			TypeCache.Refresh (180ms)
-				TypeCache.ScanAssembly (162ms)
-			BuildScriptInfoCaches (49ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (887ms)
+		AnalyzeDomain (210ms)
+			TypeCache.Refresh (154ms)
+				TypeCache.ScanAssembly (141ms)
+			BuildScriptInfoCaches (43ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (1083ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (747ms)
+		SetupLoadedEditorAssemblies (977ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (5ms)
-			SetLoadedEditorAssemblies (8ms)
-			BeforeProcessingInitializeOnLoad (203ms)
-			ProcessInitializeOnLoadAttributes (477ms)
-			ProcessInitializeOnLoadMethodAttributes (49ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (146ms)
+			ProcessInitializeOnLoadAttributes (770ms)
+			ProcessInitializeOnLoadMethodAttributes (48ms)
 			AfterProcessingInitializeOnLoad (4ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 1.72 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
+Refreshing native plugins compatible for Editor in 0.93 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 147 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6453 unused Assets / (6.0 MB). Loaded Objects now: 7041.
-Memory consumption went from 171.6 MB to 165.6 MB.
-Total: 6.931900 ms (FindLiveObjects: 0.522000 ms CreateObjectMapping: 0.487100 ms MarkObjects: 3.692100 ms  DeleteObjects: 2.229600 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 367372.362900 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/SKY.mat
-  artifactKey: Guid(1bf7db8e5c7e3e14cb4ab982b7cf775a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/SKY.mat using Guid(1bf7db8e5c7e3e14cb4ab982b7cf775a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '79fb46a027db3e2a45cd66db1c546ab5') in 0.1518192 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.111655 seconds.
-  path: Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH7.mat
-  artifactKey: Guid(25ecae58be9486d4ab7cdd7b8919b1e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH7.mat using Guid(25ecae58be9486d4ab7cdd7b8919b1e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5874d1551d3651a357b0806bf73d8746') in 0.038234 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000012 seconds.
-  path: Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH14.mat
-  artifactKey: Guid(9ce7b63f84c914e4e8d993a0108b4d6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH14.mat using Guid(9ce7b63f84c914e4e8d993a0108b4d6d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c140493eff4018ef5cffa602d3719d27') in 0.028416 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.062551 seconds.
-  path: Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH15.mat
-  artifactKey: Guid(e288c97303f9a464498028706aa80baf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH15.mat using Guid(e288c97303f9a464498028706aa80baf) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7fe22d6f2616287a1ae52d0affbebec3') in 0.0256343 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000137 seconds.
-  path: Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH19.mat
-  artifactKey: Guid(995c40ed41445b94cb7bb22020d84235) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH19.mat using Guid(995c40ed41445b94cb7bb22020d84235) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'da07fc07d5e7e62d9ea9473a76a6a712') in 0.0211049 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.190151 seconds.
-  path: Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH23.mat
-  artifactKey: Guid(5a976fc69b541ca499790fa6ffd71ba0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/ZeroGrid/Stylize Vehicles - Complete Edition/Materials/VEH23.mat using Guid(5a976fc69b541ca499790fa6ffd71ba0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b1ed17115262c9efb130f091fbd3258b') in 0.0383652 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
-
-========================================================================
-Received Import Request.
-  Time since last request: 12.389301 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_corner_signage_night_hard.mat
-  artifactKey: Guid(97715b0d30f01674b9745a777813ae35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_corner_signage_night_hard.mat using Guid(97715b0d30f01674b9745a777813ae35) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1461bd40b8b7bc00efd04f10ccb80f7d') in 0.0956375 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.438754 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_corner_signage_expert.mat
-  artifactKey: Guid(a2cfeb45775e5894583f9e9d44f2f543) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_corner_signage_expert.mat using Guid(a2cfeb45775e5894583f9e9d44f2f543) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '54f993d5cdf0ddc7ea5bf37282b34e85') in 0.0629022 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_corner_signage_night_1.mat
-  artifactKey: Guid(04478410b5a55df48b610ec1962d4a95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_corner_signage_night_1.mat using Guid(04478410b5a55df48b610ec1962d4a95) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5a6a9bb473e07d7896f0c7f60c1492a6') in 0.0269305 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.066802 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_bridge_standard_night_expert.mat
-  artifactKey: Guid(36c04ef832ee6fa43968dd7691ab4b51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_bridge_standard_night_expert.mat using Guid(36c04ef832ee6fa43968dd7691ab4b51) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '01dc75af26bb5bf24a668618cd99d129') in 0.0450858 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000088 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_corner_signage_animated.mat
-  artifactKey: Guid(c6ea52fba07fcc5499ab6dcb45eb08fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_corner_signage_animated.mat using Guid(c6ea52fba07fcc5499ab6dcb45eb08fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '79e83b01281860fda4aad1bd07696b45') in 0.0531491 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.597809 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_bridge_magnetic_night_hard.mat
-  artifactKey: Guid(c25320ede06762b4eb2f58ec0be3c8dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_bridge_magnetic_night_hard.mat using Guid(c25320ede06762b4eb2f58ec0be3c8dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a756a029fa5e8220bf664cf134cc8143') in 0.0377968 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_bridge_standard_expert.mat
-  artifactKey: Guid(0298b312bb635f343b6a2bf9546b91e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_bridge_standard_expert.mat using Guid(0298b312bb635f343b6a2bf9546b91e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c9fc0de2ddd604b6d1bd9edc2c58275e') in 0.0373058 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.201675 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_barriers_standard_night_medium.mat
-  artifactKey: Guid(246893001397d9e449c32d56584d8837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_barriers_standard_night_medium.mat using Guid(246893001397d9e449c32d56584d8837) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '162111d716753e3e6dccb4d29e1ccfa9') in 0.0621921 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_bridge_magnetic.mat
-  artifactKey: Guid(d447ca8a2cc52d144ae00957adaca79e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_bridge_magnetic.mat using Guid(d447ca8a2cc52d144ae00957adaca79e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '226cf205e4ea0d83a3f397f39e87cd33') in 0.0253799 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.034237 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_barriers_narrow_night_medium.mat
-  artifactKey: Guid(b7320e00ccfbf554db125f5ad10d56a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_barriers_narrow_night_medium.mat using Guid(b7320e00ccfbf554db125f5ad10d56a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '887fc27696690ecf87cf50f85943726a') in 0.0669843 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_barriers_standard_night.mat
-  artifactKey: Guid(b10586941525ba8468a3b62d857607ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_barriers_standard_night.mat using Guid(b10586941525ba8468a3b62d857607ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '15c2c1040ed356ec8679e869e45d74fe') in 0.055488 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.106083 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_banners_flags_night_expert.mat
-  artifactKey: Guid(ac1e05e7da65ef04e8bb4940693c1457) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_banners_flags_night_expert.mat using Guid(ac1e05e7da65ef04e8bb4940693c1457) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '785be45adbd2c487a07d3dff8c2631f2') in 0.0500584 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_barriers_narrow_night_hard.mat
-  artifactKey: Guid(eae20d00e8f8be7438d98fca37a541a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_barriers_narrow_night_hard.mat using Guid(eae20d00e8f8be7438d98fca37a541a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '864717173a006cb4c89778629aa4c58c') in 0.0556242 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.267606 seconds.
-  path: Assets/AssedStore - Prefabs/LowpolyStyle/Shared Materials and Textures/Main.mat
-  artifactKey: Guid(b218d35c8dc65164892039ea0aea3b4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/LowpolyStyle/Shared Materials and Textures/Main.mat using Guid(b218d35c8dc65164892039ea0aea3b4b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7391d387d1511fbcab048de9b4ac3c45') in 0.0301546 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000015 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_banners_flags_expert.mat
-  artifactKey: Guid(4aeec9786ffb3fc4094fbbfa4fc34dae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/mat_banners_flags_expert.mat using Guid(4aeec9786ffb3fc4094fbbfa4fc34dae) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7e963e35d9dffa709b31646e7c243db7') in 0.041468 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.275173 seconds.
-  path: Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Metalic Green.mat
-  artifactKey: Guid(8b29aaa3eec7468097ff07adfcf29ac9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Metalic Green.mat using Guid(8b29aaa3eec7468097ff07adfcf29ac9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '312c68e8d4f5d71e006385665cd8f0ae') in 0.0778433 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.490831 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/framework_atlas.mat
-  artifactKey: Guid(152343c274b3d134181e8724124828a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/framework_atlas.mat using Guid(152343c274b3d134181e8724124828a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3bbc84e25710c09609d700a80090fef2') in 0.0462817 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.696755 seconds.
-  path: Assets/TextMesh Pro/Examples & Extras/Materials/Crate - Surface Shader Scene.mat
-  artifactKey: Guid(e6b9b44320f4448d9d5e0ee634259966) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Examples & Extras/Materials/Crate - Surface Shader Scene.mat using Guid(e6b9b44320f4448d9d5e0ee634259966) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9fef2f5f9c84c1a421ed5b80c1e270c6') in 0.045246 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.024936 seconds.
-  path: Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Drop Shadow - 2 Pass.mat
-  artifactKey: Guid(947a44964e53bf0448ff698b2a2219c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Drop Shadow - 2 Pass.mat using Guid(947a44964e53bf0448ff698b2a2219c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '034cd25d97b53a9fd26f3e4bc30a3ad4') in 0.0534691 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/Container_Padding.mat
-  artifactKey: Guid(933eddf03ea22364ca560d05e2e69b1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Materials/Container_Padding.mat using Guid(933eddf03ea22364ca560d05e2e69b1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1d859ded473a08679b9ef1f2ab5e2948') in 0.0337611 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 4
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.440132 seconds.
-  path: Assets/UI/2.mat
-  artifactKey: Guid(0164e5fdcad01cb408f9736b11e2a372) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI/2.mat using Guid(0164e5fdcad01cb408f9736b11e2a372) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '09d2071c27dc904d6a0c0eb245f8ef38') in 0.0218561 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/AssedStore - Prefabs/LowpolyStyle/Shared Materials and Textures/ArcticWater.mat
-  artifactKey: Guid(96fcb580b00d89b41befaa454e5d7c18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/LowpolyStyle/Shared Materials and Textures/ArcticWater.mat using Guid(96fcb580b00d89b41befaa454e5d7c18) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5fa9774142defd454c542c27568cb6e4') in 0.0224473 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+Unloading 144 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6415 unused Assets / (6.3 MB). Loaded Objects now: 7009.
+Memory consumption went from 175.9 MB to 169.6 MB.
+Total: 17.393200 ms (FindLiveObjects: 1.165000 ms CreateObjectMapping: 0.477900 ms MarkObjects: 13.354500 ms  DeleteObjects: 2.394300 ms)
 
 ========================================================================
 Received Prepare
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.738 seconds
+- Loaded All Assemblies, in  0.699 seconds
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 0.97 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.16 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00025] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:22 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x0057d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00012] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00044] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x00037] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x00013] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:33 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x0000d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.861 seconds
-Domain Reload Profiling: 1598ms
-	BeginReloadAssembly (194ms)
+- Finished resetting the current domain, in  1.550 seconds
+Domain Reload Profiling: 2248ms
+	BeginReloadAssembly (201ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
+		DisableScriptedObjects (7ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (46ms)
-	RebuildCommonClasses (43ms)
-	RebuildNativeTypeToScriptingClass (13ms)
-	initialDomainReloadingComplete (29ms)
-	LoadAllAssembliesAndSetupDomain (458ms)
-		LoadAssemblies (386ms)
+		CreateAndSetChildDomain (53ms)
+	RebuildCommonClasses (31ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (27ms)
+	LoadAllAssembliesAndSetupDomain (429ms)
+		LoadAssemblies (361ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (177ms)
-			TypeCache.Refresh (9ms)
+		AnalyzeDomain (157ms)
+			TypeCache.Refresh (7ms)
 				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (152ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (861ms)
+			BuildScriptInfoCaches (135ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1550ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (742ms)
+		SetupLoadedEditorAssemblies (1031ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (13ms)
+			BeforeProcessingInitializeOnLoad (214ms)
+			ProcessInitializeOnLoadAttributes (712ms)
+			ProcessInitializeOnLoadMethodAttributes (79ms)
+			AfterProcessingInitializeOnLoad (7ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (7ms)
+Refreshing native plugins compatible for Editor in 1.91 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 32 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6414 unused Assets / (7.2 MB). Loaded Objects now: 7012.
+Memory consumption went from 151.0 MB to 143.8 MB.
+Total: 23.947700 ms (FindLiveObjects: 0.981600 ms CreateObjectMapping: 0.783100 ms MarkObjects: 17.597800 ms  DeleteObjects: 4.583000 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.698 seconds
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.28 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00025] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:22 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x0057d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00012] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00044] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x00037] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x00013] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:33 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x0000d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.464 seconds
+Domain Reload Profiling: 2162ms
+	BeginReloadAssembly (189ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (50ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (24ms)
+	LoadAllAssembliesAndSetupDomain (443ms)
+		LoadAssemblies (368ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (162ms)
+			TypeCache.Refresh (6ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (139ms)
+			ResolveRequiredComponents (12ms)
+	FinalizeReload (1465ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1027ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (4ms)
-			SetLoadedEditorAssemblies (9ms)
-			BeforeProcessingInitializeOnLoad (196ms)
-			ProcessInitializeOnLoadAttributes (463ms)
+			SetLoadedEditorAssemblies (12ms)
+			BeforeProcessingInitializeOnLoad (228ms)
+			ProcessInitializeOnLoadAttributes (712ms)
+			ProcessInitializeOnLoadMethodAttributes (65ms)
+			AfterProcessingInitializeOnLoad (5ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (6ms)
+Refreshing native plugins compatible for Editor in 1.54 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 32 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6414 unused Assets / (6.0 MB). Loaded Objects now: 7015.
+Memory consumption went from 151.0 MB to 145.0 MB.
+Total: 22.900200 ms (FindLiveObjects: 0.595400 ms CreateObjectMapping: 0.906200 ms MarkObjects: 18.202900 ms  DeleteObjects: 3.193900 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Prepare
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  5.755 seconds
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 1.66 ms, found 3 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00025] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:22 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x0057d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00012] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00044] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x00037] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x00013] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:33 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x0000d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.006 seconds
+Domain Reload Profiling: 7762ms
+	BeginReloadAssembly (839ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (65ms)
+	RebuildCommonClasses (275ms)
+	RebuildNativeTypeToScriptingClass (20ms)
+	initialDomainReloadingComplete (34ms)
+	LoadAllAssembliesAndSetupDomain (4587ms)
+		LoadAssemblies (5103ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (200ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (174ms)
+			ResolveRequiredComponents (13ms)
+	FinalizeReload (2007ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1579ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			SetLoadedEditorAssemblies (10ms)
+			BeforeProcessingInitializeOnLoad (186ms)
+			ProcessInitializeOnLoadAttributes (1308ms)
 			ProcessInitializeOnLoadMethodAttributes (66ms)
 			AfterProcessingInitializeOnLoad (5ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (6ms)
-Refreshing native plugins compatible for Editor in 1.53 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.46 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 32 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6452 unused Assets / (6.5 MB). Loaded Objects now: 7086.
-Memory consumption went from 151.9 MB to 145.4 MB.
-Total: 9.914600 ms (FindLiveObjects: 0.704200 ms CreateObjectMapping: 0.604400 ms MarkObjects: 5.073400 ms  DeleteObjects: 3.530500 ms)
+Unloading 6414 unused Assets / (6.4 MB). Loaded Objects now: 7018.
+Memory consumption went from 151.0 MB to 144.6 MB.
+Total: 17.319200 ms (FindLiveObjects: 0.563200 ms CreateObjectMapping: 0.507000 ms MarkObjects: 13.057900 ms  DeleteObjects: 3.189500 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 412452.795438 seconds.
+  path: Assets/AssedStore - Prefabs/LowpolyStyle/Desert/Prefabs/AgaveHigh.prefab
+  artifactKey: Guid(fa5cb7927e928254fa0ab07e9f1815cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/LowpolyStyle/Desert/Prefabs/AgaveHigh.prefab using Guid(fa5cb7927e928254fa0ab07e9f1815cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '205f44524e524cafd76d158e07abfccd') in 0.3793433 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/AssedStore - Prefabs/LowpolyStyle/Desert/Prefabs/Barrel.prefab
+  artifactKey: Guid(c5f50e6e7e79d4f40b29e064c20f4fef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/LowpolyStyle/Desert/Prefabs/Barrel.prefab using Guid(c5f50e6e7e79d4f40b29e064c20f4fef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3bc07e13f594159fe793af863b8b1b62') in 0.0411393 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 10
+
+========================================================================
+Received Import Request.
+  Time since last request: 41.297137 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Snow 01.terrainlayer
+  artifactKey: Guid(3e71f3c68760e7d439971407599c79e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Snow 01.terrainlayer using Guid(3e71f3c68760e7d439971407599c79e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9a4810f807726ecfcd61a451f93a65da') in 0.0763425 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.606073 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Sand 01.terrainlayer
+  artifactKey: Guid(26d2a47b8d126ea4ea187927097350a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Sand 01.terrainlayer using Guid(26d2a47b8d126ea4ea187927097350a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e3ebd5bbb7c3f9322da12482070aae83') in 0.0542316 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.211026 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 08.terrainlayer
+  artifactKey: Guid(25b16ec876cc2384ba781c3f13dfebad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 08.terrainlayer using Guid(25b16ec876cc2384ba781c3f13dfebad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '01c7836499d946c94bfab612c6d5c46d') in 0.0472744 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.012875 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Plantlet 02.terrainlayer
+  artifactKey: Guid(212bc52a4b9cdc2498c134dd46c48fb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Plantlet 02.terrainlayer using Guid(212bc52a4b9cdc2498c134dd46c48fb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4c1f2e7775c1c3e805556e7b73412a48') in 0.0553556 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.304287 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Soil 01.terrainlayer
+  artifactKey: Guid(4d1eacfe512a12845b2943bb58c7aa1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Soil 01.terrainlayer using Guid(4d1eacfe512a12845b2943bb58c7aa1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2762c964d7d46bbaa3b82222a6aeddd4') in 0.0512974 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.914681 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 06.terrainlayer
+  artifactKey: Guid(01e2e79109e4ed04180f814f9b6eceec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 06.terrainlayer using Guid(01e2e79109e4ed04180f814f9b6eceec) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd5c7a623d283f95b2490d62eab5f75b5') in 0.05263 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.416012 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_clay_down.terrainlayer
+  artifactKey: Guid(4c4035b4429296047a447dd96db29248) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_clay_down.terrainlayer using Guid(4c4035b4429296047a447dd96db29248) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4b41a02ca28945bc94448fbf93090012') in 0.016159 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_claydarked_right.terrainlayer
+  artifactKey: Guid(79459100015b83e448ec508ceae4fc57) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_claydarked_right.terrainlayer using Guid(79459100015b83e448ec508ceae4fc57) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '871c5c97fe87adb5045ab2769419da8e') in 0.0201577 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_down.terrainlayer
+  artifactKey: Guid(a2067e44dd8d50144b0a359c7513a3ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_down.terrainlayer using Guid(a2067e44dd8d50144b0a359c7513a3ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c26efab371de27748590f049e816070b') in 0.0221028 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000181 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_rocks_up.terrainlayer
+  artifactKey: Guid(f8179b5fdea36d14484ce6531cdf7e64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_rocks_up.terrainlayer using Guid(f8179b5fdea36d14484ce6531cdf7e64) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f199453db7bfbd36124e8c5c042a88e3') in 0.0321338 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_down.terrainlayer
+  artifactKey: Guid(ca37d638073554c449cb7c9dd313f5cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_down.terrainlayer using Guid(ca37d638073554c449cb7c9dd313f5cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '709e923a2ab11b03755a0cb78520435b') in 0.0261897 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_lighted_down.terrainlayer
+  artifactKey: Guid(3d4206861a951f648b37ee22d964bf26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_lighted_down.terrainlayer using Guid(3d4206861a951f648b37ee22d964bf26) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9a26dce4a725aa10c3d2510e27c4d0fc') in 0.0205728 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_rocks_left.terrainlayer
+  artifactKey: Guid(2af4e57ff8bc78e4a88241418c051a76) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_rocks_left.terrainlayer using Guid(2af4e57ff8bc78e4a88241418c051a76) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '42ae23a3c2ed4f871e825e66605d1e7d') in 0.0216993 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_normal_down.terrainlayer
+  artifactKey: Guid(2b319025aaf66334aa785399b8ac33ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_normal_down.terrainlayer using Guid(2b319025aaf66334aa785399b8ac33ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd87f1579a3490108966a27260664c3a4') in 0.0192845 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_lighted_right.terrainlayer
+  artifactKey: Guid(4ac37b12803ab694983dffea6db7bf14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_lighted_right.terrainlayer using Guid(4ac37b12803ab694983dffea6db7bf14) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5756eb082b056ef3568af0317f962ff0') in 0.0207665 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000067 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_lighted_rocks_left.terrainlayer
+  artifactKey: Guid(1c493d6bb8797ef4f9f71200033d5fae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_lighted_rocks_left.terrainlayer using Guid(1c493d6bb8797ef4f9f71200033d5fae) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2836bbd1bd7cf87efe77371fb009bdb3') in 0.0212555 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_lighted_rocks_right.terrainlayer
+  artifactKey: Guid(93048c3e21ad4ea48a891e7dfba702ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_lighted_rocks_right.terrainlayer using Guid(93048c3e21ad4ea48a891e7dfba702ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5fa4738f03de6640e29daba735e42ba2') in 0.0220357 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_right.terrainlayer
+  artifactKey: Guid(81ae3aa24351ac3468c21be8f174a9ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_right.terrainlayer using Guid(81ae3aa24351ac3468c21be8f174a9ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '489739bdab16e64846ee3a07779e23f4') in 0.0193329 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_clay_up.terrainlayer
+  artifactKey: Guid(799b17a5976350a4699e3fe5773d8e83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_clay_up.terrainlayer using Guid(799b17a5976350a4699e3fe5773d8e83) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '716266a29d04a2c44021cb809a397165') in 0.021796 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000185 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_claydarked_down.terrainlayer
+  artifactKey: Guid(421ead4c2a1387945a283cc08d0ad7ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_claydarked_down.terrainlayer using Guid(421ead4c2a1387945a283cc08d0ad7ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2f2d15c7b35a80e7bd78949b62388728') in 0.0345748 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_left.terrainlayer
+  artifactKey: Guid(01fdb5ede7bc71744bebfca6e00634c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_left.terrainlayer using Guid(01fdb5ede7bc71744bebfca6e00634c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '13a130c5c2e83af882d7043837be5df8') in 0.0195821 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_up.terrainlayer
+  artifactKey: Guid(bcb6b5f0b45e65f41a03dfd1c55f60d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_up.terrainlayer using Guid(bcb6b5f0b45e65f41a03dfd1c55f60d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c2711ed83b36b84ebc03df7f84a4abbb') in 0.0183469 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_claydarked_up.terrainlayer
+  artifactKey: Guid(8d1901c5994c2e845b5026dcbc721c13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_claydarked_up.terrainlayer using Guid(8d1901c5994c2e845b5026dcbc721c13) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7bdd86727653005201021822e5ef0015') in 0.0211631 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_normal_up.terrainlayer
+  artifactKey: Guid(205fdae2c6b4e4345831e9b662268942) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_normal_up.terrainlayer using Guid(205fdae2c6b4e4345831e9b662268942) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '43937a93e7b7f7f88ac5f12d709ff7ff') in 0.0187397 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_up.terrainlayer
+  artifactKey: Guid(299e03f60c444014eb427319d96ae48e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_corrupted_up.terrainlayer using Guid(299e03f60c444014eb427319d96ae48e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '86623a44472134fd02844306b8920b56') in 0.0182636 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_claydarked_left.terrainlayer
+  artifactKey: Guid(69aae8f389094174fa2ca70f9268a251) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_claydarked_left.terrainlayer using Guid(69aae8f389094174fa2ca70f9268a251) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4fa05aaae10ccb951f0e840f4f3e6983') in 0.0192829 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_rocks_right.terrainlayer
+  artifactKey: Guid(623b445a6e0248847a90129992558440) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_desatured_rocks_right.terrainlayer using Guid(623b445a6e0248847a90129992558440) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3ace2fd66aa876b691dd5a990b88d14b') in 0.0196057 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.639406 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_overcorrupted_right.terrainlayer
+  artifactKey: Guid(94bd4356f0397844b86cc42bed9f66c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_overcorrupted_right.terrainlayer using Guid(94bd4356f0397844b86cc42bed9f66c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f1afecf13aa306816e11f7ff8dcf4e3e') in 0.0204099 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_overdesatured_down.terrainlayer
+  artifactKey: Guid(a35f94c7d8dea164fa79fe7e62a3c4a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_overdesatured_down.terrainlayer using Guid(a35f94c7d8dea164fa79fe7e62a3c4a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b63e874d2609ca3b57e0553a2bc002b8') in 0.0171017 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_overdesatured_up.terrainlayer
+  artifactKey: Guid(ed58adfb5ac840849b177a27f87a058a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/dirt_overdesatured_up.terrainlayer using Guid(ed58adfb5ac840849b177a27f87a058a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7845fc32d9053fb452cf25c59cb6cc1e') in 0.0179731 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.257725 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_bluetint_down.terrainlayer
+  artifactKey: Guid(af09d6fd4ebc81e448c4a90956dfb789) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_bluetint_down.terrainlayer using Guid(af09d6fd4ebc81e448c4a90956dfb789) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a84c3a14cceefa574b175cd11bdd6841') in 0.0218749 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.028792 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_bluetint_left.terrainlayer
+  artifactKey: Guid(4f578fafc038b3e47889d8591aeabb7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_bluetint_left.terrainlayer using Guid(4f578fafc038b3e47889d8591aeabb7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2147a2f7333ab50e21c51b049f1aba6b') in 0.0179081 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_corrupted_down.terrainlayer
+  artifactKey: Guid(acddab07f8ac8c84aa7852a315806c4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_corrupted_down.terrainlayer using Guid(acddab07f8ac8c84aa7852a315806c4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '94e3220e4f0c29f99d29478b0d3ca910') in 0.0195022 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_corrupted_right.terrainlayer
+  artifactKey: Guid(5a8233d884b35ae4581f8f254c1995be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_corrupted_right.terrainlayer using Guid(5a8233d884b35ae4581f8f254c1995be) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bbc5f1363aa67befc41f6ad6b980ae9d') in 0.019229 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000107 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_corrupted_left.terrainlayer
+  artifactKey: Guid(1969c3a09bbfb164f9683bf61b1f0cc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_corrupted_left.terrainlayer using Guid(1969c3a09bbfb164f9683bf61b1f0cc1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '999d48359e62a91f77887892132a7055') in 0.0179231 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_normal_right.terrainlayer
+  artifactKey: Guid(230d99471a8ceec4e91c4455a1f70044) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_normal_right.terrainlayer using Guid(230d99471a8ceec4e91c4455a1f70044) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3fad9972aa608d4787faae6e39b99387') in 0.0165654 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_darked_right.terrainlayer
+  artifactKey: Guid(1b91aa2ac8fa2b04b972e4af2dfa295b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_darked_right.terrainlayer using Guid(1b91aa2ac8fa2b04b972e4af2dfa295b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e0c135804512b4348c71ff86f0594c6d') in 0.0181755 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_lighted_left.terrainlayer
+  artifactKey: Guid(f090ea60b20d02c4ba801580101c5465) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_lighted_left.terrainlayer using Guid(f090ea60b20d02c4ba801580101c5465) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '16e5ce97a1649542ff4334caf756080f') in 0.0204807 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_desatured_down.terrainlayer
+  artifactKey: Guid(6cc09a088a350a64fa9c4fdadce1ce3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_desatured_down.terrainlayer using Guid(6cc09a088a350a64fa9c4fdadce1ce3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2015820eb92cde6f107876211f1048eb') in 0.0180121 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_lighted_down.terrainlayer
+  artifactKey: Guid(bd09f0681f28b484fb0610ef52f7254c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_lighted_down.terrainlayer using Guid(bd09f0681f28b484fb0610ef52f7254c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7387a9d436e4ace50f0dad9e0166c941') in 0.0189779 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_darked_up.terrainlayer
+  artifactKey: Guid(4a7af20f1c12eed44b51c5f085942c21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_darked_up.terrainlayer using Guid(4a7af20f1c12eed44b51c5f085942c21) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '072f9221c1ad0f861c112955efec2d49') in 0.0195101 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000083 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_desatured_up.terrainlayer
+  artifactKey: Guid(3e876ba4c3fbcb44892786b86e12a40d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_desatured_up.terrainlayer using Guid(3e876ba4c3fbcb44892786b86e12a40d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f28800a976c4c8f9c18f23dd2ee79efb') in 0.019189 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_desatured_left.terrainlayer
+  artifactKey: Guid(33706b97a412a2b4bb4ec1ef3b9eeb36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_desatured_left.terrainlayer using Guid(33706b97a412a2b4bb4ec1ef3b9eeb36) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2666d9c401f6ba69828018e4ddd589e9') in 0.0211248 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.242356 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_overcorrupted_up.terrainlayer
+  artifactKey: Guid(66ebd6a3e966c7447a9f9b40428d928a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_overcorrupted_up.terrainlayer using Guid(66ebd6a3e966c7447a9f9b40428d928a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6435552226a82eeaa28ed8510983471a') in 0.0353317 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_swamp_dark_left.terrainlayer
+  artifactKey: Guid(d7db9727f3802a04cae590170e40b962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_swamp_dark_left.terrainlayer using Guid(d7db9727f3802a04cae590170e40b962) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2e7d595919681f6361957d4290973d18') in 0.0227588 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_swamp_dark_up.terrainlayer
+  artifactKey: Guid(ae6d998d1ab092a489d8fd2c714eea4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_swamp_dark_up.terrainlayer using Guid(ae6d998d1ab092a489d8fd2c714eea4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e26ff883f799b57153090649c7f3d484') in 0.0223685 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.913262 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_swamp_lighted_up.terrainlayer
+  artifactKey: Guid(ac1779a434deba04099ff213b16320e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_swamp_lighted_up.terrainlayer using Guid(ac1779a434deba04099ff213b16320e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1b44dac7f219fd7fefa41cc2fe8dc9d9') in 0.02184 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_swamp_normal_left.terrainlayer
+  artifactKey: Guid(055834330a513be4794397d9ee7d6802) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_swamp_normal_left.terrainlayer using Guid(055834330a513be4794397d9ee7d6802) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '23f3871dc9ec63d3c8c0211e40e5e33c') in 0.0207118 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server
 Process exiting

@@ -15,7 +15,7 @@ C:/Game_Unity_Car-2/Car-2/Game_Car-2
 -logFile
 Logs/AssetImportWorker13.log
 -srvPort
-57116
+57370
 -job-worker-count
 7
 -background-job-worker-count
@@ -59,12 +59,12 @@ C:/Game_Unity_Car-2/Car-2/Game_Car-2
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [35524]  Target information:
+Player connection [3016]  Target information:
 
-Player connection [35524]  * "[IP] 192.168.1.24 [Port] 0 [Flags] 2 [Guid] 3518730068 [EditorId] 3518730068 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-TS10LTIF) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [3016]  * "[IP] 192.168.1.24 [Port] 0 [Flags] 2 [Guid] 938535095 [EditorId] 938535095 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-TS10LTIF) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [35524] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [35524] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [3016] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [3016] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -76,7 +76,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 5.06 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.47 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.41f1 (46e447368a18)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/Resources/UnitySubsystems
@@ -92,44 +92,44 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56320
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56536
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.007392 seconds.
-- Loaded All Assemblies, in  0.428 seconds
+Registered in 0.002927 seconds.
+- Loaded All Assemblies, in  0.324 seconds
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.294 seconds
-Domain Reload Profiling: 720ms
-	BeginReloadAssembly (194ms)
+- Finished resetting the current domain, in  0.288 seconds
+Domain Reload Profiling: 610ms
+	BeginReloadAssembly (111ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (48ms)
-	LoadAllAssembliesAndSetupDomain (145ms)
-		LoadAssemblies (192ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (45ms)
+	LoadAllAssembliesAndSetupDomain (125ms)
+		LoadAssemblies (110ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (141ms)
-			TypeCache.Refresh (139ms)
-				TypeCache.ScanAssembly (127ms)
+		AnalyzeDomain (122ms)
+			TypeCache.Refresh (121ms)
+				TypeCache.ScanAssembly (109ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (294ms)
+	FinalizeReload (288ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (251ms)
+		SetupLoadedEditorAssemblies (246ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (22ms)
+			InitializePlatformSupportModulesInManaged (20ms)
 			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (49ms)
-			ProcessInitializeOnLoadAttributes (133ms)
+			BeforeProcessingInitializeOnLoad (48ms)
+			ProcessInitializeOnLoadAttributes (132ms)
 			ProcessInitializeOnLoadMethodAttributes (42ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
@@ -142,11 +142,11 @@ Import Worker Mode flag is 0x00
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.786 seconds
+- Loaded All Assemblies, in  0.667 seconds
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 0.95 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.94 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
@@ -154,47 +154,410 @@ Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00025] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:22 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x0057d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00012] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00044] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x00037] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x0003f] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:48 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x0000d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.775 seconds
-Domain Reload Profiling: 1558ms
-	BeginReloadAssembly (170ms)
+- Finished resetting the current domain, in  1.109 seconds
+Domain Reload Profiling: 1773ms
+	BeginReloadAssembly (137ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
+		DisableScriptedObjects (4ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (28ms)
-	RebuildCommonClasses (34ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (35ms)
-	LoadAllAssembliesAndSetupDomain (534ms)
-		LoadAssemblies (393ms)
+		CreateAndSetChildDomain (23ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (9ms)
+	initialDomainReloadingComplete (33ms)
+	LoadAllAssembliesAndSetupDomain (456ms)
+		LoadAssemblies (332ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (242ms)
-			TypeCache.Refresh (186ms)
-				TypeCache.ScanAssembly (169ms)
-			BuildScriptInfoCaches (43ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (776ms)
+		AnalyzeDomain (206ms)
+			TypeCache.Refresh (149ms)
+				TypeCache.ScanAssembly (134ms)
+			BuildScriptInfoCaches (44ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (1109ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (663ms)
+		SetupLoadedEditorAssemblies (1007ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (3ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (162ms)
-			ProcessInitializeOnLoadAttributes (434ms)
-			ProcessInitializeOnLoadMethodAttributes (54ms)
+			SetLoadedEditorAssemblies (5ms)
+			BeforeProcessingInitializeOnLoad (146ms)
+			ProcessInitializeOnLoadAttributes (801ms)
+			ProcessInitializeOnLoadMethodAttributes (48ms)
 			AfterProcessingInitializeOnLoad (4ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 1.23 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (4ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
+Refreshing native plugins compatible for Editor in 1.10 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 144 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6415 unused Assets / (6.3 MB). Loaded Objects now: 7000.
-Memory consumption went from 172.5 MB to 166.2 MB.
-Total: 7.341600 ms (FindLiveObjects: 0.546600 ms CreateObjectMapping: 0.481500 ms MarkObjects: 3.800000 ms  DeleteObjects: 2.512500 ms)
+Unloading 6415 unused Assets / (6.6 MB). Loaded Objects now: 7009.
+Memory consumption went from 173.5 MB to 166.9 MB.
+Total: 15.840800 ms (FindLiveObjects: 0.552600 ms CreateObjectMapping: 0.479800 ms MarkObjects: 12.062000 ms  DeleteObjects: 2.744200 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 412747.822103 seconds.
+  path: Assets/AssedStore - Prefabs/LowpolyStyle/Alpine Woodland/Prefabs/GrassHillFlat.prefab
+  artifactKey: Guid(000822f569a208c4ba124d52aac8a9e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/LowpolyStyle/Alpine Woodland/Prefabs/GrassHillFlat.prefab using Guid(000822f569a208c4ba124d52aac8a9e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '18207753345698235d0c6e0a3625e387') in 0.163581 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 9
+
+========================================================================
+Received Import Request.
+  Time since last request: 268.152913 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/TerrainData_c5dafd93-705c-4d64-84cb-678ba7246350.asset
+  artifactKey: Guid(f4c146b62c0ea9b47bd95b1a8167a82f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/TerrainData_c5dafd93-705c-4d64-84cb-678ba7246350.asset using Guid(f4c146b62c0ea9b47bd95b1a8167a82f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7a068490a891a3e2d0bfe81cb4a63945') in 0.0582061 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 34.370212 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_bluetint/Grass_bluetint_left.png
+  artifactKey: Guid(4b13c3aa7713124418fd1f17e83a5be7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_bluetint/Grass_bluetint_left.png using Guid(4b13c3aa7713124418fd1f17e83a5be7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3d0ebf3fd9c6a875cbbfc5c7d0691fce') in 0.0324028 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000091 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_bluetint/Grass_bluetint_up.png
+  artifactKey: Guid(87faeff29765dd54d93f5ba0cdabfa58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_bluetint/Grass_bluetint_up.png using Guid(87faeff29765dd54d93f5ba0cdabfa58) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3e59f5146c5a59eef5d5053d405e7fc9') in 0.0209636 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 82.402229 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Asphalt 01/Asphalt 01_BaseColor.png
+  artifactKey: Guid(6b23c868778ba4e4398535899046bb97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Asphalt 01/Asphalt 01_BaseColor.png using Guid(6b23c868778ba4e4398535899046bb97) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '434d453070889cb2d6e57951a1aa6970') in 0.0225405 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000260 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Asphalt 01/Asphalt 01_Height.png
+  artifactKey: Guid(e05e169589151f7408d261d9529dedc0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Asphalt 01/Asphalt 01_Height.png using Guid(e05e169589151f7408d261d9529dedc0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2c674bf999cef89e043804d280f045aa') in 0.0272817 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000221 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Asphalt 01/Asphalt 01_Normal.png
+  artifactKey: Guid(fe15da56b92c6a24d8401b99c4a29765) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Asphalt 01/Asphalt 01_Normal.png using Guid(fe15da56b92c6a24d8401b99c4a29765) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2d657cb0801f2bd13b84cd370248a4ae') in 0.0317456 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Content/Prefabs/Texture/Asphalt 02.png
+  artifactKey: Guid(a0d85858a250e1f44b7f12a4429f00c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Content/Prefabs/Texture/Asphalt 02.png using Guid(a0d85858a250e1f44b7f12a4429f00c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '93017709ce797133efe1431ae3e7094b') in 0.020321 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Asphalt 02/Asphalt 02_MaskMap.png
+  artifactKey: Guid(43944a090937d5a4db741460c442aff0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Asphalt 02/Asphalt 02_MaskMap.png using Guid(43944a090937d5a4db741460c442aff0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a6f6300b7920ec8b0eadf56ee00d70a9') in 0.0222144 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.908948 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_clay/dirt_clay_right.png
+  artifactKey: Guid(5197e5687d16e554ea60221ab38ec35c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_clay/dirt_clay_right.png using Guid(5197e5687d16e554ea60221ab38ec35c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4ca98e38f6dd23ee61268b30c22421b7') in 0.0238329 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_claydarked/dirt_claydarked_down.png
+  artifactKey: Guid(a207d850508a70c46b922ceafbea7a7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_claydarked/dirt_claydarked_down.png using Guid(a207d850508a70c46b922ceafbea7a7b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c782293cf5da19c5ed0e127d21a71248') in 0.0280335 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.753692 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_claydarked/dirt_claydarked_up.png
+  artifactKey: Guid(62ca00121c2f0c646a26db82e26732c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_claydarked/dirt_claydarked_up.png using Guid(62ca00121c2f0c646a26db82e26732c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a225057e1067af28c1a693205650ff94') in 0.0303402 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_corrupted_lighted/dirt_corrupted_lighted_left.png
+  artifactKey: Guid(af5d8a637252654458c60eba7ad36bae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_corrupted_lighted/dirt_corrupted_lighted_left.png using Guid(af5d8a637252654458c60eba7ad36bae) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '60a8f13f3aa50125c2c28dd451c80dfb') in 0.034338 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.057820 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_desatured/dirt_desatured_left.png
+  artifactKey: Guid(46cc1e28981d28949961007cbc078393) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_desatured/dirt_desatured_left.png using Guid(46cc1e28981d28949961007cbc078393) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5f73978f1632809b11d05df7e6544ef0') in 0.0288904 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_desatured_rocks/dirt_desatured_rocks_up.png
+  artifactKey: Guid(3e38a850c0ef7cf44bdba15f73c994b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_desatured_rocks/dirt_desatured_rocks_up.png using Guid(3e38a850c0ef7cf44bdba15f73c994b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1cb5a8b400f63355ad7e7c190dae5400') in 0.0255605 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_lighted/dirt_lighted_left.png
+  artifactKey: Guid(dca83dcb27c238d4b807b4746e7f6ffe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_lighted/dirt_lighted_left.png using Guid(dca83dcb27c238d4b807b4746e7f6ffe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4e080d14ab598233ff51c778ff41f8ab') in 0.0264226 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.676650 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_lighted/dirt_lighted_up.png
+  artifactKey: Guid(20aa0f234461fbc46ae6fe91f504e2f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_lighted/dirt_lighted_up.png using Guid(20aa0f234461fbc46ae6fe91f504e2f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8aa1d5549fab533ebb48c67e923fdb37') in 0.0297229 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000053 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_normal/dirt_normal_up.png
+  artifactKey: Guid(0dd443a2df90ef247be261e60d0ce83b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_normal/dirt_normal_up.png using Guid(0dd443a2df90ef247be261e60d0ce83b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'caab106b78b5eb0999a97b9fa7664e12') in 0.0252741 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.209266 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_overcorrupted/dirt_overcorrupted_up.png
+  artifactKey: Guid(7f322789625325f40af5296c839409dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Dirt/dirt_overcorrupted/dirt_overcorrupted_up.png using Guid(7f322789625325f40af5296c839409dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9507d3058b507fad239b6670a0a5bf66') in 0.03683 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.959119 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 01/Grass 01_Height.png
+  artifactKey: Guid(8cdd8f4b067436549aa983e788946da4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 01/Grass 01_Height.png using Guid(8cdd8f4b067436549aa983e788946da4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ef15978571a67c5af5ed46c045fbdc98') in 0.024806 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.751694 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Content/Prefabs/Texture/Grass 02.png
+  artifactKey: Guid(07934483f9d08ac41b96ae11ab97ab9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Content/Prefabs/Texture/Grass 02.png using Guid(07934483f9d08ac41b96ae11ab97ab9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '64a23ef207fedfc2fab4892b6e3062d0') in 0.0243704 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000235 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 02/Grass 02_Normal.png
+  artifactKey: Guid(6434e8ecca0a27e408cf5e7bcf47b115) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 02/Grass 02_Normal.png using Guid(6434e8ecca0a27e408cf5e7bcf47b115) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0276d2b62f00f9bf0898cc6066c41dc9') in 0.032513 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.302496 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 03/Grass 03_MaskMap.png
+  artifactKey: Guid(2e27da24166ce9748ab7997390b93f6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 03/Grass 03_MaskMap.png using Guid(2e27da24166ce9748ab7997390b93f6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'eaeeeea5f584b35640afa58205010cab') in 0.0267091 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 04/Grass 04_Height.png
+  artifactKey: Guid(0553f8a3364794948a9a3e6be3e765da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 04/Grass 04_Height.png using Guid(0553f8a3364794948a9a3e6be3e765da) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '41861a011b5f2d3d40e2c17db4e1e25b') in 0.025858 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.093198 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 05/Grass 05_BaseColor.png
+  artifactKey: Guid(7bf088a02622662489e52bb11ad821f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 05/Grass 05_BaseColor.png using Guid(7bf088a02622662489e52bb11ad821f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2620ed71316874ef27bd1961c63175de') in 0.0219564 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 05/Grass 05_Normal.png
+  artifactKey: Guid(049c3108de4b6c4468b06822282cf059) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 05/Grass 05_Normal.png using Guid(049c3108de4b6c4468b06822282cf059) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '447b69af357775a258325dc6aa2989d8') in 0.0291784 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.399782 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 07/Grass 07_BaseColor.png
+  artifactKey: Guid(475abc994fb1db143b82c16c94398c15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Grass 07/Grass 07_BaseColor.png using Guid(475abc994fb1db143b82c16c94398c15) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9cf8d56973872c327fe992808b7968a5') in 0.0214416 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.284352 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Content/Prefabs/Texture/Grass 09.png
+  artifactKey: Guid(71ea4ca1c6ffd3841adfcd7acac91f2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Content/Prefabs/Texture/Grass 09.png using Guid(71ea4ca1c6ffd3841adfcd7acac91f2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '16afcb3ec21e6fe00eb545d8509f12f0') in 0.0220516 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.390534 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_corrupted/Grass_corrupted_down.png
+  artifactKey: Guid(3d2d1e0a5d613ec41bd2b90a7d0ecec6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_corrupted/Grass_corrupted_down.png using Guid(3d2d1e0a5d613ec41bd2b90a7d0ecec6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '62e37fa70b189831482074c709d72145') in 0.0282847 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.052856 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_darked/Grass_darked_down.png
+  artifactKey: Guid(9234305f12ded3442b911c3ff978d340) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_darked/Grass_darked_down.png using Guid(9234305f12ded3442b911c3ff978d340) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5254b53bba410a277cf692d56aa91e13') in 0.0264928 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000388 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_desatured/Grass_desatured_down.png
+  artifactKey: Guid(bf2b3b343fdc3044fa9aae22230ac40b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_desatured/Grass_desatured_down.png using Guid(bf2b3b343fdc3044fa9aae22230ac40b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ccae0227675f95babd7f2c07d5b55a02') in 0.0230447 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.789421 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_lighted/Grass_lighted_left.png
+  artifactKey: Guid(80d6d2d5125a9fa43999ca6f99876b08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_lighted/Grass_lighted_left.png using Guid(80d6d2d5125a9fa43999ca6f99876b08) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9826d1f576da3cc36db217c71bbfefcc') in 0.024268 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.286362 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_overcorrupted/Grass_overcorrupted_down.png
+  artifactKey: Guid(8acdc6d940b8a594792bbae9f254ed32) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_overcorrupted/Grass_overcorrupted_down.png using Guid(8acdc6d940b8a594792bbae9f254ed32) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cdb2c406917ff25a46ac12b60532394f') in 0.0275224 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000200 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_swamp_dark/Grass_swamp_dark_left.png
+  artifactKey: Guid(e96b0d391769ce94aa49e0896688b82c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_swamp_dark/Grass_swamp_dark_left.png using Guid(e96b0d391769ce94aa49e0896688b82c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c2950a6463d0b293dfb8f1938265bddc') in 0.0193585 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.060068 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_swamp_lighted/Grass_swamp_lighted_down.png
+  artifactKey: Guid(c6d3dfb14834d2642842e5bc8bdf6c8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_swamp_lighted/Grass_swamp_lighted_down.png using Guid(c6d3dfb14834d2642842e5bc8bdf6c8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c03569d7481c042592d3241c29e295e1') in 0.0281571 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_swamp_lighted/Grass_swamp_lighted_right.png
+  artifactKey: Guid(b9cc1b4e12ee8504b8820d2f834b2ca7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Textures/Grass/Grass_swamp_lighted/Grass_swamp_lighted_right.png using Guid(b9cc1b4e12ee8504b8820d2f834b2ca7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '488b35133758dfedfe5d09dad42ea6d0') in 0.0342076 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.430292 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Content/Prefabs/Texture/Gravel 01.png
+  artifactKey: Guid(05759ecf9f6046c408b5322a0b7becea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Content/Prefabs/Texture/Gravel 01.png using Guid(05759ecf9f6046c408b5322a0b7becea) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ac4521bc496c3307177c52fa03cfeb3b') in 0.0214445 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000194 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Textures/Gravel 01/Gravel 01_Normal.png
+  artifactKey: Guid(8e9ca9c11677f9147b2eacc314e03ebb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Textures/Gravel 01/Gravel 01_Normal.png using Guid(8e9ca9c11677f9147b2eacc314e03ebb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '36c8b95027737ba9574603841d149dbe') in 0.0298662 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 50.350260 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 2.terrainlayer
+  artifactKey: Guid(c9596995c83910a47a4acd06fdb3b027) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 2.terrainlayer using Guid(c9596995c83910a47a4acd06fdb3b027) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2e3bd363756bce7d1e226fab0a6dcf7b') in 0.038143 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 7.terrainlayer
+  artifactKey: Guid(de0b8db7bfd88a84b84cb144622fa9d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 7.terrainlayer using Guid(de0b8db7bfd88a84b84cb144622fa9d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dbf5d2e476fa559bbc47914147cea6a7') in 0.0231922 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000149 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 11.terrainlayer
+  artifactKey: Guid(d416920543f84ac4fa1f3409560150b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 11.terrainlayer using Guid(d416920543f84ac4fa1f3409560150b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c410065197690ac9821befabcb394bb6') in 0.0311589 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.998987 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 14.terrainlayer
+  artifactKey: Guid(b60800acad8aee94c9282271be786969) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 14.terrainlayer using Guid(b60800acad8aee94c9282271be786969) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0540e9bde8bc63d9797b297b716ba96b') in 0.0256683 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 18.terrainlayer
+  artifactKey: Guid(00b8d645b2b347942a3abcd3082f1f64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/NewLayer 18.terrainlayer using Guid(00b8d645b2b347942a3abcd3082f1f64) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9dfb7d916cd6ed30d4433e54a41f35c8') in 0.0259482 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server

@@ -15,7 +15,7 @@ C:/Game_Unity_Car-2/Car-2/Game_Car-2
 -logFile
 Logs/AssetImportWorker2.log
 -srvPort
-57116
+57370
 -job-worker-count
 7
 -background-job-worker-count
@@ -59,12 +59,12 @@ C:/Game_Unity_Car-2/Car-2/Game_Car-2
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [21864]  Target information:
+Player connection [11248]  Target information:
 
-Player connection [21864]  * "[IP] 192.168.1.24 [Port] 0 [Flags] 2 [Guid] 2592907765 [EditorId] 2592907765 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-TS10LTIF) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [11248]  * "[IP] 192.168.1.24 [Port] 0 [Flags] 2 [Guid] 2718471356 [EditorId] 2718471356 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-TS10LTIF) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [21864] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [21864] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [11248] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [11248] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -76,7 +76,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 1.43 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.70 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.41f1 (46e447368a18)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/Resources/UnitySubsystems
@@ -92,45 +92,45 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56832
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56172
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.0.41f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003389 seconds.
-- Loaded All Assemblies, in  0.345 seconds
+Registered in 0.003730 seconds.
+- Loaded All Assemblies, in  0.329 seconds
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.293 seconds
-Domain Reload Profiling: 637ms
-	BeginReloadAssembly (125ms)
+- Finished resetting the current domain, in  0.276 seconds
+Domain Reload Profiling: 603ms
+	BeginReloadAssembly (119ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (32ms)
+	RebuildCommonClasses (31ms)
 	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (44ms)
-	LoadAllAssembliesAndSetupDomain (133ms)
-		LoadAssemblies (123ms)
+	initialDomainReloadingComplete (43ms)
+	LoadAllAssembliesAndSetupDomain (125ms)
+		LoadAssemblies (117ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (130ms)
-			TypeCache.Refresh (128ms)
-				TypeCache.ScanAssembly (116ms)
+		AnalyzeDomain (122ms)
+			TypeCache.Refresh (120ms)
+				TypeCache.ScanAssembly (110ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (293ms)
+	FinalizeReload (276ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (253ms)
+		SetupLoadedEditorAssemblies (248ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (20ms)
+			InitializePlatformSupportModulesInManaged (24ms)
 			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (49ms)
-			ProcessInitializeOnLoadAttributes (133ms)
-			ProcessInitializeOnLoadMethodAttributes (46ms)
+			BeforeProcessingInitializeOnLoad (51ms)
+			ProcessInitializeOnLoadAttributes (127ms)
+			ProcessInitializeOnLoadMethodAttributes (41ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -142,11 +142,11 @@ Import Worker Mode flag is 0x00
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.724 seconds
+- Loaded All Assemblies, in  0.730 seconds
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 'Packages/com.unity.cinemachine/Editor/Obsolete/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.cinemachine/Editor/Editors/CinemachineVirtualCameraBaseEditor.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 0.95 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.85 ms, found 3 plugins.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
@@ -154,143 +154,674 @@ Package Manager log level set to [2]
 [Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
+System.Exception: Error! Visual Scripting: couldn't find visual scripting package
+  at Unity.VisualScripting.PackageVersionUtility.get_version () [0x00025] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\PackageVersionUtility.cs:22 
+  at Unity.VisualScripting.BoltCoreManifest.get_version () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugin\BoltCoreManifest.cs:11 
+  at Unity.VisualScripting.PluginManifest.get_currentVersion () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:33 
+  at Unity.VisualScripting.PluginManifest.get_versionMismatch () [0x00000] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginManifest.cs:48 
+  at Unity.VisualScripting.PluginContainer.Initialize () [0x0057d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:208 
+  at Unity.VisualScripting.PluginContainer.InitializeOnLoad () [0x00012] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Plugins\PluginContainer.cs:32 
+  at Unity.VisualScripting.VSUsageUtility.DoInitializeOnLoadCalls () [0x00044] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:76 
+  at Unity.VisualScripting.VSUsageUtility.set_isVisualScriptingUsed (System.Boolean value) [0x00037] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:114 
+  at Unity.VisualScripting.VSUsageUtility.CheckAndSetIsVisualScriptingUsed () [0x0003f] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:48 
+  at Unity.VisualScripting.VSUsageUtility..cctor () [0x0000d] in .\Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Utilities\VSUsageUtility.cs:22 
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.709 seconds
-Domain Reload Profiling: 1430ms
-	BeginReloadAssembly (152ms)
+- Finished resetting the current domain, in  1.101 seconds
+Domain Reload Profiling: 1829ms
+	BeginReloadAssembly (157ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (27ms)
-	RebuildCommonClasses (31ms)
-	RebuildNativeTypeToScriptingClass (9ms)
-	initialDomainReloadingComplete (35ms)
-	LoadAllAssembliesAndSetupDomain (493ms)
-		LoadAssemblies (352ms)
+		CreateAndSetChildDomain (28ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (34ms)
+	LoadAllAssembliesAndSetupDomain (496ms)
+		LoadAssemblies (371ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (232ms)
-			TypeCache.Refresh (170ms)
-				TypeCache.ScanAssembly (156ms)
-			BuildScriptInfoCaches (45ms)
-			ResolveRequiredComponents (13ms)
-	FinalizeReload (709ms)
+		AnalyzeDomain (220ms)
+			TypeCache.Refresh (159ms)
+				TypeCache.ScanAssembly (145ms)
+			BuildScriptInfoCaches (47ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1102ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (603ms)
+		SetupLoadedEditorAssemblies (999ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (3ms)
 			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (145ms)
-			ProcessInitializeOnLoadAttributes (393ms)
-			ProcessInitializeOnLoadMethodAttributes (52ms)
-			AfterProcessingInitializeOnLoad (4ms)
+			BeforeProcessingInitializeOnLoad (146ms)
+			ProcessInitializeOnLoadAttributes (791ms)
+			ProcessInitializeOnLoadMethodAttributes (48ms)
+			AfterProcessingInitializeOnLoad (6ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.02 seconds
-Refreshing native plugins compatible for Editor in 0.91 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
+Refreshing native plugins compatible for Editor in 0.90 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 144 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 6415 unused Assets / (6.5 MB). Loaded Objects now: 6999.
-Memory consumption went from 172.3 MB to 165.8 MB.
-Total: 7.638700 ms (FindLiveObjects: 0.530100 ms CreateObjectMapping: 0.454400 ms MarkObjects: 4.195000 ms  DeleteObjects: 2.457900 ms)
+Unloading 6415 unused Assets / (6.5 MB). Loaded Objects now: 7007.
+Memory consumption went from 173.0 MB to 166.5 MB.
+Total: 15.142200 ms (FindLiveObjects: 0.496000 ms CreateObjectMapping: 0.464300 ms MarkObjects: 11.822200 ms  DeleteObjects: 2.358300 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 347227.630709 seconds.
-  path: Assets/TerrainData_0b150545-32b9-425f-8a34-c8f3347a58d4.asset
-  artifactKey: Guid(143fc9b2ca28e4d46bcdc2f2cbc3d5f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TerrainData_0b150545-32b9-425f-8a34-c8f3347a58d4.asset using Guid(143fc9b2ca28e4d46bcdc2f2cbc3d5f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6b9c02ed3e1558efb9e9218d0bb8ea21') in 0.0301486 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+  Time since last request: 404680.219395 seconds.
+  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/NewLayer.terrainlayer
+  artifactKey: Guid(0b7fae08412fc494086fd7b8d571b08e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Models/NewLayer.terrainlayer using Guid(0b7fae08412fc494086fd7b8d571b08e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9544d8a90a270bac0d8372a7a78a4b38') in 0.1191299 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.710280 seconds.
-  path: Assets/TerrainData_6d628020-e61a-4194-9f53-91175907ef0d.asset
-  artifactKey: Guid(af152aeb3455f5942b02aeeac738f9e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TerrainData_6d628020-e61a-4194-9f53-91175907ef0d.asset using Guid(af152aeb3455f5942b02aeeac738f9e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b0f45236da7b3cb1ff07d9cbe0400eba') in 0.0041127 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+  Time since last request: 141.505674 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 01.exr
+  artifactKey: Guid(676672db1fc5fd04287117b24ff2e5cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 01.exr using Guid(676672db1fc5fd04287117b24ff2e5cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '71a9dbe61020c3b949cabfc8abda78b4') in 0.0697196 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Import Request.
-  Time since last request: 4.663906 seconds.
-  path: Assets/New Terrain.asset
-  artifactKey: Guid(29b5ac896096394498a03bb13bca84c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/New Terrain.asset using Guid(29b5ac896096394498a03bb13bca84c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '705654d0eee356bd9d376aebdbc3920f') in 0.0046578 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+  Time since last request: 0.000030 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 04.exr
+  artifactKey: Guid(3cc85e4d2e9495b4aa19885740632015) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 04.exr using Guid(3cc85e4d2e9495b4aa19885740632015) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '38add3dec5fe47a127ddc3ec961e384d') in 0.034794 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Import Request.
-  Time since last request: 4274.121608 seconds.
-  path: Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props
-  artifactKey: Guid(f2d3e6eb1632bf2468aa478fc9eb6410) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AssedStore - Prefabs/Modular Tracks - Racing Tracks/Prefabs/Supporting Props using Guid(f2d3e6eb1632bf2468aa478fc9eb6410) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4d913884b1980ca33c9edda37e2a4d04') in 0.0055275 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 658.847516 seconds.
-  path: Assets/Prefab/Gameplay/Buulet.prefab
-  artifactKey: Guid(22431a62b2ec3fa46bce9f6451dd5e35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Gameplay/Buulet.prefab using Guid(22431a62b2ec3fa46bce9f6451dd5e35) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'eaf5db9ae52611e22b895d419c04cbe3') in 0.2708496 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Prefab/Car/WorkPrefab/Hilia/Car_Hilia_2.prefab
-  artifactKey: Guid(0b1cf47f5f6d5d340aca69e19ab0389f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Car/WorkPrefab/Hilia/Car_Hilia_2.prefab using Guid(0b1cf47f5f6d5d340aca69e19ab0389f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f3babf95ca1ac2f008d16014f5eb6931') in 0.1042486 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 249
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/Prefab/Car/WorkPrefab/Hilia/Car_Hilia_1.prefab
-  artifactKey: Guid(95499bc65cd2f2c43ab598ed589c5e0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Car/WorkPrefab/Hilia/Car_Hilia_1.prefab using Guid(95499bc65cd2f2c43ab598ed589c5e0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '447417540223b2ce7e2264c378a28354') in 0.0356411 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 249
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000016 seconds.
-  path: Assets/Prefab/Car/WorkPrefab/Polli/Car_Polli_2.prefab
-  artifactKey: Guid(6a99614696a83b94b9a507e3215205dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Car/WorkPrefab/Polli/Car_Polli_2.prefab using Guid(6a99614696a83b94b9a507e3215205dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '936263b56b47d0abf5fe151ba56e2d1a') in 0.066672 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 255
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000019 seconds.
-  path: Assets/Prefab/Car/WorkPrefab/Hilia/Car_Hilia_0.prefab
-  artifactKey: Guid(3fd4a8dc6431bd34fb1e7705006787ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Car/WorkPrefab/Hilia/Car_Hilia_0.prefab using Guid(3fd4a8dc6431bd34fb1e7705006787ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd2ad129158b744b1f78add6432a644e2') in 0.0388165 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 131
+  Time since last request: 0.000028 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 05.exr
+  artifactKey: Guid(9f7006f0c268f424bb47910f227ccfd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 05.exr using Guid(9f7006f0c268f424bb47910f227ccfd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8ec1852cbd28a243d2add955a9678565') in 0.0278143 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000020 seconds.
-  path: Assets/Prefab/Car/WorkPrefab/Polli/Car_Polli_0.prefab
-  artifactKey: Guid(22e89fd638dc0f149854c0451b5c8166) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Car/WorkPrefab/Polli/Car_Polli_0.prefab using Guid(22e89fd638dc0f149854c0451b5c8166) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '250c52f914997b13a5d28cbcee2cde04') in 0.0397991 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 125
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 02.exr
+  artifactKey: Guid(4075e7a58b2d3304dbc41ea5cf575fbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 02.exr using Guid(4075e7a58b2d3304dbc41ea5cf575fbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f7a1e3ecb20504b94a2a88cc725e2711') in 0.0310357 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 02.exr
+  artifactKey: Guid(0bf020311afbeb841b3dfd6046577c7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 02.exr using Guid(0bf020311afbeb841b3dfd6046577c7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3aed4fb8b8667e144d977262e74a470d') in 0.0305288 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 06.exr
+  artifactKey: Guid(1fd84b91b51a4d7489e1677f4e5b3c98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 06.exr using Guid(1fd84b91b51a4d7489e1677f4e5b3c98) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1f53cb3ec3bc0df8264ca3067880ae60') in 0.0233722 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 09.exr
+  artifactKey: Guid(798c38588433a104483097c4ef3be396) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 09.exr using Guid(798c38588433a104483097c4ef3be396) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7bc7e9ddcd054146af1026a8609973c4') in 0.0338429 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/4K Canyons/Canyon 08.exr
+  artifactKey: Guid(66abd898003037f4a8d860a343131eef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/4K Canyons/Canyon 08.exr using Guid(66abd898003037f4a8d860a343131eef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ef93c2c2ebe2860f8f6ffd979dcfb85f') in 0.0988646 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 10.exr
+  artifactKey: Guid(b1fc59d452486c24b91e4857f092e24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Canyons/Canyon 10.exr using Guid(b1fc59d452486c24b91e4857f092e24b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a9e6b609d7b6764bb1d32e767885c866') in 0.0262412 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.582281 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 05.exr
+  artifactKey: Guid(f5c233fc83c24344daed4220f997f53b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 05.exr using Guid(f5c233fc83c24344daed4220f997f53b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7e29f3e5aa1af2b08be487ce2ff01cbb') in 0.033229 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000211 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 09.exr
+  artifactKey: Guid(3c8fadd0413d6ea4facaa7ad6f62a784) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 09.exr using Guid(3c8fadd0413d6ea4facaa7ad6f62a784) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dc673033f9ae498418a96364807a3c5e') in 0.0301369 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 08.exr
+  artifactKey: Guid(b9e06f3afd763f04398d63b07db46962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Craters/Craters 08.exr using Guid(b9e06f3afd763f04398d63b07db46962) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2a45d083e96cc00ea90c99349d01c416') in 0.0311524 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.175509 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 01.exr
+  artifactKey: Guid(7a93d21a56344434eaec553478c10bc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 01.exr using Guid(7a93d21a56344434eaec553478c10bc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e6aee268513e5e114a0a0865735c15f5') in 0.0302233 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000184 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 03.exr
+  artifactKey: Guid(ce29cb599447ab4458e793602024d9c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 03.exr using Guid(ce29cb599447ab4458e793602024d9c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '44783fe9d8b90bf3bab8edfa04de160a') in 0.0299915 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 06.exr
+  artifactKey: Guid(3d4508570550a0f44a056a3323b06def) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 06.exr using Guid(3d4508570550a0f44a056a3323b06def) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9fad8adf414eb4ae1694a580301c3d29') in 0.0283547 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000093 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 10.exr
+  artifactKey: Guid(239e13191168226479c0999e3406a919) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 10.exr using Guid(239e13191168226479c0999e3406a919) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f5787c93b90acb3668c184b19aa92116') in 0.027747 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000101 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 08.exr
+  artifactKey: Guid(616bae65cd6a17b4f9e975e7807000d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 08.exr using Guid(616bae65cd6a17b4f9e975e7807000d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9da80cf39558fc72a3bf20425538c634') in 0.0298928 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 05.exr
+  artifactKey: Guid(db60adce6f0931b4bb32feb94823dac9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 05.exr using Guid(db60adce6f0931b4bb32feb94823dac9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a1f2c3db486cfb544ebc434bdad8bf92') in 0.0270761 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000112 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 09.exr
+  artifactKey: Guid(902f8357978f45941a9679f4de3ea47a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Dunes/Dunes 09.exr using Guid(902f8357978f45941a9679f4de3ea47a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a82c7b0362708ca3ceea377115daffb0') in 0.0262633 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.432335 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 01.exr
+  artifactKey: Guid(8a567af9548e0434daf1ba0f48d3c038) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 01.exr using Guid(8a567af9548e0434daf1ba0f48d3c038) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c64eedf64952e9c6dbf817f4e2548d37') in 0.0280631 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.058403 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 02.exr
+  artifactKey: Guid(ec7afe1baae52d540982964a11736d14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 02.exr using Guid(ec7afe1baae52d540982964a11736d14) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1b41de00623cce6e37055fffa6b0fa5b') in 0.0283085 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 08.exr
+  artifactKey: Guid(77de0d1513b2c454faa8bea418f1c8d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 08.exr using Guid(77de0d1513b2c454faa8bea418f1c8d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ff173a785232067c73087c94237a417a') in 0.0287169 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 10.exr
+  artifactKey: Guid(b1e7637f0e5521a4fa298e8fc038ba05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 10.exr using Guid(b1e7637f0e5521a4fa298e8fc038ba05) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '72b107e28393956adfc243a39a7cb39a') in 0.0323806 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000128 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 02.exr
+  artifactKey: Guid(c4eff64403e176940870275090945fbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 02.exr using Guid(c4eff64403e176940870275090945fbb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3d00a5c933eac9dd1a0e7ef442b97ee4') in 0.031032 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000057 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 03.exr
+  artifactKey: Guid(db5f932fac78730419b2e9a3ebe9d757) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 03.exr using Guid(db5f932fac78730419b2e9a3ebe9d757) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '015908f404a896a72e438108e6f4cdd3') in 0.0268306 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 09.exr
+  artifactKey: Guid(04047411d698db74197190ef15f692d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Highlands/Highlands 09.exr using Guid(04047411d698db74197190ef15f692d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '237fb3de69e184e4d43b5755eb6fb305') in 0.0281546 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.108202 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 05.exr
+  artifactKey: Guid(cc888fa872877fb4b83aff1ae7733ee8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 05.exr using Guid(cc888fa872877fb4b83aff1ae7733ee8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3b055b378d2cafc88564f9f8e8f83a69') in 0.029757 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000070 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 08.exr
+  artifactKey: Guid(8167caa2cf786e349ad4229cadcc58d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 08.exr using Guid(8167caa2cf786e349ad4229cadcc58d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '17e89eef9b159fa7db7c2e634b41b36c') in 0.031428 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 07.exr
+  artifactKey: Guid(3975b890b8d866c4983758594e686499) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Islands/Islands 07.exr using Guid(3975b890b8d866c4983758594e686499) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7e09bced18e5e98056d1b9cd850f021e') in 0.0257122 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Meadows/Meadows 02.exr
+  artifactKey: Guid(63164d7637ad1e64981fdb1b432c21ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Meadows/Meadows 02.exr using Guid(63164d7637ad1e64981fdb1b432c21ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9c8c57969b900fc68c9670d8fd2d62ad') in 0.034616 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.267320 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Meadows/Meadows 05.exr
+  artifactKey: Guid(4a8a5637ea7bbeb468736da1daae29a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Meadows/Meadows 05.exr using Guid(4a8a5637ea7bbeb468736da1daae29a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd261cd656f6e6fc19c7f25e0e02b387b') in 0.0396241 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Meadows/Meadows 10.exr
+  artifactKey: Guid(d9db00695414779499294a1d83bdece1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Meadows/Meadows 10.exr using Guid(d9db00695414779499294a1d83bdece1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ec40f51b9cf4a44958fb759bf6287129') in 0.0522796 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000498 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Monument Desert/Monument Desert 05.exr
+  artifactKey: Guid(e692aa78947b8ae43a833eeb2b3d5c55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Monument Desert/Monument Desert 05.exr using Guid(e692aa78947b8ae43a833eeb2b3d5c55) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ee918fc7550a63e79528814bfcc126e3') in 0.0385974 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Monument Desert/Monument Desert 04.exr
+  artifactKey: Guid(b737bfffea1138447b4ace12ef756f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Monument Desert/Monument Desert 04.exr using Guid(b737bfffea1138447b4ace12ef756f40) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ce24bbf90ce8b1df01333a1b75d00d9c') in 0.0402584 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.509499 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Monument Desert/Monument Desert 07.exr
+  artifactKey: Guid(c406c20f1e626ea4e8b4d20f0cf9c301) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Monument Desert/Monument Desert 07.exr using Guid(c406c20f1e626ea4e8b4d20f0cf9c301) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '033027d7d9dba8b96e6c0488febadf49') in 0.0727378 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000112 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Moon/Moon 01.exr
+  artifactKey: Guid(56d9310509fcb444e8d834b2ddebb492) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Moon/Moon 01.exr using Guid(56d9310509fcb444e8d834b2ddebb492) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e39fb2a93a2dbfd3eb338018a94b6f57') in 0.0396562 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000133 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Moon/Moon 06.exr
+  artifactKey: Guid(2e9ab01522dc27f48814aba100c662dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Moon/Moon 06.exr using Guid(2e9ab01522dc27f48814aba100c662dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a7a857d75a882e46f11fc0c414ed0abf') in 0.0406947 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.255395 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Desert/Rocky Desert 02.exr
+  artifactKey: Guid(44f5a345d4aaf5448a2c8d4f3f737cfe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Desert/Rocky Desert 02.exr using Guid(44f5a345d4aaf5448a2c8d4f3f737cfe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0455d35ec7ec765a5bdc728f359f47e8') in 0.0343625 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000061 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Desert/Rocky Desert 08.exr
+  artifactKey: Guid(eda31074e3144a14b9b12c79829e613b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Desert/Rocky Desert 08.exr using Guid(eda31074e3144a14b9b12c79829e613b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '174773d139d688b5eee303b2c383b9c4') in 0.0305521 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002521 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Desert/Rocky Desert 10.exr
+  artifactKey: Guid(6a479694016a67746b42f16f142186ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Desert/Rocky Desert 10.exr using Guid(6a479694016a67746b42f16f142186ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd4ce0404fb47cd594880503407b3e7c9') in 0.0438327 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.203216 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Plateaus/Rocky Plateaus 06.exr
+  artifactKey: Guid(309c41923a1e71740b3d32d714b5d53e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Plateaus/Rocky Plateaus 06.exr using Guid(309c41923a1e71740b3d32d714b5d53e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a08bf56369b68b7aad5c5f46ae626fac') in 0.0350707 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Plateaus/Rocky Plateaus 10.exr
+  artifactKey: Guid(d8552f6e6a54b4c4b88a615d771385d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rocky Plateaus/Rocky Plateaus 10.exr using Guid(d8552f6e6a54b4c4b88a615d771385d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '26ebbe181c0547a33680cf15c138d512') in 0.0294052 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000024 seconds.
-  path: Assets/Prefab/Car/WorkPrefab/Polli/Car_Polli_3.prefab
-  artifactKey: Guid(1a5332094eb27aa44b139927fbf9552a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Car/WorkPrefab/Polli/Car_Polli_3.prefab using Guid(1a5332094eb27aa44b139927fbf9552a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dd2a541cd95f156aa037d551684ad97d') in 0.0460148 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 420
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rugged Rocks/Rugged Rocks 03.exr
+  artifactKey: Guid(4fb847eeb412f0749a5253528d1b49c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rugged Rocks/Rugged Rocks 03.exr using Guid(4fb847eeb412f0749a5253528d1b49c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1fc5a40936ed733e40161886f77701bd') in 0.0271022 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/Prefab/Car/WorkPrefab/Polli/Car_Polli_1.prefab
-  artifactKey: Guid(6ca770441f994964097e6ff70b54be88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefab/Car/WorkPrefab/Polli/Car_Polli_1.prefab using Guid(6ca770441f994964097e6ff70b54be88) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b002d8e4131f691d4f4089d298ca89b9') in 0.0392015 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 237
+  Time since last request: 0.000058 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rugged Rocks/Rugged Rocks 06.exr
+  artifactKey: Guid(edbeaffa008a3834e8e37dc96f3a2803) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rugged Rocks/Rugged Rocks 06.exr using Guid(edbeaffa008a3834e8e37dc96f3a2803) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dde429279aff060457c052eaa4df11a4') in 0.0314224 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.231099 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rugged Rocks/Rugged Rocks 09.exr
+  artifactKey: Guid(91dc6d7d3962b4e40b5fa74b298f9194) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Rugged Rocks/Rugged Rocks 09.exr using Guid(91dc6d7d3962b4e40b5fa74b298f9194) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '746dc70ca51e1b0a31ed3bb16b41fa81') in 0.0415347 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000170 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Seaside Cliffs/Seaside Cliffs 05.exr
+  artifactKey: Guid(7b73cc4b4282fa14181740ab0b21cb65) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Seaside Cliffs/Seaside Cliffs 05.exr using Guid(7b73cc4b4282fa14181740ab0b21cb65) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c8f2b6755c0a19072c17832e5ff558f6') in 0.0342213 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.044554 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Seaside Cliffs/Seaside Cliffs 07.exr
+  artifactKey: Guid(a071b2ff93a59a747bde466e84233316) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Seaside Cliffs/Seaside Cliffs 07.exr using Guid(a071b2ff93a59a747bde466e84233316) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'aafc4ac0a292c7c279e1a28bed3d8e8b') in 0.0347042 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.012741 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Terrace Fields/Terrace Fields 02.exr
+  artifactKey: Guid(820182b4b2150bd42ae063c2c044d331) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Terrace Fields/Terrace Fields 02.exr using Guid(820182b4b2150bd42ae063c2c044d331) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '59ba9f1155845f9a242da021e324f381') in 0.0304347 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.188277 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Terrace Fields/Terrace Fields 04.exr
+  artifactKey: Guid(0dce1b9a9c5d28e40baa72d5c1ab137b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Terrace Fields/Terrace Fields 04.exr using Guid(0dce1b9a9c5d28e40baa72d5c1ab137b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4cb85fd66f833e325cafbddba875d273') in 0.0354042 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000078 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Terrace Fields/Terrace Fields 09.exr
+  artifactKey: Guid(a1fa01bf55f0c404fbe32af7c5107957) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Terrace Fields/Terrace Fields 09.exr using Guid(a1fa01bf55f0c404fbe32af7c5107957) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6aae81bc3c75451c910d6c47b63481d8') in 0.0310301 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.799532 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Tundra/Tundra 02.exr
+  artifactKey: Guid(68e51a2eeeae82d4387b85ec5533e526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Tundra/Tundra 02.exr using Guid(68e51a2eeeae82d4387b85ec5533e526) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '86476914812d1e695105b17bd77552c5') in 0.0680125 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Tundra/Tundra 08.exr
+  artifactKey: Guid(e4c7d662b9a05b84a89bcfa207ac9b9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Tundra/Tundra 08.exr using Guid(e4c7d662b9a05b84a89bcfa207ac9b9a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ff7007f686a1b815a8e4c1bae5828c90') in 0.0353194 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.154293 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Tundra/Tundra 10.exr
+  artifactKey: Guid(f1c088a799890a040823daec58c5178d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Tundra/Tundra 10.exr using Guid(f1c088a799890a040823daec58c5178d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd5ce0b549c630fe2a395971c15a5c1a7') in 0.0376959 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.044883 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Valleys/Valleys 02.exr
+  artifactKey: Guid(2e788d1024e357346922c87a32c4e7a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Valleys/Valleys 02.exr using Guid(2e788d1024e357346922c87a32c4e7a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd0c2f3f69ced824ef0b6e136ce22874d') in 0.0605096 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.185059 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Valleys/Valleys 08.exr
+  artifactKey: Guid(055fb48c7912ada4980ddc5433b0b85a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Valleys/Valleys 08.exr using Guid(055fb48c7912ada4980ddc5433b0b85a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6af7bb2110cf84ed6b9a9081e2292dff') in 0.0470403 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.194377 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Volcanos/Volcano 02.exr
+  artifactKey: Guid(b09995cb369066240857a758d0598ae1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Volcanos/Volcano 02.exr using Guid(b09995cb369066240857a758d0598ae1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9cc7d10adfa06beb7c551f9a0dc45e4e') in 0.0419646 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Volcanos/Volcano 05.exr
+  artifactKey: Guid(912c182ab74c60444aaaffea566a29e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Volcanos/Volcano 05.exr using Guid(912c182ab74c60444aaaffea566a29e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '9d11c75031403176feddff268416906b') in 0.0434326 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Volcanos/Volcano 07.exr
+  artifactKey: Guid(e7f4f8558239a6747b0e361c9f7edb1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssedStore - Prefabs/Rowlan/Gaia User Data/Stamps/2K Volcanos/Volcano 07.exr using Guid(e7f4f8558239a6747b0e361c9f7edb1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4a17bf5e1cfbffac0bf00f980787d9b7') in 0.0471862 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 607.884677 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Asphalt 02.terrainlayer
+  artifactKey: Guid(43cfca39c84755749b8b0fb20f7ad559) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Asphalt 02.terrainlayer using Guid(43cfca39c84755749b8b0fb20f7ad559) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '89ef95c45b12b0e13e2bbe290971be6f') in 0.035422 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 01.terrainlayer
+  artifactKey: Guid(196d6e243c8556049bd243c17fd9dbf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 01.terrainlayer using Guid(196d6e243c8556049bd243c17fd9dbf4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '21763468226d5f6d0b75a77515c26fd4') in 0.0418309 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 07.terrainlayer
+  artifactKey: Guid(ebb6342ac21cfc84ea1aca14672d3da4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 07.terrainlayer using Guid(ebb6342ac21cfc84ea1aca14672d3da4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '29cb840f6bd42937935c97b3868bd692') in 0.0314295 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Gravel 05.terrainlayer
+  artifactKey: Guid(affe22d82e9bb1940b6fd63ab36c4b62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Gravel 05.terrainlayer using Guid(affe22d82e9bb1940b6fd63ab36c4b62) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '78535f937d07bb6ed95b639facf33154') in 0.0252419 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000127 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Snow 01.terrainlayer
+  artifactKey: Guid(3e71f3c68760e7d439971407599c79e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Snow 01.terrainlayer using Guid(3e71f3c68760e7d439971407599c79e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8becc7c823ce9a1f81758cb9d383b634') in 0.0324355 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Scrubs 02.terrainlayer
+  artifactKey: Guid(3c3a0f0dfbb56d04ca929b198922914b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Scrubs 02.terrainlayer using Guid(3c3a0f0dfbb56d04ca929b198922914b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '86dffc2dd396e6c0da5efe14a2cbd6fe') in 0.0380444 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Wood Chips 03.terrainlayer
+  artifactKey: Guid(cd23ac145eb058642972cd7888e69800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Wood Chips 03.terrainlayer using Guid(cd23ac145eb058642972cd7888e69800) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '72772a95f6fb111c26960a1724996cdd') in 0.0277946 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000298 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 09.terrainlayer
+  artifactKey: Guid(75db70689c5584a4bab53b10648d368e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 09.terrainlayer using Guid(75db70689c5584a4bab53b10648d368e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4ada1371a928536e8a03c64cf4f64f45') in 0.029826 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Plantlet 02.terrainlayer
+  artifactKey: Guid(212bc52a4b9cdc2498c134dd46c48fb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Plantlet 02.terrainlayer using Guid(212bc52a4b9cdc2498c134dd46c48fb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2413a11c6cbb21e929654238d49ddb4b') in 0.0270459 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 03.terrainlayer
+  artifactKey: Guid(a1aaab63c93e82a4cb7323d017ec2e26) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 03.terrainlayer using Guid(a1aaab63c93e82a4cb7323d017ec2e26) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6fd17de09b67efe8db0249506597fb70') in 0.0272032 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 02.terrainlayer
+  artifactKey: Guid(39a6ee106203046469782f4caa9a24ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 02.terrainlayer using Guid(39a6ee106203046469782f4caa9a24ad) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '689cb1e55f1873dfeb7559c0329abbc7') in 0.0227724 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000278 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Scrubs 01.terrainlayer
+  artifactKey: Guid(d2d63726104cf684ca41229dc6cc3bf9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Scrubs 01.terrainlayer using Guid(d2d63726104cf684ca41229dc6cc3bf9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '03958964e937b45443fa694bc7214cc0') in 0.041948 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Gravel 03.terrainlayer
+  artifactKey: Guid(41dfa0af9886dcd4a8994424a87d4db7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Gravel 03.terrainlayer using Guid(41dfa0af9886dcd4a8994424a87d4db7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1236aeb4dbc23782e80f3f33fd346bd2') in 0.0206521 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 05.terrainlayer
+  artifactKey: Guid(b7ec9cbcb3e9ab542a93e6f8a008ab1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Grass 05.terrainlayer using Guid(b7ec9cbcb3e9ab542a93e6f8a008ab1c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0ce364684bf050d2f634ba5359aa1a1f') in 0.0211777 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Moon 01.terrainlayer
+  artifactKey: Guid(4a76a52de65845542b69445649540156) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Moon 01.terrainlayer using Guid(4a76a52de65845542b69445649540156) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e7ee46515f0d527dcc86f4be9b6dff95') in 0.0225374 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Gravel 06.terrainlayer
+  artifactKey: Guid(1cc88c8485b9128409d37651cbe433cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Gravel 06.terrainlayer using Guid(1cc88c8485b9128409d37651cbe433cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd7ef8af1bc03d9c595170431f96fae22') in 0.0231393 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/MicroVerse-Extras/Terrain Textures/Layers/Sand 03.terrainlayer
+  artifactKey: Guid(c3ab199559e8ea146ad6132e72d7169e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/MicroVerse-Extras/Terrain Textures/Layers/Sand 03.terrainlayer using Guid(c3ab199559e8ea146ad6132e72d7169e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '036521fa6dc71e630d7ab0f44550805f') in 0.0239028 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 5
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server
