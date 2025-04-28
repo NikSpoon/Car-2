@@ -52,34 +52,37 @@ public class Wheel : MonoBehaviour
     }
     private void SetupWheelCollider(WheelCollider wheelCollider)
     {
-       
 
-        // Фрикционные силы
-        WheelFrictionCurve forwardFriction = wheelCollider.forwardFriction;
-        forwardFriction.stiffness = 1.5f;
-        wheelCollider.forwardFriction = forwardFriction;
-
-        WheelFrictionCurve sidewaysFriction = wheelCollider.sidewaysFriction;
-        sidewaysFriction.stiffness = 1.2f;
-        wheelCollider.sidewaysFriction = sidewaysFriction;
+        wheelCollider.mass = 25f;
+        
+        wheelCollider.suspensionDistance = 0.25f;
+        wheelCollider.wheelDampingRate = 1.0f;
 
         // Подвеска
-        JointSpring suspension = wheelCollider.suspensionSpring;
-        suspension.spring = 50000f;  // Жесткая подвеска
-        suspension.damper = 3000f;   // Сопротивление амортизаторов
-        suspension.targetPosition = 0.5f; // Нейтральное положение подвески
+        JointSpring suspension = new JointSpring();
+        suspension.spring = IsForward ? 45000f : 40000f;
+        suspension.damper = 3500f;
+        suspension.targetPosition = 0.45f;
         wheelCollider.suspensionSpring = suspension;
 
+        // 📈 Фрикция вперёд-назад
+        WheelFrictionCurve forwardFriction = wheelCollider.forwardFriction;
+        forwardFriction.extremumSlip = 0.4f;
+        forwardFriction.extremumValue = 1.6f;
+        forwardFriction.asymptoteSlip = 0.8f;
+        forwardFriction.asymptoteValue = 0.9f;
+        forwardFriction.stiffness = IsForward ? 1.15f : 1.85f; // Задним больше тяги
+        wheelCollider.forwardFriction = forwardFriction;
 
-        // Кривые сцепления
-        WheelFrictionCurve forwardFrictionCurve = wheelCollider.forwardFriction;
-        forwardFrictionCurve.extremumSlip = 0.5f;
-        forwardFrictionCurve.extremumValue = 1.5f;
-        wheelCollider.forwardFriction = forwardFrictionCurve;
-
-        WheelFrictionCurve sidewaysFrictionCurve = wheelCollider.sidewaysFriction;
-        sidewaysFrictionCurve.extremumSlip = 0.5f;
-        sidewaysFrictionCurve.extremumValue = 1.2f;
-        wheelCollider.sidewaysFriction = sidewaysFrictionCurve;
+        // 🔁 Боковое сцепление
+        WheelFrictionCurve sidewaysFriction = wheelCollider.sidewaysFriction;
+        sidewaysFriction.extremumSlip = 0.3f;
+        sidewaysFriction.extremumValue = 1.5f;
+        sidewaysFriction.asymptoteSlip = 0.55f;
+        sidewaysFriction.asymptoteValue = 0.85f;
+        sidewaysFriction.stiffness = IsForward ? 1.25f : 1.1f; // Задние легче срываются
+        wheelCollider.sidewaysFriction = sidewaysFriction;
     }
-}
+    }
+
+
