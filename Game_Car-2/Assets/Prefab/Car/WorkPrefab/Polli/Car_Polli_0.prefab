@@ -574,7 +574,7 @@ MonoBehaviour:
   _AWD: 1
   _RWD: 0
   _FWD: 0
-  _motorForce: 2000
+  _motorForce: 5000
   _maxSteerAngle: 50
   _brakeTorque: 0
   _maxSpead: 220
@@ -583,8 +583,8 @@ MonoBehaviour:
   _currentEngineRPM: 0
   _currentWhellTorque: 0
   _currentSteeringAngle: 0
-  _rpmUpSpeed: 400
-  _rpmDownSpeed: 4000
+  _rpmUpSpeed: 3100
+  _rpmDownSpeed: 1000
   _steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -628,7 +628,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _rpmDropDuration: 0.5
-  _dragCoefficient: 0.4257
+  _dragCoefficient: 1.4257
   _rollingResistance: 12.8
   _handbrakeTorque: 200000
   _handbrakeRampSpeed: 2

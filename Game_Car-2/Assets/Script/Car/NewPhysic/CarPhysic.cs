@@ -54,9 +54,9 @@ public class CarPhysic : MonoBehaviour
     private bool _justShifted = false;
     private float _rpmDropTimer = 0f;
     [SerializeField] private float _rpmDropDuration = 0.5f;
-    
 
-    
+
+
     private void Awake()
     {
         if (!_AWD && !_RWD && !_FWD)
@@ -87,7 +87,7 @@ public class CarPhysic : MonoBehaviour
         SteerWheels(horisontal);
         Engine(vertical);
         ApplyHandbrake(brake);
-        
+
         OnSpeadChanged?.Invoke(_speed, _currentEngineRPM, _currentWhellTorque);
     }
     private void Engine(float input)
@@ -102,14 +102,14 @@ public class CarPhysic : MonoBehaviour
         float directionMultiplier = Mathf.Sign(verticalInput);
         float torque = CalculateWheelTorque(_currentEngineRPM, currentGear.gearRatio) * directionMultiplier;
 
-        // Ограничим заднюю скорость
-        if (_speed > _maxReverseSpeed && verticalInput < 0)
+       
+        if (_speed > _maxReverseSpeed && verticalInput < 0 || _speed > _maxSpead)
         {
             torque = 0f;
         }
-
         _currentWhellTorque = torque;
-     
+      
+            
         foreach (var wheel in _wheels)
         {
             if (_AWD || (_FWD && wheel.IsForward) || (_RWD && !wheel.IsForward))
@@ -125,11 +125,7 @@ public class CarPhysic : MonoBehaviour
 
         SimulateResistance();
 
-        if (_speed < 1 && !isGasPresed)
-        {
-            _rigidbody.linearVelocity = Vector3.zero;
-
-        }
+      
 
         UpdateGear();
 
@@ -152,9 +148,9 @@ public class CarPhysic : MonoBehaviour
 
         if (_justShifted && _rpmDropTimer > 0f)
         {
-            // Если только что переключили передачу, устанавливаем обороты в 0
+            
             _rpmDropTimer -= Time.fixedDeltaTime;
-            _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, 0f, 1f - (_rpmDropTimer / _rpmDropDuration)); // Линейно снижаем до 0
+            _currentEngineRPM = Mathf.Lerp(_currentEngineRPM, 0f, 1f - (_rpmDropTimer / _rpmDropDuration)); 
 
             if (_rpmDropTimer <= 0f)
             {
@@ -163,7 +159,7 @@ public class CarPhysic : MonoBehaviour
         }
         else
         {
-            // Наращиваем или уменьшаем обороты по целевому значению
+           
             if (targetRPM > _currentEngineRPM)
                 _currentEngineRPM = Mathf.MoveTowards(_currentEngineRPM, targetRPM, _rpmUpSpeed * Time.fixedDeltaTime);
             else
@@ -182,21 +178,21 @@ public class CarPhysic : MonoBehaviour
         if (verticalInput < 0.1f) return;
 
         Gear currentGear = _gears[_currentGearIndex];
-        
+
 
         if (_currentEngineRPM >= currentGear.maxRPM && _currentGearIndex < _gears.Count - 1)
         {
             Gear nextGear = _gears[_currentGearIndex + 1];
-        
+
             int minRecommendedSpeedInt = (int)nextGear.minRecommendedSpeed;
 
             // Переключаем только если скорость находится хотя бы рядом с рекомендуемым диапазоном
-            if (_speed >= nextGear.minRecommendedSpeed )
+            if (_speed >= nextGear.minRecommendedSpeed)
             {
                 _currentGearIndex++;
                 _justShifted = true;
                 _rpmDropTimer = _rpmDropDuration;
-                Debug.Log("⏫ Shift up: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed 
+                Debug.Log("⏫ Shift up: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed
                     + " nextGear.minRecommendedSpeed " + nextGear.minRecommendedSpeed + ("RPM: " + _currentEngineRPM + " | maxRPM: " + currentGear.maxRPM));
             }
         }
@@ -213,31 +209,31 @@ public class CarPhysic : MonoBehaviour
                 Debug.Log("⏬ Shift down: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed);
             }
         }
-        
+
     }
 
 
     [Header(" воздух")]
     [SerializeField] private float _dragCoefficient = 0.4257f;
     [SerializeField] private float _rollingResistance = 12.8f;
-
+    [SerializeField] private float _downForse = 20f;
     private void SimulateResistance()
     {
         if (_rigidbody == null) return;
 
         float speedMS = _speed / 3.6f; // из км/ч в м/с
 
-        // Воздушное сопротивление с учетом ветра
+        
         Vector3 windResistance = Vector3.zero;
         if (_wind != null)
         {
-            windResistance = _wind.CalculateWindResistance(_rigidbody.position, _rigidbody.linearVelocity);  // используем linearVelocity
+            windResistance = _wind.CalculateWindResistance(_rigidbody.position, _rigidbody.linearVelocity); 
         }
 
         float airDrag = _dragCoefficient * speedMS * speedMS;
         Vector3 totalResistance = -_rigidbody.linearVelocity.normalized * (airDrag + windResistance.magnitude);
 
-        // Сопротивление качению
+       
         float rollingDrag = _rollingResistance * speedMS;
         totalResistance += -_rigidbody.linearVelocity.normalized * rollingDrag;
 
@@ -247,7 +243,10 @@ public class CarPhysic : MonoBehaviour
             totalResistance *= 1.5f; // Увеличиваем сопротивление на холостых
         }
 
-        _rigidbody.AddForce(totalResistance); // Применяем сопротивление
+        _rigidbody.AddForce(totalResistance);
+        Vector3 downForce = Vector3.down * _downForse * _rigidbody.mass;
+        _rigidbody.AddForce(downForce, ForceMode.Force);
+
     }
     private void ApplySteering(float angle)
     {
@@ -363,4 +362,5 @@ public class CarPhysic : MonoBehaviour
 
         }
     }
+
 }
