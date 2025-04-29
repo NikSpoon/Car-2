@@ -13,11 +13,11 @@ public class MainManuControl : MonoBehaviour
 
         if (currentSceneIndex == 0)
         {
-            SceneManager.LoadScene(1); // Переход с MainMenu на Level1, например
+            PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToMainMenu);
         }
         else if (currentSceneIndex == 1)
         {
-            SceneManager.LoadScene(2); // Переход на следующую сцену
+            PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
         }
     }
 

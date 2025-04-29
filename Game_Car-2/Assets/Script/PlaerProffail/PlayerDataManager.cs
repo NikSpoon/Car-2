@@ -1,9 +1,9 @@
-﻿using Gameplay.App;
+﻿using FSM.App;
 using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour
 {
-    public static PlayerDataManager Instance; // глобальный доступ
+    public static PlayerDataManager Instance; 
 
     public PlayerProfile playerProfile = new PlayerProfile();
     public IAppSystem AppSystem = new AppSystem();
@@ -15,11 +15,11 @@ public class PlayerDataManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // сохраняем при смене сцен
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
-            Destroy(gameObject); // если уже есть — удаляем дубликат
+            Destroy(gameObject); 
         }
     }
    

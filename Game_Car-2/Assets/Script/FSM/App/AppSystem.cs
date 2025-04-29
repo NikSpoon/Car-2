@@ -1,6 +1,6 @@
 using System;
 
-namespace Gameplay.App
+namespace FSM.App
 {
 
     public interface IAppSystem
