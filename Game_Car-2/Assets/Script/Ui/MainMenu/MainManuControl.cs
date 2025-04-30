@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FSM.App;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainManuControl : MonoBehaviour
@@ -11,11 +12,11 @@ public class MainManuControl : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if (currentSceneIndex == 0)
+        if (PlayerDataManager.Instance.AppSystem.CurrentState == AppState.MainMenu)
         {
-            PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToMainMenu);
+            PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGerage);
         }
-        else if (currentSceneIndex == 1)
+        else if (PlayerDataManager.Instance.AppSystem.CurrentState == AppState.Garage)
         {
             PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
         }

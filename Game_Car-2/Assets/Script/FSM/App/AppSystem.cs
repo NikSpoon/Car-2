@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using UnityEngine;
 
 namespace FSM.App
 {
@@ -41,6 +42,7 @@ namespace FSM.App
 
         public void Trigger(AppTriger trigger)
         {
+            Debug.Log("Trigger called with: " + trigger); // Логируем, что триггер был вызван
             _stateMashine.SetTrigger(trigger);
 
         }

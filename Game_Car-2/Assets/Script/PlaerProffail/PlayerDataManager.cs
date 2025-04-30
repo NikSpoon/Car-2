@@ -10,7 +10,6 @@ public class PlayerDataManager : MonoBehaviour
 
     private void Awake()
     {
-        AppSystem.Trigger(AppTriger.ToMainMenu);
         
         if (Instance == null)
         {
@@ -21,8 +20,8 @@ public class PlayerDataManager : MonoBehaviour
         {
             Destroy(gameObject); 
         }
+         
     }
-   
     public void AddMoney(int amount)
     {
         playerProfile.money += amount;

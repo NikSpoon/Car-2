@@ -27,7 +27,10 @@ public class StateMashine<TState,TTrigger>
             {
                 var oldState = CurrentState;
                 CurrentState = transition.NextState;
+                  
                 OnStateChange?.Invoke(new(CurrentState, oldState, trigger));
+               
+                Debug.Log("StateChangeData created with NewState: " + CurrentState + " OldState: " + oldState + " Trigger: " + trigger);
                 return;
             }
 
@@ -77,6 +80,7 @@ public class StateChangeData<TState, TTrigger>
 
     public StateChangeData(TState newState, TState oldState, TTrigger trigger)
     {
+        Debug.Log("newState" + newState + "oldState" + oldState + "trigger" + trigger);
         NewState = newState;
         OldState = oldState;
         Trigger = trigger;
