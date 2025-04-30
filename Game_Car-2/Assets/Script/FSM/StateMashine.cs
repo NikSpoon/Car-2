@@ -30,7 +30,6 @@ public class StateMashine<TState,TTrigger>
                   
                 OnStateChange?.Invoke(new(CurrentState, oldState, trigger));
                
-                Debug.Log("StateChangeData created with NewState: " + CurrentState + " OldState: " + oldState + " Trigger: " + trigger);
                 return;
             }
 

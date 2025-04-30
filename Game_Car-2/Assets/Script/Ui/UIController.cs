@@ -38,13 +38,12 @@ public class UIController : MonoBehaviour
             Destroy(_currentScren);
         }
      
-                Debug.Log(data.NewState + "data.NewState");
         switch (data.NewState)
         {
             case AppState.MainMenu:
               
-                SceneManager.LoadScene(1); // Проверь, что название сцены правильное
-                Debug.Log("MainMenu scene loading...");
+                SceneManager.LoadScene(1);
+                // включаю катинку 
                 // запускаю корутину
                 // віключаю корутину и картинку как закончил закгужать 
                 _currentScren = Instantiate(_mainMenuScren, _root);
@@ -52,7 +51,7 @@ public class UIController : MonoBehaviour
 
             case AppState.Garage:
                 SceneManager.LoadScene(2);
-
+                // включаю катинку 
                 // запускаю корутину
                 // віключаю корутину и картинку как закончил закгужать 
                 _currentScren = Instantiate(_garageScren, _root);
