@@ -1,11 +1,11 @@
 ﻿using FSM.App;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
 
 public class UIController : MonoBehaviour
 {
-
+    [SerializeField] private AppTriger _appTriger;
 
     [SerializeField] private Transform _root;
     [SerializeField] private GameObject _mainMenuScren;
@@ -16,19 +16,20 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _loadingScreen;
 
     private GameObject _currentScren;
-  
     private void Awake()
     {
+        var appSystem = PlayerDataManager.Instance.AppSystem;
         PlayerDataManager.Instance.AppSystem.OnStateChange += OnStateChange;
-    }
-    private void Start()
-    {
-        
         DontDestroyOnLoad(gameObject);
-   
+        
     }
-
    
+
+    [ContextMenu("SetTrigger")]
+    public void SetTrigger()
+    {
+        PlayerDataManager.Instance.AppSystem.Trigger(_appTriger);
+    }
     private void OnStateChange(StateChangeData<AppState, AppTriger> data)
     {
        
@@ -42,7 +43,7 @@ public class UIController : MonoBehaviour
         {
             case AppState.MainMenu:
               
-                SceneManager.LoadScene("MainMenu"); // Проверь, что название сцены правильное
+                SceneManager.LoadScene(1); // Проверь, что название сцены правильное
                 Debug.Log("MainMenu scene loading...");
                 // запускаю корутину
                 // віключаю корутину и картинку как закончил закгужать 
@@ -50,7 +51,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case AppState.Garage:
-                SceneManager.LoadScene("Garage");
+                SceneManager.LoadScene(2);
 
                 // запускаю корутину
                 // віключаю корутину и картинку как закончил закгужать 
@@ -58,7 +59,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case AppState.Gameplay:
-                SceneManager.LoadScene("Test Car");
+                SceneManager.LoadScene(3);
                 // включаю катинку 
                 // запускаю корутину
                 // віключаю корутину и картинку как закончил закгужать 
@@ -75,5 +76,16 @@ public class UIController : MonoBehaviour
         }
     }
   
+    private IEnumerator WaitForPlayerDataManager()
+    {
+        while (PlayerDataManager.Instance == null)
+        {
+            yield return null;
+        }
+
+        var appSystem = PlayerDataManager.Instance.AppSystem;
+        appSystem.OnStateChange += OnStateChange;
+        DontDestroyOnLoad(gameObject);
+    }
 
 }

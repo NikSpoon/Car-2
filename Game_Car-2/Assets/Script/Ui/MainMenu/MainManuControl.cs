@@ -10,8 +10,7 @@ public class MainManuControl : MonoBehaviour
 
     public void OnClickPlay()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
+        
         if (PlayerDataManager.Instance.AppSystem.CurrentState == AppState.MainMenu)
         {
             PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGerage);
@@ -21,6 +20,8 @@ public class MainManuControl : MonoBehaviour
             PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
         }
     }
+
+
 
     public void OnClickOptions()
     {

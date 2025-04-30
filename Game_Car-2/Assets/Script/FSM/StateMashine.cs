@@ -80,7 +80,7 @@ public class StateChangeData<TState, TTrigger>
 
     public StateChangeData(TState newState, TState oldState, TTrigger trigger)
     {
-        Debug.Log("newState" + newState + "oldState" + oldState + "trigger" + trigger);
+       
         NewState = newState;
         OldState = oldState;
         Trigger = trigger;
