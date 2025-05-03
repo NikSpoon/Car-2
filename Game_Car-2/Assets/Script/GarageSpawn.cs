@@ -37,8 +37,8 @@ public class GarageSpawn : MonoBehaviour
         }
 
         GameObject upgradePrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
-       currentCarInstance = Instantiate(upgradePrefab, _start.position, _start.rotation,transform);
-        Debug.Log(currentCarInstance.name);
+        currentCarInstance = Instantiate(upgradePrefab, _start.position, _start.rotation,transform);
+      
 
         lastSelectedCarIndex = profile.selectedCarIndex;
         lastSelectedBodyUpgradeIndex = profile.selectedBodyUpgradeIndex;

@@ -50,6 +50,11 @@ public class Wheel : MonoBehaviour
         _wheelCollider.brakeTorque = brake;  
       
     }
+    public void AddForse(float forse)
+    {
+        Vector3 wheelWorldPos = _wheelCollider.transform.position;
+        _wheelCollider.attachedRigidbody.AddForceAtPosition(-_wheelCollider.transform.up * forse, wheelWorldPos, ForceMode.Force);
+    }
     private void SetupWheelCollider(WheelCollider wheelCollider)
     {
 
