@@ -244,10 +244,13 @@ public class CarPhysic : MonoBehaviour
         }
 
         _rigidbody.AddForce(totalResistance);
-        var downForce = (_downForse * _rigidbody.mass )/ _wheels.Length;
+
+        float totalDownforce = _downForse * _rigidbody.mass;
+        float perWheelForce = totalDownforce / _wheels.Length;
+
         foreach (var wheel in _wheels)
         {
-            wheel.AddForse(downForce);
+            wheel.AddWorldForse(perWheelForce);
         }
 
     }
