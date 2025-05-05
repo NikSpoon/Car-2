@@ -54,12 +54,10 @@ public class Wheel : MonoBehaviour
     {
 
         Vector3 wheelPos = _wheelCollider.transform.position;
-
-        // Давление строго вниз, независимо от поворота машины
         Vector3 forceDir = Vector3.down;
-
-        // Применяем силу в позицию колеса
-        _wheelCollider.attachedRigidbody.AddForceAtPosition(forceDir * force, wheelPos, ForceMode.Force);
+        Vector3 applyPoint = wheelPos + Vector3.up * 0.1f;
+        
+        _wheelCollider.attachedRigidbody.AddForceAtPosition(forceDir * force, applyPoint, ForceMode.Force);
     }
     private void SetupWheelCollider(WheelCollider wheelCollider)
     {
@@ -71,7 +69,7 @@ public class Wheel : MonoBehaviour
 
         // Подвеска
         JointSpring suspension = new JointSpring();
-        suspension.spring = IsForward ? 45000f : 40000f;
+        suspension.spring = IsForward ? 95000f : 90000f;
         suspension.damper = 3500f;
         suspension.targetPosition = 0.45f;
         wheelCollider.suspensionSpring = suspension;

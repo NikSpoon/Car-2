@@ -38,7 +38,7 @@ public class CarControler : MonoBehaviour
 
     private void IsEnamy()
     {
-
+        
     }
 
 
