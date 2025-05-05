@@ -5,14 +5,17 @@ public class ViewPhisick : MonoBehaviour
 {
     private CarPhysic _carPhysic;
     private NoCollision _resp;
+    private CarSpawner _start;
     [SerializeField] private TextMeshProUGUI _carSpeadText;
     [SerializeField] private TextMeshProUGUI _engineRPMText;
     [SerializeField] private TextMeshProUGUI _whellTorqueText;
 
     [SerializeField] private TextMeshProUGUI _timeNoCollision;
+    [SerializeField] private TextMeshProUGUI _startTimer;
     private void Awake()
     {
         GameObject car = GameObject.FindGameObjectWithTag("Player");
+        var Start = GameObject.FindGameObjectWithTag("Start");
 
         if (car == null)
         {
@@ -28,6 +31,7 @@ public class ViewPhisick : MonoBehaviour
             return;
         }
         _resp = car.GetComponent<NoCollision>();
+        _start = Start.GetComponent<CarSpawner>();
     }
 
     private void Start()
@@ -46,13 +50,27 @@ public class ViewPhisick : MonoBehaviour
             _timeNoCollision.text = "NoCollision =  0 ";
             _timeNoCollision.gameObject.SetActive(false);
         }
+        _start.OnWaitForStart += OnWaitForStart;
     }
     private void OnDestroy()
     {
         _carPhysic.OnSpeadChanged -= OnSpead;
-
+        _resp.OnNoCollision -= OnNoCollision;
+        _start.OnWaitForStart -= OnWaitForStart;
     }
-
+    private void OnWaitForStart( int time,bool IsTimerActive)
+    {
+        if (IsTimerActive)
+        {
+            _startTimer.gameObject.SetActive(true);
+            _startTimer.text = "Start after: " + time;
+         
+        }
+        else
+        {
+            _startTimer.gameObject.SetActive(false);
+        }
+    }
     private void OnSpead(float spead, float currentEngineRPM, float WhellTorque)
     {
         _carSpeadText.text = "Spead =  " + spead;
@@ -67,7 +85,7 @@ public class ViewPhisick : MonoBehaviour
             _timeNoCollision.gameObject.SetActive(true);
            _timeNoCollision.text = "NoCollision =  " + time;
         }
-        else
+        else 
         {
             _timeNoCollision.gameObject.SetActive(false);
         }

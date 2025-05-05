@@ -18,8 +18,10 @@ public class NoCollision : MonoBehaviour
     [SerializeField] private float blinkInterval = 0.2f;
 
     private Coroutine _ghostRoutine;
+    private Coroutine _startGhostRoutine;
     private bool IsGhostActive  = false;
     public event Action<float,bool> OnNoCollision;
+    
     public void Respawn()
     {
          
@@ -37,6 +39,38 @@ public class NoCollision : MonoBehaviour
 
         _ghostRoutine = StartCoroutine(GhostRoutine());
 
+    }
+    public void EnablePassiveGhost(float duration)
+    {
+        _myColliders.Clear();
+        _myColliders.AddRange(GetComponentsInChildren<Collider>());
+
+        _otherColliders.Clear();
+        FindOtherColliders();
+
+        if (_startGhostRoutine != null)
+        {
+            StopCoroutine(_startGhostRoutine);
+        }
+
+        _startGhostRoutine = StartCoroutine(PassiveGhostRoutine(duration));
+    }
+    private IEnumerator PassiveGhostRoutine(float duration)
+    {
+        
+        SetCollision(false);
+        SetMeshVisible(true); 
+
+        float timer = 0f;
+        while (timer < duration)
+        {
+            yield return new WaitForSeconds(checkInterval);
+            
+            timer += checkInterval;
+        }
+
+      
+       
     }
 
     private void FindOtherColliders()

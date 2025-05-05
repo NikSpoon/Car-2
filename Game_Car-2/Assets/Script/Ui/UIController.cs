@@ -66,6 +66,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case AppState.Finish:
+                SceneManager.LoadScene(4);
                 // включаю катинку 
                 // запускаю корутину
                 // віключаю корутину и картинку как закончил закгужать 

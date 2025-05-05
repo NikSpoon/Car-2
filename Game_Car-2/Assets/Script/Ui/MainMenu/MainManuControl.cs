@@ -1,6 +1,6 @@
 ﻿using FSM.App;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class MainManuControl : MonoBehaviour
 {
@@ -59,7 +59,14 @@ public class MainManuControl : MonoBehaviour
 
     public void OnClickExit()
     {
-
+        if (PlayerDataManager.Instance.AppSystem.CurrentState == AppState.MainMenu)
+        {
+            return;
+        }
+        else if (PlayerDataManager.Instance.AppSystem.CurrentState == AppState.Garage)
+        {
+            PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToMainMenu);
+        }
     }
 
 }
