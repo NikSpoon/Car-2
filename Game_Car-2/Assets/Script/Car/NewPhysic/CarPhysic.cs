@@ -244,8 +244,14 @@ public class CarPhysic : MonoBehaviour
         }
 
         _rigidbody.AddForce(totalResistance);
-        Vector3 downForce = Vector3.down * _downForse * _rigidbody.mass;
-        _rigidbody.AddForce(downForce, ForceMode.Force);
+
+        float totalDownforce = _downForse * _rigidbody.mass;
+        float perWheelForce = totalDownforce / _wheels.Length;
+
+        foreach (var wheel in _wheels)
+        {
+            wheel.AddWorldForse(perWheelForce);
+        }
 
     }
     private void ApplySteering(float angle)

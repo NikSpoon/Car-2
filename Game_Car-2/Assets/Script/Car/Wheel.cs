@@ -50,6 +50,15 @@ public class Wheel : MonoBehaviour
         _wheelCollider.brakeTorque = brake;  
       
     }
+    public void AddWorldForse(float force)
+    {
+
+        Vector3 wheelPos = _wheelCollider.transform.position;
+        Vector3 forceDir = Vector3.down;
+        Vector3 applyPoint = wheelPos + Vector3.up * 0.1f;
+        
+        _wheelCollider.attachedRigidbody.AddForceAtPosition(forceDir * force, applyPoint, ForceMode.Force);
+    }
     private void SetupWheelCollider(WheelCollider wheelCollider)
     {
 
@@ -60,7 +69,7 @@ public class Wheel : MonoBehaviour
 
         // Подвеска
         JointSpring suspension = new JointSpring();
-        suspension.spring = IsForward ? 45000f : 40000f;
+        suspension.spring = IsForward ? 95000f : 90000f;
         suspension.damper = 3500f;
         suspension.targetPosition = 0.45f;
         wheelCollider.suspensionSpring = suspension;

@@ -8706,12 +8706,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2970026716160973342, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
+      propertyPath: _downForse
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970026716160973342, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
+      propertyPath: _motorForce
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970026716160973342, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
       propertyPath: _rpmUpSpeed
       value: 4600
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473374677444164603, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 6558900668969141882, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
       propertyPath: m_Name
       value: Car_Hilia_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016176951463431109, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.484
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8720,6 +8736,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6558900668969141882, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1670515885}
+    - targetCorrespondingSourceObject: {fileID: 6558900668969141882, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1670515890}
   m_SourcePrefab: {fileID: 100100000, guid: 4de01288f30ed174d83270374ce0d636, type: 3}
 --- !u!1 &1669067095
 GameObject:
@@ -8825,6 +8844,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.87, y: 2.15, z: 4}
   m_Center: {x: 0, y: 0.63, z: -0.5}
+--- !u!114 &1670515890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670515879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a64c0df4ba5064f8d83f2c0c7a1d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSmoothness: 2
+  groundCheckDistance: 1
 --- !u!1001 &1703142597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9589,7 +9622,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1808324049
 MonoBehaviour:
   m_ObjectHideFlags: 0

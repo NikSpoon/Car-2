@@ -1,6 +1,7 @@
-using System;
+﻿using System;
+using UnityEngine;
 
-namespace Gameplay.App
+namespace FSM.App
 {
 
     public interface IAppSystem
@@ -41,6 +42,7 @@ namespace Gameplay.App
 
         public void Trigger(AppTriger trigger)
         {
+            
             _stateMashine.SetTrigger(trigger);
 
         }
