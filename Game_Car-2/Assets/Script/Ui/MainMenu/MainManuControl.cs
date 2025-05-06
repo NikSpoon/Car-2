@@ -6,11 +6,12 @@ public class MainManuControl : MonoBehaviour
 {
     [SerializeField] private GameObject _options;
     [SerializeField] private GameObject _save;
-    [SerializeField] private GameObject _Multiplaer;
+    [SerializeField] private GameObject _multiplaer;
+    [SerializeField] private GameObject _exit;
 
     public void OnClickPlay()
     {
-        
+
         if (PlayerDataManager.Instance.AppSystem.CurrentState == AppState.MainMenu)
         {
             PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGerage);
@@ -25,7 +26,7 @@ public class MainManuControl : MonoBehaviour
 
     public void OnClickOptions()
     {
-        if (_save.activeSelf != true && _Multiplaer.activeSelf != true)
+        if (_save.activeSelf != true && _multiplaer.activeSelf != true)
         {
             if (_options.activeSelf)
                 _options.SetActive(false);
@@ -36,7 +37,7 @@ public class MainManuControl : MonoBehaviour
 
     public void OnClickSave()
     {
-        if (_options.activeSelf != true && _Multiplaer.activeSelf != true)
+        if (_options.activeSelf != true && _multiplaer.activeSelf != true)
         {
 
             if (_save.activeSelf)
@@ -50,10 +51,10 @@ public class MainManuControl : MonoBehaviour
     {
         if (_save.activeSelf != true && _options.activeSelf != true)
         {
-            if (_Multiplaer.activeSelf)
-                _Multiplaer.SetActive(false);
+            if (_multiplaer.activeSelf)
+                _multiplaer.SetActive(false);
             else
-                _Multiplaer.SetActive(true);
+                _multiplaer.SetActive(true);
         }
     }
 
@@ -61,7 +62,12 @@ public class MainManuControl : MonoBehaviour
     {
         if (PlayerDataManager.Instance.AppSystem.CurrentState == AppState.MainMenu)
         {
+            Application.Quit(); // Работает в билде
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false; // Только для редактора
+#endif
             return;
+
         }
         else if (PlayerDataManager.Instance.AppSystem.CurrentState == AppState.Garage)
         {
@@ -70,3 +76,4 @@ public class MainManuControl : MonoBehaviour
     }
 
 }
+

@@ -2226,7 +2226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _options: {fileID: 7021714558849161200}
   _save: {fileID: 6571051462891106784}
-  _Multiplaer: {fileID: 6550873945247820624}
+  _multiplaer: {fileID: 2709658544508956261}
+  _exit: {fileID: 6174704789414697635}
 --- !u!1 &6174704789414697635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,13 +2349,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5958533321546942600}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 4505596619407963953}
+        m_TargetAssemblyTypeName: MainManuControl, Assembly-CSharp
+        m_MethodName: OnClickExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
