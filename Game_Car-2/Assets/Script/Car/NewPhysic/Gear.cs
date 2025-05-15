@@ -9,7 +9,6 @@ public class Gear
 
 
 
-    // Новые параметры
     public float minRecommendedSpeed;
     public float maxRecommendedSpeed;
 }

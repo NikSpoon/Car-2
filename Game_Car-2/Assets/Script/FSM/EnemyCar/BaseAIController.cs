@@ -1,3 +1,4 @@
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,9 +12,12 @@ namespace Assets.Script.FSM.EnemyCar
         public Transform target;
         public StateMashine<State, object> _stateMashine;
 
+
         public void Awake()
         {
+
             _stateMashine = GetBehavior();
+
         }
 
         public abstract StateMashine<State, object> GetBehavior();
@@ -21,6 +25,7 @@ namespace Assets.Script.FSM.EnemyCar
 
         public void Update()
         {
+
             _stateMashine.CurrentState.Execute();
             var nextState = _stateMashine.CurrentState.TryGetNexState();
             if (nextState != null)
@@ -28,6 +33,7 @@ namespace Assets.Script.FSM.EnemyCar
                 _stateMashine.CurrentState = nextState;
             }
         }
+
     }
 }
 

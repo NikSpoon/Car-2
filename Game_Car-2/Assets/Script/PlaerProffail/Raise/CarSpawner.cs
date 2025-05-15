@@ -10,6 +10,10 @@ public class CarSpawner : MonoBehaviour
     public CarDatabase carDatabase;
     private Rigidbody carRb;
 
+
+    private CarControler carControler;
+
+    [SerializeField] private int enemyValue = 5;
     [SerializeField] private Transform _start;
     [SerializeField] private int startTime = 10;
 
@@ -27,12 +31,13 @@ public class CarSpawner : MonoBehaviour
         carRb = car.GetComponent<Rigidbody>();
         carRb.isKinematic = true; 
         carNoCollision = car.GetComponent<NoCollision>();
+           
     }
     private void Start()
     {
         carNoCollision.EnablePassiveGhost(999f);
         StartCoroutine(HandleStartSequence());
-
+        SpawnEnemy(enemyValue);
     }
     private IEnumerator HandleStartSequence()
     {
@@ -54,10 +59,35 @@ public class CarSpawner : MonoBehaviour
 
         OnWaitForStart?.Invoke(0, false); 
         IsGhostStartActive = false;
+       
     }
    private IEnumerator WaitForOther()
     {
         yield return new WaitForSeconds(10f);
+
+    }
+private void SpawnEnemy(int value)
+    {
+        var profile = PlayerDataManager.Instance.playerProfile;
+
+        var enrmyUpdqateIndex = profile.selectedBodyUpgradeIndex;
+        var enemyCarIndex = UnityEngine.Random.Range(0, carDatabase.carPrefabs.Count);
+
+        GameObject enemyUpgradePrefab = carDatabase.carUpgrades[enemyCarIndex].upgrades[enrmyUpdqateIndex];
+        for (int i = 0; i <=value; i++)
+        {
+           
+           var enemyCar = Instantiate(enemyUpgradePrefab, _start.position, _start.rotation);
+            enemyCar.tag = "Enemy";
+            carControler = enemyCar.GetComponent<CarControler>();
+           
+            if (carControler.IsPlayerControl)
+            {
+                carControler.IsPlayerControl = false;
+                carControler.IsEnamyControl = true;
+            }
+        }
     }
 
+    
 }

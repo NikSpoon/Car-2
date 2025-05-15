@@ -9,9 +9,8 @@ public class CarControler : MonoBehaviour
     [SerializeField] private InputServis _inputServis;
     [SerializeField] private EnemyCar _enemyCar;
 
-    [SerializeField] private bool IsPlayerControl;
-    [SerializeField] private bool IsEnamyControl;
-
+    public bool IsPlayerControl { get; set; }
+    public bool IsEnamyControl { get; set; }
     private void Start()
     {
         if (gameObject.tag == ("Player"))

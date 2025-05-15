@@ -15,7 +15,7 @@ public class HealthView : MonoBehaviour
     {
         _health.OnHealthChanged += OnDamaged;
         if (_text != null)
-            _text.text = "Health = " + _health.CurrentHeath;
+            _text.text = "Health = " + _health.CurrentHealth;
     }
     private void OnDestroy()
     {
@@ -30,7 +30,7 @@ public class HealthView : MonoBehaviour
     {
         SetFill((float)current / (float)max);
         if (_text != null)
-            _text.text = "Health = " + _health.CurrentHeath;
+            _text.text = "Health = " + _health.CurrentHealth;
     }
 
 }

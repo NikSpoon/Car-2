@@ -34,6 +34,8 @@ public class RaiseChekpoint : MonoBehaviour
         var car = GameObject.FindGameObjectWithTag("Player");
         _car = car.transform;
         OnChekPointChenge?.Invoke(0, _chekpoints.Count - 1);
+
+
     }
 
     public void UpdateCheckpoint(Transform nextPoint)
@@ -47,5 +49,11 @@ public class RaiseChekpoint : MonoBehaviour
             Debug.Log($"Checkpoint updated to: {CurentPoint.name}");
             OnChekPointChenge?.Invoke(index, rem);
         }
+    }
+   public List<Transform> GetPoint()
+    {
+        var list = _chekpoints;
+
+        return list;
     }
 }
