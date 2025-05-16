@@ -12,6 +12,7 @@ namespace Assets.Script.FSM.EnemyCar
             var agresivState = new State();
             var finishState = new State();
 
+
             startState.transitions.Add(new Transition<State, BaseCondition>(raiseState, new StartCondition(this)));
 
 
@@ -29,7 +30,7 @@ namespace Assets.Script.FSM.EnemyCar
             finishState.actions.Add(new GoToTargetAction(this));
             
 
-            return null;
+            return new StateMashine<State, object>(startState);
         }
      
     }

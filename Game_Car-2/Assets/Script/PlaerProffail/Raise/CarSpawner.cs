@@ -8,6 +8,7 @@ public class CarSpawner : MonoBehaviour
     private GameObject car;
     private NoCollision carNoCollision;
     public CarDatabase carDatabase;
+    public CarDatabase enemyCarDatabase;
     private Rigidbody carRb;
 
 
@@ -45,7 +46,7 @@ public class CarSpawner : MonoBehaviour
         yield return StartCoroutine(StartRaise());
 
         carRb.isKinematic = false;
-        carNoCollision.Respawn();
+       
     }
     private IEnumerator StartRaise()
     {
@@ -71,9 +72,9 @@ private void SpawnEnemy(int value)
         var profile = PlayerDataManager.Instance.playerProfile;
 
         var enrmyUpdqateIndex = profile.selectedBodyUpgradeIndex;
-        var enemyCarIndex = UnityEngine.Random.Range(0, carDatabase.carPrefabs.Count);
+        var enemyCarIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carPrefabs.Count);
 
-        GameObject enemyUpgradePrefab = carDatabase.carUpgrades[enemyCarIndex].upgrades[enrmyUpdqateIndex];
+        GameObject enemyUpgradePrefab = enemyCarDatabase.carUpgrades[enemyCarIndex].upgrades[enrmyUpdqateIndex];
         for (int i = 0; i <=value; i++)
         {
            
@@ -85,6 +86,15 @@ private void SpawnEnemy(int value)
             {
                 carControler.IsPlayerControl = false;
                 carControler.IsEnamyControl = true;
+            }
+            var noCollision = enemyCar.GetComponent<NoCollision>();
+            var rb = enemyCar.GetComponent<Rigidbody>();
+            if (noCollision != null && rb != null)
+            {
+                noCollision.EnablePassiveGhost(999f);
+                rb.isKinematic = true;
+                StartRaise();
+                rb.isKinematic = false;
             }
         }
     }

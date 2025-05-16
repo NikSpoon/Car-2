@@ -1,13 +1,16 @@
 
+using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
 
 
 public class CarControler : MonoBehaviour
 {
-    //[SerializeField] private CarMovement _carMovement;
+    
     [SerializeField] private CarPhysic _carPhysic;
     [SerializeField] private InputServis _inputServis;
-    [SerializeField] private EnemyCar _enemyCar;
+
+    [SerializeField] private BaseAIController AI;
+
 
     public bool IsPlayerControl { get; set; }
     public bool IsEnamyControl { get; set; }
@@ -37,7 +40,13 @@ public class CarControler : MonoBehaviour
 
     private void IsEnamy()
     {
-        
+        if (AI == null)
+        {
+            Debug.LogWarning("AI controller is not assigned!");
+            return;
+        }
+
+        _carPhysic.Move(AI.VerticalInput, AI.HorizontalInput, AI.Brake);
     }
 
 

@@ -8,6 +8,6 @@
         {
             this._controller = controller;
         }
-        public abstract void Execute();
+        public abstract (float vertical, float horizontal, bool brake) Execute();
     }
 }

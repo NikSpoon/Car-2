@@ -6,15 +6,20 @@ namespace Assets.Script.FSM.EnemyCar.Actions
 {
     public class GoToTargetAction : BaseAction
     {
-        public StartRaisr raisr;
+       
         public GoToTargetAction(BaseAIController controller) : base(controller)
         {
 
         }
 
-        public override void Execute()
+        public override (float vertical, float horizontal, bool brake) Execute()
         {
-            _controller.agent.destination = _controller.target.position;
+            
+            float vertical = 1f; 
+            float horizontal = 0f; 
+            bool brake = false;
+
+            return (vertical, horizontal, brake);
         }
 
     }

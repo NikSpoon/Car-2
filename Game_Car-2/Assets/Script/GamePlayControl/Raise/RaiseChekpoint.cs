@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,7 +50,7 @@ public class RaiseChekpoint : MonoBehaviour
             OnChekPointChenge?.Invoke(index, rem);
         }
     }
-   public List<Transform> GetPoint()
+   public List<Transform> GetСhekPoint()
     {
         var list = _chekpoints;
 

@@ -12,10 +12,15 @@ namespace Assets.Script.FSM.EnemyCar
         public Transform target;
         public StateMashine<State, object> _stateMashine;
 
-
+        public List<Transform> Checkpoints => RaceManager.Instance.Checkpoints;
+       
+        public float VerticalInput { get;  set; }
+        public float HorizontalInput { get;  set; }
+        public bool Brake { get;  set; }
+       
         public void Awake()
         {
-
+            
             _stateMashine = GetBehavior();
 
         }
@@ -32,7 +37,9 @@ namespace Assets.Script.FSM.EnemyCar
             {
                 _stateMashine.CurrentState = nextState;
             }
+
         }
+      
 
     }
 }
