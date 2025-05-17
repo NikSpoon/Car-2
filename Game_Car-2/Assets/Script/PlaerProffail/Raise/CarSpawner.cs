@@ -1,6 +1,7 @@
+﻿using NUnit.Framework;
 using System;
 using System.Collections;
-
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
@@ -67,37 +68,41 @@ public class CarSpawner : MonoBehaviour
         yield return new WaitForSeconds(10f);
 
     }
-private void SpawnEnemy(int value)
+    private List<CarControler> enemyControllers = new List<CarControler>();
+
+    private void SpawnEnemy(int value)
     {
         var profile = PlayerDataManager.Instance.playerProfile;
-
-        var enrmyUpdqateIndex = profile.selectedBodyUpgradeIndex;
+        var enemyUpdateIndex = profile.selectedBodyUpgradeIndex;
         var enemyCarIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carPrefabs.Count);
 
-        GameObject enemyUpgradePrefab = enemyCarDatabase.carUpgrades[enemyCarIndex].upgrades[enrmyUpdqateIndex];
-        for (int i = 0; i <=value; i++)
+        GameObject enemyUpgradePrefab = enemyCarDatabase.carUpgrades[enemyCarIndex].upgrades[enemyUpdateIndex];
+
+        for (int i = 0; i < value; i++)
         {
-           
-           var enemyCar = Instantiate(enemyUpgradePrefab, _start.position, _start.rotation);
+            Vector3 spawnPosition = _start.position + new Vector3(i * 2f, 0, 0); // чтобы не налазили
+            var enemyCar = Instantiate(enemyUpgradePrefab, spawnPosition, _start.rotation);
             enemyCar.tag = "Enemy";
-            carControler = enemyCar.GetComponent<CarControler>();
-           
-            if (carControler.IsPlayerControl)
+
+            var carController = enemyCar.GetComponent<CarControler>();
+            if (carController.IsPlayerControl)
             {
-                carControler.IsPlayerControl = false;
-                carControler.IsEnamyControl = true;
+                carController.IsPlayerControl = false;
+                carController.IsEnamyControl = true;
             }
+            enemyControllers.Add(carController);
+
             var noCollision = enemyCar.GetComponent<NoCollision>();
             var rb = enemyCar.GetComponent<Rigidbody>();
+
             if (noCollision != null && rb != null)
             {
                 noCollision.EnablePassiveGhost(999f);
                 rb.isKinematic = true;
-                StartRaise();
-                rb.isKinematic = false;
+                // Для врагов можно не запускать StartRaise — оно для игрока
+                // rb.isKinematic = false; можно включить в другом месте, например при старте гонки
             }
         }
     }
 
-    
 }

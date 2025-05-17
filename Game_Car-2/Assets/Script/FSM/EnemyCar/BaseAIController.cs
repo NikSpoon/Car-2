@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Script.FSM.EnemyCar.Condition;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,9 +12,11 @@ namespace Assets.Script.FSM.EnemyCar
         public NavMeshAgent agent;
         public Transform target;
         public StateMashine<State, object> _stateMashine;
-
+        
         public List<Transform> Checkpoints => RaceManager.Instance.Checkpoints;
-       
+        public TargetFinder targetFinder;
+
+        public Transform AgroTarget { get; set; }
         public float VerticalInput { get;  set; }
         public float HorizontalInput { get;  set; }
         public bool Brake { get;  set; }
@@ -30,6 +33,10 @@ namespace Assets.Script.FSM.EnemyCar
 
         public void Update()
         {
+            if (targetFinder != null)
+            {
+                AgroTarget = targetFinder.CurrentTarget;
+            }
 
             _stateMashine.CurrentState.Execute();
             var nextState = _stateMashine.CurrentState.TryGetNexState();
