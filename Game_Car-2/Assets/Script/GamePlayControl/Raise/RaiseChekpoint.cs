@@ -13,8 +13,9 @@ public class RaiseChekpoint : MonoBehaviour
     public Transform CurentPoint { get;  private set; }
     public event Action<int,int> OnChekPointChenge;
 
-    public void Awake()
+    public void Start()
     {
+        gameObject.SetActive(true);
         _chekpoints.Clear();
 
         CurentPoint = _firstPoint.transform;
@@ -32,6 +33,12 @@ public class RaiseChekpoint : MonoBehaviour
 
 
         var car = GameObject.FindGameObjectWithTag("Player");
+        if (car == null)
+        {
+            Debug.LogError("Player не найден!");
+            return;
+        }
+
         _car = car.transform;
         OnChekPointChenge?.Invoke(0, _chekpoints.Count - 1);
 

@@ -5,17 +5,21 @@ namespace Assets.Script.FSM.EnemyCar.Condition
 {
     class StartCondition : BaseCondition
     {
-        private Rigidbody _rb;
+        private CarSpawner start;
+
 
         public StartCondition(BaseAIController controller) : base(controller)
         {
 
-            _rb = _controller.GetComponent<Rigidbody>();
+            
         }
 
         public override bool Evoluete()
         {
-            return !_rb.isKinematic; 
+          
+                return start.start;
+            
+            
         }
     }
 }

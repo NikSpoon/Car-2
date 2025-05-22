@@ -1,6 +1,8 @@
 ﻿using Assets.Script.FSM.EnemyCar.Actions;
 using Assets.Script.FSM.EnemyCar.Condition;
 
+using UnityEngine;
+
 namespace Assets.Script.FSM.EnemyCar
 {
     public class BaiseCar : BaseAIController
@@ -9,6 +11,13 @@ namespace Assets.Script.FSM.EnemyCar
 
         public override StateMashine<State, object> GetBehavior()
         {
+            
+            UnityEngine.Debug.Log("=== GetBehavior started ===");
+
+            UnityEngine.Debug.Log($"Checkpoints count: {Checkpoints?.Count}");
+            UnityEngine.Debug.Log($"targetFinder: {targetFinder}");
+            UnityEngine.Debug.Log($"agent: {agent}");
+
             AgroCooldown = new AgroCooldownCondition(this);
            
             var startState = new State();

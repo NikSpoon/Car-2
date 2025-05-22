@@ -14,6 +14,18 @@ public class CarControler : MonoBehaviour
 
     public bool IsPlayerControl { get; set; }
     public bool IsEnamyControl { get; set; }
+    private void Awake()
+    {
+        if (AI == null)
+        {
+            AI = GetComponent<BaseAIController>();
+            if (AI == null)
+            {
+                AI = GetComponentInChildren<BaseAIController>();
+            }
+        }
+    }
+
     private void Start()
     {
         if (gameObject.tag == ("Player"))
