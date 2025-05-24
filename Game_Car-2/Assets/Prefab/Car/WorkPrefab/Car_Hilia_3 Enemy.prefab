@@ -88,6 +88,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1050.88
       objectReference: {fileID: 0}
+    - target: {fileID: 2921000654391155259, guid: 08b77f85d277aa14ea16b86272fb58fa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822471506835247754, guid: 08b77f85d277aa14ea16b86272fb58fa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4366157888661275058, guid: 08b77f85d277aa14ea16b86272fb58fa, type: 3}
       propertyPath: m_Name
       value: Car_Hilia_3 Enemy
@@ -130,6 +138,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4366157888661275058, guid: 08b77f85d277aa14ea16b86272fb58fa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9138238311405545011}
+    - targetCorrespondingSourceObject: {fileID: 4366157888661275058, guid: 08b77f85d277aa14ea16b86272fb58fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5717202088121978985}
   m_SourcePrefab: {fileID: 100100000, guid: 08b77f85d277aa14ea16b86272fb58fa, type: 3}
 --- !u!1 &287377771153030577 stripped
 GameObject:
@@ -149,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 7849259931463037689}
-  target: {fileID: 0}
+  carSpawner: {fileID: 0}
   targetFinder: {fileID: 174639791208827119}
 --- !u!114 &174639791208827119
 MonoBehaviour:
@@ -184,6 +195,29 @@ MonoBehaviour:
   ghostDuration: 3
   checkInterval: 0.5
   blinkInterval: 0.2
+--- !u!136 &5717202088121978985
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287377771153030577}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.03
+  m_Height: 4.03
+  m_Direction: 2
+  m_Center: {x: 0, y: 1.06, z: 0}
 --- !u!23 &2183920730639664766 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2388479749940066941, guid: 08b77f85d277aa14ea16b86272fb58fa, type: 3}

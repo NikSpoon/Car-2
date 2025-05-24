@@ -1,6 +1,7 @@
 
 using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 
 public class CarControler : MonoBehaviour
@@ -35,6 +36,7 @@ public class CarControler : MonoBehaviour
     }
     void FixedUpdate()
     {
+        Debug.Log("CarControler -- Vertical: " + AI.VerticalInput + ", Horizontal: " + AI.HorizontalInput + ", Brake: " + AI.Brake);
         if (IsPlayerControl)
         {
             IsPlayer();
@@ -57,7 +59,6 @@ public class CarControler : MonoBehaviour
             Debug.LogWarning("AI controller is not assigned!");
             return;
         }
-
         _carPhysic.Move(AI.VerticalInput, AI.HorizontalInput, AI.Brake);
     }
 

@@ -1,17 +1,27 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Script.FSM.EnemyCar
 {
 
     public  class State
     {
-        public List<BaseAction> actions;
-        public List<Transition<State, BaseCondition>> transitions;
 
-       
+        public string Name { get; private set; }
+
+        public List<BaseAction> actions = new List<BaseAction>();
+        public List<Transition<State, BaseCondition>> transitions = new List<Transition<State, BaseCondition>>();
+
+
         public float vertical = 0f;
         public float horizontal = 0f;
         public bool brake = false;
+        public State(string name)
+        {
+            Name = name;
+        }
+
+
         public (float vertical, float horizontal, bool brake) Execute()
         {
             float vertical = 0f;
@@ -25,7 +35,7 @@ namespace Assets.Script.FSM.EnemyCar
                 horizontal = h;
                 brake = b;
             }
-
+            Debug.Log($"State - Vertical: {vertical}, Horizontal: {horizontal}, Brake: {brake}");
             return (vertical, horizontal, brake);
         }
         

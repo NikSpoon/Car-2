@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
@@ -119,7 +119,7 @@ public class CarSpawner : MonoBehaviour
         yield return new WaitUntil(() => start == true);
 
         // Отключаем ghost, включаем физику
-        noCollision.Respawn();  Debug.Log("Ркспавн"); // отключаем ghost, включаем коллизии и видимость
+        noCollision.Respawn(); 
         rb.isKinematic = false;  // включаем физику
     }
 

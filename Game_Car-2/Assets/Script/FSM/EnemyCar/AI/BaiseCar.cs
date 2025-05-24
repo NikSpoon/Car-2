@@ -1,55 +1,74 @@
 ﻿using Assets.Script.FSM.EnemyCar.Actions;
 using Assets.Script.FSM.EnemyCar.Condition;
-
+using Assets.Script.FSM.EnemyCar.Conditions;
+using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
 
-namespace Assets.Script.FSM.EnemyCar
+public class BaiseCar : BaseAIController
 {
-    public class BaiseCar : BaseAIController
+    public AgroCooldownCondition AgroCooldown { get; private set; }
+
+    private int currentCheckpointIndex = 0;
+
+    public override StateMashine<State, object> GetBehavior()
     {
-         public AgroCooldownCondition AgroCooldown { get; private set; }
-
-        public override StateMashine<State, object> GetBehavior()
+        if (Checkpoints.Count > 0)
         {
-            
-            UnityEngine.Debug.Log("=== GetBehavior started ===");
-
-            UnityEngine.Debug.Log($"Checkpoints count: {Checkpoints?.Count}");
-            UnityEngine.Debug.Log($"targetFinder: {targetFinder}");
-            UnityEngine.Debug.Log($"agent: {agent}");
-
-            AgroCooldown = new AgroCooldownCondition(this);
-           
-            var startState = new State();
-            var raiseState = new State();
-            var aggroState = new State();
-            var finishState = new State();
-
-            var goAction = new GoToTargetAction(this);
-            var agroAction = new AgroTatgetTo(this);
-            var agroCooldown = new AgroCooldownCondition(this);
-
-            // Переход из старт в гонку
-            startState.transitions.Add(new Transition<State, BaseCondition>(raiseState, new StartCondition(this)));
-
-            // Переходы из гонки:
-            raiseState.transitions.Add(new Transition<State, BaseCondition>(aggroState, new DetectClosestTargetCondition(this)));
-            raiseState.transitions.Add(new Transition<State, BaseCondition>(finishState, new ReachedFinishCondition(this, goAction)));
-
-            // Переходы из агро:
-            aggroState.transitions.Add(new Transition<State, BaseCondition>(raiseState, new AgroCooldownCondition(this))); 
-            aggroState.transitions.Add(new Transition<State, BaseCondition>(finishState, new ReachedFinishCondition(this, goAction)));
-
-            // Добавляем действия в состояния
-            startState.actions.Add(new StartActions(this));
-            raiseState.actions.Add(goAction);
-            aggroState.actions.Add(agroAction);
-            finishState.actions.Add(new StartActions(this)); // или какое-то финальное действие
-
-
-            return new StateMashine<State, object>(startState);
+            Target = Checkpoints[currentCheckpointIndex];
         }
-     
+        else
+        {
+            Debug.LogError("Checkpoints list is empty!");
+            return null; // Не создаём поведение если нет чекпоинтов
+        }
+
+        AgroCooldown = new AgroCooldownCondition(this);
+
+        var startState = new State("StartState");
+        var raceState = new State("RaceState");
+        var aggroState = new State("AggroState");
+        var finishState = new State("FinishState");
+
+        var goToCheckpoint = new GoToTargetAction(this);
+        var agroToEnemy = new AgroTargetAction(this);
+        var burnout = new StartActions(this);
+
+        // Состояния
+        startState.actions.Add(burnout);
+        raceState.actions.Add(goToCheckpoint);
+        aggroState.actions.Add(agroToEnemy);
+        finishState.actions.Add(burnout);
+
+        // Переходы
+        startState.transitions.Add(new Transition<State, BaseCondition>(raceState, new StartCondition(this)));
+
+        raceState.transitions.Add(new Transition<State, BaseCondition>(aggroState, new DetectClosestTargetCondition(this, AgroCooldown)));
+        raceState.transitions.Add(new Transition<State, BaseCondition>(finishState, new ReachedFinishCondition(this)));
+
+        aggroState.transitions.Add(new Transition<State, BaseCondition>(raceState, AgroCooldown));
+        aggroState.transitions.Add(new Transition<State, BaseCondition>(finishState, new ReachedFinishCondition(this)));
+
+        return new StateMashine<State, object>(startState);
     }
 
+    public void Update()
+    {
+        base.Update();
+
+        // Проверяем расстояние до текущей цели (чекпоинта)
+        if (Target != null)
+        {
+            float distance = Vector3.Distance(transform.position, Target.position);
+            if (distance < 3f)  // Достигли чекпоинта
+            {
+                currentCheckpointIndex++;
+                if (currentCheckpointIndex >= Checkpoints.Count)
+                {
+                    currentCheckpointIndex = 0; // Цикл по чекпоинтам
+                }
+                Target = Checkpoints[currentCheckpointIndex];
+                Debug.Log($"Next checkpoint set: {currentCheckpointIndex}");
+            }
+        }
+    }
 }

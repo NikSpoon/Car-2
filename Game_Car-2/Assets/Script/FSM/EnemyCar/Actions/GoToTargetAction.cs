@@ -1,48 +1,51 @@
-﻿
-
-using UnityEngine;
-
+﻿using UnityEngine;
 
 namespace Assets.Script.FSM.EnemyCar.Actions
 {
     public class GoToTargetAction : BaseAction
     {
-        private int _currentCheckpointIndex = 0;
-        public GoToTargetAction(BaseAIController controller) : base(controller)
-        {
-            
-            if (_controller.Checkpoints.Count > 0)
-            {
-                _controller.agent.SetDestination(_controller.Checkpoints[_currentCheckpointIndex].position);
-            }
-        }
+        private readonly float slowDownRadius = 10f;
+        private readonly LayerMask obstacleLayer = 1 << 8;
+
+        public GoToTargetAction(BaseAIController controller) : base(controller) { }
 
         public override (float vertical, float horizontal, bool brake) Execute()
         {
+            if (_controller.Target == null)
+                return (0f, 0f, false);
 
-            if (!_controller.agent.pathPending && _controller.agent.remainingDistance < 1.0f)
-            {
-                _currentCheckpointIndex++;
+            float vertical = CalculateThrottle();
+            float horizontal = SteerTowardsTarget();
+            bool brake = ShouldBrake();
 
-                if (_currentCheckpointIndex < _controller.Checkpoints.Count)
-                {
-                    _controller.agent.SetDestination(_controller.Checkpoints[_currentCheckpointIndex].position);
-                }
-                
-            }
-                Vector3 localVelocity = _controller.transform.InverseTransformDirection(_controller.agent.desiredVelocity.normalized);
-
-                float vertical = localVelocity.z;    // вперёд/назад
-                float horizontal = localVelocity.x;  // поворот
-                bool brake = false;                  // опционально: тормоз при необходимости
-
+            Debug.Log($"Vertical: {vertical}, Horizontal: {horizontal}, Brake: {brake}");
             return (vertical, horizontal, brake);
-        }
-        public bool IsAtLastCheckpoint()
-        {
-            return _currentCheckpointIndex == _controller.Checkpoints.Count - 1 &&
-                   _controller.agent.remainingDistance < 1.0f;
+
         }
 
+        /// <summary>
+        /// Пока просто возвращает "1", чтобы ехать вперёд
+        /// </summary>
+        private float CalculateThrottle()
+        {
+            return 1f;
+        }
+
+        /// <summary>
+        /// Пока пустой, вернёт 0 (прямо)
+        /// В будущем можно сделать поворот в сторону цели
+        /// </summary>
+        private float SteerTowardsTarget()
+        {
+            return 0f;
+        }
+
+        /// <summary>
+        /// Пока не тормозит, можно реализовать замедление при приближении к цели
+        /// </summary>
+        private bool ShouldBrake()
+        {
+            return false;
+        }
     }
 }

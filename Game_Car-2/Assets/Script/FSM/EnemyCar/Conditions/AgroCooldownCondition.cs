@@ -4,23 +4,21 @@ namespace Assets.Script.FSM.EnemyCar.Condition
 {
     public class AgroCooldownCondition : BaseCondition
     {
-        private float _cooldownTime = 5f; 
-        private float _lastExitTime = -Mathf.Infinity;
+        private float cooldownTime = 5f;
+        private float lastAgroTime = -999f;
 
         public AgroCooldownCondition(BaseAIController controller) : base(controller)
         {
         }
 
-
-        public void SetExitTime()
+        public void ResetCooldown()
         {
-            _lastExitTime = Time.time;
+            lastAgroTime = Time.time;
         }
 
         public override bool Evoluete()
         {
-           
-            return Time.time - _lastExitTime > _cooldownTime;
+            return Time.time - lastAgroTime > cooldownTime;
         }
     }
 }

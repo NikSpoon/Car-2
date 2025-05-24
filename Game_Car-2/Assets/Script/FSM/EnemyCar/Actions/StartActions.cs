@@ -9,11 +9,7 @@ namespace Assets.Script.FSM.EnemyCar.Actions
 
         public override (float vertical, float horizontal, bool brake) Execute()
         {
-            float vertical = 1f;
-            float horizontal = 0f;
-            bool brake = true;
-            
-            return (vertical, horizontal, brake);
+            return (1f, 0f, false);
         }
     }
 }
