@@ -35,7 +35,7 @@ namespace Assets.Script.FSM.EnemyCar
                 horizontal = h;
                 brake = b;
             }
-            Debug.Log($"State - Vertical: {vertical}, Horizontal: {horizontal}, Brake: {brake}");
+        
             return (vertical, horizontal, brake);
         }
         

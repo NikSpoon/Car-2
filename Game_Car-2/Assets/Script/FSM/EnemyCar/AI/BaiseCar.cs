@@ -10,19 +10,22 @@ public class BaiseCar : BaseAIController
 
     private int currentCheckpointIndex = 0;
 
+   
     public override StateMashine<State, object> GetBehavior()
     {
         if (Checkpoints.Count > 0)
         {
             Target = Checkpoints[currentCheckpointIndex];
+            
         }
         else
         {
             Debug.LogError("Checkpoints list is empty!");
-            return null; // Не создаём поведение если нет чекпоинтов
+            
         }
 
         AgroCooldown = new AgroCooldownCondition(this);
+       
 
         var startState = new State("StartState");
         var raceState = new State("RaceState");
@@ -35,6 +38,7 @@ public class BaiseCar : BaseAIController
 
         // Состояния
         startState.actions.Add(burnout);
+        
         raceState.actions.Add(goToCheckpoint);
         aggroState.actions.Add(agroToEnemy);
         finishState.actions.Add(burnout);
@@ -51,24 +55,50 @@ public class BaiseCar : BaseAIController
         return new StateMashine<State, object>(startState);
     }
 
-    public void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        base.Update();
+        // Проверяем, что это чекпоинт
+        Transform checkpointTransform = other.transform;
 
-        // Проверяем расстояние до текущей цели (чекпоинта)
-        if (Target != null)
+        // Проверяем, есть ли этот чекпоинт в нашем списке
+        int index = Checkpoints.IndexOf(checkpointTransform);
+        if (index == -1)
         {
-            float distance = Vector3.Distance(transform.position, Target.position);
-            if (distance < 3f)  // Достигли чекпоинта
-            {
-                currentCheckpointIndex++;
-                if (currentCheckpointIndex >= Checkpoints.Count)
-                {
-                    currentCheckpointIndex = 0; // Цикл по чекпоинтам
-                }
-                Target = Checkpoints[currentCheckpointIndex];
-                Debug.Log($"Next checkpoint set: {currentCheckpointIndex}");
-            }
+            // Этот чекпоинт не из нашего списка — игнорируем
+            return;
+        }
+
+        // Проверяем, что это текущий чекпоинт, который мы ждем
+        if (index == currentCheckpointIndex)
+        {
+            OnCheckpointReached(checkpointTransform);
+
+            // Убираем пройденный чекпоинт из списка или деактивируем его
+            // Например, просто деактивируем объект:
+            Checkpoints[index].gameObject.SetActive(false);
+
+            // Или удаляем из списка, если хочешь:
+            // Checkpoints.RemoveAt(index);
+        }
+        else
+        {
+            Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {Checkpoints[currentCheckpointIndex].name}");
+        }
+    }
+
+    public void OnCheckpointReached(Transform checkpoint)
+    {
+        Debug.Log($"Checkpoint reached: {checkpoint.name}, next target: {(currentCheckpointIndex + 1 < Checkpoints.Count ? Checkpoints[currentCheckpointIndex + 1].name : "Finish")}");
+
+        currentCheckpointIndex++;
+        if (currentCheckpointIndex >= Checkpoints.Count)
+        {
+            Debug.Log("Все чекпоинты пройдены!");
+            // Здесь можно переключиться в состояние финиша или что-то ещё
+        }
+        else
+        {
+            Target = Checkpoints[currentCheckpointIndex];
         }
     }
 }

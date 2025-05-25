@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Assets.Script.FSM.EnemyCar.Actions
 {
@@ -13,36 +14,50 @@ namespace Assets.Script.FSM.EnemyCar.Actions
         {
             if (_controller.Target == null)
                 return (0f, 0f, false);
+          
+            _controller.agent.SetDestination(_controller.Target.position);
 
             float vertical = CalculateThrottle();
             float horizontal = SteerTowardsTarget();
             bool brake = ShouldBrake();
 
-            Debug.Log($"Vertical: {vertical}, Horizontal: {horizontal}, Brake: {brake}");
+
             return (vertical, horizontal, brake);
 
         }
 
-        /// <summary>
-        /// Пока просто возвращает "1", чтобы ехать вперёд
-        /// </summary>
+       
         private float CalculateThrottle()
         {
-            return 1f;
+            return 0.2f;
         }
 
-        /// <summary>
-        /// Пока пустой, вернёт 0 (прямо)
-        /// В будущем можно сделать поворот в сторону цели
-        /// </summary>
         private float SteerTowardsTarget()
         {
-            return 0f;
+            if (_controller.Target == null)
+                return 0f;
+
+            Vector3 targetPosition = _controller.Target.position;
+
+            //Debug.Log("Target position: " + targetPosition);
+
+            Vector3 directionToTarget = (targetPosition - _controller.transform.position).normalized;
+
+            directionToTarget.y = 0;
+            Vector3 forward = _controller.transform.forward;
+            forward.y = 0;
+
+            float angle = Vector3.SignedAngle(forward, directionToTarget, Vector3.up);
+
+            //Debug.Log("Angle to target: " + angle+ " name: " +  _controller.Target.name);
+
+            float steer = Mathf.Clamp(angle / 45f, -1f, 1f);
+            //Debug.Log("Steer value: " + steer);
+
+            return steer;
+
         }
 
-        /// <summary>
-        /// Пока не тормозит, можно реализовать замедление при приближении к цели
-        /// </summary>
         private bool ShouldBrake()
         {
             return false;

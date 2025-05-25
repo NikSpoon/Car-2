@@ -14,9 +14,9 @@ namespace Assets.Script.FSM.EnemyCar
         public StateMashine<State, object> _stateMashine;
         public CarSpawner carSpawner;
         public List<Transform> Checkpoints =>
-           RaceManager.Instance != null && RaceManager.Instance.Checkpoints != null
-               ? RaceManager.Instance.Checkpoints
-               : new List<Transform>();
+           RaceManager.Instance != null && RaceManager.Instance.Checkpoints != null? RaceManager.Instance.Checkpoints:
+            new List<Transform>();
+       
         public TargetFinder targetFinder;
 
         public Transform AgroTarget { get; set; }
@@ -25,7 +25,7 @@ namespace Assets.Script.FSM.EnemyCar
         public float HorizontalInput { get; set; }
         public bool Brake { get; set; }
 
-
+        
 
         public abstract StateMashine<State, object> GetBehavior();
        
@@ -34,15 +34,26 @@ namespace Assets.Script.FSM.EnemyCar
             agent.updatePosition = false;
             agent.updateRotation = false;
             agent.updateUpAxis = false;
+           
             carSpawner = Object.FindFirstObjectByType<CarSpawner>();
             StartCoroutine(InitAI());
+
+           
         }
 
         private IEnumerator InitAI()
         {
-
             yield return new WaitUntil(() => RaceManager.Instance != null);
 
+            
+            yield return new WaitUntil(() => RaceManager.Instance.Checkpoints != null && RaceManager.Instance.Checkpoints.Count > 0);
+
+           /* Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
+            for (int i = 0; i < Checkpoints.Count; i++)
+            {
+                Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
+            }
+           */
             _stateMashine = GetBehavior();
 
             if (_stateMashine != null && _stateMashine.CurrentState != null)
@@ -53,6 +64,9 @@ namespace Assets.Script.FSM.EnemyCar
             {
                 Debug.LogError("[FSM INIT] StateMachine or CurrentState is null!");
             }
+
+
+
         }
 
         public void Update()
@@ -65,7 +79,7 @@ namespace Assets.Script.FSM.EnemyCar
 
             string stateName = _stateMashine.CurrentState?.Name ?? "null";
             string targetName = Target != null ? Target.name : "null";
-            Debug.Log($"[FSM] Current State: {stateName}, Target: {targetName}");
+           // Debug.Log($"[FSM] Current State: {stateName}");
 
             if (_stateMashine == null)
                 return;
@@ -86,7 +100,8 @@ namespace Assets.Script.FSM.EnemyCar
             {
                 _stateMashine.CurrentState = nextState;
             }
-
+            
+            
         }
     
 

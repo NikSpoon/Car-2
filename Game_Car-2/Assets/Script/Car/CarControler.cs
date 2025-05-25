@@ -36,7 +36,7 @@ public class CarControler : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log("CarControler -- Vertical: " + AI.VerticalInput + ", Horizontal: " + AI.HorizontalInput + ", Brake: " + AI.Brake);
+        
         if (IsPlayerControl)
         {
             IsPlayer();
@@ -49,6 +49,7 @@ public class CarControler : MonoBehaviour
     }
     private void IsPlayer()
     {
+        //Debug.Log((_inputServis.VerticalInput, _inputServis.HorizontalInput, _inputServis.Brake));
         _carPhysic.Move(_inputServis.VerticalInput,_inputServis.HorizontalInput, _inputServis.Brake);
     }
 
@@ -59,6 +60,7 @@ public class CarControler : MonoBehaviour
             Debug.LogWarning("AI controller is not assigned!");
             return;
         }
+       // Debug.Log((AI.VerticalInput, AI.HorizontalInput, AI.Brake));
         _carPhysic.Move(AI.VerticalInput, AI.HorizontalInput, AI.Brake);
     }
 

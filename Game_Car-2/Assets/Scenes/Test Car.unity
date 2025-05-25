@@ -45976,6 +45976,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChekPoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3613943385181969768, guid: 630897f7b76e0904b8d7ee04ea585fd6, type: 3}
+      propertyPath: checkpointIndex
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -90830,6 +90834,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChekPoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3613943385181969768, guid: 630897f7b76e0904b8d7ee04ea585fd6, type: 3}
+      propertyPath: checkpointIndex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -117946,6 +117954,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChekPoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3613943385181969768, guid: 630897f7b76e0904b8d7ee04ea585fd6, type: 3}
+      propertyPath: checkpointIndex
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -135343,7 +135355,7 @@ GameObject:
   - component: {fileID: 931560743}
   m_Layer: 0
   m_Name: Finish
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135427,6 +135439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetTags: Player
+  checkpointIndex: 5
 --- !u!1 &932207764
 GameObject:
   m_ObjectHideFlags: 0
@@ -248863,6 +248876,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChekPoint (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3613943385181969768, guid: 630897f7b76e0904b8d7ee04ea585fd6, type: 3}
+      propertyPath: checkpointIndex
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -321923,7 +321940,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3449205465200170180, guid: 630897f7b76e0904b8d7ee04ea585fd6, type: 3}
       propertyPath: m_Name
-      value: ChekPoint
+      value: ChekPoint44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449205465200170180, guid: 630897f7b76e0904b8d7ee04ea585fd6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613943385181969768, guid: 630897f7b76e0904b8d7ee04ea585fd6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
