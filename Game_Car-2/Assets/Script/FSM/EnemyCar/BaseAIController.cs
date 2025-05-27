@@ -14,9 +14,14 @@ namespace Assets.Script.FSM.EnemyCar
         public StateMashine<State, object> _stateMashine;
         public CarSpawner carSpawner;
         public List<Transform> Checkpoints =>
-           RaceManager.Instance != null && RaceManager.Instance.Checkpoints != null? RaceManager.Instance.Checkpoints:
+           RaceManager.Instance != null && RaceManager.Instance.Checkpoints != null ? RaceManager.Instance.Checkpoints :
             new List<Transform>();
-       
+
+        // Зоны обнаружения препятствий
+        public float slowDownRadius = 6f;
+        public float brakeRadius = 2.5f;
+        public LayerMask obstacleLayer;
+
         public TargetFinder targetFinder;
 
         public Transform AgroTarget { get; set; }
@@ -25,35 +30,35 @@ namespace Assets.Script.FSM.EnemyCar
         public float HorizontalInput { get; set; }
         public bool Brake { get; set; }
 
-        
+        public Vector3 Dierction { get; set; }
 
         public abstract StateMashine<State, object> GetBehavior();
-       
+
         public void Start()
         {
             agent.updatePosition = false;
             agent.updateRotation = false;
-            agent.updateUpAxis = false;
-           
+  
+            
             carSpawner = Object.FindFirstObjectByType<CarSpawner>();
             StartCoroutine(InitAI());
 
-           
+          
         }
 
         private IEnumerator InitAI()
         {
             yield return new WaitUntil(() => RaceManager.Instance != null);
 
-            
+
             yield return new WaitUntil(() => RaceManager.Instance.Checkpoints != null && RaceManager.Instance.Checkpoints.Count > 0);
 
-           /* Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
+            Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
             for (int i = 0; i < Checkpoints.Count; i++)
             {
                 Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
             }
-           */
+
             _stateMashine = GetBehavior();
 
             if (_stateMashine != null && _stateMashine.CurrentState != null)
@@ -79,7 +84,7 @@ namespace Assets.Script.FSM.EnemyCar
 
             string stateName = _stateMashine.CurrentState?.Name ?? "null";
             string targetName = Target != null ? Target.name : "null";
-           // Debug.Log($"[FSM] Current State: {stateName}");
+            // Debug.Log($"[FSM] Current State: {stateName}");
 
             if (_stateMashine == null)
                 return;
@@ -100,11 +105,60 @@ namespace Assets.Script.FSM.EnemyCar
             {
                 _stateMashine.CurrentState = nextState;
             }
-            
-            
-        }
-    
 
+            Dierction = agent.destination;
+
+
+        }
+        public void FixedUpdate()
+        {
+            agent.nextPosition = transform.position;
+        }
+     
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, slowDownRadius);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, brakeRadius);
+        }
+
+        private void OnDrawGizmos()
+        {
+
+            // Цвет направления
+            Gizmos.color = Color.green;
+
+            // Вектор от позиции к steeringTarget
+            Vector3 direction = agent.steeringTarget - transform.position;
+            Gizmos.DrawLine(transform.position, agent.steeringTarget);
+
+            // Отметим точку назначения
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(agent.steeringTarget, 0.3f);
+           
+            Gizmos.color = Color.grey;
+            Gizmos.DrawSphere(Target.position, 0.6f);
+            // Показываем путь, если есть
+            if (agent.path != null && agent.path.corners.Length > 1)
+            {
+                Gizmos.color = Color.black;
+
+                Vector3[] corners = agent.path.corners;
+                for (int i = 0; i < corners.Length - 1; i++)
+                {
+                    Gizmos.DrawLine(corners[i], corners[i + 1]);
+                    Gizmos.DrawSphere(corners[i], 0.15f);
+                }
+
+                // Последняя точка
+                Gizmos.DrawSphere(corners[corners.Length - 1], 0.15f);
+            }
+        }
     }
+
+
 }
 

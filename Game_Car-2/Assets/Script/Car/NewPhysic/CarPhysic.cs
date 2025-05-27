@@ -36,7 +36,7 @@ public class CarPhysic : MonoBehaviour
 
 
     [Header("Event Values")]
-    [SerializeField] private float _speed;
+    public float _speed { get; private set; }
     [SerializeField] private float _currentEngineRPM; // Оборот двигателя — Engine RPM (RPM = Revolutions Per Minute)
     [SerializeField] private float _currentWhellTorque;
     [SerializeField] private float _currentSteeringAngle;
@@ -192,8 +192,8 @@ public class CarPhysic : MonoBehaviour
                 _currentGearIndex++;
                 _justShifted = true;
                 _rpmDropTimer = _rpmDropDuration;
-                Debug.Log("⏫ Shift up: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed
-                    + " nextGear.minRecommendedSpeed " + nextGear.minRecommendedSpeed + ("RPM: " + _currentEngineRPM + " | maxRPM: " + currentGear.maxRPM));
+                //Debug.Log("⏫ Shift up: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed
+                  //  + " nextGear.minRecommendedSpeed " + nextGear.minRecommendedSpeed + ("RPM: " + _currentEngineRPM + " | maxRPM: " + currentGear.maxRPM));
             }
         }
         else if (_currentEngineRPM <= currentGear.minRPM && _currentGearIndex > 0)
@@ -206,7 +206,7 @@ public class CarPhysic : MonoBehaviour
                 _currentGearIndex--;
                 _justShifted = true;
                 _rpmDropTimer = _rpmDropDuration;
-                Debug.Log("⏬ Shift down: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed);
+                //Debug.Log("⏬ Shift down: " + _currentGearIndex + "  = Spead: " + _speed + " MotorForce :" + _motorForce + " RpmUpSpeed: " + _rpmUpSpeed);
             }
         }
 

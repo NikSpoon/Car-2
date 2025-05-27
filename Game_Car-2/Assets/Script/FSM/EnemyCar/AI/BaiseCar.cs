@@ -9,7 +9,7 @@ public class BaiseCar : BaseAIController
     public AgroCooldownCondition AgroCooldown { get; private set; }
 
     private int currentCheckpointIndex = 0;
-
+    
    
     public override StateMashine<State, object> GetBehavior()
     {
@@ -22,6 +22,11 @@ public class BaiseCar : BaseAIController
         {
             Debug.LogError("Checkpoints list is empty!");
             
+        }
+
+        if (Target != null)
+        {
+            agent.SetDestination(Target.position);
         }
 
         AgroCooldown = new AgroCooldownCondition(this);
@@ -99,6 +104,9 @@ public class BaiseCar : BaseAIController
         else
         {
             Target = Checkpoints[currentCheckpointIndex];
+           
+                agent.SetDestination(Target.position);
+            
         }
     }
 }
