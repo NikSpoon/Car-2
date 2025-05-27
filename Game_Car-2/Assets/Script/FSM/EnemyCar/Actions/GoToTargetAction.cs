@@ -33,7 +33,7 @@ namespace Assets.Script.FSM.EnemyCar.Actions
             if (car == null)
                 return 0.2f;  // или какое-то дефолтное значение газа
 
-            float targetSpeed = 170f;       // максимальная желаемая скорость
+            float targetSpeed = 180f;       // максимальная желаемая скорость
             float maxThrottle = 0.6f;      // максимальное значение газа
             float minThrottle = 0f;        // минимальное значение газа (газ выключен)
 
