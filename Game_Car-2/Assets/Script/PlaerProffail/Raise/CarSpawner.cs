@@ -122,5 +122,8 @@ public class CarSpawner : MonoBehaviour
         noCollision.Respawn(); 
         rb.isKinematic = false;  // включаем физику
     }
-
+    private void Update()
+    {
+        Debug.Log(start + "= start");
+    }
 }

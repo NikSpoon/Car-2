@@ -34,32 +34,31 @@ namespace Assets.Script.FSM.EnemyCar
 
         public abstract StateMashine<State, object> GetBehavior();
 
-        public void Start()
+        public virtual void Start()
         {
             agent.updatePosition = false;
             agent.updateRotation = false;
   
             
-            carSpawner = Object.FindFirstObjectByType<CarSpawner>();
-            StartCoroutine(InitAI());
 
-          
         }
 
-        private IEnumerator InitAI()
+        public IEnumerator InitAI()
         {
             yield return new WaitUntil(() => RaceManager.Instance != null);
 
 
             yield return new WaitUntil(() => RaceManager.Instance.Checkpoints != null && RaceManager.Instance.Checkpoints.Count > 0);
 
+            carSpawner = Object.FindFirstObjectByType<CarSpawner>();
+            _stateMashine = GetBehavior();
+           
             Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
             for (int i = 0; i < Checkpoints.Count; i++)
             {
                 Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
             }
 
-            _stateMashine = GetBehavior();
 
             if (_stateMashine != null && _stateMashine.CurrentState != null)
             {
@@ -84,7 +83,7 @@ namespace Assets.Script.FSM.EnemyCar
 
             string stateName = _stateMashine.CurrentState?.Name ?? "null";
             string targetName = Target != null ? Target.name : "null";
-            // Debug.Log($"[FSM] Current State: {stateName}");
+           // Debug.Log($"[FSM] Current State: {stateName}");
 
             if (_stateMashine == null)
                 return;

@@ -3,19 +3,57 @@ using Assets.Script.FSM.EnemyCar.Condition;
 using Assets.Script.FSM.EnemyCar.Conditions;
 using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
+
 
 public class BaiseCar : BaseAIController
 {
     public AgroCooldownCondition AgroCooldown { get; private set; }
-
+    private List<Transform> ChekpointEnemy;
     private int currentCheckpointIndex = 0;
-    
-   
+
+    public override void Start()
+    {
+        base.Start();
+        ChekpointEnemy = new List<Transform>(Checkpoints);
+
+        // 2. Запускаем FSM (после того как чекпоинты скопированы)
+        StartCoroutine(InitAI());
+        StartCoroutine(InitFSM()); 
+    }
+    private IEnumerator InitFSM()
+    {
+        yield return new WaitUntil(() => RaceManager.Instance != null);
+
+
+        yield return new WaitUntil(() => RaceManager.Instance.Checkpoints != null && RaceManager.Instance.Checkpoints.Count > 0);
+
+        Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
+        for (int i = 0; i < Checkpoints.Count; i++)
+        {
+            Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
+        }
+
+
+        if (_stateMashine != null && _stateMashine.CurrentState != null)
+        {
+            Debug.Log($"[FSM INIT] Current State: {_stateMashine.CurrentState.GetType().Name}");
+        }
+        else
+        {
+            Debug.LogError("[FSM INIT] StateMachine or CurrentState is null!");
+        }
+
+
+
+    }
+
     public override StateMashine<State, object> GetBehavior()
     {
-        if (Checkpoints.Count > 0)
+        if (ChekpointEnemy.Count > 0)
         {
-            Target = Checkpoints[currentCheckpointIndex];
+            Target = ChekpointEnemy[currentCheckpointIndex];
             
         }
         else
@@ -66,7 +104,7 @@ public class BaiseCar : BaseAIController
         Transform checkpointTransform = other.transform;
 
         // Проверяем, есть ли этот чекпоинт в нашем списке
-        int index = Checkpoints.IndexOf(checkpointTransform);
+        int index = ChekpointEnemy.IndexOf(checkpointTransform);
         if (index == -1)
         {
             // Этот чекпоинт не из нашего списка — игнорируем
@@ -78,32 +116,27 @@ public class BaiseCar : BaseAIController
         {
             OnCheckpointReached(checkpointTransform);
 
-            // Убираем пройденный чекпоинт из списка или деактивируем его
-            // Например, просто деактивируем объект:
-            Checkpoints[index].gameObject.SetActive(false);
-
-            // Или удаляем из списка, если хочешь:
-            // Checkpoints.RemoveAt(index);
+          
         }
         else
         {
-            Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {Checkpoints[currentCheckpointIndex].name}");
+            Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {ChekpointEnemy[currentCheckpointIndex].name}");
         }
     }
 
     public void OnCheckpointReached(Transform checkpoint)
     {
-        Debug.Log($"Checkpoint reached: {checkpoint.name}, next target: {(currentCheckpointIndex + 1 < Checkpoints.Count ? Checkpoints[currentCheckpointIndex + 1].name : "Finish")}");
+        Debug.Log($"Checkpoint reached: {checkpoint.name}, next target: {(currentCheckpointIndex + 1 < ChekpointEnemy.Count ? ChekpointEnemy[currentCheckpointIndex + 1].name : "Finish")}");
 
         currentCheckpointIndex++;
-        if (currentCheckpointIndex >= Checkpoints.Count)
+        if (currentCheckpointIndex >= ChekpointEnemy.Count)
         {
             Debug.Log("Все чекпоинты пройдены!");
             // Здесь можно переключиться в состояние финиша или что-то ещё
         }
         else
         {
-            Target = Checkpoints[currentCheckpointIndex];
+            Target = ChekpointEnemy[currentCheckpointIndex];
            
                 agent.SetDestination(Target.position);
             
