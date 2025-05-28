@@ -39,8 +39,6 @@ namespace Assets.Script.FSM.EnemyCar
             agent.updatePosition = false;
             agent.updateRotation = false;
   
-            
-
         }
 
         public IEnumerator InitAI()
