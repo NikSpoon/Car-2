@@ -6,8 +6,7 @@ namespace Assets.Script.FSM.EnemyCar.Actions
 {
     public class GoToTargetAction : BaseAction
     {
-        private readonly float slowDownRadius = 10f;
-        private readonly LayerMask obstacleLayer = 1 << 8;
+       
         private float _currentThrottle = 0f;
         public GoToTargetAction(BaseAIController controller) : base(controller) { }
 

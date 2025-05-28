@@ -15,7 +15,7 @@ public class Chekpoint : MonoBehaviour
                 manager.UpdateCheckpoint(transform);
             }
 
-            gameObject.SetActive(false);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         }
 

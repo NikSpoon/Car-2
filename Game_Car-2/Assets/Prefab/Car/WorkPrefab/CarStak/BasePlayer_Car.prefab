@@ -481,8 +481,9 @@ GameObject:
   - component: {fileID: 4784457634901668060}
   - component: {fileID: 3299472433215516900}
   - component: {fileID: 2452975436662182850}
+  - component: {fileID: 7091802554419332205}
   m_Layer: 8
-  m_Name: Car_Polli_0
+  m_Name: BasePlayer_Car
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -581,7 +582,6 @@ MonoBehaviour:
   _brakeTorque: 0
   _maxSpead: 220
   _maxReverseSpeed: 40
-  _speed: 0
   _currentEngineRPM: 0
   _currentWhellTorque: 0
   _currentSteeringAngle: 0
@@ -703,6 +703,19 @@ MonoBehaviour:
   ghostDuration: 5
   checkInterval: 0.5
   blinkInterval: 0.2
+--- !u!114 &7091802554419332205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163013463592450753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ed86f374333154187f13e965d4f0a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!1 &1208980761211192181
 GameObject:
   m_ObjectHideFlags: 0

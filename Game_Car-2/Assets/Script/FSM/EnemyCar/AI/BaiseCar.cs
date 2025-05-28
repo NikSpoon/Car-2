@@ -13,6 +13,10 @@ public class BaiseCar : BaseAIController
     private List<Transform> ChekpointEnemy;
     private int currentCheckpointIndex = 0;
 
+    public bool AllCheckpointsPassed()
+    {
+        return currentCheckpointIndex >= ChekpointEnemy.Count;
+    }
     public override void Start()
     {
         base.Start();
@@ -99,29 +103,24 @@ public class BaiseCar : BaseAIController
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        // Проверяем, что это чекпоинт
+    {  
         Transform checkpointTransform = other.transform;
 
-        // Проверяем, есть ли этот чекпоинт в нашем списке
         int index = ChekpointEnemy.IndexOf(checkpointTransform);
         if (index == -1)
         {
-            // Этот чекпоинт не из нашего списка — игнорируем
             return;
         }
 
-        // Проверяем, что это текущий чекпоинт, который мы ждем
         if (index == currentCheckpointIndex)
         {
             OnCheckpointReached(checkpointTransform);
-
-          
         }
         else
         {
             Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {ChekpointEnemy[currentCheckpointIndex].name}");
         }
+        
     }
 
     public void OnCheckpointReached(Transform checkpoint)
@@ -132,14 +131,14 @@ public class BaiseCar : BaseAIController
         if (currentCheckpointIndex >= ChekpointEnemy.Count)
         {
             Debug.Log("Все чекпоинты пройдены!");
-            // Здесь можно переключиться в состояние финиша или что-то ещё
+           
         }
         else
         {
             Target = ChekpointEnemy[currentCheckpointIndex];
            
-                agent.SetDestination(Target.position);
-            
+            agent.SetDestination(Target.position);
+          
         }
     }
 }

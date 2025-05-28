@@ -81,7 +81,7 @@ namespace Assets.Script.FSM.EnemyCar
 
             string stateName = _stateMashine.CurrentState?.Name ?? "null";
             string targetName = Target != null ? Target.name : "null";
-           // Debug.Log($"[FSM] Current State: {stateName}");
+           Debug.Log($"[FSM] Current State: {stateName}");
 
             if (_stateMashine == null)
                 return;
@@ -137,6 +137,7 @@ namespace Assets.Script.FSM.EnemyCar
             Gizmos.DrawSphere(agent.steeringTarget, 0.3f);
            
             Gizmos.color = Color.grey;
+            if(Target !=null)
             Gizmos.DrawSphere(Target.position, 0.6f);
             // Показываем путь, если есть
             if (agent.path != null && agent.path.corners.Length > 1)

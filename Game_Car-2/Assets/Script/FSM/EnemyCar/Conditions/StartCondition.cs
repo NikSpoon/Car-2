@@ -14,8 +14,7 @@ namespace Assets.Script.FSM.EnemyCar.Conditions
                 return false;
             }
 
-            Debug.Log(_controller.carSpawner.start + " _controller.carSpawner.start");
-
+          
             return _controller.carSpawner.start;
         }
     }

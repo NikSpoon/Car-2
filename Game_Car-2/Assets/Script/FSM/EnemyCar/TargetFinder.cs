@@ -2,37 +2,39 @@
 
 public class TargetFinder : MonoBehaviour
 {
+    [SerializeField] private LayerMask targetLayer;
+    [SerializeField] private float detectionRadius = 30f;   
     public Transform CurrentTarget { get; private set; }
-
-    [SerializeField] private string playerTag = "Player";
-    [SerializeField] private float searchInterval = 1f;
-    private float _nextSearchTime = 0f;
 
     void Update()
     {
-        if (Time.time >= _nextSearchTime)
-        {
-            FindClosestTarget();
-            _nextSearchTime = Time.time + searchInterval;
-        }
+        FindClosestTarget();
     }
 
     private void FindClosestTarget()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag(playerTag);
-        Transform closest = null;
-        float minDistance = Mathf.Infinity;
+        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, targetLayer);
 
-        foreach (var player in players)
+        float closestDistance = Mathf.Infinity;
+        Transform closestTarget = null;
+
+        foreach (var hit in hits)
         {
-            float dist = Vector3.Distance(transform.position, player.transform.position);
-            if (dist < minDistance)
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
+            if (distance < closestDistance)
             {
-                minDistance = dist;
-                closest = player.transform;
+                closestDistance = distance;
+                closestTarget = hit.transform;
             }
         }
 
-        CurrentTarget = closest;
+        CurrentTarget = closestTarget;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Визуализация радиуса обнаружения
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

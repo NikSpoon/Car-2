@@ -4,18 +4,27 @@ namespace Assets.Script.FSM.EnemyCar.Condition
 {
     public class ReachedFinishCondition : BaseCondition
     {
+
+        private BaiseCar _baiseCar;
+
         public ReachedFinishCondition(BaseAIController controller) : base(controller)
         {
+            _baiseCar = controller as BaiseCar;
         }
 
         public override bool Evoluete()
         {
-            var target = _controller.Target;
-            if (target == null)
+            if (_baiseCar == null)
+            {
+                Debug.LogError("ReachedFinishCondition: _baiseCar is null!");
                 return false;
+            }
 
-            float distance = Vector3.Distance(_controller.transform.position, target.position);
-            return distance < 3f;
+            bool finished = _baiseCar.AllCheckpointsPassed();
+            if (finished)
+                Debug.Log("ReachedFinishCondition: Все чекпоинты пройдены, переход к FinishState");
+
+            return finished;
         }
     }
 }

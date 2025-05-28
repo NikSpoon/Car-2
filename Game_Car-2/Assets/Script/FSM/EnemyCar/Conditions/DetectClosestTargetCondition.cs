@@ -22,9 +22,6 @@ namespace Assets.Script.FSM.EnemyCar.Condition
             if (target == null)
                 return false;
 
-            float distance = Vector3.Distance(_controller.transform.position, target.position);
-            if (distance > detectionRadius)
-                return false;
 
             // Предположим, что у обоих есть компонент Health с полем CurrentHP
             var myHealth = _controller.GetComponent<Health>();
@@ -40,6 +37,7 @@ namespace Assets.Script.FSM.EnemyCar.Condition
                 _agroCooldown.ResetCooldown();
                 return true;
             }
+            
 
             return false;
         }
