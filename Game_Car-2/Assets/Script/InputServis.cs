@@ -6,6 +6,7 @@ public class InputServis : MonoBehaviour
     public float VerticalInput { get; private set; }
     public float HorizontalInput { get; private set; }
    
+    public bool Respawn { get; private set; }
     public bool Brake { get; private set; }
     void Update()
     {
@@ -14,7 +15,8 @@ public class InputServis : MonoBehaviour
         HorizontalInput = Input.GetAxis("Horizontal");
 
         Brake = Input.GetKey(KeyCode.Space);
-        
+
+        Respawn = Input.GetKey(KeyCode.R);
 
         Direction = new Vector3(VerticalInput, 0, HorizontalInput);
 

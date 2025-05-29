@@ -9,7 +9,7 @@ public class CarControler : MonoBehaviour
     
     [SerializeField] private CarPhysic _carPhysic;
     [SerializeField] private InputServis _inputServis;
-
+    [SerializeField] private Respawn _respawn;
     [SerializeField] private BaseAIController AI;
 
 
@@ -51,6 +51,11 @@ public class CarControler : MonoBehaviour
     {
         //Debug.Log((_inputServis.VerticalInput, _inputServis.HorizontalInput, _inputServis.Brake));
         _carPhysic.Move(_inputServis.VerticalInput,_inputServis.HorizontalInput, _inputServis.Brake);
+       
+        if (_inputServis.Respawn)
+        {
+            _respawn.Resp();
+        }
     }
 
     private void IsEnamy()
@@ -63,6 +68,5 @@ public class CarControler : MonoBehaviour
        // Debug.Log((AI.VerticalInput, AI.HorizontalInput, AI.Brake));
         _carPhysic.Move(AI.VerticalInput, AI.HorizontalInput, AI.Brake);
     }
-
 
 }
