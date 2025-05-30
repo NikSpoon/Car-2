@@ -12,6 +12,7 @@ public class BaiseCar : BaseAIController
     public AgroCooldownCondition AgroCooldown { get; private set; }
     private List<Transform> ChekpointEnemy;
     private int currentCheckpointIndex = 0;
+    private Transform _respChek;
 
     public bool AllCheckpointsPassed()
     {
@@ -24,7 +25,8 @@ public class BaiseCar : BaseAIController
 
         // 2. Запускаем FSM (после того как чекпоинты скопированы)
         StartCoroutine(InitAI());
-        StartCoroutine(InitFSM()); 
+        StartCoroutine(InitFSM());
+        _respChek = ChekpointEnemy[0];
     }
     private IEnumerator InitFSM()
     {
@@ -109,6 +111,7 @@ public class BaiseCar : BaseAIController
         int index = ChekpointEnemy.IndexOf(checkpointTransform);
         if (index == -1)
         {
+            
             return;
         }
 
@@ -136,7 +139,7 @@ public class BaiseCar : BaseAIController
         else
         {
             Target = ChekpointEnemy[currentCheckpointIndex];
-           
+            _respChek = ChekpointEnemy[currentCheckpointIndex - 1 ];
             agent.SetDestination(Target.position);
           
         }
