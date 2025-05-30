@@ -118,7 +118,7 @@ public class BaiseCar : BaseAIController
         }
         else
         {
-            Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {ChekpointEnemy[currentCheckpointIndex].name}");
+          //  Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {ChekpointEnemy[currentCheckpointIndex].name}");
         }
         
     }
