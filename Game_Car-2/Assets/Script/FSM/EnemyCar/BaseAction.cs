@@ -9,5 +9,7 @@
             this._controller = controller;
         }
         public abstract (float vertical, float horizontal, bool brake) Execute();
+        public virtual void OnEnter() { }
+        public virtual void OnExit() { }
     }
 }

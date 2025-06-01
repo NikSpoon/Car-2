@@ -5,13 +5,43 @@ namespace Assets.Script.FSM.EnemyCar.Actions
 {
     class AgroTargetAction : BaseAction
     {
-        public AgroTargetAction(BaseAIController controller) : base(controller) { }
+        private GameObject visualObject;
 
+        public AgroTargetAction(BaseAIController controller) : base(controller) 
+        {
+          
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            if (_controller.AgroTarget != null)
+            {
+                Transform visual = _controller.AgroTarget.transform.Find("AgroMesh");
+                Debug.Log(visual.name);
+                if (visual != null)
+                {
+                    visual.gameObject.SetActive(true);
+                    visualObject = visual.gameObject;
+                }
+
+            }
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+
+            if (visualObject != null)
+                visualObject.SetActive(false);
+        }
         public override (float vertical, float horizontal, bool brake) Execute()
         {
             if (_controller.AgroTarget == null)
                 return (0f, 0f, false);
-
+           
+            _controller.agent.SetDestination(_controller.AgroTarget.position);
 
             float vertical = CalculateThrottle();
             float horizontal = SteerTowardsTarget();

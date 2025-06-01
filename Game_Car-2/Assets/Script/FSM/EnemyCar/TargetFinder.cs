@@ -5,10 +5,12 @@ public class TargetFinder : MonoBehaviour
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private float detectionRadius = 30f;   
     public Transform CurrentTarget { get; private set; }
-
+    private Transform lastTarget = null;
+    public Transform curent;
     void Update()
     {
         FindClosestTarget();
+        curent = CurrentTarget;
     }
 
     private void FindClosestTarget()
@@ -20,6 +22,8 @@ public class TargetFinder : MonoBehaviour
 
         foreach (var hit in hits)
         {
+            if (hit.transform == transform) continue;
+
             float distance = Vector3.Distance(transform.position, hit.transform.position);
             if (distance < closestDistance)
             {
@@ -27,7 +31,11 @@ public class TargetFinder : MonoBehaviour
                 closestTarget = hit.transform;
             }
         }
+        if (closestTarget != lastTarget)
+        {
 
+            lastTarget = closestTarget;
+        }
         CurrentTarget = closestTarget;
     }
 

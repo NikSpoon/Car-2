@@ -5,14 +5,36 @@ using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 
 public class BaiseCar : BaseAIController
 {
-    public AgroCooldownCondition AgroCooldown { get; private set; }
+    private AgrtoTimerConditions agrtoTimerConditions;
     private List<Transform> ChekpointEnemy;
     private int currentCheckpointIndex = 0;
     private Transform _respChek;
+    private static int botCounter = 0;
+
+
+    [SerializeField] private int _agroTime = 5;      
+    [SerializeField] private int _agroCooldown = 30;
+  
+    [HideInInspector] public bool HasCollidedWithEnemy = false;
+    public int AgroTime => _agroTime;
+    public int AgroCooldownTime => _agroCooldown;
+
+    public event Action<int, int> OnCooldownAgro;    
+
+    private static Color[] botColors = {
+    Color.cyan, Color.magenta, Color.green, Color.blue, Color.yellow, Color.white,
+    new Color(1f, 0.5f, 0f), // orange
+    new Color(0.5f, 0f, 1f), // purple
+    new Color(0f, 1f, 0.5f), // teal
+    new Color(1f, 0f, 0.5f), // pink
+};
+
+    private Color uniqueColor;
 
     public bool AllCheckpointsPassed()
     {
@@ -21,12 +43,17 @@ public class BaiseCar : BaseAIController
     public override void Start()
     {
         base.Start();
+
+        uniqueColor = botColors[botCounter % botColors.Length];
+        botCounter++;
+
         ChekpointEnemy = new List<Transform>(Checkpoints);
 
         // 2. Запускаем FSM (после того как чекпоинты скопированы)
         StartCoroutine(InitAI());
         StartCoroutine(InitFSM());
         _respChek = ChekpointEnemy[0];
+       
     }
     private IEnumerator InitFSM()
     {
@@ -73,8 +100,8 @@ public class BaiseCar : BaseAIController
             agent.SetDestination(Target.position);
         }
 
-        AgroCooldown = new AgroCooldownCondition(this);
-       
+        agrtoTimerConditions = new AgrtoTimerConditions(this);
+
 
         var startState = new State("StartState");
         var raceState = new State("RaceState");
@@ -92,13 +119,16 @@ public class BaiseCar : BaseAIController
         aggroState.actions.Add(agroToEnemy);
         finishState.actions.Add(burnout);
 
+
+        
         // Переходы
+
         startState.transitions.Add(new Transition<State, BaseCondition>(raceState, new StartCondition(this)));
 
-        raceState.transitions.Add(new Transition<State, BaseCondition>(aggroState, new DetectClosestTargetCondition(this, AgroCooldown)));
+        raceState.transitions.Add(new Transition<State, BaseCondition>(aggroState, new EnerAggroCondition(this, agrtoTimerConditions)));
         raceState.transitions.Add(new Transition<State, BaseCondition>(finishState, new ReachedFinishCondition(this)));
 
-        aggroState.transitions.Add(new Transition<State, BaseCondition>(raceState, AgroCooldown));
+        aggroState.transitions.Add( new Transition<State, BaseCondition>(raceState, new ExitAggroCondition(this, agrtoTimerConditions)));
         aggroState.transitions.Add(new Transition<State, BaseCondition>(finishState, new ReachedFinishCondition(this)));
 
         return new StateMashine<State, object>(startState);
@@ -125,10 +155,19 @@ public class BaiseCar : BaseAIController
         }
         
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.root == transform.root)
+            return;
 
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Car"))
+        {
+            HasCollidedWithEnemy = true;
+        }
+    }
     public void OnCheckpointReached(Transform checkpoint)
     {
-        Debug.Log($"Checkpoint reached: {checkpoint.name}, next target: {(currentCheckpointIndex + 1 < ChekpointEnemy.Count ? ChekpointEnemy[currentCheckpointIndex + 1].name : "Finish")}");
+        // Debug.Log($"Checkpoint reached: {checkpoint.name}, next target: {(currentCheckpointIndex + 1 < ChekpointEnemy.Count ? ChekpointEnemy[currentCheckpointIndex + 1].name : "Finish")}");
 
         currentCheckpointIndex++;
         if (currentCheckpointIndex >= ChekpointEnemy.Count)
@@ -143,5 +182,47 @@ public class BaiseCar : BaseAIController
             agent.SetDestination(Target.position);
           
         }
+        
+    }
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        // 1. Путь агента
+        if (agent.path != null && agent.path.corners.Length > 1)
+        {
+            Gizmos.color = Color.black;
+            Vector3[] corners = agent.path.corners;
+            for (int i = 0; i < corners.Length - 1; i++)
+            {
+                Gizmos.DrawLine(corners[i], corners[i + 1]);
+                Gizmos.DrawSphere(corners[i], 0.15f);
+            }
+            Gizmos.DrawSphere(corners[corners.Length - 1], 0.15f);
+        }
+
+        // 2. Отрисовка текущей Target (например, чекпоинт)
+        if (Target != null)
+        {
+            Gizmos.color = uniqueColor;
+            Gizmos.DrawLine(transform.position, Target.position);
+            Gizmos.DrawSphere(Target.position, 0.4f);
+        }
+
+        // 3. Отрисовка текущей агро-цели
+        if (AgroTarget != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, AgroTarget.position);
+            Gizmos.DrawWireSphere(AgroTarget.position, 0.4f);
+        }
+
+        // 4. Steering target
+        Gizmos.color = Color.gray;
+        Gizmos.DrawSphere(agent.steeringTarget, 0.2f);
+    }
+    public void InvokeAgroCooldownEvent(int agroTime, int cooldownLeft)
+    {
+        OnCooldownAgro?.Invoke(agroTime, cooldownLeft);
     }
 }

@@ -25,8 +25,7 @@ public class Chekpoint : MonoBehaviour
             var aiController = other.GetComponent<BaiseCar>();
             if (aiController != null)
             {
-                Debug.Log("Enemy Chek");
-
+                
                 var car = other.GetComponent<BaiseCar>();
                 if (car != null)
                 {

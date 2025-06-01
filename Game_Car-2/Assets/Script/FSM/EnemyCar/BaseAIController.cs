@@ -81,7 +81,7 @@ namespace Assets.Script.FSM.EnemyCar
 
             string stateName = _stateMashine.CurrentState?.Name ?? "null";
             string targetName = Target != null ? Target.name : "null";
-          // Debug.Log($"[FSM] Current State: {stateName}");
+          Debug.Log($"[FSM] Current State: {stateName}");
 
             if (_stateMashine == null)
                 return;
@@ -153,6 +153,7 @@ namespace Assets.Script.FSM.EnemyCar
 
                 // Последняя точка
                 Gizmos.DrawSphere(corners[corners.Length - 1], 0.15f);
+
             }
         }
     }
