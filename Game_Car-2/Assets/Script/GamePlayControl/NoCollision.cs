@@ -31,7 +31,11 @@ public class NoCollision : MonoBehaviour
         _otherColliders.Clear();
         FindOtherColliders();
 
-       
+        StopAllCoroutines(); // ⬅ Принудительно останавливаем мигание
+
+        SetMeshVisible(true); // ⬅ Убедись, что меш включён
+        SetCollision(true);   // ⬅ Сброс старого IgnoreCollision
+
         if (_ghostRoutine != null)
         {
             StopCoroutine(_ghostRoutine);
@@ -102,6 +106,7 @@ public class NoCollision : MonoBehaviour
            
             yield return new WaitForSeconds(checkInterval);
             OnNoCollision?.Invoke(ghostDuration - timer, IsGhostActive);
+            
             timer += checkInterval;
 
             if (!IsOverlappingOtherCars())

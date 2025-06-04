@@ -5,7 +5,7 @@ using UnityEngine;
 public class StateMashine<TState,TTrigger>
 {
    
-    public TState CurrentState { get; private set; }
+    public TState CurrentState { get; set; }
     public event Action<StateChangeData<TState,TTrigger>> OnStateChange;
     public Dictionary<TState, List<Transition<TState, TTrigger>>> _transitions = new();
 

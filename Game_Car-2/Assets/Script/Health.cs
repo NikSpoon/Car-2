@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
 
     [SerializeField] private int _maxHealth;
-    public int CurrentHeath { get; private set; }
+    public int CurrentHealth { get; private set; }
     private bool _isPlayer = false;
 
     public event Action<int, int> OnHealthChanged;
@@ -17,19 +17,19 @@ public class Health : MonoBehaviour
         if (gameObject.tag == "Player")
             _isPlayer = true;
 
-        CurrentHeath = _maxHealth;
+        CurrentHealth = _maxHealth;
 
     }
 
     public void Damage(int damade)
     {
-        Debug.Log(damade);
+        
 
-        if (CurrentHeath < 0)
+        if (CurrentHealth < 0)
             OnDie();
 
-        CurrentHeath -= damade;
-        OnHealthChanged?.Invoke(CurrentHeath, _maxHealth);
+        CurrentHealth -= damade;
+        OnHealthChanged?.Invoke(CurrentHealth, _maxHealth);
     }
     private void OnDie()
     {

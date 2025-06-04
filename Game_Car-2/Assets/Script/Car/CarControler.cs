@@ -1,16 +1,31 @@
 
+using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 
 public class CarControler : MonoBehaviour
 {
-    //[SerializeField] private CarMovement _carMovement;
+    
     [SerializeField] private CarPhysic _carPhysic;
     [SerializeField] private InputServis _inputServis;
-    [SerializeField] private EnemyCar _enemyCar;
+    [SerializeField] private Respawn _respawn;
+    [SerializeField] private BaseAIController AI;
 
-    [SerializeField] private bool IsPlayerControl;
-    [SerializeField] private bool IsEnamyControl;
+
+    public bool IsPlayerControl { get; set; }
+    public bool IsEnamyControl { get; set; }
+    private void Awake()
+    {
+        if (AI == null)
+        {
+            AI = GetComponent<BaseAIController>();
+            if (AI == null)
+            {
+                AI = GetComponentInChildren<BaseAIController>();
+            }
+        }
+    }
 
     private void Start()
     {
@@ -21,6 +36,7 @@ public class CarControler : MonoBehaviour
     }
     void FixedUpdate()
     {
+        
         if (IsPlayerControl)
         {
             IsPlayer();
@@ -33,13 +49,24 @@ public class CarControler : MonoBehaviour
     }
     private void IsPlayer()
     {
+        //Debug.Log((_inputServis.VerticalInput, _inputServis.HorizontalInput, _inputServis.Brake));
         _carPhysic.Move(_inputServis.VerticalInput,_inputServis.HorizontalInput, _inputServis.Brake);
+       
+        if (_inputServis.Respawn)
+        {
+            _respawn.Resp();
+        }
     }
 
     private void IsEnamy()
     {
-        
+        if (AI == null)
+        {
+            Debug.LogWarning("AI controller is not assigned!");
+            return;
+        }
+       // Debug.Log((AI.VerticalInput, AI.HorizontalInput, AI.Brake));
+        _carPhysic.Move(AI.VerticalInput, AI.HorizontalInput, AI.Brake);
     }
-
 
 }
