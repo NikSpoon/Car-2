@@ -16,6 +16,10 @@ namespace Assets.Script.FSM.EnemyCar.Actions
         {
             base.OnEnter();
 
+            if (_controller is BaiseCar car)
+            {
+                car.IsExecutingAgroAction = true;
+            }
             if (_controller.AgroTarget != null)
             {
                 Transform visual = _controller.AgroTarget.transform.Find("AgroMesh");
@@ -27,12 +31,17 @@ namespace Assets.Script.FSM.EnemyCar.Actions
                 }
 
             }
+            
         }
 
         public override void OnExit()
         {
             base.OnExit();
-
+          
+            if (_controller is BaiseCar car)
+            {
+                car.IsExecutingAgroAction = false;
+            }
             if (visualObject != null)
                 visualObject.SetActive(false);
         }

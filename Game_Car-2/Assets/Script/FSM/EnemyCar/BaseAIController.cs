@@ -40,7 +40,16 @@ namespace Assets.Script.FSM.EnemyCar
             agent.updateRotation = false;
   
         }
+        private void ChangeState(State newState)
+        {
+            if (_stateMashine.CurrentState != null)
+                _stateMashine.CurrentState.OnExit();
 
+            _stateMashine.CurrentState = newState;
+
+            if (_stateMashine.CurrentState != null)
+                _stateMashine.CurrentState.OnEnter();
+        }
         public IEnumerator InitAI()
         {
             yield return new WaitUntil(() => RaceManager.Instance != null);
@@ -51,37 +60,37 @@ namespace Assets.Script.FSM.EnemyCar
             carSpawner = Object.FindFirstObjectByType<CarSpawner>();
             _stateMashine = GetBehavior();
            
-            Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
+           // Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
             for (int i = 0; i < Checkpoints.Count; i++)
             {
-                Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
+               // Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
             }
 
 
             if (_stateMashine != null && _stateMashine.CurrentState != null)
             {
-                Debug.Log($"[FSM INIT] Current State: {_stateMashine.CurrentState.GetType().Name}");
+                //Debug.Log($"[FSM INIT] Current State: {_stateMashine.CurrentState.GetType().Name}");
             }
             else
             {
-                Debug.LogError("[FSM INIT] StateMachine or CurrentState is null!");
+               // Debug.LogError("[FSM INIT] StateMachine or CurrentState is null!");
             }
 
 
 
         }
 
-        public void Update()
+        public virtual void Update()
         {
             if (_stateMashine == null || _stateMashine.CurrentState == null)
             {
-                Debug.Log("[FSM] StateMachine или CurrentState не инициализированы");
+               // Debug.Log("[FSM] StateMachine или CurrentState не инициализированы");
                 return;
             }
 
             string stateName = _stateMashine.CurrentState?.Name ?? "null";
             string targetName = Target != null ? Target.name : "null";
-          Debug.Log($"[FSM] Current State: {stateName}");
+         // Debug.Log($"[FSM] Current State: {stateName}");
 
             if (_stateMashine == null)
                 return;
@@ -100,7 +109,7 @@ namespace Assets.Script.FSM.EnemyCar
             var nextState = _stateMashine.CurrentState.TryGetNexState();
             if (nextState != null)
             {
-                _stateMashine.CurrentState = nextState;
+                ChangeState(nextState);
             }
 
             Dierction = agent.destination;

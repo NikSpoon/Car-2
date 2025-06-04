@@ -53,7 +53,7 @@ public class RaiseChekpoint : MonoBehaviour
         {
             CurentPoint = nextPoint;
             var rem = _chekpoints.Count - 1 - index;
-            Debug.Log($"Checkpoint updated to: {CurentPoint.name}");    
+           // Debug.Log($"Checkpoint updated to: {CurentPoint.name}");    
             OnChekPointChenge?.Invoke(index, rem);
         }
     }

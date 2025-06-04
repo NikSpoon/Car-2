@@ -14,8 +14,11 @@ namespace Assets.Script.FSM.EnemyCar.Actions
         {
             if (_controller.Target == null)
                 return (0f, 0f, false);
-          
-            
+
+            if (_controller.Target != null)
+            {
+                _controller.agent.SetDestination(_controller.Target.position);
+            }
             float vertical = CalculateThrottle();
             float horizontal = SteerTowardsTarget();
             bool brake = ShouldBrake();

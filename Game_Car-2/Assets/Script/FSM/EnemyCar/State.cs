@@ -51,6 +51,22 @@ namespace Assets.Script.FSM.EnemyCar
             }
             return default;
         }
+        public void OnEnter()
+        {
+            foreach (var act in actions)
+            {
+                act.OnEnter();
+            }
+        }
+
+        public void OnExit()
+        {
+            foreach (var act in actions)
+            {
+                act.OnExit();
+            }
+        }
 
     }
+
 }

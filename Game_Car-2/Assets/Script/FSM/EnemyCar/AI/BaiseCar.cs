@@ -14,39 +14,66 @@ public class BaiseCar : BaseAIController
     private List<Transform> ChekpointEnemy;
     private int currentCheckpointIndex = 0;
     private Transform _respChek;
-    private static int botCounter = 0;
-
+  
+    [SerializeField] private Respawn respawnComponent;
+    private Vector3 lastPosition;
+    private float standStillTimer = 0f;
+    [SerializeField] private float standStillThreshold = 2f; // сколько секунд считать "стоянием"
+    [SerializeField] private float minMoveDistance = 0.1f;  // минимальное расстояние, чтобы считать, что бот двинулся
 
     [SerializeField] private int _agroTime = 5;      
     [SerializeField] private int _agroCooldown = 30;
-  
-    [HideInInspector] public bool HasCollidedWithEnemy = false;
+    public bool IsExecutingAgroAction { get; set; } = false;
     public int AgroTime => _agroTime;
     public int AgroCooldownTime => _agroCooldown;
 
     public event Action<int, int> OnCooldownAgro;    
 
-    private static Color[] botColors = {
-    Color.cyan, Color.magenta, Color.green, Color.blue, Color.yellow, Color.white,
-    new Color(1f, 0.5f, 0f), // orange
-    new Color(0.5f, 0f, 1f), // purple
-    new Color(0f, 1f, 0.5f), // teal
-    new Color(1f, 0f, 0.5f), // pink
-};
 
-    private Color uniqueColor;
 
     public bool AllCheckpointsPassed()
     {
         return currentCheckpointIndex >= ChekpointEnemy.Count;
     }
+    public override void Update()
+    {
+        base.Update();
+        if (carSpawner == null || !carSpawner.start)
+        {
+            return;
+        }
+        agrtoTimerConditions?.Evoluete();
+        CheckIfStuckAndRespawn();
+
+    }
+    private void CheckIfStuckAndRespawn()
+    {
+        float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+
+        if (distanceMoved < minMoveDistance)
+        {
+            standStillTimer += Time.deltaTime;
+            if (standStillTimer >= standStillThreshold)
+            {
+                if (respawnComponent != null)
+                {
+                    respawnComponent.Resp();
+                }
+                standStillTimer = 0f;
+            }
+        }
+        else
+        {
+            standStillTimer = 0f;
+        }
+
+        lastPosition = transform.position;
+    }
     public override void Start()
     {
         base.Start();
 
-        uniqueColor = botColors[botCounter % botColors.Length];
-        botCounter++;
-
+       
         ChekpointEnemy = new List<Transform>(Checkpoints);
 
         // 2. Запускаем FSM (после того как чекпоинты скопированы)
@@ -62,20 +89,20 @@ public class BaiseCar : BaseAIController
 
         yield return new WaitUntil(() => RaceManager.Instance.Checkpoints != null && RaceManager.Instance.Checkpoints.Count > 0);
 
-        Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
+       // Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
         for (int i = 0; i < Checkpoints.Count; i++)
         {
-            Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
+         //   Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
         }
 
 
         if (_stateMashine != null && _stateMashine.CurrentState != null)
         {
-            Debug.Log($"[FSM INIT] Current State: {_stateMashine.CurrentState.GetType().Name}");
+           // Debug.Log($"[FSM INIT] Current State: {_stateMashine.CurrentState.GetType().Name}");
         }
         else
         {
-            Debug.LogError("[FSM INIT] StateMachine or CurrentState is null!");
+           // Debug.LogError("[FSM INIT] StateMachine or CurrentState is null!");
         }
 
 
@@ -91,16 +118,13 @@ public class BaiseCar : BaseAIController
         }
         else
         {
-            Debug.LogError("Checkpoints list is empty!");
+           // Debug.LogError("Checkpoints list is empty!");
             
         }
 
-        if (Target != null)
-        {
-            agent.SetDestination(Target.position);
-        }
+        
 
-        agrtoTimerConditions = new AgrtoTimerConditions(this);
+        agrtoTimerConditions = new AgrtoTimerConditions(this); 
 
 
         var startState = new State("StartState");
@@ -157,12 +181,24 @@ public class BaiseCar : BaseAIController
     }
     private void OnCollisionEnter(Collision collision)
     {
+       
         if (collision.transform.root == transform.root)
             return;
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Car"))
+        if (AgroTarget != null)
         {
-            HasCollidedWithEnemy = true;
+            // Получаем все коллайдеры у AgroTarget
+            var targetColliders = AgroTarget.GetComponentsInChildren<Collider>();
+
+            foreach (var col in targetColliders)
+            {
+                if (collision.collider == col)
+                {
+                    agrtoTimerConditions._collision = true;
+                 
+                    return;
+                }
+            }
         }
     }
     public void OnCheckpointReached(Transform checkpoint)
@@ -184,43 +220,7 @@ public class BaiseCar : BaseAIController
         }
         
     }
-    private void OnDrawGizmos()
-    {
-        if (!Application.isPlaying) return;
-
-        // 1. Путь агента
-        if (agent.path != null && agent.path.corners.Length > 1)
-        {
-            Gizmos.color = Color.black;
-            Vector3[] corners = agent.path.corners;
-            for (int i = 0; i < corners.Length - 1; i++)
-            {
-                Gizmos.DrawLine(corners[i], corners[i + 1]);
-                Gizmos.DrawSphere(corners[i], 0.15f);
-            }
-            Gizmos.DrawSphere(corners[corners.Length - 1], 0.15f);
-        }
-
-        // 2. Отрисовка текущей Target (например, чекпоинт)
-        if (Target != null)
-        {
-            Gizmos.color = uniqueColor;
-            Gizmos.DrawLine(transform.position, Target.position);
-            Gizmos.DrawSphere(Target.position, 0.4f);
-        }
-
-        // 3. Отрисовка текущей агро-цели
-        if (AgroTarget != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, AgroTarget.position);
-            Gizmos.DrawWireSphere(AgroTarget.position, 0.4f);
-        }
-
-        // 4. Steering target
-        Gizmos.color = Color.gray;
-        Gizmos.DrawSphere(agent.steeringTarget, 0.2f);
-    }
+   
     public void InvokeAgroCooldownEvent(int agroTime, int cooldownLeft)
     {
         OnCooldownAgro?.Invoke(agroTime, cooldownLeft);

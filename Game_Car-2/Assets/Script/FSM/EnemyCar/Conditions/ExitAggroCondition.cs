@@ -16,8 +16,9 @@ namespace Assets.Script.FSM.EnemyCar.Condition
 
         public override bool Evoluete()
         {
-            // выйти из агро, если оно завершилось или была коллизия
-            return _timerCondition != null && _timerCondition.ShouldExitAggro();
+            
+
+            return _timerCondition._canExitAgro;
         }
     }
 }

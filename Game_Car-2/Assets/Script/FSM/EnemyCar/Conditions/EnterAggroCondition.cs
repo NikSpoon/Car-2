@@ -16,6 +16,7 @@ namespace Assets.Script.FSM.EnemyCar.Condition
 
         public override bool Evoluete()
         {
+            
             if (_car.AgroTarget == null) return false; // нет цели — нет агро
 
             if (_timerCondition == null)
@@ -24,11 +25,7 @@ namespace Assets.Script.FSM.EnemyCar.Condition
                 return false;
             }
 
-            if (_timerCondition.IsCooldown) return false; // кулдаун активен
-
-            // если все условия выполнены — запускаем агро и возвращаем true
-            _timerCondition.StartAggro();
-            return true;
+            return _timerCondition._canEnterAggro;
         }
     }
 }
