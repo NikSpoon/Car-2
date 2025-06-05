@@ -1,4 +1,4 @@
- using UnityEngine;
+﻿ using UnityEngine;
 
 public class InputServis : MonoBehaviour
 {
@@ -8,6 +8,12 @@ public class InputServis : MonoBehaviour
    
     public bool Respawn { get; private set; }
     public bool Brake { get; private set; }
+
+    public bool Exit { get; private set; }
+    private void Awake()
+    {
+        Debug.Log("InputServis: Я создан на объекте " + gameObject.name);
+    }
     void Update()
     {
 
@@ -20,5 +26,6 @@ public class InputServis : MonoBehaviour
 
         Direction = new Vector3(VerticalInput, 0, HorizontalInput);
 
+        Exit = Input.GetKey(KeyCode.Escape);
     }
 }

@@ -196,8 +196,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4505596619407963953}
-        m_TargetAssemblyTypeName: MainManuControl, Assembly-CSharp
+      - m_Target: {fileID: 8229071095403118639}
+        m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
         m_MethodName: OnClickSave
         m_Mode: 1
         m_Arguments:
@@ -1124,9 +1124,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4505596619407963953}
-        m_TargetAssemblyTypeName: MainManuControl, Assembly-CSharp
-        m_MethodName: OnClickMultiplaer
+      - m_Target: {fileID: 8229071095403118639}
+        m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
+        m_MethodName: OnClickMultiplayer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1757,8 +1757,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4505596619407963953}
-        m_TargetAssemblyTypeName: MainManuControl, Assembly-CSharp
+      - m_Target: {fileID: 8229071095403118639}
+        m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
         m_MethodName: OnClickPlay
         m_Mode: 1
         m_Arguments:
@@ -2180,7 +2180,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3694262383140480904}
-  - component: {fileID: 4505596619407963953}
+  - component: {fileID: 8229071095403118639}
+  - component: {fileID: 3071866678185810445}
   m_Layer: 5
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -2203,8 +2204,8 @@ RectTransform:
   - {fileID: 6222143236321191722}
   - {fileID: 6625152928696624298}
   - {fileID: 7797819470800289567}
-  - {fileID: 7011392526569470418}
   - {fileID: 14260215489813730}
+  - {fileID: 7011392526569470418}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2212,7 +2213,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4505596619407963953
+--- !u!114 &8229071095403118639
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2224,10 +2225,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ad11674076ecb43ab485b9b1501f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _input: {fileID: 3071866678185810445}
   _options: {fileID: 7021714558849161200}
   _save: {fileID: 6571051462891106784}
-  _multiplaer: {fileID: 2709658544508956261}
+  _multiplayer: {fileID: 6550873945247820624}
   _exit: {fileID: 6174704789414697635}
+--- !u!114 &3071866678185810445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5958533321546942600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5a21e6d40722f41a34a3fe546cde18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6174704789414697635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,8 +2363,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4505596619407963953}
-        m_TargetAssemblyTypeName: MainManuControl, Assembly-CSharp
+      - m_Target: {fileID: 8229071095403118639}
+        m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
         m_MethodName: OnClickExit
         m_Mode: 1
         m_Arguments:
@@ -3121,8 +3135,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4505596619407963953}
-        m_TargetAssemblyTypeName: MainManuControl, Assembly-CSharp
+      - m_Target: {fileID: 8229071095403118639}
+        m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
         m_MethodName: OnClickOptions
         m_Mode: 1
         m_Arguments:
