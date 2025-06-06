@@ -23,7 +23,7 @@ namespace Assets.Script.FSM.EnemyCar.Actions
             if (_controller.AgroTarget != null)
             {
                 Transform visual = _controller.AgroTarget.transform.Find("AgroMesh");
-                Debug.Log(visual.name);
+                
                 if (visual != null)
                 {
                     visual.gameObject.SetActive(true);

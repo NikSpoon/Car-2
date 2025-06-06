@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class RaiseChekpoint : MonoBehaviour
 {
-    [SerializeField] private Transform _firstPoint;
-    [SerializeField] private Transform _Finish;
+    [SerializeField] private Transform _checkpointsParent;
 
     private List<Transform> _chekpoints = new List<Transform>();
     private Transform _car;
@@ -18,18 +17,18 @@ public class RaiseChekpoint : MonoBehaviour
         gameObject.SetActive(true);
         _chekpoints.Clear();
 
-        CurentPoint = _firstPoint.transform;
-        var chArray = GameObject.FindGameObjectsWithTag("Chekpoint");
 
-        Array.Sort(chArray, (a, b) => string.Compare(a.name, b.name));
-
-        _chekpoints.Add(_firstPoint);
-        foreach (var chek in chArray)
+        if (_checkpointsParent == null)
         {
-            var transform = chek.GetComponent<Transform>();
-            _chekpoints.Add(transform);
+            Debug.LogError("Checkpoints parent is not assigned!");
+            return;
         }
-        _chekpoints.Add(_Finish);
+
+        foreach (Transform checkpoint in _checkpointsParent)
+        {
+            _chekpoints.Add(checkpoint);
+        }
+
 
 
         var car = GameObject.FindGameObjectWithTag("Player");

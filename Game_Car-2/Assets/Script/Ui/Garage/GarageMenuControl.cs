@@ -25,6 +25,8 @@ public class GarageMenuControl : MonoBehaviour
 
     private void Start()
     {
+        
+        
         _creator.SetActive(true);
         _creator.SetActive(false);
     }

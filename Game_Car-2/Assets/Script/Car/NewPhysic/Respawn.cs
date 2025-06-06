@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ public class Respawn : MonoBehaviour
             new List<Transform>();
 
 
+    private void Start()
+    {
+        StartCoroutine(InitCheckpoints());
+    }
     private void OnTriggerEnter(Collider other)
     {
         foreach (Transform checkpoint in Checkpoints)
@@ -24,6 +29,18 @@ public class Respawn : MonoBehaviour
 
     }
 
+    private IEnumerator InitCheckpoints()
+    {
+        while(Checkpoints != null)
+        {
+            yield return new WaitUntil(() =>
+        RaceManager.Instance != null &&
+        RaceManager.Instance.Checkpoints != null &&
+        RaceManager.Instance.Checkpoints.Count > 0
+    );
+        }
+        lastChek = Checkpoints[0];
+    }
     public void Resp()
     {
         var car = gameObject.GetComponent<Rigidbody>();

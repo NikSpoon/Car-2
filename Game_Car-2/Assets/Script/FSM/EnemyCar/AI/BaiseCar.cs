@@ -89,10 +89,10 @@ public class BaiseCar : BaseAIController
 
         yield return new WaitUntil(() => RaceManager.Instance.Checkpoints != null && RaceManager.Instance.Checkpoints.Count > 0);
 
-       // Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
+        Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
         for (int i = 0; i < Checkpoints.Count; i++)
         {
-         //   Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
+           Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
         }
 
 

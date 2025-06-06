@@ -10,10 +10,7 @@ public class InputServis : MonoBehaviour
     public bool Brake { get; private set; }
 
     public bool Exit { get; private set; }
-    private void Awake()
-    {
-        Debug.Log("InputServis: Я создан на объекте " + gameObject.name);
-    }
+  
     void Update()
     {
 
