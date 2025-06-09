@@ -7,7 +7,7 @@ public class RaceData : ScriptableObject
     [SerializeField] private string raceName;
     [SerializeField] private string location;
     [SerializeField] private int maxCar;
-    [SerializeField] private Sprite previewImage; // ?? ???????? ?????
+    [SerializeField] private Sprite previewImage; 
 
     public string SceneName => sceneName;
     public string RaceName => raceName;

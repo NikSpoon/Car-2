@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +12,8 @@ public class RaceItemUI : MonoBehaviour
     [SerializeField] private GameObject Error;
 
     private RaceData raceData;
-  
+
+    [SerializeField] private GameSessionData sessionData;
     public void Sesect()
     {
         if (PlayerDataManager.Instance.playerProfile.Xp < XP)
@@ -36,6 +37,10 @@ public class RaceItemUI : MonoBehaviour
 
     private void OnSelectRace()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(raceData.SceneName);
+        if (sessionData != null && raceData != null)
+        {
+            sessionData.SetRaceMap(raceData);
+            Debug.Log($"Выбрана гонка: {raceData.RaceName}");
+        }
     }
 }

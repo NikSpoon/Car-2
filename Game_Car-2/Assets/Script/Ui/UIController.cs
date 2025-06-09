@@ -6,6 +6,7 @@ using System.Collections;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private AppTriger _appTriger;
+    [SerializeField] private GameSessionData _data;
 
     [SerializeField] private Transform _root;
     [SerializeField] private GameObject _mainMenuScren;
@@ -21,7 +22,11 @@ public class UIController : MonoBehaviour
         var appSystem = PlayerDataManager.Instance.AppSystem;
         PlayerDataManager.Instance.AppSystem.OnStateChange += OnStateChange;
         DontDestroyOnLoad(gameObject);
-        
+      
+        if (_data == null) 
+        {
+            Debug.LogError("GameSessionData не назначен в UIController!");
+        }
     }
    
 
@@ -58,7 +63,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case AppState.Gameplay:
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(_data.raceSceneName);
                 // включаю катинку 
                 // запускаю корутину
                 // віключаю корутину и картинку как закончил закгужать 

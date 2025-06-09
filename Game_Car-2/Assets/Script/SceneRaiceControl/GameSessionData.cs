@@ -1,16 +1,23 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameSessionData", menuName = "Game/Session Data")]
+[CreateAssetMenu(fileName = "GameSessionData", menuName = "Game/SessionData")]
 public class GameSessionData : ScriptableObject
 {
-    public RaceData selectedRace;
-    public int selectedMusicIndex;
-    public int selectedCarIndex;
+    public string raceSceneName;
+
+    public void SetRaceMap(RaceData race)
+    {
+        if (race == null)
+        {
+            Debug.LogError("Попытка установить гонку, но RaceData — null.");
+            return;
+        }
+
+        raceSceneName = race.SceneName; 
+    }
 
     public void Clear()
     {
-        selectedRace = null;
-        selectedMusicIndex = -1;
-        selectedCarIndex = -1;
+        raceSceneName = string.Empty;
     }
 }
