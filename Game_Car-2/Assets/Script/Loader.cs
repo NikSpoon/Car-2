@@ -6,8 +6,12 @@ public class Loader : MonoBehaviour
     private void Start()
     {
         var Instance = PlayerDataManager.Instance.AppSystem;
-        PlayerDataManager.Instance.AppSystem.Trigger(AppTriger.ToMainMenu);
+       // PlayerDataManager.Instance.AppSystem.Trigger(AppTriger.ToMainMenu);
         
+    }
+    public void Loading()
+    {
+        PlayerDataManager.Instance.AppSystem.Trigger(AppTriger.ToMainMenu);
     }
 
 }

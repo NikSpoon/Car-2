@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameSessionData _data;
 
     [SerializeField] private Transform _root;
+    [SerializeField] private GameObject _firstLoadingScren;
     [SerializeField] private GameObject _mainMenuScren;
     [SerializeField] private GameObject _garageScren;
     [SerializeField] private GameObject _gameplayScren;
@@ -28,7 +29,10 @@ public class UIController : MonoBehaviour
             Debug.LogError("GameSessionData не назначен в UIController!");
         }
     }
-   
+    private void Start()
+    {
+        _currentScren = Instantiate(_firstLoadingScren, _root);
+    }
 
     [ContextMenu("SetTrigger")]
     public void SetTrigger()

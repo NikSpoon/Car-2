@@ -22,17 +22,5 @@ public class PlayerDataManager : MonoBehaviour
         }
          
     }
-    public void AddMoney(int amount)
-    {
-        playerProfile.money += amount;
-    }
-    public bool SpendMoney(int amount)
-    {
-        if (playerProfile.money >= amount)
-        {
-            playerProfile.money -= amount;
-            return true;
-        }
-        return false;
-    }
+
 }
