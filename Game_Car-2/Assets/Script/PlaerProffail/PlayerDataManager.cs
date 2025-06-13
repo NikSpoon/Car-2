@@ -5,8 +5,12 @@ public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager Instance; 
 
-    public PlayerProfile playerProfile = new PlayerProfile();
+    public PlayerProfile PlayerProfile = new PlayerProfile();
     public IAppSystem AppSystem = new AppSystem();
+    public MoneyManager Money = new MoneyManager();
+    public ExperienceManager Experience = new ExperienceManager();
+
+    public LevelTableSO levelTableSO;
 
     private void Awake()
     {
@@ -14,7 +18,9 @@ public class PlayerDataManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); 
+            DontDestroyOnLoad(gameObject);
+            Money.Init(PlayerProfile);
+            Experience.Init(PlayerProfile);
         }
         else
         {

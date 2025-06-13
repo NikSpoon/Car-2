@@ -26,7 +26,7 @@ public class CarSpawner : MonoBehaviour
     private void Awake()
     {
 
-        var profile = PlayerDataManager.Instance.playerProfile;
+        var profile = PlayerDataManager.Instance.PlayerProfile;
 
         GameObject carPrefab = carDatabase.carPrefabs[profile.selectedCarIndex];
         GameObject upgradePrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
@@ -36,6 +36,7 @@ public class CarSpawner : MonoBehaviour
         carRb.isKinematic = true;
         carNoCollision = car.GetComponent<NoCollision>();
 
+        RaceManager.Instance.RegisterRaceCar(profile.playerName, car);
     }
     private void Start()
     {
@@ -79,7 +80,7 @@ public class CarSpawner : MonoBehaviour
 
     private void SpawnEnemy(int value)
     {
-        var profile = PlayerDataManager.Instance.playerProfile;
+        var profile = PlayerDataManager.Instance.PlayerProfile;
         var enemyUpdateIndex = profile.selectedBodyUpgradeIndex;
         var enemyCarIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carPrefabs.Count);
 
@@ -91,11 +92,14 @@ public class CarSpawner : MonoBehaviour
             var rb = enemyCar.GetComponent<Rigidbody>();
             rb.isKinematic = true;
             enemyCar.tag = "Enemy";
-            
-            
-            var noCollision = enemyCar.GetComponent<NoCollision>();
 
+
+            var noCollision = enemyCar.GetComponent<NoCollision>();
             var carController = enemyCar.GetComponent<CarControler>();
+
+            var uniqueEnemyName = $"Enemy_{i}_{Guid.NewGuid()}";
+            RaceManager.Instance.RegisterRaceCar(uniqueEnemyName, enemyCar);
+
             if (carController.IsPlayerControl)
             {
                 carController.IsPlayerControl = false;
@@ -119,7 +123,7 @@ public class CarSpawner : MonoBehaviour
         yield return new WaitUntil(() => start == true);
 
         // Отключаем ghost, включаем физику
-        noCollision.Respawn(); 
+        noCollision.Respawn();
         rb.isKinematic = false;  // включаем физику
     }
 

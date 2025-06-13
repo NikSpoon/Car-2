@@ -16,7 +16,7 @@ public class RaceItemUI : MonoBehaviour
     [SerializeField] private GameSessionData sessionData;
     public void Sesect()
     {
-        if (PlayerDataManager.Instance.playerProfile.Xp < XP)
+        if (PlayerDataManager.Instance.PlayerProfile.Xp < XP)
         {
             if (!Error.activeSelf)
             {

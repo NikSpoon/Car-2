@@ -14,7 +14,7 @@ public class GarageSpawn : MonoBehaviour
 
     private void Awake()
     {
-        profile = PlayerDataManager.Instance.playerProfile;
+        profile = PlayerDataManager.Instance.PlayerProfile;
 
         SpawnCar();
     }

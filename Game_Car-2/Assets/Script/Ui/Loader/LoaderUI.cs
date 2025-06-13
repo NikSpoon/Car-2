@@ -21,7 +21,7 @@ public class LoaderUI : MonoBehaviour
 
     private void Start()
     {
-        playerProfile = PlayerDataManager.Instance.playerProfile;
+        playerProfile = PlayerDataManager.Instance.PlayerProfile;
         StartCoroutine(WaitForLoader());
     }
     public void OnClickLogin()

@@ -5,7 +5,7 @@ using System.Collections;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private AppTriger _appTriger;
+  
     [SerializeField] private GameSessionData _data;
 
     [SerializeField] private Transform _root;
@@ -18,7 +18,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject _loadingScreen;
 
     private GameObject _currentScren;
-    private void Awake()
+   
+    private void Start()
     {
         var appSystem = PlayerDataManager.Instance.AppSystem;
         PlayerDataManager.Instance.AppSystem.OnStateChange += OnStateChange;
@@ -28,17 +29,9 @@ public class UIController : MonoBehaviour
         {
             Debug.LogError("GameSessionData не назначен в UIController!");
         }
-    }
-    private void Start()
-    {
         _currentScren = Instantiate(_firstLoadingScren, _root);
     }
-
-    [ContextMenu("SetTrigger")]
-    public void SetTrigger()
-    {
-        PlayerDataManager.Instance.AppSystem.Trigger(_appTriger);
-    }
+ 
     private void OnStateChange(StateChangeData<AppState, AppTriger> data)
     {
        
