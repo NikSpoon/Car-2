@@ -1,39 +1,51 @@
-using System;
+﻿
+using Mirror;
 using System.Collections.Generic;
 using System.Linq;
 
 public class GameSession
 {
-    public string SessionId { get; private set; }
-    public string MapName { get; private set; }
-    
-    public List<string> Players = new();
+    public string SessionName { get; set; }
+    public string SessionId { get; set; }
+    public int maxPlayer { get; set; }
+    public string MapName { get;  set; }
+    public RaceData CurrentRaceData { get;  set; }
+ 
+
+    public List<NetworkPlayerProfile> Players = new List<NetworkPlayerProfile>();
+
+    public bool RaceStarted = false;
+
+    public NetworkConnection HostConnection; // Кто создал сессию
 
     public GameSession(string sessionId, string mapName)
     {
         SessionId = sessionId;
-        MapName = mapName;
+        SessionName = mapName;
     }
 
-    public void AddPlayer(PlayerProfile playerProfile)
+    public void AddPlayer(NetworkPlayerProfile player)
     {
-        if (!Players.Contains(playerProfile.playerName))
-            Players.Add(playerProfile.playerName);
+        if (!Players.Contains(player))
+            Players.Add(player);
     }
 
-    public void RemovePlayer(PlayerProfile playerProfile)
+    public void RemovePlayer(NetworkPlayerProfile player)
     {
-        Players.Remove(playerProfile.playerName);
-    }
-    public void AddBot(AIProfile bot)
-    {
-        if (!Players.Contains(bot.playerName))
-            Players.Add(bot.playerName);
+        if (Players.Contains(player))
+            Players.Remove(player);
     }
 
-    public void RemoveBot(AIProfile bot)
+    public bool AreAllPlayersReady()
     {
-        Players.Remove(bot.playerName);
+        return Players.Count > 0 && Players.All(p => p.isReady);
     }
-    public bool IsEmpty => Players.Count == 0;
+
+    public void SetRaceData(RaceData raceData)
+    {
+        CurrentRaceData = raceData;
+        MapName = raceData.SceneName;
+        maxPlayer = raceData.MaxCar;
+        
+    }
 }

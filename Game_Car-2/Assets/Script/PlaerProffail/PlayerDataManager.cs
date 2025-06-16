@@ -9,6 +9,7 @@ public class PlayerDataManager : MonoBehaviour
     public IAppSystem AppSystem = new AppSystem();
     public MoneyManager Money = new MoneyManager();
     public ExperienceManager Experience = new ExperienceManager();
+    public PlayerSessionData PlayerSessionData = new PlayerSessionData();
 
     public LevelTableSO levelTableSO;
 

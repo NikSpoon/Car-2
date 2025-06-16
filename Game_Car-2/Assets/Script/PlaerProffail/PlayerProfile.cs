@@ -5,7 +5,7 @@ public class PlayerProfile
 
     public string playerName;
     public string password;
-    public string playerID;
+    public int playerID;
     public int levl;
     public bool isOnline;
 
@@ -20,7 +20,7 @@ public class PlayerProfile
     {
         playerName = name;
         password = pass;
-        playerID = "00000000";
+        playerID = 00000000;
 
         selectedCarIndex = 0;
         selectedBodyUpgradeIndex = 0;

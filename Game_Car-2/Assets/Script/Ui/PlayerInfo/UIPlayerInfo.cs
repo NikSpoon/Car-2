@@ -35,18 +35,12 @@ public class UIPlayerInfo : MonoBehaviour
         _xp.text = $"XP: {profile.Xp} / {experienceManager.XpForLevlUp}";
 
       //  _xpImage.fillAmount = Mathf.Clamp01( profile.Xp / experienceManager.XpForLevlUp);
-        Log();
+       
     }
     public void UpdatePlayerInfo()
     {
     }
-    public void Log()
-    {
-        // Лог значения XP для текущего уровня
-        Debug.Log($"[UIPlayerInfo] XpForLevlUp: {experienceManager.XpForLevlUp}");
 
-       
-    }
 }
 
 

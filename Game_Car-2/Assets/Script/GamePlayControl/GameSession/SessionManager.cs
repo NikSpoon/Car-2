@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Mirror;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SessionManager : MonoBehaviour
@@ -6,7 +7,8 @@ public class SessionManager : MonoBehaviour
     public static SessionManager Instance { get; private set; }
 
     private Dictionary<string, GameSession> sessions = new Dictionary<string, GameSession>();
-
+    
+   
     private void Awake()
     {
         if (Instance != null && Instance != this)
