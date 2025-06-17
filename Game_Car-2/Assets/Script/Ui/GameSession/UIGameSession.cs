@@ -7,37 +7,32 @@ public class UIGameSession : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI sessionNameText;
     [SerializeField] private TextMeshProUGUI sessionId;
-    [SerializeField] private TextMeshProUGUI sessionMapNeme;
+    [SerializeField] private TextMeshProUGUI sessionMapName;
     [SerializeField] private TextMeshProUGUI sessionPlayersValue;
     [SerializeField] private TextMeshProUGUI sessionMaxPlayersValue;
+
     [SerializeField] private Transform playersContainer;
     [SerializeField] private GameObject playerUIPrefab;
 
+    private NetworkGameSession currentSession;
 
-    private GameSession currentSession;
-
-    // Устанавливаем сессию и обновляем UI
-    public void SetSession(GameSession session)
+    public void SetSession(NetworkGameSession session)
     {
         currentSession = session;
-       
 
-        sessionNameText.text = $"Сессия: {session.SessionName}";
-        sessionId.text = $"ID: {session.SessionId}";
-       
+        sessionNameText.text = $"Сессия: {currentSession.sessionName}";
+        sessionId.text = $"ID: {currentSession.sessionId}";
+
         RefreshPlayersUI();
-       
+        RefreshSessionUI();
     }
 
-    // Обновляем список игроков в UI
     public void RefreshPlayersUI()
     {
-        // Очищаем текущие элементы
         foreach (Transform child in playersContainer)
             Destroy(child.gameObject);
 
-        // Создаем UI элементы для каждого игрока
-        foreach (var player in currentSession.Players)
+        foreach (var player in currentSession.syncedPlayers)
         {
             var playerUIObj = Instantiate(playerUIPrefab, playersContainer);
             var playerUI = playerUIObj.GetComponent<UIOnePlayerOnSession>();
@@ -47,58 +42,26 @@ public class UIGameSession : MonoBehaviour
         }
     }
 
-    // Добавляем игрока и обновляем UI
-    public void AddPlayer(NetworkPlayerProfile player)
+    public void RefreshSessionUI()
     {
-        currentSession.AddPlayer(player);
-        RefreshPlayersUI();
-    }
-
-    // Удаляем игрока и обновляем UI (если понадобится)
-    public void RemovePlayer(NetworkPlayerProfile player)
-    {
-        currentSession.RemovePlayer(player);
-        RefreshPlayersUI();
-    }
-    // Проверяем, является ли локальный игрок хостом сессии
-   
-    
-    private bool IsHost()
-    {
-        if (currentSession == null)
-            return false;
-
-        // NetworkClient.connection — это локальная сеть игрока
-        // currentSession.HostConnection — соединение хоста
-        return NetworkClient.connection == currentSession.HostConnection;
+        sessionMapName.text = $"Карта: {currentSession.mapName}";
+        sessionPlayersValue.text = $"Игроков: {currentSession.syncedPlayers.Count}";
+        sessionMaxPlayersValue.text = $"Макс: {currentSession.maxPlayers}";
     }
 
     public void Update()
     {
-        if (!IsHost())
-        {
-            Debug.LogWarning("Только хост может изменять настройки!");
+        if (currentSession == null || !currentSession.isServer)
             return;
-        }
-        else
-        {
 
         var localSessionData = PlayerDataManager.Instance.PlayerSessionData;
         currentSession.SetRaceData(localSessionData.raceData);
         RefreshSessionUI();
-
-        }
-    
     }
-    private void RefreshSessionUI()
-    {
-        sessionMapNeme.text = $"Map Name: {currentSession.MapName}";
-        
-        sessionPlayersValue.text = $"Max Players: {currentSession.maxPlayer}";
 
-    }
-    public void StartRaise()
+    public void StartRace()
     {
-        
+        if (currentSession != null && currentSession.isServer)
+            currentSession.StartRace();
     }
 }

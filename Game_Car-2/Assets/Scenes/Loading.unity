@@ -200,11 +200,11 @@ Transform:
   m_GameObject: {fileID: 903765670}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 140663994613162453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &903765672
 MonoBehaviour:
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 1201844090}
   m_Layer: 0
   m_Name: NetworkManagerObj
-  m_TagString: Untagged
+  m_TagString: NetworkManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,11 +245,11 @@ Transform:
   m_GameObject: {fileID: 1201844088}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 140663994613162453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1201844090
 MonoBehaviour:
@@ -293,10 +293,12 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 8852055554584960388, guid: 36110445444349c4485c0707ebb09072, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 549863904943538117, guid: fa2c2144b2db5dd44b4c20101929cbaa, type: 3}
+  - {fileID: 0}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -498,9 +500,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4189005911047963775, guid: 11e7f0215972f444496a110d8ef529b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1201844089}
+    - targetCorrespondingSourceObject: {fileID: 4189005911047963775, guid: 11e7f0215972f444496a110d8ef529b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 903765671}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11e7f0215972f444496a110d8ef529b3, type: 3}
+--- !u!224 &140663994613162453 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4189005911047963775, guid: 11e7f0215972f444496a110d8ef529b3, type: 3}
+  m_PrefabInstance: {fileID: 140663994613162452}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1658928060505515204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,5 +566,3 @@ SceneRoots:
   - {fileID: 443337330}
   - {fileID: 3273446610262164509}
   - {fileID: 140663994613162452}
-  - {fileID: 1201844089}
-  - {fileID: 903765671}
