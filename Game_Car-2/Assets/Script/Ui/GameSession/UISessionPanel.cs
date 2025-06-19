@@ -28,7 +28,7 @@ public class UISessionPanel : MonoBehaviour
         steamLobbyManager.CreateLobby();
 
        panelSessionRoot.SetActive(true);
-
+       
     }
 
     public void OnClickJoin()
@@ -47,7 +47,8 @@ public class UISessionPanel : MonoBehaviour
     
     private void OnLobbyCreated(string lobbyId)
     {
-        Debug.Log("Лобби успешно создано: " + lobbyId);
+        // Debug.Log("Лобби успешно создано: " + lobbyId);
+        
         // можно обновить UI, если нужно
     }
 
@@ -60,7 +61,7 @@ public class UISessionPanel : MonoBehaviour
             Destroy(item);
         }
         spawnedSessionItems.Clear();
-
+      
         // Обновляем текст количества сессий
         sessionsCountText.text = $"Сессий найдено: {sessions.Count}";
 
@@ -72,5 +73,18 @@ public class UISessionPanel : MonoBehaviour
             ui.SetSession(session);
             spawnedSessionItems.Add(sessionUIObj);
         }
+    }
+    public void AttachToNetworkSession(NetworkGameSession session)
+    {
+        if (session == null)
+        {
+            Debug.LogWarning("AttachToNetworkSession получил null-сессию.");
+            return;
+        }
+
+        Debug.Log("📥 Привязываем сессию к UI: " + session.sessionId);
+
+        // Показываем только одну сессию — текущую
+        ShowSessions(new List<NetworkGameSession> { session });
     }
 }

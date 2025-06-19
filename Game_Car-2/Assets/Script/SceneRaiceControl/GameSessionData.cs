@@ -12,7 +12,7 @@ public class GameSessionData : ScriptableObject
             Debug.LogError("Попытка установить гонку, но RaceData — null.");
             return;
         }
-
+        PlayerDataManager.Instance.PlayerSessionData.GetInstansRaceData(race);
         raceSceneName = race.SceneName; 
     }
 

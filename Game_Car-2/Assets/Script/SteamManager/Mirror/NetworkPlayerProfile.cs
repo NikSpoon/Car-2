@@ -15,13 +15,40 @@ public class NetworkPlayerProfile : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        Debug.Log($"Игрок подключился: {playerName}, уровень: {level}");
 
-        // Если это наш локальный игрок, копируем данные с сервера в локальный профиль
+        var session = FindFirstObjectByType<NetworkGameSession>();
+        if (session != null)
+        {
+            Initialize(PlayerDataManager.Instance.PlayerProfile);
+            Debug.Log($"👤 Игрок добавлен в сессию: {playerName}");
+            session.AddPlayer(this);
+        }
         if (isLocalPlayer)
         {
-            CopyToLocalProfile(PlayerDataManager.Instance.PlayerProfile);
+            CmdRegisterPlayer();
+        }
+    }
+    
+    [Command]
+    void CmdRegisterPlayer()
+    {
+        var session = FindFirstObjectByType<NetworkGameSession>();
+        if (session != null)
+        {
+            Initialize(PlayerDataManager.Instance.PlayerProfile);
+            Debug.Log($"👤 Игрок добавлен в сессию: {playerName}");
+            session.AddPlayer(this);
+        }
+    }
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
 
+        var session = FindFirstObjectByType<NetworkGameSession>();
+        if (session != null)
+        {
+            session.RemovePlayer(this);
+            Debug.Log($"👋 Игрок удалён из сессии: {playerName}");
         }
     }
 

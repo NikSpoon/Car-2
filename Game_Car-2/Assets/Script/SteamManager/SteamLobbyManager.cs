@@ -1,6 +1,8 @@
 ﻿
 using Mirror;
 using Steamworks;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SteamLobbyManager : MonoBehaviour
@@ -68,13 +70,14 @@ public class SteamLobbyManager : MonoBehaviour
 
         // Создаем и запускаем объект с NetworkGameSession (синхронизированная сессия)
         SpawnNetworkGameSession();
+        StartCoroutine(ShowMySession());
     }
 
     private void OnLobbyEntered(LobbyEnter_t result)
     {
         // Получаем Steam ID лобби, в которое вошли
         currentLobbyID = new CSteamID(result.m_ulSteamIDLobby);
-        Debug.Log("Вошли в лобби: " + currentLobbyID);
+        
 
         // Если это сервер, выходим, так как сервер не должен подключаться как клиент
         if (NetworkServer.active) return;
@@ -87,7 +90,12 @@ public class SteamLobbyManager : MonoBehaviour
 
         // Запускаем клиентское подключение Mirror к серверу
         networkManager.StartClient();
+
+        StartCoroutine(WaitForSessionOnClient());
+
     }
+
+    
 
     // Метод для присоединения к лобби по ID (например, введенному в UI)
     public void JoinLobbyById(string lobbyId)
@@ -107,17 +115,109 @@ public class SteamLobbyManager : MonoBehaviour
     // Создаем объект NetworkGameSession на сервере и запускаем его в сети
     void SpawnNetworkGameSession()
     {
-        // Создаем объект из префаба
+
+        // 1) Инстансиируем префаб
         GameObject sessionObj = Instantiate(networkGameSessionPrefab);
+        var session = sessionObj.GetComponent<NetworkGameSession>();
 
-        // Получаем компонент NetworkGameSession на объекте
-        currentSession = sessionObj.GetComponent<NetworkGameSession>();
+        // 2) Формируем короткий ID из SteamLobbyID
+        string shortId = (currentLobbyID.m_SteamID % 100000).ToString("D5");
+        // Имя сессии можно взять, например, из профиля хоста
+        string sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
 
-        // Инициализируем данные сессии (например, ID и имя)
-        currentSession.sessionId = SteamMatchmaking.GetLobbyData(currentLobbyID, "LobbyID"); // Здесь можно задать свой ID
-        currentSession.sessionName = "Steam Lobby Session";
+        // 3) Готовим данные до спауна
+        session.PrepareSession(shortId, sessionName);
 
-        // Запускаем объект в сети — теперь он синхронизируется между игроками
+        // 4) Спауним сетевой объект (SyncVar будет передан клиентам автоматически)
         NetworkServer.Spawn(sessionObj);
+
+        // Сохраняем для ссылок в этом классе
+        currentSession = session;
+    }
+    private IEnumerator ShowMySession()
+    {
+        float logInterval = 0.5f;
+        float timeSinceLastLog = 0f;
+        int attemptCount = 0;
+
+        while (true)
+        {
+            var session = Object.FindFirstObjectByType<NetworkGameSession>();
+
+            if (session != null)
+            {
+                if (!string.IsNullOrEmpty(session.sessionId))
+                {
+                    Debug.Log($"✅ NetworkGameSession найден и проинициализирован. sessionId = {session.sessionId}");
+
+                    var sessionPanel = Object.FindFirstObjectByType<UISessionPanel>();
+                    if (sessionPanel != null)
+                    {
+                        sessionPanel.ShowSessions(new List<NetworkGameSession> { session });
+                    }
+                    else
+                    {
+                        Debug.LogError("❌ UISessionPanel не найден в сцене!");
+                    }
+
+                    yield break; // Завершаем корутину
+                }
+                else
+                {
+                    if (timeSinceLastLog >= logInterval)
+                    {
+                        Debug.LogWarning($"⏳ Найден NetworkGameSession, но sessionId ещё пустой. Ожидание... [{++attemptCount}]");
+                        timeSinceLastLog = 0f;
+                    }
+                }
+            }
+            else
+            {
+                if (timeSinceLastLog >= logInterval)
+                {
+                    Debug.LogWarning($"🔍 NetworkGameSession пока не найден... [{++attemptCount}]");
+                    timeSinceLastLog = 0f;
+                }
+            }
+
+            timeSinceLastLog += Time.deltaTime;
+            yield return null;
+        }
+    }
+    private IEnumerator WaitForSessionOnClient()
+    {
+        float timeSinceLastLog = 0f;
+        int attemptCount = 0;
+
+        while (true)
+        {
+            var session = Object.FindFirstObjectByType<NetworkGameSession>();
+
+            if (session != null && !string.IsNullOrEmpty(session.sessionId))
+            {
+                Debug.Log($"✅ [CLIENT] Получена сетевая сессия: {session.sessionId}");
+
+                var sessionPanel = Object.FindFirstObjectByType<UISessionPanel>();
+                if (sessionPanel != null)
+                {
+                    sessionPanel.ShowSessions(new List<NetworkGameSession> { session });
+                }
+                else
+                {
+                    Debug.LogError("❌ [CLIENT] UISessionPanel не найден!");
+                }
+
+                yield break;
+            }
+
+            if (timeSinceLastLog > 0.5f)
+            {
+                Debug.LogWarning($"🔍 [CLIENT] Ожидание появления NetworkGameSession... попытка [{++attemptCount}]");
+                timeSinceLastLog = 0f;
+            }
+
+            timeSinceLastLog += Time.deltaTime;
+            yield return null;
+        }
     }
 }

@@ -41,7 +41,7 @@ public class GameSession
         return Players.Count > 0 && Players.All(p => p.isReady);
     }
 
-    public void SetRaceData(RaceData raceData)
+    public void SetGameSessionRaceData(RaceData raceData)
     {
         CurrentRaceData = raceData;
         MapName = raceData.SceneName;

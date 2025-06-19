@@ -40,6 +40,7 @@ public class RaceItemUI : MonoBehaviour
         if (sessionData != null && raceData != null)
         {
             sessionData.SetRaceMap(raceData);
+           
             Debug.Log($"Выбрана гонка: {raceData.RaceName}");
         }
     }
