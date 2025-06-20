@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &549863904943538117
+--- !u!1 &6110029346762253150
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,68 +8,70 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1609318289739091454}
-  - component: {fileID: 3875430545673851687}
-  - component: {fileID: 5205118128496456272}
+  - component: {fileID: 7572330709213247549}
+  - component: {fileID: 928159482640703517}
+  - component: {fileID: 7338437003920550773}
   m_Layer: 0
-  m_Name: NetworkGameSession
+  m_Name: Bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1609318289739091454
+--- !u!4 &7572330709213247549
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 549863904943538117}
+  m_GameObject: {fileID: 6110029346762253150}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 1206.4585, y: 737.27094, z: 9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3875430545673851687
+--- !u!114 &928159482640703517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 549863904943538117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34210b6b0040974e9156114d56a8bcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  sessionId: 
-  sessionName: 
-  mapName: 
-  maxPlayers: 0
-  raceStarted: 0
-  hostPlayer: {fileID: 0}
-  currentRaceData: {fileID: 0}
-  botPrefab: {fileID: 6110029346762253150, guid: ca19eba3482d32d4f91f8fd356a03b34, type: 3}
---- !u!114 &5205118128496456272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 549863904943538117}
+  m_GameObject: {fileID: 6110029346762253150}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 487847629
+  _assetId: 528030753
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
+--- !u!114 &7338437003920550773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6110029346762253150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd006d1756d6364492b933f78851b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  playerName: 
+  level: 0
+  money: 0
+  xp: 0
+  selectedCarIndex: 0
+  selectedBodyUpgradeIndex: 0
+  playerID: 0
+  isReady: 0
+  isOnline: 0
+  isBot: 0

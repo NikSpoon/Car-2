@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BotCreator : BotNameRegistry
 {
     private HashSet<int> usedIds = new(); // Храним уже использованные ID

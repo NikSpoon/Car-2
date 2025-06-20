@@ -12,13 +12,24 @@ public class NetworkGameSession : NetworkBehaviour
 
 
     [SyncVar] public NetworkPlayerProfile hostPlayer;
-    
+
     private string pendingSessionId;
     private string pendingSessionName;
 
     public SyncList<NetworkPlayerProfile> syncedPlayers = new SyncList<NetworkPlayerProfile>();
 
     public RaceData currentRaceData;
+
+
+    private BotCreator botCreator;
+    
+    [SerializeField] private GameObject botPrefab;
+
+    private void Start()
+    {
+        botCreator = new BotCreator();
+    }
+
     [Server]
     public void PrepareSession(string id, string name)
     {
@@ -42,15 +53,15 @@ public class NetworkGameSession : NetworkBehaviour
         sessionId = pendingSessionId;
         sessionName = pendingSessionName;
 
-        
 
-        var uiPanel = FindObjectsByType <UISessionPanel>(FindObjectsSortMode.None);
+
+        var uiPanel = FindObjectsByType<UISessionPanel>(FindObjectsSortMode.None);
         foreach (var panel in uiPanel)
         {
             if (panel != null)
             {
                 panel.AttachToNetworkSession(this);
-                
+
             }
 
         }
@@ -65,7 +76,7 @@ public class NetworkGameSession : NetworkBehaviour
     {
         if (!syncedPlayers.Contains(profile))
             syncedPlayers.Add(profile);
-        
+
         if (hostPlayer == null)
         {
             hostPlayer = profile;
@@ -77,9 +88,9 @@ public class NetworkGameSession : NetworkBehaviour
     public void RemovePlayer(NetworkPlayerProfile profile)
     {
         syncedPlayers.Remove(profile);
-       
-        if(profile == hostPlayer)
-        UpdateHost();
+
+        if (profile == hostPlayer)
+            UpdateHost();
     }
 
     [Server]
@@ -87,7 +98,6 @@ public class NetworkGameSession : NetworkBehaviour
     {
         if (data == null)
         {
-            Debug.LogError("RaceData is null в SetRaceData!");
             return;
         }
 
@@ -101,5 +111,43 @@ public class NetworkGameSession : NetworkBehaviour
     {
         raceStarted = true;
         NetworkManager.singleton.ServerChangeScene(mapName);
+    }
+
+
+    [Server]
+    public void AddBot()
+    {
+        // Проверяем, что вызывающий — хост (сервер)
+        if (!isServer)
+        {
+            Debug.LogWarning("Добавлять бота может только сервер (хост)");
+            return;
+        }
+
+        if (botCreator == null || botPrefab == null)
+        {
+            Debug.LogError("BotCreator или botPrefab не назначены!");
+            return;
+        }
+
+        AIProfile aiProfile = botCreator.CreateUniqueBot();
+
+        GameObject botObj = Instantiate(botPrefab);
+        NetworkServer.Spawn(botObj);
+
+        NetworkBotProfile botProfile = botObj.GetComponent<NetworkBotProfile>();
+
+        if (botProfile == null)
+        {
+            Debug.LogError("У префаба бота нет компонента NetworkBotProfile!");
+            Destroy(botObj);
+            return;
+        }
+
+        botProfile.InitializeBot(aiProfile);
+
+        AddPlayer(botProfile);
+
+        Debug.Log($"🤖 Добавлен бот: {botProfile.playerName}");
     }
 }

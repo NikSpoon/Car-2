@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using System;
 using UnityEngine;
 
 public class NetworkPlayerProfile : NetworkBehaviour
@@ -8,10 +9,15 @@ public class NetworkPlayerProfile : NetworkBehaviour
     [SyncVar] public int money;
     [SyncVar] public int xp;
     [SyncVar] public int selectedCarIndex;
+    [SyncVar] public int selectedBodyUpgradeIndex;
     [SyncVar] public int playerID;
     [SyncVar] public bool isReady;
     [SyncVar] public bool isOnline;
 
+    [SyncVar] public bool isBot;
+
+    private int _cachedCarIndex = -1;
+    private int _cachedCarUpgradeIndex = -1;
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -19,13 +25,11 @@ public class NetworkPlayerProfile : NetworkBehaviour
         var session = FindFirstObjectByType<NetworkGameSession>();
         if (session != null)
         {
-            Initialize(PlayerDataManager.Instance.PlayerProfile);
-            Debug.Log($"👤 Игрок добавлен в сессию: {playerName}");
-            session.AddPlayer(this);
-        }
+           
         if (isLocalPlayer)
         {
             CmdRegisterPlayer();
+        }
         }
     }
     
@@ -98,5 +102,25 @@ public class NetworkPlayerProfile : NetworkBehaviour
     public void CmdSetReady(bool value)
     {
         isReady = value;
+    }
+    void Update()
+    {
+        if (!isLocalPlayer) return;
+
+        int currentCarIndex = PlayerDataManager.Instance.PlayerProfile.selectedCarIndex;
+        int currentselectedBodyUpgradeIndex = PlayerDataManager.Instance.PlayerProfile.selectedBodyUpgradeIndex ;
+
+        if (currentCarIndex != _cachedCarIndex || currentselectedBodyUpgradeIndex != _cachedCarUpgradeIndex)
+        {
+            CmdSetCarIndex(currentCarIndex, currentselectedBodyUpgradeIndex);
+            _cachedCarIndex = currentCarIndex;
+        }
+    }
+    [Command]
+    void CmdSetCarIndex(int index, int index2)
+    {
+        selectedCarIndex = index;
+        selectedBodyUpgradeIndex = index2;
+        Debug.Log($"[SERVER] {playerName} выбрал машину #{index},{index2}");
     }
 }

@@ -33,13 +33,14 @@ public class UIOnePlayerOnSession : MonoBehaviour
 
     private void Update()
     {
+       
         if (!_isSetup || _profile == null)
             return;
 
         
         _name.text = _profile.playerName;
         _id.text = $"ID: {_profile.playerID}";
-        _selectedCar.text = $"Машина #{_profile.selectedCarIndex}";
+        _selectedCar.text = $"Машина #{_profile.selectedCarIndex},{_profile.selectedBodyUpgradeIndex}";
         _isReady.isOn = _profile.isReady;
     }
 

@@ -15,6 +15,10 @@ public class UIGameSession : MonoBehaviour
     [SerializeField] private GameObject playerUIPrefab;
 
     private NetworkGameSession currentSession;
+    private void OnEnable()
+    {
+        TryAttachToExistingSession();
+    }
 
     public void SetSession(NetworkGameSession session)
     {
@@ -24,17 +28,21 @@ public class UIGameSession : MonoBehaviour
         sessionNameText.text = $"Сессия: {currentSession.sessionName}";
         sessionId.text = $"ID: {currentSession.sessionId}";
 
-        RefreshPlayersUI();
-        RefreshSessionUI();
-    }
+        currentSession.syncedPlayers.Callback += OnPlayersListChanged;
 
+        RefreshPlayersUI();
+    }
+    private void OnPlayersListChanged(SyncList<NetworkPlayerProfile>.Operation op, int index, NetworkPlayerProfile oldItem, NetworkPlayerProfile newItem)
+    {
+        Debug.Log($"📢 Игроки изменились: {op} в позиции {index}");
+        RefreshPlayersUI();
+    }
     public void RefreshPlayersUI()
     {
         Debug.Log("🔁 Обновляем список игроков");
 
         if (playersContainer == null)
         {
-            Debug.LogWarning("❌ playersContainer не назначен");
             return;
         }
 
@@ -76,16 +84,21 @@ public class UIGameSession : MonoBehaviour
 
     public void Update()
     {
+
+
         if (currentSession == null)
         {
             TryAttachToExistingSession();
             Debug.LogWarning("currentSession is NULL");
             return;
         }
+        
+        RefreshSessionUI();
 
         if (!currentSession.isServer)
             return;
 
+        // Всё готово — можно безопасно устанавливать
         var localSessionData = PlayerDataManager.Instance?.PlayerSessionData;
 
         if (localSessionData == null)
@@ -93,6 +106,7 @@ public class UIGameSession : MonoBehaviour
             Debug.LogWarning("PlayerSessionData is null");
             return;
         }
+        currentSession.SetRaceData(localSessionData.raceData);
 
         if (localSessionData.raceData == null)
         {
@@ -100,24 +114,7 @@ public class UIGameSession : MonoBehaviour
             return;
         }
 
-        // Всё готово — можно безопасно устанавливать
-        currentSession.SetRaceData(localSessionData.raceData);
-
-        RefreshPlayersUI();
-        RefreshSessionUI();
     }
-
-
-    public void StartRace()
-    {
-        if (currentSession != null && currentSession.isServer)
-            currentSession.StartRace();
-    }
-    private void OnEnable()
-    {
-        TryAttachToExistingSession();
-    }
-
     private void TryAttachToExistingSession()
     {
         var session = FindFirstObjectByType<NetworkGameSession>(FindObjectsInactive.Include);
@@ -130,5 +127,19 @@ public class UIGameSession : MonoBehaviour
         {
             Debug.LogWarning("❌ Не удалось найти активную NetworkGameSession при активации панели");
         }
+    }
+
+
+    public void StartRace()
+    {
+        if (currentSession != null && currentSession.isServer)
+            currentSession.StartRace();
+    }
+    public void AddBot()
+    {
+        if (currentSession != null && currentSession.isServer)
+            currentSession.AddBot();
+        else
+            Debug.LogWarning("Добавлять бота может только хост!");
     }
 }
