@@ -69,6 +69,7 @@ public class UISessionPanel : MonoBehaviour
         foreach (var session in sessions)
         {
             var sessionUIObj = Instantiate(oneSessionPrefab, context);
+            ClosePanel.Instance.openPanels.Add(sessionUIObj);
             var ui = sessionUIObj.GetComponent<UIGameSession>();
             ui.SetSession(session);
             spawnedSessionItems.Add(sessionUIObj);

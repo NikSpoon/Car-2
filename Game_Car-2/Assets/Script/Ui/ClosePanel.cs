@@ -1,28 +1,40 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ClosePanel : MonoBehaviour
 {
+
+    public static ClosePanel Instance { get; set; }
+
     [SerializeField] private GameObject[] panels;
     [SerializeField] private InputServis input;
     private GameObject lastPanel;
+
+    public List<GameObject> openPanels = new List<GameObject>();
     private void Update()
     {
-        if (input.Exit)
+        if (input.Exit && openPanels.Count > 0)
         {
-            lastPanel = LastPanel(panels);
+            lastPanel = openPanels[openPanels.Count - 1];
             lastPanel.SetActive(false);
+            StartCoroutine(DelayRemoveLastPanel());
+        }
+        foreach (var panel in panels)
+        {
+             if (panel.activeSelf && !openPanels.Contains(panel))
+                    openPanels.Add(panel);
         }
     }
-    private GameObject LastPanel(GameObject[] panels)
-    {
 
-        for (int i = panels.Length - 1; i >= 0; i--)
+    private IEnumerator DelayRemoveLastPanel()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (openPanels.Count > 0)
         {
-            if (panels[i] != null && panels[i].activeSelf)
-            {
-                return panels[i];
-            }
+            openPanels.RemoveAt(openPanels.Count - 1);
         }
-        return null;
     }
 }

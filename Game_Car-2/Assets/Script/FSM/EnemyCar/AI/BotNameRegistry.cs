@@ -13,7 +13,9 @@ public class BotNameRegistry
         { 6, "AutoRacer" },
         { 7, "MegaDriver" },
         { 8, "IronWheel" },
-        { 9, "RocketRunner" }
+        { 9, "RocketRunner" },
+        { 10, "Den-Gey !!!!!!" },
+        { 11, "Kazhan .!." }
     };
 
 }
