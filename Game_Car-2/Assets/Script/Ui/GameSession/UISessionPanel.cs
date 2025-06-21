@@ -10,6 +10,7 @@ public class UISessionPanel : MonoBehaviour
     [SerializeField] private Transform context;                // Контейнер для сессий
     [SerializeField] private GameObject oneSessionPrefab;      // Префаб для отображения одной сессии
     [SerializeField] private GameObject panelSessionRoot;             // Само окно (для скрытия/показа)
+  
 
     [Header("Логика")]
     [SerializeField] private SteamLobbyManager steamLobbyManager;

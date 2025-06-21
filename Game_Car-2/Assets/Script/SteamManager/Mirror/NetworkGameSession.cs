@@ -1,6 +1,9 @@
 ﻿using Mirror;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using FSM.App;
+
 
 public class NetworkGameSession : NetworkBehaviour
 {
@@ -22,11 +25,17 @@ public class NetworkGameSession : NetworkBehaviour
 
 
     private BotCreator botCreator;
-    
+
     [SerializeField] private GameObject botPrefab;
+
+    public bool onStart;
+    public int timeToStart;
+
+    public List<UIGameSession> uIGameSessions = new List<UIGameSession>();
 
     private void Start()
     {
+        maxPlayers = 10;
         botCreator = new BotCreator();
     }
 
@@ -74,6 +83,12 @@ public class NetworkGameSession : NetworkBehaviour
     [Server]
     public void AddPlayer(NetworkPlayerProfile profile)
     {
+        if (syncedPlayers.Count == maxPlayers)
+        {
+            ErrorLog("AddPlayer");
+            return;
+        }
+
         if (!syncedPlayers.Contains(profile))
             syncedPlayers.Add(profile);
 
@@ -109,10 +124,47 @@ public class NetworkGameSession : NetworkBehaviour
     [Server]
     public void StartRace()
     {
+        if (!currentRaceData)
+        {
+            ErrorLog("StartRace");
+            return;
+        }
+
         raceStarted = true;
+        StartCoroutine(StartTimer());
+    }
+    private IEnumerator StartTimer()
+    {
+        int time = 10;
+        timeToStart = time;
+        onStart = true;
+
+        while (timeToStart > 0)
+        {
+            RpcUpdateTimer(timeToStart); 
+            yield return new WaitForSeconds(1f);
+            timeToStart--;
+        }
+
+        RpcUpdateTimer(0); 
+
+        onStart = false;
+        PlayerDataManager.Instance.AppSystem.Trigger(AppTriger.ToGameplay);
         NetworkManager.singleton.ServerChangeScene(mapName);
     }
 
+    [ClientRpc]
+    private void RpcUpdateTimer(int timeLeft)
+    {
+        foreach (var t in uIGameSessions)
+        {
+            if (t != null)
+            {
+                t.UpdateTimer(timeLeft);
+            }
+
+        }
+    }
 
     [Server]
     public void AddBot()
@@ -150,4 +202,29 @@ public class NetworkGameSession : NetworkBehaviour
 
         Debug.Log($"🤖 Добавлен бот: {botProfile.playerName}");
     }
+
+    private void Update()
+    {
+        if (currentRaceData == null) return;
+
+        mapName = currentRaceData.SceneName;
+        maxPlayers = currentRaceData.MaxCar;
+    }
+
+    [Command]
+    public void CmdRequestStartRace()
+    {
+        if (!isServer) return;
+
+        if (!raceStarted)
+        {
+            StartRace();
+        }
+    }
+
+    private void ErrorLog(string context)
+    {
+        return;
+    }
+
 }

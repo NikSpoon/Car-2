@@ -17,8 +17,6 @@ public class ClosePanel : MonoBehaviour
     {
         if (input.Exit && openPanels.Count > 0)
         {
-            lastPanel = openPanels[openPanels.Count - 1];
-            lastPanel.SetActive(false);
             StartCoroutine(DelayRemoveLastPanel());
         }
         foreach (var panel in panels)
@@ -30,6 +28,9 @@ public class ClosePanel : MonoBehaviour
 
     private IEnumerator DelayRemoveLastPanel()
     {
+        lastPanel = openPanels[openPanels.Count - 1];
+        lastPanel.SetActive(false);
+
         yield return new WaitForSeconds(1f);
 
         if (openPanels.Count > 0)

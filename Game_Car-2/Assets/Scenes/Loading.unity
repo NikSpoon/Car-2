@@ -227,8 +227,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1201844089}
-  - component: {fileID: 1201844091}
   - component: {fileID: 1201844090}
+  - component: {fileID: 1201844091}
   m_Layer: 0
   m_Name: NetworkManagerObj
   m_TagString: NetworkManager
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1201844088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Script: {fileID: 11500000, guid: fc04736871c49534f8c553a80508c9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
@@ -297,10 +297,8 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
+  - {fileID: 6110029346762253150, guid: ca19eba3482d32d4f91f8fd356a03b34, type: 3}
   - {fileID: 549863904943538117, guid: fa2c2144b2db5dd44b4c20101929cbaa, type: 3}
-  - {fileID: 3659872205401066284, guid: ac9fb1051c075ea4ebc68bfc32545bb2, type: 3}
-  - {fileID: 8859642024945769623, guid: 6d11caaf6e9bfdf42a1c29916696ec08, type: 3}
-  - {fileID: 8176225908396392461, guid: a4fe5e5e30b23b645bd6efff9bdc5ae0, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2

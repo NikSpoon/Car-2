@@ -130,7 +130,7 @@ public class SteamLobbyManager : MonoBehaviour
 
         // 4) Спауним сетевой объект (SyncVar будет передан клиентам автоматически)
         NetworkServer.Spawn(sessionObj);
-
+      
         // Сохраняем для ссылок в этом классе
         currentSession = session;
     }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Mirror;
 
 public class UIController : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class UIController : MonoBehaviour
 
     private GameObject _currentScren;
    
+    private bool _isMultiplayerMode = false;
+
+    public void SetMultiplayerMode(bool value)
+    {
+        _isMultiplayerMode = value;
+    }
     private void Start()
     {
         var appSystem = PlayerDataManager.Instance.AppSystem;
@@ -60,7 +67,22 @@ public class UIController : MonoBehaviour
                 break;
 
             case AppState.Gameplay:
-                SceneManager.LoadScene(_data.raceSceneName);
+                if (_isMultiplayerMode)
+                {
+                    var session = FindFirstObjectByType<NetworkGameSession>();
+                    if (session != null)
+                    {
+                        session.CmdRequestStartRace();
+                    }
+                    else
+                    {
+                        Debug.LogError("NetworkGameSession не найден");
+                    }
+                }
+                else
+                {
+                    SceneManager.LoadScene(_data.raceSceneName);
+                }
                 // включаю катинку 
                 // запускаю корутину
                 // віключаю корутину и картинку как закончил закгужать 

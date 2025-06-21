@@ -1971,15 +1971,6 @@ MonoBehaviour:
   passwordInput: {fileID: 923116025106250979}
   errorText: {fileID: 610621038030783724}
   error: {fileID: 1655553293383108996}
-  playerProfile:
-    playerName: 
-    password: 
-    playerID: 
-    isOnline: 0
-    selectedCarIndex: 0
-    selectedBodyUpgradeIndex: 0
-    money: 0
-    Xp: 0
 --- !u!1 &5061497828070676354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2668,6 +2659,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 575804144682208229, guid: f92a08b4e87433046838633abc48ece7, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1398299140629947042, guid: f92a08b4e87433046838633abc48ece7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2762,7 +2757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5737432984957446737, guid: f92a08b4e87433046838633abc48ece7, type: 3}
       propertyPath: m_Name
-      value: Loading
+      value: FirstLoading
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

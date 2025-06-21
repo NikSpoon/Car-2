@@ -2,6 +2,7 @@
 using TMPro;
 using System.Collections.Generic;
 using Mirror;
+using System.Collections;
 
 public class UIGameSession : MonoBehaviour
 {
@@ -11,18 +12,23 @@ public class UIGameSession : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sessionPlayersValue;
     [SerializeField] private TextMeshProUGUI sessionMaxPlayersValue;
 
+    [SerializeField] private TextMeshProUGUI startTimer;
+    [SerializeField] private GameObject startPanel;
+
     [SerializeField] private RectTransform playersContainer;
     [SerializeField] private GameObject playerUIPrefab;
 
     private NetworkGameSession currentSession;
+
     private void OnEnable()
     {
+        startPanel.SetActive(false);
         TryAttachToExistingSession();
     }
 
     public void SetSession(NetworkGameSession session)
     {
-        
+
         currentSession = session;
 
         sessionNameText.text = $"Сессия: {currentSession.sessionName}";
@@ -55,7 +61,7 @@ public class UIGameSession : MonoBehaviour
         Debug.Log($"📋 Игроков в сессии: {currentSession.syncedPlayers.Count}");
         if (playersContainer == null)
             return;
-        
+
         foreach (Transform child in playersContainer)
             Destroy(child.gameObject);
 
@@ -92,7 +98,7 @@ public class UIGameSession : MonoBehaviour
             Debug.LogWarning("currentSession is NULL");
             return;
         }
-        
+
         RefreshSessionUI();
 
         if (!currentSession.isServer)
@@ -115,13 +121,38 @@ public class UIGameSession : MonoBehaviour
         }
 
     }
+    public void UpdateTimer(int timeLeft)
+    {
+        if (!startPanel)
+        {
+            return;
+        }
+        startPanel.SetActive(true);
+
+        if (timeLeft > 0)
+        {
+            startTimer.text = $"{timeLeft}";
+        }
+        else
+        {
+            startTimer.text = "Поехали!";
+            StartCoroutine(HidePanelAfterDelay());
+        }
+    }
+
+    private IEnumerator HidePanelAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        startPanel.SetActive(false);
+    }
     private void TryAttachToExistingSession()
     {
         var session = FindFirstObjectByType<NetworkGameSession>(FindObjectsInactive.Include);
         if (session != null && session.sessionId != null)
         {
+            session.uIGameSessions.Add(this);
             SetSession(session);
-           
+
         }
         else
         {
@@ -142,4 +173,12 @@ public class UIGameSession : MonoBehaviour
         else
             Debug.LogWarning("Добавлять бота может только хост!");
     }
+    private void OnDisable()
+    {
+        if (currentSession != null)
+        {
+            currentSession.uIGameSessions.Remove(this);
+        }
+    }
 }
+
