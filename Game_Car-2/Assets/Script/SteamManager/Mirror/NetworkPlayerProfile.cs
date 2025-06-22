@@ -15,6 +15,10 @@ public class NetworkPlayerProfile : NetworkBehaviour
     [SyncVar] public bool isOnline;
 
     [SyncVar] public bool isBot;
+    
+    [SyncVar] public bool isBotRandom;
+
+    private GameObject carInstance;
 
     private int _cachedCarIndex = -1;
     private int _cachedCarUpgradeIndex = -1;
@@ -25,14 +29,13 @@ public class NetworkPlayerProfile : NetworkBehaviour
         var session = FindFirstObjectByType<NetworkGameSession>();
         if (session != null)
         {
-           
-        if (isLocalPlayer)
-        {
-            CmdRegisterPlayer();
-        }
+            if (isLocalPlayer)
+            {
+                CmdRegisterPlayer();
+            }
         }
     }
-    
+
     [Command]
     void CmdRegisterPlayer()
     {
@@ -108,7 +111,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         int currentCarIndex = PlayerDataManager.Instance.PlayerProfile.selectedCarIndex;
-        int currentselectedBodyUpgradeIndex = PlayerDataManager.Instance.PlayerProfile.selectedBodyUpgradeIndex ;
+        int currentselectedBodyUpgradeIndex = PlayerDataManager.Instance.PlayerProfile.selectedBodyUpgradeIndex;
 
         if (currentCarIndex != _cachedCarIndex || currentselectedBodyUpgradeIndex != _cachedCarUpgradeIndex)
         {
@@ -122,5 +125,18 @@ public class NetworkPlayerProfile : NetworkBehaviour
         selectedCarIndex = index;
         selectedBodyUpgradeIndex = index2;
         Debug.Log($"[SERVER] {playerName} выбрал машину #{index},{index2}");
+    }
+    [Server]
+    public void SpawnSelectedCar(NetworkConnectionToClient conn, Transform spawnPoint, GameObject carPref,out bool Bot, out bool Random)
+    {
+        Bot = isBot;
+        Random = isBotRandom;
+        if (Bot)
+        {
+
+            return;
+        }
+        var car = Instantiate(carPref, spawnPoint.position, spawnPoint.rotation);
+        NetworkServer.Spawn(car, conn); // Владение — у игрока
     }
 }

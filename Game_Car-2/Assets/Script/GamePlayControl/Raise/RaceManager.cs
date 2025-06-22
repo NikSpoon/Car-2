@@ -63,4 +63,8 @@ public class RaceManager : MonoBehaviour
     {
         _raceCars.Clear();
     }
+    public void SetPlayerStats()
+    {
+
+    }
 }

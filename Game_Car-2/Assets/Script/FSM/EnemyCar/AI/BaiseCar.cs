@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using Mirror;
 
 
 public class BaiseCar : BaseAIController
@@ -27,9 +28,23 @@ public class BaiseCar : BaseAIController
     public int AgroTime => _agroTime;
     public int AgroCooldownTime => _agroCooldown;
 
-    public event Action<int, int> OnCooldownAgro;    
+    public event Action<int, int> OnCooldownAgro;
 
+    private void Awake()
+    {
+        if (!Application.isPlaying)
+        {
+            enabled = false;
+            return;
+        }
 
+        // Проверяем: Mirror включен, и мы — сервер
+        if (!NetworkServer.active || !NetworkManager.singleton)
+        {
+            enabled = false;
+            return;
+        }
+    }
 
     public bool AllCheckpointsPassed()
     {
@@ -38,10 +53,12 @@ public class BaiseCar : BaseAIController
     public override void Update()
     {
         base.Update();
-        if (carSpawner == null || !carSpawner.start)
-        {
-            return;
-        }
+
+        
+
+        if (carSpawner == null || !carSpawner.start) return;
+
+       
         agrtoTimerConditions?.Evoluete();
         CheckIfStuckAndRespawn();
 
@@ -73,7 +90,8 @@ public class BaiseCar : BaseAIController
     {
         base.Start();
 
-       
+        
+
         ChekpointEnemy = new List<Transform>(Checkpoints);
 
         // 2. Запускаем FSM (после того как чекпоинты скопированы)

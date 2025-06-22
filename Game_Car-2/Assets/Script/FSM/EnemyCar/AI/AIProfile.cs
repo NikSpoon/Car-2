@@ -2,7 +2,7 @@
 
 public class AIProfile
 {
-    public string playerName;
+    public string botName;
  
     public int AI_ID;
    
@@ -15,7 +15,7 @@ public class AIProfile
 
     public void GetNewBotProfile(string name, int ID)
     {
-        playerName = name;
+        botName = name;
 
         AI_ID = ID;
 

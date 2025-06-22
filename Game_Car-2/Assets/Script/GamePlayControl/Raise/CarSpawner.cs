@@ -1,130 +1,171 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
+using Mirror;
 
-public class CarSpawner : MonoBehaviour
+public class CarSpawner : NetworkBehaviour
 {
-    private GameObject car;
-    private NoCollision carNoCollision;
-    public CarDatabase carDatabase;
-    public CarDatabase enemyCarDatabase;
-    private Rigidbody carRb;
+    [SerializeField] private Transform _start;
+    [SerializeField] private CarDatabase carDatabase;
+    [SerializeField] private CarDatabase enemyCarDatabase;
+    [SerializeField] private int enemyValue = 5;
+    [SerializeField] private int startTime = 5;
 
+    public event Action<int, bool> OnWaitForStart;
+
+    private List<CarControler> allSpawnedCars = new();
     public bool start = false;
 
-    private CarControler carControler;
+    private bool isMultiplayer = false;
 
-    [SerializeField] private int enemyValue = 5;
-    [SerializeField] private Transform _start;
-    [SerializeField] private int startTime = 10;
-
-    private bool IsGhostStartActive = false;
-    public event Action<int, bool> OnWaitForStart;
     private void Awake()
     {
+        isMultiplayer = NetworkServer.active || NetworkClient.active;
+    }
 
+    private void OnEnable()
+    {
+        if (NetworkServer.active) // Хост (сервер)
+        {
+            SpawnAllPlayers();
+            SpawnEnemiesIfHost();
+            StartCoroutine(ServerStartRaceRoutine());
+        }
+        else if (!isMultiplayer) // Сингл
+        {
+            SpawnSinglePlayer();
+            SpawnSinglePlayerEnemies(enemyValue);
+            StartCoroutine(SinglePlayerStartRoutine());
+        }
+    }
+
+    #region SPAWN LOGIC
+
+    private void SpawnSinglePlayer()
+    {
         var profile = PlayerDataManager.Instance.PlayerProfile;
+        var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
 
-        GameObject carPrefab = carDatabase.carPrefabs[profile.selectedCarIndex];
-        GameObject upgradePrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
-
-        car = Instantiate(upgradePrefab, _start.position, _start.rotation);
-        carRb = car.GetComponent<Rigidbody>();
-        carRb.isKinematic = true;
-        carNoCollision = car.GetComponent<NoCollision>();
-
-        RaceManager.Instance.RegisterRaceCar(profile.playerName, car);
+        var car = Instantiate(carPrefab, _start.position, _start.rotation);
+        SetupCar(car, profile.playerName, false);
     }
-    private void Start()
+
+    private void SpawnSinglePlayerEnemies(int count)
     {
-        carNoCollision.EnablePassiveGhost(999f);
-        SpawnEnemy(enemyValue);
-        StartCoroutine(HandleStartSequence());
+        for (int i = 0; i < count; i++)
+        {
+            int carIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carUpgrades.Count);
+            var upgrade = enemyCarDatabase.carUpgrades[carIndex].upgrades[0];
+            var botCar = Instantiate(upgrade, _start.position, _start.rotation);
+
+            string botName = $"Bot_{i}";
+            SetupCar(botCar, botName, true);
+        }
     }
-    private IEnumerator HandleStartSequence()
+
+    private void SpawnAllPlayers()
     {
-        yield return StartCoroutine(WaitForOther());
-        yield return StartCoroutine(StartRaise());
+        foreach (var conn in NetworkServer.connections.Values)
+        {
+            var profile = conn.identity.GetComponent<NetworkPlayerProfile>();
+            var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
 
+            var car = Instantiate(carPrefab, _start.position, _start.rotation);
+            NetworkServer.Spawn(car, conn);
 
-        carNoCollision.Respawn();
-        carRb.isKinematic = false;
+            SetupCar(car, profile.playerName, false);
+        }
+    }
 
+    private void SpawnEnemiesIfHost()
+    {
+        for (int i = 0; i < enemyValue; i++)
+        {
+            int carIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carUpgrades.Count);
+            var upgrade = enemyCarDatabase.carUpgrades[carIndex].upgrades[0];
+            var botCar = Instantiate(upgrade, _start.position, _start.rotation);
+
+            NetworkServer.Spawn(botCar); // Спавн без владельца
+            string botName = $"Bot_{i}";
+            SetupCar(botCar, botName, true);
+        }
+    }
+
+    private void SetupCar(GameObject carObj, string playerName, bool isBot)
+    {
+        var rb = carObj.GetComponent<Rigidbody>();
+        var noCol = carObj.GetComponent<NoCollision>();
+        var controller = carObj.GetComponent<CarControler>();
+
+        rb.isKinematic = true;
+        noCol?.EnablePassiveGhost(999f);
+
+        if (controller != null)
+        {
+            controller.IsPlayerControl = !isBot;
+            controller.IsEnamyControl = isBot;
+        }
+
+        carObj.tag = isBot ? "Enemy" : "Player";
+
+        RaceManager.Instance.RegisterRaceCar(playerName, carObj);
+        allSpawnedCars.Add(controller);
+    }
+
+    #endregion
+
+    #region START RACE
+
+    private IEnumerator ServerStartRaceRoutine()
+    {
+        // Ждём подключение всех + буфер
+        yield return new WaitForSeconds(5f); // Можно сделать динамическим
+
+        yield return CountdownBeforeStart();
+
+        RpcStartRace(); // Запускаем гонку на всех
+    }
+
+    private IEnumerator SinglePlayerStartRoutine()
+    {
+        yield return new WaitForSeconds(3f);
+        yield return CountdownBeforeStart();
+        EnableAllCars();
         start = true;
-
-
     }
-    private IEnumerator StartRaise()
-    {
-        IsGhostStartActive = true;
 
+    private IEnumerator CountdownBeforeStart()
+    {
+        bool ghost = true;
         for (int i = startTime; i > 0; i--)
         {
-            OnWaitForStart?.Invoke(i, IsGhostStartActive);
+            OnWaitForStart?.Invoke(i, ghost);
             yield return new WaitForSeconds(1f);
         }
-
         OnWaitForStart?.Invoke(0, false);
-        IsGhostStartActive = false;
-
     }
-    private IEnumerator WaitForOther()
-    {
-        yield return new WaitForSeconds(10f);
 
+    [ClientRpc]
+    private void RpcStartRace()
+    {
+        EnableAllCars();
+        start = true;
     }
-    private List<CarControler> enemyControllers = new List<CarControler>();
 
-    private void SpawnEnemy(int value)
+    private void EnableAllCars()
     {
-        var profile = PlayerDataManager.Instance.PlayerProfile;
-        var enemyUpdateIndex = profile.selectedBodyUpgradeIndex;
-        var enemyCarIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carPrefabs.Count);
-
-        GameObject enemyUpgradePrefab = enemyCarDatabase.carUpgrades[enemyCarIndex].upgrades[enemyUpdateIndex];
-
-        for (int i = 0; i < value; i++)
+        foreach (var car in allSpawnedCars)
         {
-            var enemyCar = Instantiate(enemyUpgradePrefab, _start.position, _start.rotation);
-            var rb = enemyCar.GetComponent<Rigidbody>();
-            rb.isKinematic = true;
-            enemyCar.tag = "Enemy";
+            if (car == null) continue;
 
+            var rb = car.GetComponent<Rigidbody>();
+            var noCol = car.GetComponent<NoCollision>();
 
-            var noCollision = enemyCar.GetComponent<NoCollision>();
-            var carController = enemyCar.GetComponent<CarControler>();
-
-            var uniqueEnemyName = $"Enemy_{i}_{Guid.NewGuid()}";
-            RaceManager.Instance.RegisterRaceCar(uniqueEnemyName, enemyCar);
-
-            if (carController.IsPlayerControl)
-            {
-                carController.IsPlayerControl = false;
-                carController.IsEnamyControl = true;
-            }
-            enemyControllers.Add(carController);
-
-
-            if (noCollision != null && rb != null)
-            {
-                noCollision.EnablePassiveGhost(999f);
-                StartCoroutine(WaitForStartThenEnablePhysics(rb, noCollision));
-
-            }
-
+            noCol?.Respawn();
+            rb.isKinematic = false;
         }
     }
-    private IEnumerator WaitForStartThenEnablePhysics(Rigidbody rb, NoCollision noCollision)
-    {
-        // Ждем пока start не станет true
-        yield return new WaitUntil(() => start == true);
 
-        // Отключаем ghost, включаем физику
-        noCollision.Respawn();
-        rb.isKinematic = false;  // включаем физику
-    }
-
+    #endregion
 }

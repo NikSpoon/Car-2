@@ -34,6 +34,7 @@ namespace Assets.Script.FSM.EnemyCar
 
         public abstract StateMashine<State, object> GetBehavior();
 
+     
         public virtual void Start()
         {
             agent.updatePosition = false;

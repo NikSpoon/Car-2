@@ -12,7 +12,7 @@ public class NetworkBotProfile : NetworkPlayerProfile
     [Server]
     public void InitializeBot(AIProfile botData)
     {
-        playerName = botData.playerName;
+        playerName = botData.botName;
         money = botData.money;
         xp = botData.Xp;
         level = 1;
