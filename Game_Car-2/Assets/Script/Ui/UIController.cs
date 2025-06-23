@@ -6,7 +6,8 @@ using Mirror;
 
 public class UIController : MonoBehaviour
 {
-  
+    private static UIController Instance;
+
     [SerializeField] private GameSessionData _data;
 
     [SerializeField] private Transform _root;
@@ -26,11 +27,24 @@ public class UIController : MonoBehaviour
     {
         _isMultiplayerMode = value;
     }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Start()
     {
         var appSystem = PlayerDataManager.Instance.AppSystem;
         PlayerDataManager.Instance.AppSystem.OnStateChange += OnStateChange;
-        DontDestroyOnLoad(gameObject);
+      
       
         if (_data == null) 
         {
@@ -59,6 +73,12 @@ public class UIController : MonoBehaviour
                 break;
 
             case AppState.Garage:
+               
+                if (NetworkServer.active)
+                {
+                    NetworkServer.Shutdown();
+                    Debug.Log("Сервер остановлен");
+                }
                 SceneManager.LoadScene(2);
                 // включаю катинку 
                 // запускаю корутину
@@ -81,6 +101,11 @@ public class UIController : MonoBehaviour
                 }
                 else
                 {
+                    if (NetworkClient.isConnected)
+                    {
+                        NetworkClient.Disconnect();
+                        Debug.Log("Клиент отключен");
+                    }
                     SceneManager.LoadScene(_data.raceSceneName);
                 }
                 // включаю катинку 

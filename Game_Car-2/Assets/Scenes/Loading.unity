@@ -200,11 +200,11 @@ Transform:
   m_GameObject: {fileID: 903765670}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 140663994613162453}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &903765672
 MonoBehaviour:
@@ -245,11 +245,11 @@ Transform:
   m_GameObject: {fileID: 1201844088}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 140663994613162453}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1201844090
 MonoBehaviour:
@@ -299,6 +299,8 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 6110029346762253150, guid: ca19eba3482d32d4f91f8fd356a03b34, type: 3}
   - {fileID: 549863904943538117, guid: fa2c2144b2db5dd44b4c20101929cbaa, type: 3}
+  - {fileID: 682681219204175824, guid: 2acf43ce609d6eb4a8bd794e4b495f88, type: 3}
+  - {fileID: 1163013463592450753, guid: 22e89fd638dc0f149854c0451b5c8166, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -500,20 +502,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4189005911047963775, guid: 11e7f0215972f444496a110d8ef529b3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1201844089}
-    - targetCorrespondingSourceObject: {fileID: 4189005911047963775, guid: 11e7f0215972f444496a110d8ef529b3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 903765671}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11e7f0215972f444496a110d8ef529b3, type: 3}
---- !u!224 &140663994613162453 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4189005911047963775, guid: 11e7f0215972f444496a110d8ef529b3, type: 3}
-  m_PrefabInstance: {fileID: 140663994613162452}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1658928060505515204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,3 +557,5 @@ SceneRoots:
   - {fileID: 443337330}
   - {fileID: 3273446610262164509}
   - {fileID: 140663994613162452}
+  - {fileID: 1201844089}
+  - {fileID: 903765671}

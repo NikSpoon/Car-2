@@ -14323,10 +14323,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cc4e822e49bbd43831017c751b2545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProfile:
+  PlayerProfile:
+    playerName: 
+    password: 
+    playerID: 0
+    levl: 0
+    isOnline: 0
     selectedCarIndex: 0
-    selectedBodyUpgradeIndex: 1
-    money: 1000
+    selectedBodyUpgradeIndex: 0
+    money: 0
+    Xp: 0
+  levelTableSO: {fileID: 0}
 --- !u!4 &89780704
 Transform:
   m_ObjectHideFlags: 0
@@ -303210,6 +303217,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016913664}
   m_Mesh: {fileID: 2977981768884665668, guid: 6c1edc03db999394fb0c7fadf207d49b, type: 3}
+--- !u!1 &2017742294 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7758606875038334333, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
+  m_PrefabInstance: {fileID: 4720249026470778362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2017742297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017742294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3005559035
+  _assetId: 2676800508
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &2018217797
 GameObject:
   m_ObjectHideFlags: 0
@@ -324161,6 +324190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RaseMeneger
       objectReference: {fileID: 0}
+    - target: {fileID: 1471026407142968099, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
+      propertyPath: sceneId
+      value: 1508832326
+      objectReference: {fileID: 0}
     - target: {fileID: 4137591765852292223, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
       propertyPath: m_LocalPosition.z
       value: -201.6
@@ -324205,7 +324238,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1471026407142968099, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4090835471835122261, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
     - {fileID: 1156127036811160752, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
@@ -324260,7 +324294,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4402665588598338429, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
       insertIndex: 13
       addedObject: {fileID: 1360653797}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7758606875038334333, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2017742297}
   m_SourcePrefab: {fileID: 100100000, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
 --- !u!4 &6366941275905989439 stripped
 Transform:

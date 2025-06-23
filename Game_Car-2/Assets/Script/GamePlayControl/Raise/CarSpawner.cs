@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.Runtime.ConstrainedExecution;
 
 public class CarSpawner : NetworkBehaviour
 {
@@ -22,74 +23,113 @@ public class CarSpawner : NetworkBehaviour
     private void Awake()
     {
         isMultiplayer = NetworkServer.active || NetworkClient.active;
+        StartCoroutine(InitRotine());
     }
 
-    private void OnEnable()
+    private void Start()
     {
         if (NetworkServer.active) // Хост (сервер)
         {
-            SpawnAllPlayers();
-            SpawnEnemiesIfHost();
-            StartCoroutine(ServerStartRaceRoutine());
+            StartCoroutine(InitMirorRotine());
+            SpawnMiror();
+            ServerStartRaceRoutine();
         }
         else if (!isMultiplayer) // Сингл
         {
-            SpawnSinglePlayer();
-            SpawnSinglePlayerEnemies(enemyValue);
-            StartCoroutine(SinglePlayerStartRoutine());
+            SpawnSingle();
+            SinglePlayerStartRoutine();
         }
     }
-
     #region SPAWN LOGIC
 
-    private void SpawnSinglePlayer()
+    private void SpawnSingle()
     {
         var profile = PlayerDataManager.Instance.PlayerProfile;
+        SpawnSinglePlayer(profile);
+        SpawnSinglePlayerEnemies(enemyValue, profile);
+    }
+    private void SpawnSinglePlayer(PlayerProfile profile)
+    {
         var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
 
         var car = Instantiate(carPrefab, _start.position, _start.rotation);
         SetupCar(car, profile.playerName, false);
     }
 
-    private void SpawnSinglePlayerEnemies(int count)
+    private void SpawnSinglePlayerEnemies(int count, PlayerProfile profile)
     {
+        BotCreator botCreator = new BotCreator();
         for (int i = 0; i < count; i++)
         {
             int carIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carUpgrades.Count);
-            var upgrade = enemyCarDatabase.carUpgrades[carIndex].upgrades[0];
+            var upgrade = enemyCarDatabase.carUpgrades[carIndex].upgrades[profile.selectedBodyUpgradeIndex];
             var botCar = Instantiate(upgrade, _start.position, _start.rotation);
 
-            string botName = $"Bot_{i}";
+            AIProfile aiProfile = botCreator.CreateUniqueBot();
+            string botName = aiProfile.botName;
+
             SetupCar(botCar, botName, true);
         }
     }
-
-    private void SpawnAllPlayers()
+    private void SpawnMiror()
     {
         foreach (var conn in NetworkServer.connections.Values)
         {
+            if (conn.identity == null) continue;
+
             var profile = conn.identity.GetComponent<NetworkPlayerProfile>();
-            var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
+            if (profile == null) continue;
 
-            var car = Instantiate(carPrefab, _start.position, _start.rotation);
-            NetworkServer.Spawn(car, conn);
+            var bot = profile.isBot;
 
-            SetupCar(car, profile.playerName, false);
+            if (!bot)
+            {
+                var car = SpawnPlayer(profile);
+
+                NetworkServer.Spawn(car, conn);
+
+                SetupCar(car, profile.playerName, false);
+            }
+            else
+            {
+                var botCar = SpawnEnemiesIfHost(profile);
+
+                NetworkServer.Spawn(botCar); // Спавн без владельца
+
+                SetupCar(botCar, profile.playerName, true);
+            }
         }
     }
 
-    private void SpawnEnemiesIfHost()
+    private GameObject SpawnPlayer(NetworkPlayerProfile profile)
     {
-        for (int i = 0; i < enemyValue; i++)
-        {
-            int carIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carUpgrades.Count);
-            var upgrade = enemyCarDatabase.carUpgrades[carIndex].upgrades[0];
-            var botCar = Instantiate(upgrade, _start.position, _start.rotation);
+        var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
 
-            NetworkServer.Spawn(botCar); // Спавн без владельца
-            string botName = $"Bot_{i}";
-            SetupCar(botCar, botName, true);
+        var car = Instantiate(carPrefab, _start.position, _start.rotation);
+        return car;
+    }
+
+    private GameObject SpawnEnemiesIfHost(NetworkPlayerProfile profile)
+    {
+        int carIndex = 0, carUpgrades = 0;
+        if (profile.isBotRandom)
+        {
+            if (NetworkServer.active)
+            {
+                var hostProfile = PlayerDataManager.Instance.PlayerProfile;
+                carIndex = hostProfile.selectedCarIndex;
+                carUpgrades = UnityEngine.Random.Range(0, enemyCarDatabase.carUpgrades.Count);
+            }
         }
+        else
+        {
+            carUpgrades = profile.selectedBodyUpgradeIndex;
+            carIndex = profile.selectedCarIndex;
+        }
+        var carPrefab = carDatabase.carUpgrades[carIndex].upgrades[carUpgrades];
+        var botCar = Instantiate(carPrefab, _start.position, _start.rotation);
+
+        return botCar;
     }
 
     private void SetupCar(GameObject carObj, string playerName, bool isBot)
@@ -97,6 +137,10 @@ public class CarSpawner : NetworkBehaviour
         var rb = carObj.GetComponent<Rigidbody>();
         var noCol = carObj.GetComponent<NoCollision>();
         var controller = carObj.GetComponent<CarControler>();
+
+        if (rb == null) Debug.LogError("SetupCar: Rigidbody is missing!");
+        if (noCol == null) Debug.LogWarning("SetupCar: NoCollision is missing!");
+        if (controller == null) Debug.LogError("SetupCar: CarControler is missing!");
 
         rb.isKinematic = true;
         noCol?.EnablePassiveGhost(999f);
@@ -126,7 +170,10 @@ public class CarSpawner : NetworkBehaviour
 
         RpcStartRace(); // Запускаем гонку на всех
     }
-
+    private IEnumerator InitRotine()
+    {
+        yield return new WaitForSeconds(3f);
+    }
     private IEnumerator SinglePlayerStartRoutine()
     {
         yield return new WaitForSeconds(3f);
@@ -144,6 +191,14 @@ public class CarSpawner : NetworkBehaviour
             yield return new WaitForSeconds(1f);
         }
         OnWaitForStart?.Invoke(0, false);
+    }
+    private IEnumerator InitMirorRotine()
+    {
+        while (NetworkClient.ready)
+        {
+
+          yield return new WaitForSeconds(1f);
+        }
     }
 
     [ClientRpc]

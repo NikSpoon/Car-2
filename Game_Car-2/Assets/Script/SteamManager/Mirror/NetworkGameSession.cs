@@ -32,7 +32,10 @@ public class NetworkGameSession : NetworkBehaviour
     public int timeToStart;
 
     public List<UIGameSession> uIGameSessions = new List<UIGameSession>();
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     private void Start()
     {
         maxPlayers = 10;

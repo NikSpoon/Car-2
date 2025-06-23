@@ -32,11 +32,6 @@ public class BaiseCar : BaseAIController
 
     private void Awake()
     {
-        if (!Application.isPlaying)
-        {
-            enabled = false;
-            return;
-        }
 
         // Проверяем: Mirror включен, и мы — сервер
         if (!NetworkServer.active || !NetworkManager.singleton)
@@ -177,7 +172,10 @@ public class BaiseCar : BaseAIController
     }
 
     private void OnTriggerEnter(Collider other)
-    {  
+    {
+        if (!other.CompareTag("Chekpoint"))
+            return;
+
         Transform checkpointTransform = other.transform;
 
         int index = ChekpointEnemy.IndexOf(checkpointTransform);
@@ -193,13 +191,13 @@ public class BaiseCar : BaseAIController
         }
         else
         {
-          //  Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {ChekpointEnemy[currentCheckpointIndex].name}");
+           Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {ChekpointEnemy[currentCheckpointIndex].name}");
         }
         
     }
     private void OnCollisionEnter(Collision collision)
     {
-       
+
         if (collision.transform.root == transform.root)
             return;
 

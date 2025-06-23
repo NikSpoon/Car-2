@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class NetworkPlayerProfile : NetworkBehaviour
@@ -22,6 +23,13 @@ public class NetworkPlayerProfile : NetworkBehaviour
 
     private int _cachedCarIndex = -1;
     private int _cachedCarUpgradeIndex = -1;
+
+    private bool _isReadyToSendCommands = false;
+    private bool _isWaitingForReady = false;
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -79,7 +87,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
     }
 
     [Command]
-    void CmdUpdateProfile(string name, int newMoney, int newXp, int newLevel, int newCarIndex)
+    private void CmdUpdateProfile(string name, int newMoney, int newXp, int newLevel, int newCarIndex)
     {
         playerName = name;
         money = newMoney;
@@ -110,6 +118,16 @@ public class NetworkPlayerProfile : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        // Если ещё не готов — запускаем ожидание один раз
+        if (!_isReadyToSendCommands)
+        {
+            if (!_isWaitingForReady)
+            {
+                StartCoroutine(WaitUntilClientReady());
+                _isWaitingForReady = true;
+            }
+            return;
+        }
         int currentCarIndex = PlayerDataManager.Instance.PlayerProfile.selectedCarIndex;
         int currentselectedBodyUpgradeIndex = PlayerDataManager.Instance.PlayerProfile.selectedBodyUpgradeIndex;
 
@@ -124,7 +142,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
     {
         selectedCarIndex = index;
         selectedBodyUpgradeIndex = index2;
-        Debug.Log($"[SERVER] {playerName} выбрал машину #{index},{index2}");
+        //Debug.Log($"[SERVER] {playerName} выбрал машину #{index},{index2}");
     }
     [Server]
     public void SpawnSelectedCar(NetworkConnectionToClient conn, Transform spawnPoint, GameObject carPref,out bool Bot, out bool Random)
@@ -138,5 +156,18 @@ public class NetworkPlayerProfile : NetworkBehaviour
         }
         var car = Instantiate(carPref, spawnPoint.position, spawnPoint.rotation);
         NetworkServer.Spawn(car, conn); // Владение — у игрока
+    }
+    private IEnumerator WaitUntilClientReady()
+    {
+        // Безопасная задержка
+        yield return new WaitForSeconds(0.5f);
+
+        while (!NetworkClient.ready)
+        {
+            yield return null;
+        }
+
+        _isReadyToSendCommands = true;
+        Debug.Log($"✅ Клиент {playerName} теперь готов к командам.");
     }
 }
