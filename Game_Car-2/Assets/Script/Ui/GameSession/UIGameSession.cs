@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using Mirror;
 using System.Collections;
+using IO.Swagger.Model;
 
 public class UIGameSession : MonoBehaviour
 {
@@ -18,11 +19,13 @@ public class UIGameSession : MonoBehaviour
     [SerializeField] private RectTransform playersContainer;
     [SerializeField] private GameObject playerUIPrefab;
 
+
     private NetworkGameSession currentSession;
 
     private void OnEnable()
     {
         startPanel.SetActive(false);
+
         TryAttachToExistingSession();
     }
 
@@ -40,12 +43,12 @@ public class UIGameSession : MonoBehaviour
     }
     private void OnPlayersListChanged(SyncList<NetworkPlayerProfile>.Operation op, int index, NetworkPlayerProfile oldItem, NetworkPlayerProfile newItem)
     {
-        Debug.Log($"📢 Игроки изменились: {op} в позиции {index}");
+      //  Debug.Log($"📢 Игроки изменились: {op} в позиции {index}");
         RefreshPlayersUI();
     }
     public void RefreshPlayersUI()
     {
-        Debug.Log("🔁 Обновляем список игроков");
+       // Debug.Log("🔁 Обновляем список игроков");
 
         if (playersContainer == null)
         {
@@ -58,7 +61,7 @@ public class UIGameSession : MonoBehaviour
             return;
         }
 
-        Debug.Log($"📋 Игроков в сессии: {currentSession.syncedPlayers.Count}");
+       // Debug.Log($"📋 Игроков в сессии: {currentSession.syncedPlayers.Count}");
         if (playersContainer == null)
             return;
 
@@ -83,6 +86,7 @@ public class UIGameSession : MonoBehaviour
             Debug.LogWarning("RefreshSessionUI: currentSession is null");
             return;
         }
+        sessionNameText.text = $"Сессия: {currentSession.sessionName}";
         sessionMapName.text = $"Карта: {currentSession.mapName}";
         sessionPlayersValue.text = $"Игроков: {currentSession.syncedPlayers.Count}";
         sessionMaxPlayersValue.text = $"Макс: {currentSession.maxPlayers}";
@@ -95,7 +99,7 @@ public class UIGameSession : MonoBehaviour
         if (currentSession == null)
         {
             TryAttachToExistingSession();
-            Debug.LogWarning("currentSession is NULL");
+           // Debug.LogWarning("currentSession is NULL");
             return;
         }
 
@@ -150,21 +154,29 @@ public class UIGameSession : MonoBehaviour
         var session = FindFirstObjectByType<NetworkGameSession>(FindObjectsInactive.Include);
         if (session != null && session.sessionId != null)
         {
+            if (session == null)
+            {
+                Debug.LogWarning("session == null");
+                return;
+            }
             session.uIGameSessions.Add(this);
             SetSession(session);
 
         }
         else
         {
-            Debug.LogWarning("❌ Не удалось найти активную NetworkGameSession при активации панели");
+           // Debug.LogWarning("❌ Не удалось найти активную NetworkGameSession при активации панели");
         }
     }
 
 
     public void StartRace()
     {
-        if (currentSession != null && currentSession.isServer)
+        if (currentSession != null && currentSession.isServer) 
+        { 
             currentSession.StartRace();
+
+        }
     }
     public void AddBot()
     {

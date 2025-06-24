@@ -22,6 +22,7 @@ public class PlayerDataManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             Money.Init(PlayerProfile);
             Experience.Init(PlayerProfile);
+            
         }
         else
         {

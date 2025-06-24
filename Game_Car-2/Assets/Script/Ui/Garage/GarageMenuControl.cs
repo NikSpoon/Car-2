@@ -63,7 +63,10 @@ public class GarageMenuControl : MonoBehaviour
     {
 
         if (_raiceStarter != null && _raiceStarter.IsRaiceStarterFul)
+        {
+            
             PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
+        }
         else
             _creatorNull.SetActive(true);
     }

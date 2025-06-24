@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GarageUI : MonoBehaviour
+public class GarageUISelectCar : MonoBehaviour
 {
    public void SelectCar(int index )
     {

@@ -10,6 +10,7 @@ public class GameSessionData : ScriptableObject
         if (race == null)
         {
             Debug.LogError("Попытка установить гонку, но RaceData — null.");
+            
             return;
         }
         PlayerDataManager.Instance.PlayerSessionData.GetInstansRaceData(race);

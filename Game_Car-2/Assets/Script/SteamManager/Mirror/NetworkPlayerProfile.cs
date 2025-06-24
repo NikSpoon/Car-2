@@ -51,7 +51,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
         if (session != null)
         {
             Initialize(PlayerDataManager.Instance.PlayerProfile);
-            Debug.Log($"👤 Игрок добавлен в сессию: {playerName}");
+           // Debug.Log($"👤 Игрок добавлен в сессию: {playerName}");
             session.AddPlayer(this);
         }
     }
@@ -168,6 +168,6 @@ public class NetworkPlayerProfile : NetworkBehaviour
         }
 
         _isReadyToSendCommands = true;
-        Debug.Log($"✅ Клиент {playerName} теперь готов к командам.");
+        // Debug.Log($"✅ Клиент {playerName} теперь готов к командам.");
     }
 }

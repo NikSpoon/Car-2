@@ -20,6 +20,7 @@ public class SteamLobbyManager : MonoBehaviour
 
     public System.Action<string> OnLobbyCreatedUI; // Событие для UI: передаем ID лобби
 
+  
     private void Start()
     {
         
@@ -70,7 +71,7 @@ public class SteamLobbyManager : MonoBehaviour
 
         // Создаем и запускаем объект с NetworkGameSession (синхронизированная сессия)
         SpawnNetworkGameSession();
-        StartCoroutine(ShowMySession());
+        
     }
 
     private void OnLobbyEntered(LobbyEnter_t result)
@@ -136,6 +137,7 @@ public class SteamLobbyManager : MonoBehaviour
     }
     private IEnumerator ShowMySession()
     {
+        
         float logInterval = 0.5f;
         float timeSinceLastLog = 0f;
         int attemptCount = 0;
@@ -219,5 +221,7 @@ public class SteamLobbyManager : MonoBehaviour
             timeSinceLastLog += Time.deltaTime;
             yield return null;
         }
+        
     }
+    
 }

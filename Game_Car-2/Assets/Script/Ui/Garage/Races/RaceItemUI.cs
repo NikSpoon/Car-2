@@ -12,8 +12,9 @@ public class RaceItemUI : MonoBehaviour
     [SerializeField] private GameObject Error;
 
     private RaceData raceData;
-
+    [SerializeField] private RaceDatabase raceDatabase;
     [SerializeField] private GameSessionData sessionData;
+  
     public void Sesect()
     {
         if (PlayerDataManager.Instance.PlayerProfile.Xp < XP)
@@ -43,5 +44,28 @@ public class RaceItemUI : MonoBehaviour
            
             Debug.Log($"Выбрана гонка: {raceData.RaceName}");
         }
+        else
+        {
+            SelectRandomRace();
+            
+        }
     }
+    public void SelectRandomRace()
+    {
+        if (raceDatabase == null || raceDatabase.Races == null || raceDatabase.Races.Count == 0)
+        {
+            Debug.LogWarning("RaceDatabase пуст или не задан.");
+            return;
+        }
+
+        var randomIndex = Random.Range(0, raceDatabase.Races.Count);
+        var randomRace = raceDatabase.Races[randomIndex];
+
+        raceData = randomRace; // сохраняем, чтобы повторно не вызывать
+
+        sessionData.SetRaceMap(randomRace);
+
+        Debug.Log($"Случайная гонка выбрана: {randomRace.RaceName}");
+    }
+   
 }

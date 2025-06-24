@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using System.Runtime.ConstrainedExecution;
+
 
 public class CarSpawner : NetworkBehaviour
 {
@@ -18,59 +18,19 @@ public class CarSpawner : NetworkBehaviour
     private List<CarControler> allSpawnedCars = new();
     public bool start = false;
 
-    private bool isMultiplayer = false;
 
     private void Awake()
     {
-        isMultiplayer = NetworkServer.active || NetworkClient.active;
         StartCoroutine(InitRotine());
     }
 
     private void Start()
     {
-        if (NetworkServer.active) // Хост (сервер)
-        {
-            StartCoroutine(InitMirorRotine());
-            SpawnMiror();
-            ServerStartRaceRoutine();
-        }
-        else if (!isMultiplayer) // Сингл
-        {
-            SpawnSingle();
-            SinglePlayerStartRoutine();
-        }
-    }
-    #region SPAWN LOGIC
-
-    private void SpawnSingle()
-    {
-        var profile = PlayerDataManager.Instance.PlayerProfile;
-        SpawnSinglePlayer(profile);
-        SpawnSinglePlayerEnemies(enemyValue, profile);
-    }
-    private void SpawnSinglePlayer(PlayerProfile profile)
-    {
-        var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
-
-        var car = Instantiate(carPrefab, _start.position, _start.rotation);
-        SetupCar(car, profile.playerName, false);
+        StartCoroutine(InitMirorRotine());
+        SpawnMiror();
+        StartCoroutine(ServerStartRaceRoutine());
     }
 
-    private void SpawnSinglePlayerEnemies(int count, PlayerProfile profile)
-    {
-        BotCreator botCreator = new BotCreator();
-        for (int i = 0; i < count; i++)
-        {
-            int carIndex = UnityEngine.Random.Range(0, enemyCarDatabase.carUpgrades.Count);
-            var upgrade = enemyCarDatabase.carUpgrades[carIndex].upgrades[profile.selectedBodyUpgradeIndex];
-            var botCar = Instantiate(upgrade, _start.position, _start.rotation);
-
-            AIProfile aiProfile = botCreator.CreateUniqueBot();
-            string botName = aiProfile.botName;
-
-            SetupCar(botCar, botName, true);
-        }
-    }
     private void SpawnMiror()
     {
         foreach (var conn in NetworkServer.connections.Values)
@@ -157,9 +117,6 @@ public class CarSpawner : NetworkBehaviour
         allSpawnedCars.Add(controller);
     }
 
-    #endregion
-
-    #region START RACE
 
     private IEnumerator ServerStartRaceRoutine()
     {
@@ -172,14 +129,7 @@ public class CarSpawner : NetworkBehaviour
     }
     private IEnumerator InitRotine()
     {
-        yield return new WaitForSeconds(3f);
-    }
-    private IEnumerator SinglePlayerStartRoutine()
-    {
-        yield return new WaitForSeconds(3f);
-        yield return CountdownBeforeStart();
-        EnableAllCars();
-        start = true;
+        yield return new WaitUntil(() => NetworkServer.active && NetworkClient.ready);
     }
 
     private IEnumerator CountdownBeforeStart()
@@ -197,7 +147,7 @@ public class CarSpawner : NetworkBehaviour
         while (NetworkClient.ready)
         {
 
-          yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -221,6 +171,10 @@ public class CarSpawner : NetworkBehaviour
             rb.isKinematic = false;
         }
     }
+    private void OnDisable()
+    {
 
-    #endregion
+        Debug.Log("Dosable");
+    }
+
 }

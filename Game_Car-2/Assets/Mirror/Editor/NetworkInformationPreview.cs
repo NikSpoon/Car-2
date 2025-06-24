@@ -60,7 +60,7 @@ namespace Mirror
         }
 
         GUIContent title;
-        Styles styles = new Styles();
+        Styles styles = null;
 
         public override GUIContent GetPreviewTitle()
         {
@@ -79,6 +79,11 @@ namespace Mirror
 
         public override void OnPreviewGUI(Rect r, GUIStyle background)
         {
+            if (styles == null)
+            {
+                styles = new Styles();
+            }
+
             if (Event.current.type != EventType.Repaint)
                 return;
 
@@ -95,8 +100,7 @@ namespace Mirror
             if (identity == null)
                 return;
 
-            if (styles == null)
-                styles = new Styles();
+           
 
 
             // padding

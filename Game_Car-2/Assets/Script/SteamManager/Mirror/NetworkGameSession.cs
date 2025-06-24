@@ -27,6 +27,7 @@ public class NetworkGameSession : NetworkBehaviour
     private BotCreator botCreator;
 
     [SerializeField] private GameObject botPrefab;
+    [SerializeField] private RaceDatabase raceDatabase;
 
     public bool onStart;
     public int timeToStart;
@@ -38,6 +39,7 @@ public class NetworkGameSession : NetworkBehaviour
     }
     private void Start()
     {
+        sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
         maxPlayers = 10;
         botCreator = new BotCreator();
     }
@@ -65,7 +67,17 @@ public class NetworkGameSession : NetworkBehaviour
         sessionId = pendingSessionId;
         sessionName = pendingSessionName;
 
-
+        // Установка первой гонки
+        if (raceDatabase != null && raceDatabase.Races.Count > 0)
+        {
+            SetRaceData(raceDatabase.Races[0]);
+            PlayerDataManager.Instance.PlayerSessionData.GetInstansRaceData(raceDatabase.Races[0]);
+           // Debug.Log($"🏁 Первая карта установлена: {raceDatabase.Races[0].RaceName}");
+        }
+        else
+        {
+            Debug.LogWarning("RaceDatabase не задан или пуст. Не удалось установить первую карту.");
+        }
 
         var uiPanel = FindObjectsByType<UISessionPanel>(FindObjectsSortMode.None);
         foreach (var panel in uiPanel)
@@ -77,10 +89,7 @@ public class NetworkGameSession : NetworkBehaviour
             }
 
         }
-
-
-
-        sessionName = "New Steam Session";
+     
     }
 
     [Server]

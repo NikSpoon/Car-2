@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using System;
+using System.Collections;
 
 public class UISessionPanel : MonoBehaviour
 {
@@ -29,7 +31,7 @@ public class UISessionPanel : MonoBehaviour
         steamLobbyManager.CreateLobby();
 
        panelSessionRoot.SetActive(true);
-       
+  
     }
 
     public void OnClickJoin()
@@ -37,6 +39,7 @@ public class UISessionPanel : MonoBehaviour
         if (!string.IsNullOrEmpty(sessionIdInput.text))
         {
             steamLobbyManager.JoinLobbyById(sessionIdInput.text);
+         
         }
     }
 
@@ -56,6 +59,26 @@ public class UISessionPanel : MonoBehaviour
    
     public void ShowSessions(List<NetworkGameSession> sessions)
     {
+        if (sessionsCountText == null)
+        {
+            Debug.LogError("sessionsCountText не назначен в инспекторе UISessionPanel!");
+            return;
+        }
+
+        if (oneSessionPrefab == null)
+        {
+            Debug.LogError("oneSessionPrefab не назначен в инспекторе UISessionPanel!");
+            return;
+        }
+
+        if (context == null)
+        {
+            Debug.LogError("context (Transform-контейнер) не назначен в инспекторе UISessionPanel!");
+            return;
+        }
+
+        sessionsCountText.text = $"Сессий найдено: {sessions.Count}";
+
         // Очищаем старые UI-элементы
         foreach (var item in spawnedSessionItems)
         {
@@ -84,9 +107,19 @@ public class UISessionPanel : MonoBehaviour
             return;
         }
 
-        Debug.Log("📥 Привязываем сессию к UI: " + session.sessionId);
+        // Debug.Log("📥 Привязываем сессию к UI: " + session.sessionId);
 
         // Показываем только одну сессию — текущую
-        ShowSessions(new List<NetworkGameSession> { session });
+        StartCoroutine(DelayedShowSessions(new List<NetworkGameSession> { session }));
+    }
+    private IEnumerator DelayedShowSessions(List<NetworkGameSession> sessions)
+    {
+        // Ждём, пока ClosePanel.Instance и openPanels инициализируются
+        while (ClosePanel.Instance == null || ClosePanel.Instance.openPanels == null)
+        {
+            yield return null; // ждём следующий кадр
+        }
+
+        ShowSessions(sessions);
     }
 }
