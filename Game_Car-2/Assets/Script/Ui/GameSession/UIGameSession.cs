@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
+
 using Mirror;
 using System.Collections;
-using IO.Swagger.Model;
+
 
 public class UIGameSession : MonoBehaviour
 {
@@ -174,8 +174,8 @@ public class UIGameSession : MonoBehaviour
     {
         if (currentSession != null && currentSession.isServer) 
         { 
-            currentSession.StartRace();
-
+            currentSession.RequestStartRace();
+            PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
         }
     }
     public void AddBot()

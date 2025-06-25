@@ -23,30 +23,49 @@ public class CarSpawner : NetworkBehaviour
     {
         StartCoroutine(InitRotine());
     }
-
     private void Start()
     {
-        StartCoroutine(InitMirorRotine());
-        SpawnMiror();
         StartCoroutine(ServerStartRaceRoutine());
     }
 
+    [Server]
     private void SpawnMiror()
     {
-        foreach (var conn in NetworkServer.connections.Values)
+        // Берём всех игроков из сессии — и игроков с подключением, и ботов
+        var session = FindFirstObjectByType<NetworkGameSession>();
+        if (session == null)
         {
-            if (conn.identity == null) continue;
-
-            var profile = conn.identity.GetComponent<NetworkPlayerProfile>();
+            Debug.LogError("NetworkGameSession не найден!");
+            return;
+        }
+        foreach (var profile in session.syncedPlayers)
+        {
             if (profile == null) continue;
-
+            NetworkConnection conn = null;
             var bot = profile.isBot;
+            
+            foreach (var c in NetworkServer.connections.Values)
+            {
+                if (c.identity == profile.netIdentity)
+                {
+                    conn = c;
+                    break;
+                }
+            }
 
             if (!bot)
             {
                 var car = SpawnPlayer(profile);
 
-                NetworkServer.Spawn(car, conn);
+                if (conn != null)
+                {
+                    NetworkServer.Spawn(car, conn as NetworkConnectionToClient);
+                }
+                else
+                {
+                    Debug.LogWarning($"Нет подключения для игрока {profile.playerName}, спавним без владельца");
+                    NetworkServer.Spawn(car);
+                }
 
                 SetupCar(car, profile.playerName, false);
             }
@@ -58,6 +77,7 @@ public class CarSpawner : NetworkBehaviour
 
                 SetupCar(botCar, profile.playerName, true);
             }
+       
         }
     }
 
@@ -86,7 +106,7 @@ public class CarSpawner : NetworkBehaviour
             carUpgrades = profile.selectedBodyUpgradeIndex;
             carIndex = profile.selectedCarIndex;
         }
-        var carPrefab = carDatabase.carUpgrades[carIndex].upgrades[carUpgrades];
+        var carPrefab = enemyCarDatabase.carUpgrades[carIndex].upgrades[carUpgrades];
         var botCar = Instantiate(carPrefab, _start.position, _start.rotation);
 
         return botCar;
@@ -120,8 +140,6 @@ public class CarSpawner : NetworkBehaviour
 
     private IEnumerator ServerStartRaceRoutine()
     {
-        // Ждём подключение всех + буфер
-        yield return new WaitForSeconds(5f); // Можно сделать динамическим
 
         yield return CountdownBeforeStart();
 
@@ -129,9 +147,13 @@ public class CarSpawner : NetworkBehaviour
     }
     private IEnumerator InitRotine()
     {
-        yield return new WaitUntil(() => NetworkServer.active && NetworkClient.ready);
-    }
+        while (!NetworkServer.active)
+            yield return null;
 
+        Debug.Log("✅ Server is active — starting Spawn");
+        SpawnMiror();
+        
+    }
     private IEnumerator CountdownBeforeStart()
     {
         bool ghost = true;
@@ -141,14 +163,6 @@ public class CarSpawner : NetworkBehaviour
             yield return new WaitForSeconds(1f);
         }
         OnWaitForStart?.Invoke(0, false);
-    }
-    private IEnumerator InitMirorRotine()
-    {
-        while (NetworkClient.ready)
-        {
-
-            yield return new WaitForSeconds(1f);
-        }
     }
 
     [ClientRpc]

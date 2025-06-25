@@ -72,7 +72,7 @@ public class NetworkGameSession : NetworkBehaviour
         {
             SetRaceData(raceDatabase.Races[0]);
             PlayerDataManager.Instance.PlayerSessionData.GetInstansRaceData(raceDatabase.Races[0]);
-           // Debug.Log($"🏁 Первая карта установлена: {raceDatabase.Races[0].RaceName}");
+            // Debug.Log($"🏁 Первая карта установлена: {raceDatabase.Races[0].RaceName}");
         }
         else
         {
@@ -89,7 +89,7 @@ public class NetworkGameSession : NetworkBehaviour
             }
 
         }
-     
+
     }
 
     [Server]
@@ -134,51 +134,6 @@ public class NetworkGameSession : NetworkBehaviour
     }
 
     [Server]
-    public void StartRace()
-    {
-        if (!currentRaceData)
-        {
-            ErrorLog("StartRace");
-            return;
-        }
-
-        raceStarted = true;
-        StartCoroutine(StartTimer());
-    }
-    private IEnumerator StartTimer()
-    {
-        int time = 10;
-        timeToStart = time;
-        onStart = true;
-
-        while (timeToStart > 0)
-        {
-            RpcUpdateTimer(timeToStart); 
-            yield return new WaitForSeconds(1f);
-            timeToStart--;
-        }
-
-        RpcUpdateTimer(0); 
-
-        onStart = false;
-        PlayerDataManager.Instance.AppSystem.Trigger(AppTriger.ToGameplay);
-        NetworkManager.singleton.ServerChangeScene(mapName);
-    }
-
-    [ClientRpc]
-    private void RpcUpdateTimer(int timeLeft)
-    {
-        foreach (var t in uIGameSessions)
-        {
-            if (t != null)
-            {
-                t.UpdateTimer(timeLeft);
-            }
-
-        }
-    }
-
-    [Server]
     public void AddBot()
     {
         // Проверяем, что вызывающий — хост (сервер)
@@ -214,6 +169,85 @@ public class NetworkGameSession : NetworkBehaviour
 
         Debug.Log($"🤖 Добавлен бот: {botProfile.playerName}");
     }
+   
+    public void RequestStartRace()
+    {
+        if (isServer)
+        {
+            // Если вызвал сервер (хост), сразу запускаем гонку
+            StartRace();
+        }
+        else if (authority)
+        {
+            // Если клиент с authority, отправляем запрос серверу
+            CmdRequestStartRace();
+        }
+        else
+        {
+            Debug.LogWarning("Нет права для запроса старта гонки.");
+        }
+    }
+
+    [Command]
+    private void CmdRequestStartRace()
+    {
+        // Команда вызывается на сервере
+
+        if (!raceStarted)
+        {
+            StartRace();
+        }
+    }
+
+    [Server]
+    private void StartRace()
+    {
+        if (!currentRaceData)
+        {
+            Debug.LogError("StartRace: нет данных гонки");
+            return;
+        }
+
+        raceStarted = true;
+
+        // Запускаем корутину обратного отсчёта
+        StartCoroutine(StartTimer());
+    }
+
+    // Таймер с обратным отсчётом и рассылкой времени всем клиентам
+    [Server]
+    private IEnumerator StartTimer()
+    {
+        int time = 10;
+        timeToStart = time;
+        onStart = true;
+
+        while (timeToStart > 0)
+        {
+            RpcUpdateTimer(timeToStart);
+            yield return new WaitForSeconds(1f);
+            timeToStart--;
+        }
+
+        RpcUpdateTimer(0);
+        onStart = false;
+
+        // После таймера переключаем сцену и уведомляем клиентов переключить UI
+        NetworkManager.singleton.ServerChangeScene(mapName);
+
+        
+    }
+
+    [ClientRpc]
+    private void RpcUpdateTimer(int timeLeft)
+    {
+        foreach (var ui in uIGameSessions)
+        {
+            if (ui != null)
+                ui.UpdateTimer(timeLeft);
+        }
+    }
+
 
     private void Update()
     {
@@ -222,21 +256,8 @@ public class NetworkGameSession : NetworkBehaviour
         mapName = currentRaceData.SceneName;
         maxPlayers = currentRaceData.MaxCar;
     }
-
-    [Command]
-    public void CmdRequestStartRace()
-    {
-        if (!isServer) return;
-
-        if (!raceStarted)
-        {
-            StartRace();
-        }
-    }
-
     private void ErrorLog(string context)
     {
         return;
     }
-
 }

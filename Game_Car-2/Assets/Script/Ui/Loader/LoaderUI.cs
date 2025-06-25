@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+
 using System.Text.RegularExpressions;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
+
 using System.Collections;
 
 public class LoaderUI : MonoBehaviour

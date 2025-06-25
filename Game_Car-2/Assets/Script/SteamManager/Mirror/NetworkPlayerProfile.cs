@@ -135,6 +135,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
         {
             CmdSetCarIndex(currentCarIndex, currentselectedBodyUpgradeIndex);
             _cachedCarIndex = currentCarIndex;
+            _cachedCarUpgradeIndex = currentselectedBodyUpgradeIndex; 
         }
     }
     [Command]
@@ -170,4 +171,5 @@ public class NetworkPlayerProfile : NetworkBehaviour
         _isReadyToSendCommands = true;
         // Debug.Log($"✅ Клиент {playerName} теперь готов к командам.");
     }
+ 
 }

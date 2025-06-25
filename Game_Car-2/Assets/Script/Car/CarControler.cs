@@ -1,7 +1,7 @@
 
 using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+
 
 
 public class CarControler : MonoBehaviour

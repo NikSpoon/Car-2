@@ -79,7 +79,7 @@ public class UIController : MonoBehaviour
                     var session = FindFirstObjectByType<NetworkGameSession>();
                     if (session != null)
                     {
-                        session.CmdRequestStartRace();
+                        session.RequestStartRace();
                     }
                     else
                     {
