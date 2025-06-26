@@ -10,7 +10,7 @@ public class CarSpawner : NetworkBehaviour
     [SerializeField] private Transform _start;
     [SerializeField] private CarDatabase carDatabase;
     [SerializeField] private CarDatabase enemyCarDatabase;
-    [SerializeField] private int enemyValue = 5;
+  //  [SerializeField] private int enemyValue = 5;
     [SerializeField] private int startTime = 5;
 
     public event Action<int, bool> OnWaitForStart;
@@ -60,6 +60,9 @@ public class CarSpawner : NetworkBehaviour
                 if (conn != null)
                 {
                     NetworkServer.Spawn(car, conn as NetworkConnectionToClient);
+                    var FollowCar  = profile.gameObject.GetComponent<PlayerFollowCar>();
+
+                    FollowCar.FindRoot(SetRootForMirrir(car));
                 }
                 else
                 {
@@ -68,6 +71,7 @@ public class CarSpawner : NetworkBehaviour
                 }
 
                 SetupCar(car, profile.playerName, false);
+                
             }
             else
             {
@@ -133,6 +137,7 @@ public class CarSpawner : NetworkBehaviour
 
         carObj.tag = isBot ? "Enemy" : "Player";
 
+
         RaceManager.Instance.RegisterRaceCar(playerName, carObj);
         allSpawnedCars.Add(controller);
     }
@@ -184,6 +189,22 @@ public class CarSpawner : NetworkBehaviour
             noCol?.Respawn();
             rb.isKinematic = false;
         }
+    }
+
+    private Transform SetRootForMirrir(GameObject carObj)
+    {
+        foreach (Transform child in carObj.transform)
+        {
+            if (child.CompareTag("Body"))
+            {
+                // Нашли объект с тегом "Body"
+                Debug.Log("Найден объект с тегом Body: " + child.name);
+                // Можно вернуть child или что-то сделать
+                return child;
+            }
+           
+        }
+        return null;
     }
     private void OnDisable()
     {

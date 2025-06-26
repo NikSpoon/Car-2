@@ -1,4 +1,5 @@
 ﻿
+using Mirror;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,16 +32,35 @@ public class RaiseChekpoint : MonoBehaviour
 
 
 
-        var car = GameObject.FindGameObjectWithTag("Player");
-        if (car == null)
+        // Получаем локального игрока (GameObject)
+        var localPlayerGO = NetworkClient.localPlayer?.gameObject;
+
+        if (localPlayerGO == null)
         {
-            Debug.LogError("Player не найден!");
+            Debug.LogError("Локальный игрок ещё не инициализирован!");
             return;
         }
 
-        _car = car.transform;
-        OnChekPointChenge?.Invoke(0, _chekpoints.Count - 1);
+        // Ищем машину (объект с тегом "Player") среди детей локального игрока
+        Transform FindChildWithTag(Transform parent, string tag)
+        {
+            foreach (Transform child in parent)
+            {
+                if (child.CompareTag(tag))
+                    return child;
+            }
+            return null;
+        }
 
+        var carTransform = FindChildWithTag(localPlayerGO.transform, "Player");
+        if (carTransform == null)
+        {
+            Debug.LogError("Player не найден у локального игрока!");
+            return;
+        }
+
+        _car = carTransform;
+        OnChekPointChenge?.Invoke(0, _chekpoints.Count - 1);
 
     }
 

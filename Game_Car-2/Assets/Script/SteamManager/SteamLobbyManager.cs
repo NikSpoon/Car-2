@@ -8,7 +8,7 @@ using UnityEngine;
 public class SteamLobbyManager : MonoBehaviour
 {
     [SerializeField] private GameObject networkGameSessionPrefab; // Префаб объекта с NetworkGameSession
-
+    
    
     private NetworkManager networkManager; // Менеджер сети Mirror
     private NetworkGameSession currentSession; // Текущая сетевая сессия игры

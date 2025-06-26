@@ -1,26 +1,36 @@
-﻿
-
+﻿using Mirror;
 using Unity.Cinemachine;
 using UnityEngine;
-public class CaneraLockAtPlaer : MonoBehaviour
+
+public class CameraLockAtPlayer : MonoBehaviour
 {
-
     public CinemachineCamera Camera;
+    private bool isCameraSet = false;
 
-    void Start()
+    private void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (Camera == null)
+        {
+            Debug.LogError("VirtualCamera не назначена!");
+            return;
+        }
 
-        if (player != null && Camera != null)
-        {
-           Camera.Follow = player.transform;
-            Camera.LookAt = player.transform;
-        }
-        else
-        {
-            Debug.LogError("Player или VirtualCamera не найдены!");
-        }
     }
 
 
+    private void Update()
+    {
+        if (!isCameraSet && NetworkClient.localPlayer != null)
+        {
+            SetupCamera(NetworkClient.localPlayer.gameObject);
+            isCameraSet = true;
+        }
+    }
+    private void SetupCamera(GameObject player)
+    {
+        Camera.Follow = player.transform;
+        Camera.LookAt = player.transform;
+        Camera.gameObject.SetActive(true);
+        Debug.Log($"Камера привязана к локальному игроку: {player.name}");
+    }
 }
