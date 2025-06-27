@@ -1,125 +1,129 @@
 ﻿using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
-using System;
+using Steamworks;
+using Mirror;
+using Edgegap;
 using System.Collections;
+
 
 public class UISessionPanel : MonoBehaviour
 {
     [Header("UI ссылки")]
     [SerializeField] private TextMeshProUGUI sessionsCountText;
     [SerializeField] private TMP_InputField sessionIdInput;
-    [SerializeField] private Transform context;                // Контейнер для сессий
-    [SerializeField] private GameObject oneSessionPrefab;      // Префаб для отображения одной сессии
-    [SerializeField] private GameObject panelSessionRoot;             // Само окно (для скрытия/показа)
-  
+    [SerializeField] private GameObject panelSessionRoot;         
+    [SerializeField] private SteamLobbyUIManager lobbyUIManager;
+
 
     [Header("Логика")]
     [SerializeField] private SteamLobbyManager steamLobbyManager;
 
-    private List<GameObject> spawnedSessionItems = new List<GameObject>();
 
     private void Start()
     {
-        
+
         steamLobbyManager.OnLobbyCreatedUI += OnLobbyCreated;
+        steamLobbyManager.OnLobbyEmpty += OnLobbyEmpty;
+    }
+    private void OnDestroy()
+    {
+        steamLobbyManager.OnLobbyCreatedUI -= OnLobbyCreated;
+        steamLobbyManager.OnLobbyEmpty -= OnLobbyEmpty;
     }
 
-  
     public void OnClickCreate()
     {
         steamLobbyManager.CreateLobby();
 
-       panelSessionRoot.SetActive(true);
-  
+        panelSessionRoot.SetActive(true);
+
     }
 
-    public void OnClickJoin()
+    public void OnClickJoinById(string id)
     {
-        if (!string.IsNullOrEmpty(sessionIdInput.text))
+        if (id == null)
         {
-            steamLobbyManager.JoinLobbyById(sessionIdInput.text);
-         
+            id = sessionIdInput.text;
+        }
+
+        if (!string.IsNullOrEmpty(id))
+        {
+            steamLobbyManager.JoinLobbyById(id);
+
+        }
+        else
+        {
+            return;
         }
     }
+    public void JoinById(CSteamID id)
+    {
+        StartCoroutine(ConnectAndJoin(id));
+        panelSessionRoot.SetActive(true);
+    }
+    private IEnumerator ConnectAndJoin(CSteamID lobbyId)
+    {
+        if (!NetworkClient.active)
+        {
+            NetworkManager.singleton.StartClient();
+        }
 
+        // Ждём подключения
+        while (!NetworkClient.isConnected)
+        {
+            yield return null;
+        }
+        steamLobbyManager.JoinLobbyById(lobbyId.ToString()); //????????????????????????????????????????????????????????????
+        var player = NetworkClient.connection.identity.GetComponent<NetworkPlayerProfile>();
+        player.CmdJoinLobbyById(lobbyId); // или любой аналогичный метод
+    }
     public void OnClickExit()
     {
         panelSessionRoot.SetActive(false);
-    }
+       
 
+    }
+ 
+    private void OnLobbyCreated(CSteamID cSteamID)
+    {
+        if (steamLobbyManager.lobby.TryGetValue(cSteamID, out NetworkGameSession session))
+        {
+            lobbyUIManager.AddLobbyToUI(session);
+        }
+        else
+        {
+            Debug.LogWarning($"UI: Не удалось найти сессию для лобби {cSteamID}");
+        }
+    }
+    private void OnLobbyEmpty(CSteamID cSteamID)
+    {
+        if (steamLobbyManager.lobby.TryGetValue(cSteamID, out NetworkGameSession session))
+        {
+            lobbyUIManager.RemoveLobby(cSteamID);
+            //NetworkServer.Shutdown();
+        }
+        else
+        {
+            Debug.LogWarning($"UI: Не удалось найти сессию для лобби {cSteamID}");
+        }
+    }
     
-    private void OnLobbyCreated(string lobbyId)
+    private float updateInterval = 2f;
+    private float updateTimer;
+
+    public void Update()
     {
-        // Debug.Log("Лобби успешно создано: " + lobbyId);
         
-        // можно обновить UI, если нужно
-    }
-
-   
-    public void ShowSessions(List<NetworkGameSession> sessions)
-    {
-        if (sessionsCountText == null)
+        updateTimer += Time.deltaTime;
+        if (updateTimer >= updateInterval)
         {
-            Debug.LogError("sessionsCountText не назначен в инспекторе UISessionPanel!");
-            return;
+            sessionsCountText.text = $"Libbies = {steamLobbyManager.lobby.Count}";
+            updateTimer = 0f;
+
+            foreach (var session in steamLobbyManager.lobby.Values)
+            {
+                lobbyUIManager.UpdateLobbyUI(session);
+            }
         }
-
-        if (oneSessionPrefab == null)
-        {
-            Debug.LogError("oneSessionPrefab не назначен в инспекторе UISessionPanel!");
-            return;
-        }
-
-        if (context == null)
-        {
-            Debug.LogError("context (Transform-контейнер) не назначен в инспекторе UISessionPanel!");
-            return;
-        }
-
-        sessionsCountText.text = $"Сессий найдено: {sessions.Count}";
-
-        // Очищаем старые UI-элементы
-        foreach (var item in spawnedSessionItems)
-        {
-            Destroy(item);
-        }
-        spawnedSessionItems.Clear();
-      
-        // Обновляем текст количества сессий
-        sessionsCountText.text = $"Сессий найдено: {sessions.Count}";
-
-        // Создаём элементы UI для каждой сессии
-        foreach (var session in sessions)
-        {
-            var sessionUIObj = Instantiate(oneSessionPrefab, context);
-            ClosePanel.Instance.openPanels.Add(sessionUIObj);
-            var ui = sessionUIObj.GetComponent<UIGameSession>();
-            ui.SetSession(session);
-            spawnedSessionItems.Add(sessionUIObj);
-        }
-    }
-    public void AttachToNetworkSession(NetworkGameSession session)
-    {
-        if (session == null)
-        {
-            Debug.LogWarning("AttachToNetworkSession получил null-сессию.");
-            return;
-        }
-
-        // Debug.Log("📥 Привязываем сессию к UI: " + session.sessionId);
-
-        // Показываем только одну сессию — текущую
-        StartCoroutine(DelayedShowSessions(new List<NetworkGameSession> { session }));
-    }
-    private IEnumerator DelayedShowSessions(List<NetworkGameSession> sessions)
-    {
-        // Ждём, пока ClosePanel.Instance и openPanels инициализируются
-        while (ClosePanel.Instance == null || ClosePanel.Instance.openPanels == null)
-        {
-            yield return null; // ждём следующий кадр
-        }
-
-        ShowSessions(sessions);
     }
 }

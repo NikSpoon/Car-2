@@ -2,6 +2,7 @@
 using Mirror;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class RaiseChekpoint : MonoBehaviour
@@ -10,8 +11,8 @@ public class RaiseChekpoint : MonoBehaviour
 
     private List<Transform> _chekpoints = new List<Transform>();
     private Transform _car;
-    public Transform CurentPoint { get;  private set; }
-    public event Action<int,int> OnChekPointChenge;
+    public Transform CurentPoint { get; private set; }
+    public event Action<int, int> OnChekPointChenge;
 
     public void Start()
     {
@@ -41,25 +42,16 @@ public class RaiseChekpoint : MonoBehaviour
             return;
         }
 
-        // Ищем машину (объект с тегом "Player") среди детей локального игрока
-        Transform FindChildWithTag(Transform parent, string tag)
+        foreach (var car in GameObject.FindGameObjectsWithTag("Player"))
         {
-            foreach (Transform child in parent)
+            NetworkIdentity identity = car.GetComponent<NetworkIdentity>();
+            if (identity != null && identity.isLocalPlayer)
             {
-                if (child.CompareTag(tag))
-                    return child;
+                _car = car.transform;
+                break;
             }
-            return null;
         }
 
-        var carTransform = FindChildWithTag(localPlayerGO.transform, "Player");
-        if (carTransform == null)
-        {
-            Debug.LogError("Player не найден у локального игрока!");
-            return;
-        }
-
-        _car = carTransform;
         OnChekPointChenge?.Invoke(0, _chekpoints.Count - 1);
 
     }
@@ -68,15 +60,15 @@ public class RaiseChekpoint : MonoBehaviour
     {
         var index = _chekpoints.IndexOf(nextPoint);
 
-        if (index!= -1)
+        if (index != -1)
         {
             CurentPoint = nextPoint;
             var rem = _chekpoints.Count - 1 - index;
-           // Debug.Log($"Checkpoint updated to: {CurentPoint.name}");    
+            // Debug.Log($"Checkpoint updated to: {CurentPoint.name}");    
             OnChekPointChenge?.Invoke(index, rem);
         }
     }
-   public List<Transform> GetСhekPoint()
+    public List<Transform> GetСhekPoint()
     {
         var list = _chekpoints;
 

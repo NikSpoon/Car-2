@@ -1,33 +1,48 @@
 ﻿
+using Edgegap;
 using Mirror;
 using Steamworks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SteamLobbyManager : MonoBehaviour
 {
     [SerializeField] private GameObject networkGameSessionPrefab; // Префаб объекта с NetworkGameSession
-    
-   
+
+
+
     private NetworkManager networkManager; // Менеджер сети Mirror
-    private NetworkGameSession currentSession; // Текущая сетевая сессия игры
+    private NetworkGameSession networkGameSession; // Текущая сетевая сессия игры
 
     protected Callback<LobbyCreated_t> lobbyCreated; // Колбэк на создание лобби в Steam
     protected Callback<LobbyEnter_t> lobbyEntered;   // Колбэк на вход в лобби Steam
+    protected Callback<LobbyChatUpdate_t> lobbyChatUpdate;
 
     private CSteamID currentLobbyID; // Steam ID текущего лобби
 
-    public System.Action<string> OnLobbyCreatedUI; // Событие для UI: передаем ID лобби
+    public System.Action<CSteamID> OnLobbyCreatedUI; // Событие для UI: передаем ID лобби
+    public System.Action<CSteamID> OnLobbyEmpty;// Событие для UI: передаем ID лобби
+    public Dictionary<CSteamID, NetworkGameSession> lobby { get; private set; } = new();
 
-  
+    // Текущий колбэк на список лобби
+    protected Callback<LobbyMatchList_t> lobbyMatchList;
+
+    // Локальный список лобби от Steam (SteamID)
+    private List<CSteamID> availableLobbies = new List<CSteamID>();
+    private List<CSteamID> filteredLobbies = new List<CSteamID>();
+
+    // Ссылка на UI менеджер, чтобы обновлять список
+    [SerializeField] private SteamLobbyUIManager lobbyUIManager;
     private void Start()
     {
-        
+
         if (!SteamManager.Initialized)
         {
             Debug.LogError("Steam не инициализирован");
-            return; 
+            return;
         }
 
         var myltiServer = GameObject.FindGameObjectWithTag("NetworkManager");
@@ -36,13 +51,58 @@ public class SteamLobbyManager : MonoBehaviour
 
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
+        lobbyChatUpdate = Callback<LobbyChatUpdate_t>.Create(OnLobbyChatUpdate);
+        lobbyMatchList = Callback<LobbyMatchList_t>.Create(OnLobbyMatchList);
+
+        RequestLobbies();
+       
+    }
+    private void OnEnable()
+    {
+        RequestLobbies();
     }
 
+    // Метод запроса публичных лобби
+    public void RequestLobbies()
+    {
+        Debug.Log("Запрос списка лобби...");
+        SteamMatchmaking.AddRequestLobbyListStringFilter("Game", "Mitrix", ELobbyComparison.k_ELobbyComparisonEqual);
+        SteamMatchmaking.RequestLobbyList();
+    }
+
+    private void OnLobbyMatchList(LobbyMatchList_t result)
+    {
+        Debug.Log($"Получено {result.m_nLobbiesMatching} лобби от Steam");
+
+        availableLobbies.Clear();
+
+        for (int i = 0; i < result.m_nLobbiesMatching; i++)
+        {
+            CSteamID lobbyId = SteamMatchmaking.GetLobbyByIndex(i);
+            availableLobbies.Add(lobbyId);
+        }
+
+        FilterLobbies();
+        // Теперь обновим UI, получив данные по каждому лобби
+        UpdateLobbyListUI();
+    }
+    private void FilterLobbies()
+    {
+        filteredLobbies.Clear();
+        foreach (var lobbyId in availableLobbies)
+        {
+            string gameKey = SteamMatchmaking.GetLobbyData(lobbyId, "Game");
+            if (gameKey == "Mitrix")
+            {
+                filteredLobbies.Add(lobbyId);
+            }
+        }
+    }
     public void CreateLobby()
     {
-        
+
         int maxPlayers = 20;
-        
+
         // Создаем публичное лобби Steam с максимальным количеством игроков
         SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypePublic, maxPlayers);
     }
@@ -53,7 +113,7 @@ public class SteamLobbyManager : MonoBehaviour
         if (result.m_eResult != EResult.k_EResultOK)
         {
             Debug.LogError("Ошибка создания лобби: " + result.m_eResult);
-            return; 
+            return;
         }
 
         // Сохраняем Steam ID созданного лобби
@@ -62,29 +122,38 @@ public class SteamLobbyManager : MonoBehaviour
 
         // Устанавливаем в данных лобби адрес хоста — SteamID пользователя, который создал лобби
         SteamMatchmaking.SetLobbyData(currentLobbyID, "HostAddress", SteamUser.GetSteamID().ToString());
-
-        // Вызываем событие для UI, чтобы показать ID лобби игрокам
-        OnLobbyCreatedUI?.Invoke(currentLobbyID.ToString());
-
+       
+        SetInfo();
         // Запускаем хост-сервер Mirror (сервер + клиент на одном ПК)
         networkManager.StartHost();
 
         // Создаем и запускаем объект с NetworkGameSession (синхронизированная сессия)
-        SpawnNetworkGameSession();
-        
+        networkGameSession = SpawnNetworkGameSession();
+
+        networkGameSession.uIGameSession = FindFirstObjectByType<UIGameSession>();
+        networkGameSession.uIGameSession.SetSession(networkGameSession);
+
+
+        lobby.Add(currentLobbyID, networkGameSession);
+
+
+        StartCoroutine(InvokeLobbyCreatedUIDelayed(currentLobbyID));
+
+
     }
 
     private void OnLobbyEntered(LobbyEnter_t result)
     {
         // Получаем Steam ID лобби, в которое вошли
         currentLobbyID = new CSteamID(result.m_ulSteamIDLobby);
-        
+
 
         // Если это сервер, выходим, так как сервер не должен подключаться как клиент
         if (NetworkServer.active) return;
 
         // Получаем адрес хоста (SteamID) из данных лобби
         string hostAddress = SteamMatchmaking.GetLobbyData(currentLobbyID, "HostAddress");
+       
 
         // Устанавливаем адрес для подключения клиента Mirror (SteamID хоста)
         networkManager.networkAddress = hostAddress;
@@ -92,11 +161,22 @@ public class SteamLobbyManager : MonoBehaviour
         // Запускаем клиентское подключение Mirror к серверу
         networkManager.StartClient();
 
-        StartCoroutine(WaitForSessionOnClient());
 
     }
+    public void SetInfo()
+    {
+        string sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
+        string mapName = "Map1"; // или выбери динамически, если нужно
+        string maxPlayers = "20";
+        string currentPlayers = "1"; // Хост всегда первый участник
 
-    
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "Game", "Mitrix");
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "SessionName", sessionName);
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "MapName", mapName);
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "MaxPlayers", maxPlayers);
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "CurrentPlayers", currentPlayers);
+    }
+
 
     // Метод для присоединения к лобби по ID (например, введенному в UI)
     public void JoinLobbyById(string lobbyId)
@@ -104,7 +184,6 @@ public class SteamLobbyManager : MonoBehaviour
         // Пытаемся преобразовать строку в ulong (SteamID)
         if (ulong.TryParse(lobbyId, out ulong parsedId))
         {
-            // Присоединяемся к лобби с этим SteamID
             SteamMatchmaking.JoinLobby(new CSteamID(parsedId));
         }
         else
@@ -114,7 +193,7 @@ public class SteamLobbyManager : MonoBehaviour
     }
 
     // Создаем объект NetworkGameSession на сервере и запускаем его в сети
-    void SpawnNetworkGameSession()
+    public NetworkGameSession SpawnNetworkGameSession()
     {
 
         // 1) Инстансиируем префаб
@@ -126,102 +205,92 @@ public class SteamLobbyManager : MonoBehaviour
         // Имя сессии можно взять, например, из профиля хоста
         string sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
 
-        // 3) Готовим данные до спауна
-        session.PrepareSession(shortId, sessionName);
+        // 4) Устанавливаем lobbyId
+        session.SetLobbyId(currentLobbyID);
 
-        // 4) Спауним сетевой объект (SyncVar будет передан клиентам автоматически)
+        // 5) Спауним объект
         NetworkServer.Spawn(sessionObj);
-      
-        // Сохраняем для ссылок в этом классе
-        currentSession = session;
+
+
+        return session;
     }
-    private IEnumerator ShowMySession()
+
+    private void OnLobbyChatUpdate(LobbyChatUpdate_t callback)
     {
-        
-        float logInterval = 0.5f;
-        float timeSinceLastLog = 0f;
-        int attemptCount = 0;
+        CSteamID lobbyID = (CSteamID)callback.m_ulSteamIDLobby;
+        CSteamID userChanged = (CSteamID)callback.m_ulSteamIDUserChanged;
+        EChatMemberStateChange stateChange = (EChatMemberStateChange)callback.m_rgfChatMemberStateChange;
 
-        while (true)
+        if (stateChange == EChatMemberStateChange.k_EChatMemberStateChangeLeft ||
+            stateChange == EChatMemberStateChange.k_EChatMemberStateChangeDisconnected ||
+            stateChange == EChatMemberStateChange.k_EChatMemberStateChangeKicked ||
+            stateChange == EChatMemberStateChange.k_EChatMemberStateChangeBanned)
         {
-            var session = Object.FindFirstObjectByType<NetworkGameSession>();
+            Debug.Log($"Игрок {userChanged} покинул лобби {lobbyID}");
 
-            if (session != null)
+            // Проверяем, остался ли кто-то в лобби
+            int memberCount = SteamMatchmaking.GetNumLobbyMembers(lobbyID);
+            if (memberCount == 0)
             {
-                if (!string.IsNullOrEmpty(session.sessionId))
-                {
-                    Debug.Log($"✅ NetworkGameSession найден и проинициализирован. sessionId = {session.sessionId}");
-
-                    var sessionPanel = Object.FindFirstObjectByType<UISessionPanel>();
-                    if (sessionPanel != null)
-                    {
-                        sessionPanel.ShowSessions(new List<NetworkGameSession> { session });
-                    }
-                    else
-                    {
-                        Debug.LogError("❌ UISessionPanel не найден в сцене!");
-                    }
-
-                    yield break; // Завершаем корутину
-                }
-                else
-                {
-                    if (timeSinceLastLog >= logInterval)
-                    {
-                        Debug.LogWarning($"⏳ Найден NetworkGameSession, но sessionId ещё пустой. Ожидание... [{++attemptCount}]");
-                        timeSinceLastLog = 0f;
-                    }
-                }
+                Debug.Log("‼️ Лобби опустело — можно считать его закрытым.");
+                // Вызови тут своё событие, если нужно
+                OnLobbyEmpty?.Invoke(lobbyID);
             }
-            else
-            {
-                if (timeSinceLastLog >= logInterval)
-                {
-                    Debug.LogWarning($"🔍 NetworkGameSession пока не найден... [{++attemptCount}]");
-                    timeSinceLastLog = 0f;
-                }
-            }
-
-            timeSinceLastLog += Time.deltaTime;
-            yield return null;
         }
     }
-    private IEnumerator WaitForSessionOnClient()
+    public void UpdateLobbyInfo(string mapName, int maxPlayers, int currentPlayers, int exp)
     {
-        float timeSinceLastLog = 0f;
-        int attemptCount = 0;
-
-        while (true)
+        if (currentLobbyID == CSteamID.Nil)
         {
-            var session = Object.FindFirstObjectByType<NetworkGameSession>();
-
-            if (session != null && !string.IsNullOrEmpty(session.sessionId))
-            {
-                Debug.Log($"✅ [CLIENT] Получена сетевая сессия: {session.sessionId}");
-
-                var sessionPanel = Object.FindFirstObjectByType<UISessionPanel>();
-                if (sessionPanel != null)
-                {
-                    sessionPanel.ShowSessions(new List<NetworkGameSession> { session });
-                }
-                else
-                {
-                    Debug.LogError("❌ [CLIENT] UISessionPanel не найден!");
-                }
-
-                yield break;
-            }
-
-            if (timeSinceLastLog > 0.5f)
-            {
-                Debug.LogWarning($"🔍 [CLIENT] Ожидание появления NetworkGameSession... попытка [{++attemptCount}]");
-                timeSinceLastLog = 0f;
-            }
-
-            timeSinceLastLog += Time.deltaTime;
-            yield return null;
+            Debug.LogError("❌ Нет активного лобби для обновления данных!");
+            return;
         }
-        
+
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "MapName", mapName);
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "MaxPlayers", maxPlayers.ToString());
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "CurrentPlayers", currentPlayers.ToString());
+        SteamMatchmaking.SetLobbyData(currentLobbyID, "Experience", exp.ToString());
+
+        Debug.Log("✅ Лобби данные обновлены: Map, MaxPlayers, CurrentPlayers, Exp");
     }
-    
+    public void UpdateLobbyData(string key, string value)
+    {
+        if (currentLobbyID == CSteamID.Nil)
+        {
+            Debug.LogError("❌ Нет активного лобби для обновления данных!");
+            return;
+        }
+
+        SteamMatchmaking.SetLobbyData(currentLobbyID, key, value);
+        Debug.Log($"🔄 Лобби обновлено: {key} = {value}");
+    }
+    private IEnumerator InvokeLobbyCreatedUIDelayed(CSteamID lobbyId)
+    {
+        yield return null; // подождать 1 кадр
+        OnLobbyCreatedUI?.Invoke(lobbyId);
+    }
+    private void UpdateLobbyListUI()
+    {
+        foreach (var lobbyId in filteredLobbies)
+        {
+            string sessionName = SteamMatchmaking.GetLobbyData(lobbyId, "SessionName"); // например
+            string mapName = SteamMatchmaking.GetLobbyData(lobbyId, "MapName");
+            string maxPlayersStr = SteamMatchmaking.GetLobbyData(lobbyId, "MaxPlayers");
+            string currentPlayersStr = SteamMatchmaking.GetLobbyData(lobbyId, "CurrentPlayers");
+            string expStr = SteamMatchmaking.GetLobbyData(lobbyId, "Experience");
+            int exp = 0;
+            int.TryParse(expStr, out exp);
+
+            int maxPlayers = 0;
+            int currentPlayers = 0;
+
+            int.TryParse(maxPlayersStr, out maxPlayers);
+            int.TryParse(currentPlayersStr, out currentPlayers);
+
+            // Если нужно — передай exp в твой UI:
+            lobbyUIManager.UpdateOrCreateLobbyUI(lobbyId, sessionName, mapName, currentPlayers, maxPlayers);
+
+         
+        }
+    }
 }

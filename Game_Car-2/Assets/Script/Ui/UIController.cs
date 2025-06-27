@@ -76,16 +76,8 @@ public class UIController : MonoBehaviour
 
             case AppState.Gameplay:
 
-                    var session = FindFirstObjectByType<NetworkGameSession>();
-                    if (session != null)
-                    {
-                        session.RequestStartRace();
-                    }
-                    else
-                    {
-                        Debug.LogError("NetworkGameSession не найден");
-                    }
-                
+                _currentScren = Instantiate(_gameplayScren, _root);
+
                 break;
 
             case AppState.Finish:

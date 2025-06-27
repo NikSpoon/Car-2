@@ -26,7 +26,7 @@ public class UIGameSession : MonoBehaviour
     {
         startPanel.SetActive(false);
 
-        TryAttachToExistingSession();
+
     }
 
     public void SetSession(NetworkGameSession session)
@@ -43,12 +43,12 @@ public class UIGameSession : MonoBehaviour
     }
     private void OnPlayersListChanged(SyncList<NetworkPlayerProfile>.Operation op, int index, NetworkPlayerProfile oldItem, NetworkPlayerProfile newItem)
     {
-      //  Debug.Log($"📢 Игроки изменились: {op} в позиции {index}");
+        //  Debug.Log($"📢 Игроки изменились: {op} в позиции {index}");
         RefreshPlayersUI();
     }
     public void RefreshPlayersUI()
     {
-       // Debug.Log("🔁 Обновляем список игроков");
+        // Debug.Log("🔁 Обновляем список игроков");
 
         if (playersContainer == null)
         {
@@ -61,7 +61,7 @@ public class UIGameSession : MonoBehaviour
             return;
         }
 
-       // Debug.Log($"📋 Игроков в сессии: {currentSession.syncedPlayers.Count}");
+        // Debug.Log($"📋 Игроков в сессии: {currentSession.syncedPlayers.Count}");
         if (playersContainer == null)
             return;
 
@@ -94,15 +94,7 @@ public class UIGameSession : MonoBehaviour
 
     public void Update()
     {
-
-
-        if (currentSession == null)
-        {
-            TryAttachToExistingSession();
-           // Debug.LogWarning("currentSession is NULL");
-            return;
-        }
-
+        if (currentSession == null) return;
         RefreshSessionUI();
 
         if (!currentSession.isServer)
@@ -125,6 +117,7 @@ public class UIGameSession : MonoBehaviour
         }
 
     }
+
     public void UpdateTimer(int timeLeft)
     {
         if (!startPanel)
@@ -149,33 +142,14 @@ public class UIGameSession : MonoBehaviour
         yield return new WaitForSeconds(1f);
         startPanel.SetActive(false);
     }
-    private void TryAttachToExistingSession()
-    {
-        var session = FindFirstObjectByType<NetworkGameSession>(FindObjectsInactive.Include);
-        if (session != null && session.sessionId != null)
-        {
-            if (session == null)
-            {
-                Debug.LogWarning("session == null");
-                return;
-            }
-            session.uIGameSessions.Add(this);
-            SetSession(session);
-
-        }
-        else
-        {
-           // Debug.LogWarning("❌ Не удалось найти активную NetworkGameSession при активации панели");
-        }
-    }
 
 
     public void StartRace()
     {
-        if (currentSession != null && currentSession.isServer) 
-        { 
+        if (currentSession != null && currentSession.isServer)
+        {
             currentSession.RequestStartRace();
-            PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
+            //PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
         }
     }
     public void AddBot()
@@ -189,7 +163,12 @@ public class UIGameSession : MonoBehaviour
     {
         if (currentSession != null)
         {
-            currentSession.uIGameSessions.Remove(this);
+            var player = FindFirstObjectByType<NetworkPlayerProfile>();
+
+            currentSession.RemovePlayer(player);
+            RefreshSessionUI();
+            currentSession.uIGameSession = null;
+
         }
     }
 }

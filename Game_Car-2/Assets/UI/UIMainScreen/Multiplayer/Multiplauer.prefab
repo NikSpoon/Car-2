@@ -366,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5931502081698668226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -778,7 +778,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -548.26117, y: 426.28333}
+  m_AnchoredPosition: {x: -556.7555, y: 426.28326}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1735989781512146088
@@ -832,6 +832,7 @@ GameObject:
   - component: {fileID: 7414819312394851008}
   - component: {fileID: 4072557178205134696}
   - component: {fileID: 997841448682356471}
+  - component: {fileID: 2502079550706980155}
   m_Layer: 5
   m_Name: Multiplauer
   m_TagString: Untagged
@@ -873,10 +874,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sessionsCountText: {fileID: 4525062370554312028}
   sessionIdInput: {fileID: 6575964475605899576}
-  context: {fileID: 3228977350544147739}
-  oneSessionPrefab: {fileID: 3659872205401066284, guid: ac9fb1051c075ea4ebc68bfc32545bb2, type: 3}
   panelSessionRoot: {fileID: 8859642024945769623, guid: 6d11caaf6e9bfdf42a1c29916696ec08, type: 3}
   steamLobbyManager: {fileID: 997841448682356471}
+  lobbyUIManager: {fileID: 2502079550706980155}
 --- !u!114 &997841448682356471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,6 +890,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkGameSessionPrefab: {fileID: 549863904943538117, guid: fa2c2144b2db5dd44b4c20101929cbaa, type: 3}
+--- !u!114 &2502079550706980155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2169558245749124586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb1168627ee11a42bc423a49b9185dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  context: {fileID: 3228977350544147739}
+  oneSessionPrefab: {fileID: 3659872205401066284, guid: ac9fb1051c075ea4ebc68bfc32545bb2, type: 3}
 --- !u!1 &2494659300547556099
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,7 +937,7 @@ RectTransform:
   m_Father: {fileID: 4833363072243988596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

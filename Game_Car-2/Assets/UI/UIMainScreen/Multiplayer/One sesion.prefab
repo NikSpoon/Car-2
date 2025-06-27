@@ -408,7 +408,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3005737651874669937}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7276537394705484159}
+        m_TargetAssemblyTypeName: UIGameSessionPanel, Assembly-CSharp
+        m_MethodName: OnJoinClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1721171584679195989
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +706,7 @@ GameObject:
   - component: {fileID: 7195883080009606648}
   - component: {fileID: 2818701869207231029}
   - component: {fileID: 4080225386739733970}
-  - component: {fileID: 8565238289537734215}
+  - component: {fileID: 7276537394705484159}
   m_Layer: 5
   m_Name: One sesion
   m_TagString: Untagged
@@ -808,7 +820,7 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &8565238289537734215
+--- !u!114 &7276537394705484159
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -817,18 +829,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3659872205401066284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77abd32254129d6439aa35adb585e011, type: 3}
+  m_Script: {fileID: 11500000, guid: 295f63f542892b7459172b027ab20016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sessionNameText: {fileID: 2844597514606599556}
+  sessionNameText: {fileID: 1821113011008255394}
   sessionId: {fileID: 6701261187855474071}
   sessionMapName: {fileID: 1595786629839810708}
-  sessionPlayersValue: {fileID: 1869689488225230902}
-  sessionMaxPlayersValue: {fileID: 1821113011008255394}
-  startTimer: {fileID: 2844597514606599556}
-  startPanel: {fileID: 2372163070909371221}
-  playersContainer: {fileID: 5249629886428456939}
-  playerUIPrefab: {fileID: 7655171721653885299}
+  sessionPlayersValue: {fileID: 6288498046565808411}
+  sessionMaxPlayersValue: {fileID: 2844597514606599556}
 --- !u!1 &4336644604435855456
 GameObject:
   m_ObjectHideFlags: 0

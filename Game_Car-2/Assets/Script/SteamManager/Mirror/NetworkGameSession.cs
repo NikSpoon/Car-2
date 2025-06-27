@@ -3,36 +3,35 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using FSM.App;
+using Steamworks;
 
 
 public class NetworkGameSession : NetworkBehaviour
 {
+
+    public CSteamID lobbyId { get; private set; }
+
     [SyncVar] public string sessionId;
     [SyncVar] public string sessionName;
     [SyncVar] public string mapName;
     [SyncVar] public int maxPlayers;
     [SyncVar] public bool raceStarted;
-
-
     [SyncVar] public NetworkPlayerProfile hostPlayer;
 
-    private string pendingSessionId;
-    private string pendingSessionName;
-
     public SyncList<NetworkPlayerProfile> syncedPlayers = new SyncList<NetworkPlayerProfile>();
-
-    public RaceData currentRaceData;
-
-
-    private BotCreator botCreator;
+    public UIGameSession uIGameSession { get; set; }
 
     [SerializeField] private GameObject botPrefab;
     [SerializeField] private RaceDatabase raceDatabase;
+    private string pendingSessionId;
+    private string pendingSessionName;
+
+    public RaceData currentRaceData;
+    private BotCreator botCreator;
 
     public bool onStart;
     public int timeToStart;
 
-    public List<UIGameSession> uIGameSessions = new List<UIGameSession>();
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -42,8 +41,18 @@ public class NetworkGameSession : NetworkBehaviour
         sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
         maxPlayers = 10;
         botCreator = new BotCreator();
-    }
 
+        if (isServer)
+            StartCoroutine(UpdateLobbyDataRoutine());
+    }
+    public void SetLobbyId(CSteamID id)
+    {
+        lobbyId = id;
+
+        string shortId = (id.m_SteamID % 100000).ToString("D5");
+
+        PrepareSession(shortId, sessionName);
+    }
     [Server]
     public void PrepareSession(string id, string name)
     {
@@ -64,6 +73,8 @@ public class NetworkGameSession : NetworkBehaviour
     {
         base.OnStartServer();
 
+        
+       
         sessionId = pendingSessionId;
         sessionName = pendingSessionName;
 
@@ -79,16 +90,6 @@ public class NetworkGameSession : NetworkBehaviour
             Debug.LogWarning("RaceDatabase не задан или пуст. Не удалось установить первую карту.");
         }
 
-        var uiPanel = FindObjectsByType<UISessionPanel>(FindObjectsSortMode.None);
-        foreach (var panel in uiPanel)
-        {
-            if (panel != null)
-            {
-                panel.AttachToNetworkSession(this);
-
-            }
-
-        }
 
     }
 
@@ -115,9 +116,10 @@ public class NetworkGameSession : NetworkBehaviour
     public void RemovePlayer(NetworkPlayerProfile profile)
     {
         syncedPlayers.Remove(profile);
-
+        Debug.Log($"👋 Игрок удалён из сессии: {profile.playerName}");
         if (profile == hostPlayer)
             UpdateHost();
+
     }
 
     [Server]
@@ -169,7 +171,7 @@ public class NetworkGameSession : NetworkBehaviour
 
         Debug.Log($"🤖 Добавлен бот: {botProfile.playerName}");
     }
-   
+
     public void RequestStartRace()
     {
         if (isServer)
@@ -234,30 +236,49 @@ public class NetworkGameSession : NetworkBehaviour
 
         // После таймера переключаем сцену и уведомляем клиентов переключить UI
         NetworkManager.singleton.ServerChangeScene(mapName);
+        PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
 
-        
     }
 
     [ClientRpc]
     private void RpcUpdateTimer(int timeLeft)
     {
-        foreach (var ui in uIGameSessions)
+        if ( uIGameSession != null)
         {
-            if (ui != null)
-                ui.UpdateTimer(timeLeft);
+           uIGameSession.UpdateTimer(timeLeft);
+
+        }
+        
+    }
+
+
+    [Server]
+    private IEnumerator UpdateLobbyDataRoutine()
+    {
+        while (true)
+        {
+            if (currentRaceData != null)
+            {
+                mapName = currentRaceData.SceneName;
+                maxPlayers = currentRaceData.MaxCar;
+
+                UpdateLobbyData("MapName", mapName);
+                UpdateLobbyData("MaxPlayers", maxPlayers.ToString());
+            }
+
+            yield return new WaitForSeconds(30f);  // ждем 30 секунд
         }
     }
 
-
-    private void Update()
-    {
-        if (currentRaceData == null) return;
-
-        mapName = currentRaceData.SceneName;
-        maxPlayers = currentRaceData.MaxCar;
-    }
     private void ErrorLog(string context)
     {
         return;
+    }
+    public void UpdateLobbyData(string key, string value)
+    {
+        if (SteamManager.Initialized && lobbyId.IsValid())
+        {
+            SteamMatchmaking.SetLobbyData(lobbyId, key, value);
+        }
     }
 }

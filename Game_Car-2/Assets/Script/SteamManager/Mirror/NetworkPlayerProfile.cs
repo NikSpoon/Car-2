@@ -1,4 +1,5 @@
 ﻿using Mirror;
+using Steamworks;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -39,15 +40,15 @@ public class NetworkPlayerProfile : NetworkBehaviour
         {
             if (isLocalPlayer)
             {
-                CmdRegisterPlayer();
+                CmdRegisterPlayer(session);
             }
         }
     }
 
     [Command]
-    void CmdRegisterPlayer()
+    void CmdRegisterPlayer(NetworkGameSession session)
     {
-        var session = FindFirstObjectByType<NetworkGameSession>();
+       
         if (session != null)
         {
             Initialize(PlayerDataManager.Instance.PlayerProfile);
@@ -63,7 +64,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
         if (session != null)
         {
             session.RemovePlayer(this);
-            Debug.Log($"👋 Игрок удалён из сессии: {playerName}");
+            
         }
     }
 
@@ -171,5 +172,15 @@ public class NetworkPlayerProfile : NetworkBehaviour
         _isReadyToSendCommands = true;
         // Debug.Log($"✅ Клиент {playerName} теперь готов к командам.");
     }
- 
+
+    [Command]
+    public void CmdJoinLobbyById(CSteamID Id)
+    {
+         Initialize(PlayerDataManager.Instance.PlayerProfile);
+        var session = FindFirstObjectByType<NetworkGameSession>();
+        if (session != null && session.lobbyId == Id)
+        {
+            session.AddPlayer(this); // твой метод добавления
+        }
+    }
 }
