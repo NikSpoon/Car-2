@@ -31,6 +31,9 @@ public class UIGameSession : MonoBehaviour
 
     public void SetSession(NetworkGameSession session)
     {
+        if (currentSession != null)
+            currentSession.syncedPlayers.Callback -= OnPlayersListChanged;
+
 
         currentSession = session;
 
@@ -96,9 +99,10 @@ public class UIGameSession : MonoBehaviour
     {
         if (currentSession == null) return;
         RefreshSessionUI();
-
-        if (!currentSession.isServer)
+        // Проверяем, что этот объект управляется сервером и сервер активен
+        if (!currentSession.isServer || !NetworkServer.active)
             return;
+
 
         // Всё готово — можно безопасно устанавливать
         var localSessionData = PlayerDataManager.Instance?.PlayerSessionData;
@@ -159,16 +163,25 @@ public class UIGameSession : MonoBehaviour
         else
             Debug.LogWarning("Добавлять бота может только хост!");
     }
+    public void OnLeaveLobbyButtonClicked()
+    {
+       
+        if (currentSession.SteamLobbyManager != null)
+        {
+            var player = FindFirstObjectByType<NetworkPlayerProfile>();
+            currentSession.SteamLobbyManager.LeaveCurrentLobby();
+            currentSession.RemovePlayer(player);
+
+        }
+
+    }
     private void OnDisable()
     {
         if (currentSession != null)
         {
-            var player = FindFirstObjectByType<NetworkPlayerProfile>();
-
-            currentSession.RemovePlayer(player);
+            
             RefreshSessionUI();
             currentSession.uIGameSession = null;
-
         }
     }
 }

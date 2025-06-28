@@ -48,8 +48,15 @@ public class UISessionPanel : MonoBehaviour
 
         if (!string.IsNullOrEmpty(id))
         {
-            steamLobbyManager.JoinLobbyById(id);
-
+            if (ulong.TryParse(id, out ulong parsed))
+            {
+                CSteamID lobbySteamID = new CSteamID(parsed);
+                JoinById(lobbySteamID);
+            }
+            else
+            {
+                Debug.LogError("❌ Неверный формат Lobby ID!");
+            }
         }
         else
         {
@@ -63,19 +70,8 @@ public class UISessionPanel : MonoBehaviour
     }
     private IEnumerator ConnectAndJoin(CSteamID lobbyId)
     {
-        if (!NetworkClient.active)
-        {
-            NetworkManager.singleton.StartClient();
-        }
-
-        // Ждём подключения
-        while (!NetworkClient.isConnected)
-        {
-            yield return null;
-        }
-        steamLobbyManager.JoinLobbyById(lobbyId.ToString()); //????????????????????????????????????????????????????????????
-        var player = NetworkClient.connection.identity.GetComponent<NetworkPlayerProfile>();
-        player.CmdJoinLobbyById(lobbyId); // или любой аналогичный метод
+        steamLobbyManager.JoinLobbyById(lobbyId.m_SteamID.ToString());
+        yield return null;
     }
     public void OnClickExit()
     {
@@ -86,7 +82,7 @@ public class UISessionPanel : MonoBehaviour
  
     private void OnLobbyCreated(CSteamID cSteamID)
     {
-        if (steamLobbyManager.lobby.TryGetValue(cSteamID, out NetworkGameSession session))
+        if (steamLobbyManager.Lobbies.TryGetValue(cSteamID, out NetworkGameSession session))
         {
             lobbyUIManager.AddLobbyToUI(session);
         }
@@ -97,7 +93,7 @@ public class UISessionPanel : MonoBehaviour
     }
     private void OnLobbyEmpty(CSteamID cSteamID)
     {
-        if (steamLobbyManager.lobby.TryGetValue(cSteamID, out NetworkGameSession session))
+        if (steamLobbyManager.Lobbies.TryGetValue(cSteamID, out NetworkGameSession session))
         {
             lobbyUIManager.RemoveLobby(cSteamID);
             //NetworkServer.Shutdown();
@@ -117,10 +113,10 @@ public class UISessionPanel : MonoBehaviour
         updateTimer += Time.deltaTime;
         if (updateTimer >= updateInterval)
         {
-            sessionsCountText.text = $"Libbies = {steamLobbyManager.lobby.Count}";
+            sessionsCountText.text = $"Libbies = {steamLobbyManager.Lobbies.Count}";
             updateTimer = 0f;
 
-            foreach (var session in steamLobbyManager.lobby.Values)
+            foreach (var session in steamLobbyManager.Lobbies.Values)
             {
                 lobbyUIManager.UpdateLobbyUI(session);
             }

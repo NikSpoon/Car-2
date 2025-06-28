@@ -17,7 +17,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
     [SyncVar] public bool isOnline;
 
     [SyncVar] public bool isBot;
-    
+
     [SyncVar] public bool isBotRandom;
 
     private GameObject carInstance;
@@ -48,11 +48,11 @@ public class NetworkPlayerProfile : NetworkBehaviour
     [Command]
     void CmdRegisterPlayer(NetworkGameSession session)
     {
-       
+
         if (session != null)
         {
             Initialize(PlayerDataManager.Instance.PlayerProfile);
-           // Debug.Log($"👤 Игрок добавлен в сессию: {playerName}");
+            // Debug.Log($"👤 Игрок добавлен в сессию: {playerName}");
             session.AddPlayer(this);
         }
     }
@@ -64,10 +64,18 @@ public class NetworkPlayerProfile : NetworkBehaviour
         if (session != null)
         {
             session.RemovePlayer(this);
-            
+
         }
     }
-
+    public override void OnStartLocalPlayer()
+    {
+        var steamLobbyManager = FindFirstObjectByType<SteamLobbyManager>();
+        base.OnStartLocalPlayer();
+        
+        CmdJoinLobbyById(steamLobbyManager.CurrentLobbyID);
+   
+        Debug.Log("✅ OnStartLocalPlayer вызван для " + SteamUser.GetSteamID());
+    }
     // Вызывается на сервере при создании игрока
     [Server]
     public void Initialize(PlayerProfile profile)
@@ -136,7 +144,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
         {
             CmdSetCarIndex(currentCarIndex, currentselectedBodyUpgradeIndex);
             _cachedCarIndex = currentCarIndex;
-            _cachedCarUpgradeIndex = currentselectedBodyUpgradeIndex; 
+            _cachedCarUpgradeIndex = currentselectedBodyUpgradeIndex;
         }
     }
     [Command]
@@ -147,7 +155,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
         //Debug.Log($"[SERVER] {playerName} выбрал машину #{index},{index2}");
     }
     [Server]
-    public void SpawnSelectedCar(NetworkConnectionToClient conn, Transform spawnPoint, GameObject carPref,out bool Bot, out bool Random)
+    public void SpawnSelectedCar(NetworkConnectionToClient conn, Transform spawnPoint, GameObject carPref, out bool Bot, out bool Random)
     {
         Bot = isBot;
         Random = isBotRandom;
@@ -176,7 +184,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
     [Command]
     public void CmdJoinLobbyById(CSteamID Id)
     {
-         Initialize(PlayerDataManager.Instance.PlayerProfile);
+        Initialize(PlayerDataManager.Instance.PlayerProfile);
         var session = FindFirstObjectByType<NetworkGameSession>();
         if (session != null && session.lobbyId == Id)
         {

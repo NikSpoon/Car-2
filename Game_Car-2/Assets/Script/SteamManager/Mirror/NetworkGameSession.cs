@@ -9,7 +9,8 @@ using Steamworks;
 public class NetworkGameSession : NetworkBehaviour
 {
 
-    public CSteamID lobbyId { get; private set; }
+    [SyncVar] public ulong lobbyIdRaw; 
+    public CSteamID lobbyId => new CSteamID(lobbyIdRaw);
 
     [SyncVar] public string sessionId;
     [SyncVar] public string sessionName;
@@ -20,6 +21,7 @@ public class NetworkGameSession : NetworkBehaviour
 
     public SyncList<NetworkPlayerProfile> syncedPlayers = new SyncList<NetworkPlayerProfile>();
     public UIGameSession uIGameSession { get; set; }
+    public SteamLobbyManager SteamLobbyManager { get; private set; }
 
     [SerializeField] private GameObject botPrefab;
     [SerializeField] private RaceDatabase raceDatabase;
@@ -45,11 +47,9 @@ public class NetworkGameSession : NetworkBehaviour
         if (isServer)
             StartCoroutine(UpdateLobbyDataRoutine());
     }
-    public void SetLobbyId(CSteamID id)
+    public void SetLobbyId(CSteamID id,string shortId)
     {
-        lobbyId = id;
-
-        string shortId = (id.m_SteamID % 100000).ToString("D5");
+        lobbyIdRaw = id.m_SteamID;
 
         PrepareSession(shortId, sessionName);
     }
@@ -92,6 +92,24 @@ public class NetworkGameSession : NetworkBehaviour
 
 
     }
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        Debug.Log("NetworkGameSession spawned on client!");
+
+        SteamLobbyManager = FindFirstObjectByType<SteamLobbyManager>();
+        if (SteamLobbyManager != null)
+        {
+            SteamLobbyManager.Lobbies[lobbyId] = this;
+        }
+
+        var uiGameSession = FindFirstObjectByType<UIGameSession>();
+        if (uiGameSession != null)
+        {
+            uiGameSession.SetSession(this);
+        }
+    }
 
     [Server]
     public void AddPlayer(NetworkPlayerProfile profile)
@@ -109,6 +127,10 @@ public class NetworkGameSession : NetworkBehaviour
         {
             hostPlayer = profile;
             Debug.Log($"⭐ Назначен новый хост: {profile.playerName}");
+        }
+        else
+        {
+            Debug.Log($"⭐ New Player: {profile.playerName}");
         }
     }
 
