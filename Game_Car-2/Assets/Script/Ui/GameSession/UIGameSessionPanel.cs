@@ -1,5 +1,6 @@
-using Steamworks;
+﻿using Steamworks;
 using TMPro;
+
 using UnityEngine;
 
 public class UIGameSessionPanel : MonoBehaviour
@@ -11,6 +12,12 @@ public class UIGameSessionPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sessionMaxPlayersValue;
 
     private CSteamID lobbyIdUI;
+    private UISessionPanel rootPanel;
+
+    public void Init(UISessionPanel panel)
+    {
+        rootPanel = panel;
+    }
     public void SetSessionData(string name, string id, string map, int players, int maxPlayers, CSteamID lobbyId)
     {
         sessionNameText.text = name;
@@ -24,8 +31,15 @@ public class UIGameSessionPanel : MonoBehaviour
 
     public void OnJoinClicked()
     {
-       var sessionPanel = FindFirstObjectByType<UISessionPanel>();
-      
-       sessionPanel.JoinById(lobbyIdUI);
+        if (rootPanel != null)
+        {
+            rootPanel.JoinById(lobbyIdUI);
+        }
+        else
+        {
+            Debug.LogError("❌ rootPanel не установлен!");
+        }
+       
     }
+ 
 }

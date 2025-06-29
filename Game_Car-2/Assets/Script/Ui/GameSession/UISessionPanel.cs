@@ -18,10 +18,11 @@ public class UISessionPanel : MonoBehaviour
     [Header("Логика")]
     [SerializeField] private SteamLobbyManager steamLobbyManager;
 
+    private UISessionPanel rootPanel;
 
     private void Start()
     {
-
+        lobbyUIManager.Init(this);
         steamLobbyManager.OnLobbyCreatedUI += OnLobbyCreated;
         steamLobbyManager.OnLobbyEmpty += OnLobbyEmpty;
     }
@@ -29,6 +30,10 @@ public class UISessionPanel : MonoBehaviour
     {
         steamLobbyManager.OnLobbyCreatedUI -= OnLobbyCreated;
         steamLobbyManager.OnLobbyEmpty -= OnLobbyEmpty;
+    }
+    public void Init(UISessionPanel panel)
+    {
+        rootPanel = panel;
     }
 
     public void OnClickCreate()
@@ -93,15 +98,9 @@ public class UISessionPanel : MonoBehaviour
     }
     private void OnLobbyEmpty(CSteamID cSteamID)
     {
-        if (steamLobbyManager.Lobbies.TryGetValue(cSteamID, out NetworkGameSession session))
-        {
+          Debug.Log($"[UI] OnLobbyEmpty: удаляем панель для лобби {cSteamID}");
             lobbyUIManager.RemoveLobby(cSteamID);
-            //NetworkServer.Shutdown();
-        }
-        else
-        {
-            Debug.LogWarning($"UI: Не удалось найти сессию для лобби {cSteamID}");
-        }
+
     }
     
     private float updateInterval = 2f;

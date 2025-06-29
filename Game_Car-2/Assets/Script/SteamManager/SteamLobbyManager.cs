@@ -43,8 +43,11 @@ public class SteamLobbyManager : MonoBehaviour
             return;
         }
 
-        var myltiServer = GameObject.FindGameObjectWithTag("NetworkManager");
-        networkManager = myltiServer.GetComponent<NetworkManager>();
+        if (networkManager == null)
+        {
+            var myltiServer = GameObject.FindGameObjectWithTag("NetworkManager");
+            networkManager = myltiServer.GetComponent<NetworkManager>();
+        }
 
 
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
@@ -52,8 +55,7 @@ public class SteamLobbyManager : MonoBehaviour
         lobbyChatUpdate = Callback<LobbyChatUpdate_t>.Create(OnLobbyChatUpdate);
         lobbyMatchList = Callback<LobbyMatchList_t>.Create(OnLobbyMatchList);
 
-        RequestLobbies();
-       
+
     }
     private void OnEnable()
     {
@@ -101,8 +103,8 @@ public class SteamLobbyManager : MonoBehaviour
     {
         if (NetworkServer.active)
         {
-            Debug.LogWarning("Сервер уже запущен!");
-            return;
+            ForceDisconnect();
+
         }
 
         int maxPlayers = 20;
@@ -113,11 +115,11 @@ public class SteamLobbyManager : MonoBehaviour
 
     private void OnLobbyCreated(LobbyCreated_t result)
     {
-
-        if (NetworkServer.active) 
+        host = true;
+        if (NetworkServer.active)
         {
-            ForceDisconnect();
-
+            Debug.LogWarning("Сервер уже запущен!");
+            return;
         }
         // Проверяем, успешно ли создано лобби
         if (result.m_eResult != EResult.k_EResultOK)
@@ -125,6 +127,9 @@ public class SteamLobbyManager : MonoBehaviour
             Debug.LogError("Ошибка создания лобби: " + result.m_eResult);
             return;
         }
+
+        DestroySessionAndCloseLobby();
+
         CSteamID hostAddress = SteamUser.GetSteamID();
         // Сохраняем Steam ID созданного лобби
         CurrentLobbyID = new CSteamID(result.m_ulSteamIDLobby);
@@ -148,6 +153,10 @@ public class SteamLobbyManager : MonoBehaviour
         // Ждём, пока сервер не станет активным
         while (!NetworkServer.active)
         {
+            if (NetworkServer.active)
+            {
+                break;
+            }
             yield return null;
         }
 
@@ -169,40 +178,71 @@ public class SteamLobbyManager : MonoBehaviour
     }
     private void OnLobbyEntered(LobbyEnter_t result)
     {
-        if (NetworkServer.active) return;
+        Debug.Log("[OnLobbyEntered] Triggered");
+
+        var enteredLobby = new CSteamID(result.m_ulSteamIDLobby);
+
+        // Если ты хост и вошёл в своё же лобби — не трогай ничего!
+        if (host && enteredLobby == CurrentLobbyID)
+        {
+            Debug.Log("[OnLobbyEntered] Это моё лобби — игнорирую.");
+            return;
+        }
+
+        if (NetworkServer.active && host)
+        {
+            Debug.Log("[OnLobbyEntered] Был хостом — переключаюсь в клиентский режим");
+            StartCoroutine(StopHostAndJoin(result));
+            return;
+        }
+
+        CurrentLobbyID = enteredLobby;
+
+
+        Debug.Log("[OnLobbyEntered] Mirror остановлен, подключаемся как клиент");
+        StartCoroutine(JoinAsClientRoutine(CurrentLobbyID));
+
+    }
+    private IEnumerator StopHostAndJoin(LobbyEnter_t result)
+    {
+        // Останови всё
+        ForceDisconnect();
+        host = false; // больше не хост
+
+        // Подожди пока сеть Mirror реально остановится
+        while (networkManager.isNetworkActive)
+        {
+            yield return null;
+        }
+
+        Debug.Log("[StopHostAndJoin] Mirror остановлен, подключаемся как клиент");
+        yield return JoinAsClientRoutine(CurrentLobbyID);
+    }
+    private IEnumerator JoinAsClientRoutine(CSteamID lobbyId)
+    {
+        Debug.Log("[JoinAsClientRoutine] Force disconnect if needed");
+
+        // Отключаем, если что-то запущено
         ForceDisconnect();
 
+        // Ждём полного отключения
+        while (NetworkServer.active || NetworkClient.active || networkManager.isNetworkActive)
+        {
+            Debug.Log("[JoinAsClientRoutine] Waiting for full disconnect...");
+            yield return null;
+        }
 
-        // Получаем Steam ID лобби, в которое вошли
-        CurrentLobbyID = new CSteamID(result.m_ulSteamIDLobby);
+        Debug.Log("[JoinAsClientRoutine] Disconnected, connecting as client");
 
-
-        // Если это сервер, выходим, так как сервер не должен подключаться как клиент
-        if (NetworkServer.active) return;
-
-        string hostAddress = SteamMatchmaking.GetLobbyData(CurrentLobbyID, "HostAddress");
-      
-        // Конвертируем строку в CSteamID
+        string hostAddress = SteamMatchmaking.GetLobbyData(lobbyId, "HostAddress");
         CSteamID hostSteamId = new CSteamID(ulong.Parse(hostAddress));
 
-
-        Debug.Log($"[OnLobbyEntered] Host SteamID: {hostAddress}");
-        
         var fizzy = (FizzySteamworks)NetworkManager.singleton.transport;
-
         fizzy.ClientConnect(hostSteamId.ToString());
 
-        // ВАЖНО: вот это всё что нужно — FizzySteamworks возьмет networkAddress!
         networkManager.StartClient();
 
-        SteamDebugMonitor.Instance.SetLobbyId(CurrentLobbyID);
-        SteamDebugMonitor.Instance.SetConnectionAddress(hostAddress);
-        SteamDebugMonitor.Instance.SetHostSteamId(hostSteamId);
-        SteamDebugMonitor.Instance.networkManager = this.networkManager;
-
-        Debug.Log($"[OnLobbyEntered] Joining host at address: {hostAddress}");
-     
-        
+        Debug.Log($"[JoinAsClientRoutine] Joining host at address: {hostAddress}");
     }
     public void ForceDisconnect()
     {
@@ -250,6 +290,13 @@ public class SteamLobbyManager : MonoBehaviour
         // Пытаемся преобразовать строку в ulong (SteamID)
         if (ulong.TryParse(lobbyId, out ulong parsedId))
         {
+            if (CurrentLobbyID.IsValid())
+            {
+                Debug.Log($"[JoinLobbyById] Покидаю текущее лобби: {CurrentLobbyID}");
+                SteamMatchmaking.LeaveLobby(CurrentLobbyID);
+                CurrentLobbyID = CSteamID.Nil;
+            }
+
             CSteamID lobbySteamID = new CSteamID(parsedId);
             SteamMatchmaking.JoinLobby(lobbySteamID);
         }
@@ -262,6 +309,7 @@ public class SteamLobbyManager : MonoBehaviour
     // Создаем объект NetworkGameSession на сервере и запускаем его в сети
     public NetworkGameSession SpawnNetworkGameSession()
     {
+
 
         // 1) Инстансиируем префаб
         GameObject sessionObj = Instantiate(networkGameSessionPrefab);
@@ -295,13 +343,32 @@ public class SteamLobbyManager : MonoBehaviour
         {
             Debug.Log($"Игрок {userChanged} покинул лобби {lobbyID}");
 
-            // Проверяем, остался ли кто-то в лобби
+            // 1️⃣ Считаем текущее количество участников
             int memberCount = SteamMatchmaking.GetNumLobbyMembers(lobbyID);
+            Debug.Log($"Теперь в лобби {memberCount} игроков");
+
+            // 2️⃣ Если лобби пустое — вызываем событие закрытия
             if (memberCount == 0)
             {
                 Debug.Log("‼️ Лобби опустело — можно считать его закрытым.");
-                // Вызови тут своё событие, если нужно
                 OnLobbyEmpty?.Invoke(lobbyID);
+            }
+
+            // 3️⃣ Обновляем данные LobbyData в Steam
+            if (lobbyID == CurrentLobbyID) // проверим, что это наше лобби
+            {
+                // Читаем текущие данные
+                string mapName = SteamMatchmaking.GetLobbyData(lobbyID, "MapName");
+                string maxPlayersStr = SteamMatchmaking.GetLobbyData(lobbyID, "MaxPlayers");
+                string expStr = SteamMatchmaking.GetLobbyData(lobbyID, "Experience");
+
+                int maxPlayers = 0;
+                int exp = 0;
+
+                int.TryParse(maxPlayersStr, out maxPlayers);
+                int.TryParse(expStr, out exp);
+
+                UpdateLobbyInfo(mapName, maxPlayers, memberCount, exp);
             }
         }
     }
@@ -357,7 +424,37 @@ public class SteamLobbyManager : MonoBehaviour
             // Если нужно — передай exp в твой UI:
             lobbyUIManager.UpdateOrCreateLobbyUI(lobbyId, sessionName, mapName, currentPlayers, maxPlayers);
 
-         
+
+        }
+    }
+    public void DestroySessionAndCloseLobby()
+    {
+        // 1️⃣ Уничтожаем сетевую сессию, если есть
+        if (networkGameSession != null)
+        {
+            if (networkGameSession.gameObject != null)
+            {
+                NetworkServer.Destroy(networkGameSession.gameObject);
+                Debug.Log("🧹 NetworkGameSession уничтожена");
+            }
+            networkGameSession = null;
+        }
+
+        // 2️⃣ Закрываем Steam лобби, если есть активный
+        if (CurrentLobbyID != CSteamID.Nil)
+        {
+            SteamMatchmaking.LeaveLobby(CurrentLobbyID);
+            Debug.Log("🚪 Вышли из Steam лобби: " + CurrentLobbyID);
+
+            OnLobbyEmpty?.Invoke(CurrentLobbyID); // 🔑 ВАЖНО!
+            CurrentLobbyID = CSteamID.Nil;
+        }
+
+        // 3️⃣ Остановим Mirror сервер, если он активен
+        if (NetworkServer.active || NetworkClient.isConnected)
+        {
+            NetworkManager.singleton.StopHost();
+            Debug.Log("⛔ Сервер и клиент остановлены");
         }
     }
     public void LeaveCurrentLobby()
@@ -387,5 +484,14 @@ public class SteamLobbyManager : MonoBehaviour
         }
         Lobbies.Clear();
         networkGameSession = null;
+    }
+    private void OnApplicationQuit()
+    {
+        LeaveCurrentLobby();
+        DestroySessionAndCloseLobby();
+    }
+    public void OnUserClickedLeaveLobbyButton()
+    {
+        DestroySessionAndCloseLobby();
     }
 }
