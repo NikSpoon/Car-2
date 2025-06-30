@@ -34,34 +34,6 @@ public class SteamLobbyUIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Обновляет UI сессии по ID
-    /// </summary>
-    public void UpdateLobbyUI(NetworkGameSession session)
-    {
-        if (activeSessions.TryGetValue(session.lobbyId, out UIGameSessionPanel panel))
-        {
-            panel.SetSessionData(session.sessionName, session.sessionId, session.mapName,
-            session.syncedPlayers.Count, session.maxPlayers, session.lobbyId);
-            
-        }
-        else
-        {
-            // СОЗДАЁМ НОВЫЙ!
-            GameObject uiObj = Instantiate(oneSessionPrefab, context);
-            panel = uiObj.GetComponent<UIGameSessionPanel>();
-            panel.Init(rootPanel);
-
-            panel.SetSessionData(session.sessionName, session.sessionId, session.mapName,
-                session.syncedPlayers.Count, session.maxPlayers, session.lobbyId);
-
-
-            activeSessions.Add(session.lobbyId, panel);
-
-            // ❌ А `panel.Init(...)` ТУТ НЕТ!
-        }
-    }
-
-    /// <summary>
     /// Удаляет UI-сессию по lobbyId
     /// </summary>
     public void RemoveLobby(CSteamID lobbyId)
@@ -72,12 +44,12 @@ public class SteamLobbyUIManager : MonoBehaviour
         Destroy(panel.gameObject);
         activeSessions.Remove(lobbyId);
     }
-    public void UpdateOrCreateLobbyUI(CSteamID lobbyId, string sessionName, string mapName, int currentPlayers, int maxPlayers)
+    public void UpdateOrCreateLobbyUI(CSteamID lobbyId, string sessionName, string mapName, int currentPlayers, int maxPlayers, string id)
     {
         if (activeSessions.TryGetValue(lobbyId, out UIGameSessionPanel panel))
         {
             // Обновляем UI
-            panel.SetSessionData(sessionName, lobbyId.m_SteamID.ToString(), mapName, currentPlayers, maxPlayers, lobbyId);
+            panel.SetSessionData(sessionName, id, mapName, currentPlayers, maxPlayers, lobbyId);
         }
         else
         {
@@ -85,8 +57,9 @@ public class SteamLobbyUIManager : MonoBehaviour
             GameObject uiObj = Instantiate(oneSessionPrefab, context);
             panel = uiObj.GetComponent<UIGameSessionPanel>();
             panel.Init(rootPanel);
-            panel.SetSessionData(sessionName, lobbyId.m_SteamID.ToString(), mapName, currentPlayers, maxPlayers, lobbyId);
+            panel.SetSessionData(sessionName, id, mapName, currentPlayers, maxPlayers, lobbyId);
             activeSessions.Add(lobbyId, panel);
         }
     }
+  
 }

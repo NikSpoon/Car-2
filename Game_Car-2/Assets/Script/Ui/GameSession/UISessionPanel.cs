@@ -11,7 +11,7 @@ public class UISessionPanel : MonoBehaviour
     [Header("UI ссылки")]
     [SerializeField] private TextMeshProUGUI sessionsCountText;
     [SerializeField] private TMP_InputField sessionIdInput;
-    [SerializeField] private GameObject panelSessionRoot;         
+    [SerializeField] private GameObject panelSessionRoot;
     [SerializeField] private SteamLobbyUIManager lobbyUIManager;
 
 
@@ -81,10 +81,10 @@ public class UISessionPanel : MonoBehaviour
     public void OnClickExit()
     {
         panelSessionRoot.SetActive(false);
-       
+
 
     }
- 
+
     private void OnLobbyCreated(CSteamID cSteamID)
     {
         if (steamLobbyManager.Lobbies.TryGetValue(cSteamID, out NetworkGameSession session))
@@ -98,27 +98,35 @@ public class UISessionPanel : MonoBehaviour
     }
     private void OnLobbyEmpty(CSteamID cSteamID)
     {
-          Debug.Log($"[UI] OnLobbyEmpty: удаляем панель для лобби {cSteamID}");
-            lobbyUIManager.RemoveLobby(cSteamID);
+        Debug.Log($"[UI] OnLobbyEmpty: удаляем панель для лобби {cSteamID}");
+        lobbyUIManager.RemoveLobby(cSteamID);
 
     }
-    
+
     private float updateInterval = 2f;
     private float updateTimer;
 
-    public void Update()
+    private void Update()
     {
-        
         updateTimer += Time.deltaTime;
         if (updateTimer >= updateInterval)
         {
-            sessionsCountText.text = $"Libbies = {steamLobbyManager.Lobbies.Count}";
+            
             updateTimer = 0f;
 
-            foreach (var session in steamLobbyManager.Lobbies.Values)
-            {
-                lobbyUIManager.UpdateLobbyUI(session);
-            }
+
+
+            // Обновляем данные своего лобби, чтобы другие видели актуальное состояние
+            steamLobbyManager.UpdateMyLobbyData();
+           
+
+            // Запрашиваем новый список лобби
+            steamLobbyManager.RequestLobbies();
+
+            steamLobbyManager.UpdateLobbyListUI();
+            
+            // Обновляем счётчик UI
+            sessionsCountText.text = $"Lobbies = {lobbyUIManager.activeSessions.Count}";
         }
     }
 }

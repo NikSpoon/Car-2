@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using Edgegap;
 
 public class SteamLobbyManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class SteamLobbyManager : MonoBehaviour
 
     protected Callback<LobbyCreated_t> lobbyCreated; // Колбэк на создание лобби в Steam
     protected Callback<LobbyEnter_t> lobbyEntered;   // Колбэк на вход в лобби Steam
-    protected Callback<LobbyChatUpdate_t> lobbyChatUpdate;
+    protected Callback<LobbyDataUpdate_t> lobbyDataUpdate;
 
     public CSteamID CurrentLobbyID { get; private set; } // Steam ID текущего лобби
 
@@ -29,7 +30,7 @@ public class SteamLobbyManager : MonoBehaviour
 
     // Локальный список лобби от Steam (SteamID)
     private List<CSteamID> availableLobbies = new List<CSteamID>();
-    private List<CSteamID> filteredLobbies = new List<CSteamID>();
+    private List<CSteamID> filteredLobbies  =  new List<CSteamID>();
 
     // Ссылка на UI менеджер, чтобы обновлять список
     [SerializeField] private SteamLobbyUIManager lobbyUIManager;
@@ -52,7 +53,7 @@ public class SteamLobbyManager : MonoBehaviour
 
         lobbyCreated = Callback<LobbyCreated_t>.Create(OnLobbyCreated);
         lobbyEntered = Callback<LobbyEnter_t>.Create(OnLobbyEntered);
-        lobbyChatUpdate = Callback<LobbyChatUpdate_t>.Create(OnLobbyChatUpdate);
+        lobbyDataUpdate = Callback<LobbyDataUpdate_t>.Create(OnLobbyDataUpdate);
         lobbyMatchList = Callback<LobbyMatchList_t>.Create(OnLobbyMatchList);
 
 
@@ -76,13 +77,21 @@ public class SteamLobbyManager : MonoBehaviour
         Debug.Log($"Получено {result.m_nLobbiesMatching} лобби от Steam");
 
         availableLobbies.Clear();
-
         for (int i = 0; i < result.m_nLobbiesMatching; i++)
         {
             CSteamID lobbyId = SteamMatchmaking.GetLobbyByIndex(i);
             availableLobbies.Add(lobbyId);
         }
-
+       
+        filteredLobbies.Clear();
+        foreach (var lobbyId in availableLobbies)
+        {
+            string gameKey = SteamMatchmaking.GetLobbyData(lobbyId, "Game");
+            if (gameKey == "Mitrix") // или твой фильтр по ключу "Game"
+            {
+                filteredLobbies.Add(lobbyId);
+            }
+        }
         FilterLobbies();
         // Теперь обновим UI, получив данные по каждому лобби
         UpdateLobbyListUI();
@@ -272,15 +281,17 @@ public class SteamLobbyManager : MonoBehaviour
     public void SetInfo()
     {
         string sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
-        string mapName = "Map1"; // или выбери динамически, если нужно
+        string mapName = "Map1"; 
         string maxPlayers = "20";
-        string currentPlayers = "1"; // Хост всегда первый участник
+        string currentPlayers = "1";
+        string smoalId = "1";
 
         SteamMatchmaking.SetLobbyData(CurrentLobbyID, "Game", "Mitrix");
         SteamMatchmaking.SetLobbyData(CurrentLobbyID, "SessionName", sessionName);
         SteamMatchmaking.SetLobbyData(CurrentLobbyID, "MapName", mapName);
         SteamMatchmaking.SetLobbyData(CurrentLobbyID, "MaxPlayers", maxPlayers);
         SteamMatchmaking.SetLobbyData(CurrentLobbyID, "CurrentPlayers", currentPlayers);
+        SteamMatchmaking.SetLobbyData(CurrentLobbyID, "ID", smoalId);
     }
 
 
@@ -330,88 +341,51 @@ public class SteamLobbyManager : MonoBehaviour
         return session;
     }
 
-    private void OnLobbyChatUpdate(LobbyChatUpdate_t callback)
+    private void OnLobbyDataUpdate(LobbyDataUpdate_t callback)
     {
-        CSteamID lobbyID = (CSteamID)callback.m_ulSteamIDLobby;
-        CSteamID userChanged = (CSteamID)callback.m_ulSteamIDUserChanged;
-        EChatMemberStateChange stateChange = (EChatMemberStateChange)callback.m_rgfChatMemberStateChange;
+        CSteamID lobbyId = new CSteamID(callback.m_ulSteamIDLobby);
 
-        if (stateChange == EChatMemberStateChange.k_EChatMemberStateChangeLeft ||
-            stateChange == EChatMemberStateChange.k_EChatMemberStateChangeDisconnected ||
-            stateChange == EChatMemberStateChange.k_EChatMemberStateChangeKicked ||
-            stateChange == EChatMemberStateChange.k_EChatMemberStateChangeBanned)
+        Debug.Log($"Обновлены данные лобби {lobbyId}");
+
+        if (filteredLobbies.Contains(lobbyId))
         {
-            Debug.Log($"Игрок {userChanged} покинул лобби {lobbyID}");
+            string sessionName = SteamMatchmaking.GetLobbyData(lobbyId, "SessionName");
+            string mapName = SteamMatchmaking.GetLobbyData(lobbyId, "MapName");
+            string currentPlayersStr = SteamMatchmaking.GetLobbyData(lobbyId, "CurrentPlayers");
+            string maxPlayersStr = SteamMatchmaking.GetLobbyData(lobbyId, "MaxPlayers");
+            string id = SteamMatchmaking.GetLobbyData(lobbyId, "ID");
 
-            // 1️⃣ Считаем текущее количество участников
-            int memberCount = SteamMatchmaking.GetNumLobbyMembers(lobbyID);
-            Debug.Log($"Теперь в лобби {memberCount} игроков");
+          int currentPlayers = 0;
+            int maxPlayers = 0;
 
-            // 2️⃣ Если лобби пустое — вызываем событие закрытия
-            if (memberCount == 0)
+            if (!int.TryParse(currentPlayersStr, out currentPlayers))
             {
-                Debug.Log("‼️ Лобби опустело — можно считать его закрытым.");
-                OnLobbyEmpty?.Invoke(lobbyID);
+                Debug.LogWarning($"Не удалось преобразовать CurrentPlayers '{currentPlayersStr}' в число для лобби {lobbyId}");
             }
 
-            // 3️⃣ Обновляем данные LobbyData в Steam
-            if (lobbyID == CurrentLobbyID) // проверим, что это наше лобби
+            if (!int.TryParse(maxPlayersStr, out maxPlayers))
             {
-                // Читаем текущие данные
-                string mapName = SteamMatchmaking.GetLobbyData(lobbyID, "MapName");
-                string maxPlayersStr = SteamMatchmaking.GetLobbyData(lobbyID, "MaxPlayers");
-                string expStr = SteamMatchmaking.GetLobbyData(lobbyID, "Experience");
-
-                int maxPlayers = 0;
-                int exp = 0;
-
-                int.TryParse(maxPlayersStr, out maxPlayers);
-                int.TryParse(expStr, out exp);
-
-                UpdateLobbyInfo(mapName, maxPlayers, memberCount, exp);
+                Debug.LogWarning($"Не удалось преобразовать MaxPlayers '{maxPlayersStr}' в число для лобби {lobbyId}");
             }
-        }
-    }
-    public void UpdateLobbyInfo(string mapName, int maxPlayers, int currentPlayers, int exp)
-    {
-        if (CurrentLobbyID == CSteamID.Nil)
-        {
-            Debug.LogError("❌ Нет активного лобби для обновления данных!");
-            return;
-        }
 
-        SteamMatchmaking.SetLobbyData(CurrentLobbyID, "MapName", mapName);
-        SteamMatchmaking.SetLobbyData(CurrentLobbyID, "MaxPlayers", maxPlayers.ToString());
-        SteamMatchmaking.SetLobbyData(CurrentLobbyID, "CurrentPlayers", currentPlayers.ToString());
-        SteamMatchmaking.SetLobbyData(CurrentLobbyID, "Experience", exp.ToString());
-
-        Debug.Log("✅ Лобби данные обновлены: Map, MaxPlayers, CurrentPlayers, Exp");
-    }
-    public void UpdateLobbyData(string key, string value)
-    {
-        if (CurrentLobbyID == CSteamID.Nil)
-        {
-            Debug.LogError("❌ Нет активного лобби для обновления данных!");
-            return;
-        }
-
-        SteamMatchmaking.SetLobbyData(CurrentLobbyID, key, value);
-        Debug.Log($"🔄 Лобби обновлено: {key} = {value}");
+            lobbyUIManager.UpdateOrCreateLobbyUI( lobbyId, sessionName, mapName, currentPlayers, maxPlayers, id);
+        } 
     }
     private IEnumerator InvokeLobbyCreatedUIDelayed(CSteamID lobbyId)
     {
         yield return null; // подождать 1 кадр
         OnLobbyCreatedUI?.Invoke(lobbyId);
     }
-    private void UpdateLobbyListUI()
+    public void UpdateLobbyListUI()
     {
         foreach (var lobbyId in filteredLobbies)
         {
-            string sessionName = SteamMatchmaking.GetLobbyData(lobbyId, "SessionName"); // например
+            string sessionName = SteamMatchmaking.GetLobbyData(lobbyId, "SessionName"); 
             string mapName = SteamMatchmaking.GetLobbyData(lobbyId, "MapName");
             string maxPlayersStr = SteamMatchmaking.GetLobbyData(lobbyId, "MaxPlayers");
             string currentPlayersStr = SteamMatchmaking.GetLobbyData(lobbyId, "CurrentPlayers");
             string expStr = SteamMatchmaking.GetLobbyData(lobbyId, "Experience");
+            string id = SteamMatchmaking.GetLobbyData(lobbyId, "ID");
             int exp = 0;
             int.TryParse(expStr, out exp);
 
@@ -422,9 +396,22 @@ public class SteamLobbyManager : MonoBehaviour
             int.TryParse(currentPlayersStr, out currentPlayers);
 
             // Если нужно — передай exp в твой UI:
-            lobbyUIManager.UpdateOrCreateLobbyUI(lobbyId, sessionName, mapName, currentPlayers, maxPlayers);
+            lobbyUIManager.UpdateOrCreateLobbyUI(lobbyId, sessionName, mapName, currentPlayers, maxPlayers, id);
 
 
+        }
+    }
+    public void UpdateMyLobbyData()
+    {
+        if (CurrentLobbyID.IsValid())
+        {
+            SteamMatchmaking.SetLobbyData(CurrentLobbyID, "SessionName", networkGameSession.sessionName);
+            SteamMatchmaking.SetLobbyData(CurrentLobbyID, "MapName", networkGameSession.mapName);
+            SteamMatchmaking.SetLobbyData(CurrentLobbyID, "ID", networkGameSession.sessionId);
+            SteamMatchmaking.SetLobbyData(CurrentLobbyID, "MaxPlayers", networkGameSession.maxPlayers.ToString());
+            SteamMatchmaking.SetLobbyData(CurrentLobbyID, "CurrentPlayers", networkGameSession.syncedPlayers.Count.ToString());
+         
+           
         }
     }
     public void DestroySessionAndCloseLobby()
@@ -494,4 +481,5 @@ public class SteamLobbyManager : MonoBehaviour
     {
         DestroySessionAndCloseLobby();
     }
+
 }
