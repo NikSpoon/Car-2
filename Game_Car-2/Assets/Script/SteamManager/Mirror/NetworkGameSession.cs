@@ -17,7 +17,7 @@ public class NetworkGameSession : NetworkBehaviour
     [SyncVar] public string mapName;
     [SyncVar] public int maxPlayers;
     [SyncVar] public bool raceStarted;
-    [SyncVar] public NetworkPlayerProfile hostPlayer;
+    public NetworkPlayerProfile hostPlayer;
 
     public SyncList<NetworkPlayerProfile> syncedPlayers = new SyncList<NetworkPlayerProfile>();
     public UIGameSession uIGameSession { get; set; }
@@ -40,7 +40,11 @@ public class NetworkGameSession : NetworkBehaviour
     }
     private void Start()
     {
-        sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
+        if (hostPlayer)
+        {
+          sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
+
+        }
         maxPlayers = 10;
         botCreator = new BotCreator();
 
@@ -60,15 +64,12 @@ public class NetworkGameSession : NetworkBehaviour
         sessionName = name;
     }
 
-    [Server]
-    public void UpdateHost()
-    {
-        hostPlayer = GetHost();
-    }
+    
     public NetworkPlayerProfile GetHost()
     {
         return syncedPlayers.Count > 0 ? syncedPlayers[0] : null;
     }
+    
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -140,7 +141,13 @@ public class NetworkGameSession : NetworkBehaviour
         syncedPlayers.Remove(profile);
         Debug.Log($"👋 Игрок удалён из сессии: {profile.playerName}");
         if (profile == hostPlayer)
-            UpdateHost();
+        
+        { 
+
+
+        }
+
+            
 
     }
 
@@ -220,6 +227,7 @@ public class NetworkGameSession : NetworkBehaviour
         if (!raceStarted)
         {
             StartRace();
+           
         }
     }
 
@@ -233,11 +241,13 @@ public class NetworkGameSession : NetworkBehaviour
         }
 
         raceStarted = true;
+        
 
         // Запускаем корутину обратного отсчёта
         StartCoroutine(StartTimer());
+     
     }
-
+   
     // Таймер с обратным отсчётом и рассылкой времени всем клиентам
     [Server]
     private IEnumerator StartTimer()
@@ -258,7 +268,8 @@ public class NetworkGameSession : NetworkBehaviour
 
         // После таймера переключаем сцену и уведомляем клиентов переключить UI
         NetworkManager.singleton.ServerChangeScene(mapName);
-        PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
+
+        yield return null;
 
     }
 

@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class ViewPhisick : MonoBehaviour
@@ -12,59 +13,63 @@ public class ViewPhisick : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _timeNoCollision;
     [SerializeField] private TextMeshProUGUI _startTimer;
-    private void Awake()
-    {
-        GameObject car = GameObject.FindGameObjectWithTag("Player");
-        var Start = GameObject.FindGameObjectWithTag("Start");
-
-        if (car == null)
-        {
-            Debug.LogError("Не найден объект с тегом Player!");
-            return;
-        }
-
-        _carPhysic = car.GetComponent<CarPhysic>();
-        
-        if (_carPhysic == null)
-        {
-            Debug.LogError("На объекте Player отсутствует компонент CarPhysic!");
-            return;
-        }
-        _resp = car.GetComponent<NoCollision>();
-        _start = Start.GetComponent<CarSpawner>();
-    }
-
     private void Start()
     {
-        _carPhysic.OnSpeadChanged += OnSpead;
-        if (_carSpeadText != null)
-            _carSpeadText.text = "Spead =  0 ";
-        if (_engineRPMText != null)
-            _engineRPMText.text = "EngineRPM =  0 ";
-        if (_whellTorqueText != null)
-            _whellTorqueText.text = "WhellTorque =  0 ";
+        StartCoroutine(MyAwake());
+    }
+    private IEnumerator MyAwake()
+    {
+        while (_resp == null || _start == null || _carPhysic == null)
+        {
+           // Debug.LogError("Не найден объект NoCollision - " + _resp + ". CarSpawner -  " + _start);
 
+            GameObject car = GameObject.FindGameObjectWithTag("Player");
+            GameObject StartObj = GameObject.FindGameObjectWithTag("Start");
+
+            if (car != null)
+            {
+                _carPhysic = car.GetComponent<CarPhysic>();
+                _resp = car.GetComponent<NoCollision>();
+            }
+
+            if (StartObj != null)
+            {
+                _start = StartObj.GetComponent<CarSpawner>();
+            }
+
+            yield return new WaitForSeconds(1);
+        }
+
+        // ✅ Подписывайся на события здесь, когда всё точно найдено!
+        _carPhysic.OnSpeadChanged += OnSpead;
         _resp.OnNoCollision += OnNoCollision;
+        _start.OnWaitForStart += OnWaitForStart;
+
+        if (_carSpeadText != null) _carSpeadText.text = "Spead = 0";
+        if (_engineRPMText != null) _engineRPMText.text = "EngineRPM = 0";
+        if (_whellTorqueText != null) _whellTorqueText.text = "WhellTorque = 0";
+
         if (_timeNoCollision != null)
         {
-            _timeNoCollision.text = "NoCollision =  0 ";
+            _timeNoCollision.text = "NoCollision = 0";
             _timeNoCollision.gameObject.SetActive(false);
         }
-        _start.OnWaitForStart += OnWaitForStart;
     }
+
+   
     private void OnDestroy()
     {
         _carPhysic.OnSpeadChanged -= OnSpead;
         _resp.OnNoCollision -= OnNoCollision;
         _start.OnWaitForStart -= OnWaitForStart;
     }
-    private void OnWaitForStart( int time,bool IsTimerActive)
+    private void OnWaitForStart(int time, bool IsTimerActive)
     {
         if (IsTimerActive)
         {
             _startTimer.gameObject.SetActive(true);
             _startTimer.text = "Start after: " + time;
-         
+
         }
         else
         {
@@ -77,15 +82,15 @@ public class ViewPhisick : MonoBehaviour
         _engineRPMText.text = "EngineRPM =  " + currentEngineRPM;
         _whellTorqueText.text = "WhellTorque =  " + WhellTorque;
     }
-    private void OnNoCollision(float time,bool IsGhostActive)
+    private void OnNoCollision(float time, bool IsGhostActive)
     {
 
         if (IsGhostActive)
         {
             _timeNoCollision.gameObject.SetActive(true);
-           _timeNoCollision.text = "NoCollision =  " + time;
+            _timeNoCollision.text = "NoCollision =  " + time;
         }
-        else 
+        else
         {
             _timeNoCollision.gameObject.SetActive(false);
         }

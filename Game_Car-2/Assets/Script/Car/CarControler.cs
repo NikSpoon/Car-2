@@ -1,4 +1,4 @@
-
+﻿
 using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
 
@@ -17,13 +17,20 @@ public class CarControler : MonoBehaviour
     public bool IsEnamyControl { get; set; }
     private void Awake()
     {
+        if (_carPhysic == null)
+            _carPhysic = GetComponent<CarPhysic>();
+
+        if (_inputServis == null)
+            _inputServis = GetComponent<InputServis>();
+
+        if (_respawn == null)
+            _respawn = GetComponent<Respawn>();
+
         if (AI == null)
         {
             AI = GetComponent<BaseAIController>();
             if (AI == null)
-            {
                 AI = GetComponentInChildren<BaseAIController>();
-            }
         }
     }
 
@@ -49,7 +56,11 @@ public class CarControler : MonoBehaviour
     }
     private void IsPlayer()
     {
-        //Debug.Log((_inputServis.VerticalInput, _inputServis.HorizontalInput, _inputServis.Brake));
+        if (_carPhysic == null || _inputServis == null || _respawn == null)
+        {
+            Debug.LogError($"❌ IsPlayer: Отсутствуют компоненты! CarPhysic: {_carPhysic}, InputServis: {_inputServis}, Respawn: {_respawn}");
+            return;
+        }
         _carPhysic.Move(_inputServis.VerticalInput,_inputServis.HorizontalInput, _inputServis.Brake);
        
         if (_inputServis.Respawn)

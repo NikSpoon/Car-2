@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System.Runtime.ConstrainedExecution;
 
 
 public class CarSpawner : NetworkBehaviour
@@ -41,16 +42,20 @@ public class CarSpawner : NetworkBehaviour
         foreach (var profile in session.syncedPlayers)
         {
             if (profile == null) continue;
-            NetworkConnection conn = null;
-            var bot = profile.isBot;
             
-            foreach (var c in NetworkServer.connections.Values)
+            var bot = profile.isBot;
+
+            var conn = profile.connectionToClient;
+
+            if (conn != null)
             {
-                if (c.identity == profile.netIdentity)
-                {
-                    conn = c;
-                    break;
-                }
+                
+                Debug.Log($"✅ Привязали машину к игроку {profile.playerName}");
+            }
+            else
+            {
+                Debug.LogWarning($"❌ Нет соединения у {profile.playerName}");
+               
             }
 
             if (!bot)
@@ -60,8 +65,8 @@ public class CarSpawner : NetworkBehaviour
                 if (conn != null)
                 {
                     NetworkServer.Spawn(car, conn as NetworkConnectionToClient);
-                    var FollowCar  = profile.gameObject.GetComponent<PlayerFollowCar>();
 
+                    var FollowCar  = profile.gameObject.GetComponent<PlayerFollowCar>();
                     FollowCar.FindRoot(SetRootForMirrir(car));
                 }
                 else
@@ -148,7 +153,14 @@ public class CarSpawner : NetworkBehaviour
 
         yield return CountdownBeforeStart();
 
-        RpcStartRace(); // Запускаем гонку на всех
+        if (isServer)
+        {
+            RpcStartRace();
+        }
+        else
+        {
+            Debug.LogError("Попытка вызвать RpcStartRace с клиента!");
+        }
     }
     private IEnumerator InitRotine()
     {
@@ -198,7 +210,7 @@ public class CarSpawner : NetworkBehaviour
             if (child.CompareTag("Body"))
             {
                 // Нашли объект с тегом "Body"
-                Debug.Log("Найден объект с тегом Body: " + child.name);
+               // Debug.Log("Найден объект с тегом Body: " + child.name);
                 // Можно вернуть child или что-то сделать
                 return child;
             }
@@ -209,7 +221,10 @@ public class CarSpawner : NetworkBehaviour
     private void OnDisable()
     {
 
-        Debug.Log("Dosable");
+       
     }
-
+    private void Update()
+    {
+        
+    }
 }

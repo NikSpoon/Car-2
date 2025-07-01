@@ -74,7 +74,7 @@ public class SteamLobbyManager : MonoBehaviour
 
     private void OnLobbyMatchList(LobbyMatchList_t result)
     {
-        Debug.Log($"Получено {result.m_nLobbiesMatching} лобби от Steam");
+       //  Debug.Log($"Получено {result.m_nLobbiesMatching} лобби от Steam");
 
         availableLobbies.Clear();
         for (int i = 0; i < result.m_nLobbiesMatching; i++)
@@ -345,7 +345,7 @@ public class SteamLobbyManager : MonoBehaviour
     {
         CSteamID lobbyId = new CSteamID(callback.m_ulSteamIDLobby);
 
-        Debug.Log($"Обновлены данные лобби {lobbyId}");
+        //Debug.Log($"Обновлены данные лобби {lobbyId}");
 
         if (filteredLobbies.Contains(lobbyId))
         {

@@ -23,10 +23,6 @@ public class PlayerFollowCar : MonoBehaviour
             }
             
         }
-        else
-        {
-           
-            bodyTransform = null;
-        }
+       
     }
 }

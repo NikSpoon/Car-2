@@ -20,13 +20,15 @@ public class NetworkPlayerProfile : NetworkBehaviour
 
     [SyncVar] public bool isBotRandom;
 
-    private GameObject carInstance;
+  
 
     private int _cachedCarIndex = -1;
     private int _cachedCarUpgradeIndex = -1;
 
     private bool _isReadyToSendCommands = false;
     private bool _isWaitingForReady = false;
+
+    
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -69,13 +71,16 @@ public class NetworkPlayerProfile : NetworkBehaviour
     }
     public override void OnStartLocalPlayer()
     {
-        var steamLobbyManager = FindFirstObjectByType<SteamLobbyManager>();
         base.OnStartLocalPlayer();
         
-        CmdJoinLobbyById(steamLobbyManager.CurrentLobbyID);
-   
+        var steamLobbyManager = FindFirstObjectByType<SteamLobbyManager>();
+        var p = PlayerDataManager.Instance.PlayerProfile;
+        CmdJoinLobbyById(steamLobbyManager.CurrentLobbyID, p.playerName, p.levl, p.money, p.Xp, p.selectedCarIndex,
+            p.selectedBodyUpgradeIndex, p.playerID, p.isOnline);
+
         Debug.Log("✅ OnStartLocalPlayer вызван для " + SteamUser.GetSteamID());
     }
+
     // Вызывается на сервере при создании игрока
     [Server]
     public void Initialize(PlayerProfile profile)
@@ -169,7 +174,6 @@ public class NetworkPlayerProfile : NetworkBehaviour
     }
     private IEnumerator WaitUntilClientReady()
     {
-        // Безопасная задержка
         yield return new WaitForSeconds(0.5f);
 
         while (!NetworkClient.ready)
@@ -178,17 +182,36 @@ public class NetworkPlayerProfile : NetworkBehaviour
         }
 
         _isReadyToSendCommands = true;
-        // Debug.Log($"✅ Клиент {playerName} теперь готов к командам.");
+        Debug.Log($"✅ Клиент {playerName} теперь готов к командам.");
     }
 
     [Command]
-    public void CmdJoinLobbyById(CSteamID Id)
+    
+    public void CmdJoinLobbyById(
+    CSteamID Id_,
+    string playerName_,
+    int level_,
+    int money_,
+    int xp_,
+    int selectedCarIndex_,
+    int selectedBodyUpgradeIndex_,
+    int playerID_,
+    bool isOnline_)
     {
-        Initialize(PlayerDataManager.Instance.PlayerProfile);
+        // Инициализируем профиль
+        playerName = playerName_;
+        level = level_;
+        money = money_;
+        xp = xp_;
+        selectedCarIndex = selectedCarIndex_;
+        selectedBodyUpgradeIndex = selectedBodyUpgradeIndex_;
+        playerID = playerID_;
+        isOnline = isOnline_;
+
         var session = FindFirstObjectByType<NetworkGameSession>();
-        if (session != null && session.lobbyId == Id)
+        if (session != null)
         {
-            session.AddPlayer(this); // твой метод добавления
+            session.AddPlayer(this);
         }
     }
 }

@@ -76,7 +76,7 @@ public class UIGameSession : MonoBehaviour
             var playerUIObj = Instantiate(playerUIPrefab, playersContainer);
             var playerUI = playerUIObj.GetComponent<UIOnePlayerOnSession>();
 
-            if (playerUI != null)
+            if (playerUI != null  )
                 playerUI.Set(player);
         }
 

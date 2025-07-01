@@ -1,6 +1,9 @@
 ﻿using Mirror;
+using Mirror.BouncyCastle.Utilities.Encoders;
+using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class CameraLockAtPlayer : MonoBehaviour
 {
@@ -17,7 +20,7 @@ public class CameraLockAtPlayer : MonoBehaviour
 
     }
 
-
+ 
     private void Update()
     {
         if (!isCameraSet && NetworkClient.localPlayer != null)
@@ -31,6 +34,7 @@ public class CameraLockAtPlayer : MonoBehaviour
         Camera.Follow = player.transform;
         Camera.LookAt = player.transform;
         Camera.gameObject.SetActive(true);
-        Debug.Log($"Камера привязана к локальному игроку: {player.name}");
+         var p = PlayerDataManager.Instance.PlayerProfile.playerName;
+        Debug.Log($"Камера привязана к локальному игроку: {p}");
     }
 }

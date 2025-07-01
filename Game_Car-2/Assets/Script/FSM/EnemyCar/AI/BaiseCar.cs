@@ -102,10 +102,10 @@ public class BaiseCar : BaseAIController
 
         yield return new WaitUntil(() => RaceManager.Instance.Checkpoints != null && RaceManager.Instance.Checkpoints.Count > 0);
 
-        Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
+       // Debug.Log($"[InitAI] Total checkpoints: {Checkpoints.Count}");
         for (int i = 0; i < Checkpoints.Count; i++)
         {
-           Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
+           //Debug.Log($"[InitAI] Checkpoint {i}: {Checkpoints[i].name}");
         }
 
 
@@ -191,7 +191,7 @@ public class BaiseCar : BaseAIController
         }
         else
         {
-           Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {ChekpointEnemy[currentCheckpointIndex].name}");
+         //  Debug.Log($"Пройден чекпоинт {checkpointTransform.name}, но мы ждём {ChekpointEnemy[currentCheckpointIndex].name}");
         }
         
     }
@@ -224,7 +224,7 @@ public class BaiseCar : BaseAIController
         currentCheckpointIndex++;
         if (currentCheckpointIndex >= ChekpointEnemy.Count)
         {
-            Debug.Log("Все чекпоинты пройдены!");
+           // Debug.Log("Все чекпоинты пройдены!");
            
         }
         else
