@@ -15,7 +15,7 @@ public class PlayerFollowCar : NetworkBehaviour
 
     private void Update()
     {
-        if (!isLocalPlayer) return;
+        if (!authority) return;
 
         if (PlayerDataManager.Instance.AppSystem.CurrentState == FSM.App.AppState.Gameplay)
         {

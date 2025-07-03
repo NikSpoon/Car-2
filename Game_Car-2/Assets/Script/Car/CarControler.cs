@@ -48,8 +48,8 @@ public class CarControler : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!IsRaceStarted) return;
 
-      
         if (IsEnamyControl)
         {
             if (!_identity.isServer) return;
@@ -89,6 +89,16 @@ public class CarControler : MonoBehaviour
        // Debug.Log((AI.VerticalInput, AI.HorizontalInput, AI.Brake));
         _carPhysic.Move(AI.VerticalInput, AI.HorizontalInput, AI.Brake);
     }
+    public bool IsRaceStarted { get; private set; } = false;
 
+    public void EnableControl()
+    {
+        IsRaceStarted = true;
+    }
+
+    public void DisableControl()
+    {
+        IsRaceStarted = false;
+    }
 
 }
