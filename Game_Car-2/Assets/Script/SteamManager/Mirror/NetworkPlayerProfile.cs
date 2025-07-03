@@ -2,6 +2,7 @@
 using Steamworks;
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class NetworkPlayerProfile : NetworkBehaviour
@@ -39,10 +40,17 @@ public class NetworkPlayerProfile : NetworkBehaviour
             var playerFollow = GetComponent<PlayerFollowCar>();
             if (playerFollow != null && newCar != null)
             {
-                var body = newCar.transform.Find("Body");
+                // Найдём Body по тегу:
+                var body = newCar.GetComponentsInChildren<Transform>()
+                                 .FirstOrDefault(t => t.CompareTag("Body"));
+
                 if (body != null)
                 {
                     playerFollow.FindRoot(body);
+                }
+                else
+                {
+                    Debug.LogWarning("❌ Внимание! Body не найден в OnCarChanged");
                 }
             }
         }

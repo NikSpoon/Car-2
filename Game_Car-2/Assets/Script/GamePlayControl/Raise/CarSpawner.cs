@@ -26,10 +26,7 @@ public class CarSpawner : NetworkBehaviour
         StartCoroutine(InitRotine());
       
     }
-    private void Start()
-    {
-        StartCoroutine(ServerStartRaceRoutine());
-    }
+   
 
     [Server]
     private void SpawnMiror()
@@ -128,7 +125,7 @@ public class CarSpawner : NetworkBehaviour
 
                 var conn = profile.connectionToClient;
 
-                // Если игрок не бот и conn == null — считаем его готовым (локальный хост)
+                
                 if (!profile.isBot)
                 {
                     if (conn != null)
@@ -143,17 +140,17 @@ public class CarSpawner : NetworkBehaviour
                     {
                         if (!(NetworkServer.active && NetworkClient.activeHost))
                         {
-                            // Если не хост — значит что-то не так, ждем дальше
+                            
                             allReady = false;
                             break;
                         }
-                        // Если хост — считаем готовым (conn нет, но это локальный хост)
+                       
                     }
                 }
                 else
                 {
                     // Для ботов можно считать их всегда готовыми
-                    // или по другой логике
+                    
                 }
             }
 
@@ -172,8 +169,7 @@ public class CarSpawner : NetworkBehaviour
     {
         // Основной код старта
         Debug.Log("Стартуем гонку!");
-        RpcStartRace();
-        start = true;
+       
     }
     private GameObject SpawnPlayer(NetworkPlayerProfile profile)
     {
@@ -212,7 +208,7 @@ public class CarSpawner : NetworkBehaviour
         var rb = carObj.GetComponent<Rigidbody>();
         var noCol = carObj.GetComponent<NoCollision>();
         var controller = carObj.GetComponent<CarControler>();
-        controller.DisableControl();
+       
 
         if (rb == null) Debug.LogError("SetupCar: Rigidbody is missing!");
         if (noCol == null) Debug.LogWarning("SetupCar: NoCollision is missing!");
@@ -289,10 +285,9 @@ public class CarSpawner : NetworkBehaviour
 
             var rb = car.GetComponent<Rigidbody>();
             var noCol = car.GetComponent<NoCollision>();
-            var  controller =  car.GetComponent<CarControler>();
+           
             noCol?.Respawn();
             rb.isKinematic = false;
-            controller.EnableControl();
         }
     }
 
