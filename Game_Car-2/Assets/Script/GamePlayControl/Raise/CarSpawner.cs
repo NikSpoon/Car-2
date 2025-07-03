@@ -66,8 +66,18 @@ public class CarSpawner : NetworkBehaviour
                 {
                     NetworkServer.Spawn(car, conn as NetworkConnectionToClient);
 
-                    var FollowCar  = profile.gameObject.GetComponent<PlayerFollowCar>();
-                    FollowCar.FindRoot(SetRootForMirrir(car));
+                    var carIdentity = car.GetComponent<NetworkIdentity>();
+                    profile.carIdentity = carIdentity;
+
+                    SetupCar(car, profile.playerName, false);
+
+                    // Получаем PlayerFollowCar из профиля игрока (например, компонент камеры)
+                    var followCar = profile.gameObject.GetComponentInChildren<PlayerFollowCar>();
+                    if (followCar != null)
+                    {
+                        Transform bodyTransform = SetRootForMirrir(car);
+                        followCar.FindRoot(bodyTransform);
+                    }
                 }
                 else
                 {
@@ -166,6 +176,8 @@ public class CarSpawner : NetworkBehaviour
     {
         while (!NetworkServer.active)
             yield return null;
+
+
 
         Debug.Log("✅ Server is active — starting Spawn");
         SpawnMiror();

@@ -1,6 +1,7 @@
-﻿
+﻿using Mirror;
 using Assets.Script.FSM.EnemyCar;
 using UnityEngine;
+using System.Security.Principal;
 
 
 
@@ -12,11 +13,15 @@ public class CarControler : MonoBehaviour
     [SerializeField] private Respawn _respawn;
     [SerializeField] private BaseAIController AI;
 
+    [SerializeField] private NetworkIdentity _identity;
 
     public bool IsPlayerControl { get; set; }
     public bool IsEnamyControl { get; set; }
     private void Awake()
     {
+        if(_identity == null)
+            _identity = GetComponent<NetworkIdentity>();
+
         if (_carPhysic == null)
             _carPhysic = GetComponent<CarPhysic>();
 
@@ -43,15 +48,20 @@ public class CarControler : MonoBehaviour
     }
     void FixedUpdate()
     {
-        
+
+      
+        if (IsEnamyControl)
+        {
+            if (!_identity.isServer) return;
+            IsEnamy();
+            return;
+        }
+       
+        if (_identity == null || !_identity.isOwned) return;
+
         if (IsPlayerControl)
         {
             IsPlayer();
-        }
-      
-        else if (IsEnamyControl)
-        {
-            IsEnamy();
         }
     }
     private void IsPlayer()
@@ -79,5 +89,6 @@ public class CarControler : MonoBehaviour
        // Debug.Log((AI.VerticalInput, AI.HorizontalInput, AI.Brake));
         _carPhysic.Move(AI.VerticalInput, AI.HorizontalInput, AI.Brake);
     }
+
 
 }

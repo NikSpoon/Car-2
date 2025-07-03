@@ -67,7 +67,7 @@ public class SteamLobbyManager : MonoBehaviour
     // Метод запроса публичных лобби
     public void RequestLobbies()
     {
-        Debug.Log("Запрос списка лобби...");
+        //Debug.Log("Запрос списка лобби...");
         SteamMatchmaking.AddRequestLobbyListStringFilter("Game", "Mitrix", ELobbyComparison.k_ELobbyComparisonEqual);
         SteamMatchmaking.RequestLobbyList();
     }

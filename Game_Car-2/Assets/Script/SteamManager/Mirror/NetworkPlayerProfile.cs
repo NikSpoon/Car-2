@@ -29,6 +29,24 @@ public class NetworkPlayerProfile : NetworkBehaviour
     private bool _isWaitingForReady = false;
 
     
+    [SyncVar(hook = nameof(OnCarChanged))]
+    public NetworkIdentity carIdentity;
+
+    private void OnCarChanged(NetworkIdentity oldCar, NetworkIdentity newCar)
+    {
+        if (isLocalPlayer)
+        {
+            var playerFollow = GetComponent<PlayerFollowCar>();
+            if (playerFollow != null && newCar != null)
+            {
+                var body = newCar.transform.Find("Body");
+                if (body != null)
+                {
+                    playerFollow.FindRoot(body);
+                }
+            }
+        }
+    }
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -46,6 +64,7 @@ public class NetworkPlayerProfile : NetworkBehaviour
             }
         }
     }
+
 
     [Command]
     void CmdRegisterPlayer(NetworkGameSession session)

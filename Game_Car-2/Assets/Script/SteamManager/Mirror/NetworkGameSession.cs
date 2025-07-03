@@ -40,7 +40,7 @@ public class NetworkGameSession : NetworkBehaviour
     }
     private void Start()
     {
-        if (hostPlayer)
+        if (isServer)
         {
           sessionName = PlayerDataManager.Instance.PlayerProfile.playerName;
 
@@ -75,9 +75,6 @@ public class NetworkGameSession : NetworkBehaviour
         base.OnStartServer();
 
         
-       
-        sessionId = pendingSessionId;
-        sessionName = pendingSessionName;
 
         // Установка первой гонки
         if (raceDatabase != null && raceDatabase.Races.Count > 0)
@@ -105,10 +102,10 @@ public class NetworkGameSession : NetworkBehaviour
             SteamLobbyManager.Lobbies[lobbyId] = this;
         }
 
-        var uiGameSession = FindFirstObjectByType<UIGameSession>();
-        if (uiGameSession != null)
+        uIGameSession = FindFirstObjectByType<UIGameSession>();
+        if (uIGameSession != null)
         {
-            uiGameSession.SetSession(this);
+            uIGameSession.SetSession(this);
         }
     }
 

@@ -887,6 +887,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1163013463592450753, guid: 22e89fd638dc0f149854c0451b5c8166, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6634691882884975024}
+    - targetCorrespondingSourceObject: {fileID: 1163013463592450753, guid: 22e89fd638dc0f149854c0451b5c8166, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8560141875678966569}
   m_SourcePrefab: {fileID: 100100000, guid: 22e89fd638dc0f149854c0451b5c8166, type: 3}
 --- !u!1 &682681219204175824 stripped
 GameObject:
@@ -949,6 +952,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _noCollision: {fileID: 4273982357080407763}
+--- !u!114 &-8560141875678966569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682681219204175824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f63ea2e505fd484193fb31c5c55ca73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0.033333335
+  baselineRate: 1
+  unreliableRedundancy: 0
+  baselineIsDelta: 1
+  debugLog: 0
+  useFixedUpdate: 0
+  target: {fileID: 8275326847447256115}
+  bufferSizeLimit: 64
+  sendRate: 30
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  debugDraw: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!114 &4273982357080407763 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2452975436662182850, guid: 22e89fd638dc0f149854c0451b5c8166, type: 3}
