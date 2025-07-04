@@ -74,7 +74,8 @@ public class NetworkGameSession : NetworkBehaviour
     {
         base.OnStartServer();
 
-        
+        sessionId = pendingSessionId ;
+        sessionName =  pendingSessionName;
 
         // Установка первой гонки
         if (raceDatabase != null && raceDatabase.Races.Count > 0)

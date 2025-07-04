@@ -4,9 +4,15 @@ using UnityEngine;
 [System.Serializable]
 public class CarUpgradeList
 {
-    public List<GameObject> upgrades; // апгрейды для одной машины
+    public List<CarUpgrade> upgrades; 
 }
 
+[System.Serializable]
+public class CarUpgrade
+{
+    public GameObject upgradePrefab;  
+    public int price;                 
+}
 [CreateAssetMenu(fileName = "CarDatabase", menuName = "GameData/Car Database")]
 public class CarDatabase : ScriptableObject
 {

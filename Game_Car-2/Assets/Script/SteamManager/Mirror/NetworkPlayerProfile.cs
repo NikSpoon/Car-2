@@ -146,7 +146,6 @@ public class NetworkPlayerProfile : NetworkBehaviour
         local.levl = level;
         local.money = money;
         local.Xp = xp;
-        local.selectedCarIndex = selectedCarIndex;
         local.playerID = playerID;
         local.isOnline = isOnline;
     }

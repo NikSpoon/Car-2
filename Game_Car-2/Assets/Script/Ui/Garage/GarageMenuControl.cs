@@ -16,7 +16,7 @@ public class GarageMenuControl : MonoBehaviour
 
     [SerializeField] private GameObject _creatorNull;
     [SerializeField] private GameObject _buy;
-    [SerializeField] private GameObject _cenNotBuy;
+
 
     private float _escapeHoldTime = 0f;
     private const float ESCAPE_HOLD_DURATION = 1.5f; // секунда(ы) удержания для полного закрытия
@@ -59,6 +59,7 @@ public class GarageMenuControl : MonoBehaviour
 
 
     }
+
     public void OnClickStart()
     {
 
@@ -106,20 +107,10 @@ public class GarageMenuControl : MonoBehaviour
         if (ActivePanel() == null)
             _buy.SetActive(true);
         else
-        {
-            _cenNotBuy.SetActive(false);
-            _buy.SetActive(false);
+         _buy.SetActive(false);
 
-        }
     }
-    public void OnClickCenNotBuy()
-    {
-        if (ActivePanel() == _buy) // и не хватило денег)
-            _cenNotBuy.SetActive(true);
-
-        if (_cenNotBuy.activeSelf)
-            _cenNotBuy.SetActive(false);
-    }
+   
 
     private void ExitPanel(GameObject panel)
     {
@@ -138,9 +129,7 @@ public class GarageMenuControl : MonoBehaviour
         if (_creator.activeSelf) return _creator;
         if (_bust.activeSelf) return _bust;
         if (_options.activeSelf) return _options;
-        if (_buy.activeSelf)
-            return _cenNotBuy.activeSelf ? _cenNotBuy : _buy;
-
+        if (_buy.activeSelf) return _buy;
         return null;
     }
     private void CloseAllPanels()
@@ -150,7 +139,7 @@ public class GarageMenuControl : MonoBehaviour
         _bust.SetActive(false);
         _options.SetActive(false);
         _buy.SetActive(false);
-        _cenNotBuy.SetActive(false);
+       
     }
 }
 

@@ -2,15 +2,51 @@
 
 public class GarageUISelectCar : MonoBehaviour
 {
-   public void SelectCar(int index )
+    [SerializeField] private GarageMenuControl _garageMenuControl;
+    private CarInventoryManager inventoryManager;
+    public int carIndex { get; private set; }
+    public int bodyIndex { get; private set; }
+    public int cost { get; private set; }
+
+    private string text;
+
+    public bool CarOrBody { get; private set; }
+    private void Start()
     {
-        PlayerDataManager.Instance.PlayerProfile.selectedCarIndex = index;
-       // Debug.Log("Выбрана машина: " + index);
+        inventoryManager = PlayerDataManager.Instance.CarInventory;
+    }
+    public void SelectCar(int carindex)
+    {
+        CarOrBody = true;
+        cost =  inventoryManager.TrySelectCarAndUpgrade(carindex, 0);
+        SelectUpgrade(0);
+        carIndex = carindex;
+        if (cost > 0)
+        {
+            text = $"Машина не куплена! Стоимость: {cost}";
+            _garageMenuControl.OnClickBuy();
+            
+        }
     }
 
-    public void SelectUpgraade(int index)
+    public void SelectUpgrade(int index)
     {
-        PlayerDataManager.Instance.PlayerProfile.selectedBodyUpgradeIndex = index;
-       // Debug.Log("Выбрана машина: " + index);
+        CarOrBody = false;
+        cost = inventoryManager.TrySelectCarAndUpgrade(carIndex, index);
+        bodyIndex = index;
+        if (cost > 0)
+        {
+            text = ($"Апгрейд не куплен! Стоимость: {cost}");
+            _garageMenuControl.OnClickBuy();
+            
+        }
+    }
+    public string SendText()
+    {
+        return text;
+    }
+    public void RefreshSelected()
+    {
+        cost = inventoryManager.TrySelectCarAndUpgrade(carIndex, bodyIndex);
     }
 }

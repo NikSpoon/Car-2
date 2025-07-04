@@ -173,7 +173,7 @@ public class CarSpawner : NetworkBehaviour
     }
     private GameObject SpawnPlayer(NetworkPlayerProfile profile)
     {
-        var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
+        var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex].upgradePrefab;
 
         var car = Instantiate(carPrefab, _start.position, _start.rotation);
         return car;
@@ -196,7 +196,7 @@ public class CarSpawner : NetworkBehaviour
             carUpgrades = profile.selectedBodyUpgradeIndex;
             carIndex = profile.selectedCarIndex;
         }
-        var carPrefab = enemyCarDatabase.carUpgrades[carIndex].upgrades[carUpgrades];
+        var carPrefab = enemyCarDatabase.carUpgrades[carIndex].upgrades[carUpgrades].upgradePrefab;
         var botCar = Instantiate(carPrefab, _start.position, _start.rotation);
 
         return botCar;
@@ -204,17 +204,25 @@ public class CarSpawner : NetworkBehaviour
 
     private void SetupCar(GameObject carObj, string playerName, bool isBot)
     {
+        // Серверная часть (регистрация, добавление в список)
+        var controller = carObj.GetComponent<CarControler>();
+        RaceManager.Instance.RegisterRaceCar(playerName, carObj);
+        allSpawnedCars.Add(controller);
+
+        // Вызов RPC, чтобы настроить машину и на клиенте
+        var carIdentity = carObj.GetComponent<NetworkIdentity>();
+        RpcSetupCar(carIdentity, isBot);
+    }
+    [ClientRpc]
+    private void RpcSetupCar(NetworkIdentity carIdentity, bool isBot)
+    {
+        var carObj = carIdentity.gameObject;
 
         var rb = carObj.GetComponent<Rigidbody>();
         var noCol = carObj.GetComponent<NoCollision>();
         var controller = carObj.GetComponent<CarControler>();
-       
 
-        if (rb == null) Debug.LogError("SetupCar: Rigidbody is missing!");
-        if (noCol == null) Debug.LogWarning("SetupCar: NoCollision is missing!");
-        if (controller == null) Debug.LogError("SetupCar: CarControler is missing!");
-
-        rb.isKinematic = true;
+        if (rb != null) rb.isKinematic = true;
         noCol?.EnablePassiveGhost(999f);
 
         if (controller != null)
@@ -224,12 +232,7 @@ public class CarSpawner : NetworkBehaviour
         }
 
         carObj.tag = isBot ? "Enemy" : "Player";
-
-
-        RaceManager.Instance.RegisterRaceCar(playerName, carObj);
-        allSpawnedCars.Add(controller);
     }
-
 
     private IEnumerator ServerStartRaceRoutine()
     {

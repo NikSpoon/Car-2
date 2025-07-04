@@ -36,7 +36,7 @@ public class GarageSpawn : MonoBehaviour
             Destroy(currentCarInstance);
         }
 
-        GameObject upgradePrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex];
+        GameObject upgradePrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex].upgradePrefab;
         currentCarInstance = Instantiate(upgradePrefab, _start.position, _start.rotation,transform);
       
 
