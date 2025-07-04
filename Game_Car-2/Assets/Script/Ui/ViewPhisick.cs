@@ -19,9 +19,11 @@ public class ViewPhisick : MonoBehaviour
     }
     private IEnumerator MyAwake()
     {
+        yield return new WaitForSeconds(1f);
+
         while (_resp == null || _start == null || _carPhysic == null)
         {
-           // Debug.LogError("Не найден объект NoCollision - " + _resp + ". CarSpawner -  " + _start);
+            Debug.LogError("Не найден объект NoCollision - " + _resp + ". CarSpawner -  " + _start);
 
             GameObject car = GameObject.FindGameObjectWithTag("Player");
             GameObject StartObj = GameObject.FindGameObjectWithTag("Start");

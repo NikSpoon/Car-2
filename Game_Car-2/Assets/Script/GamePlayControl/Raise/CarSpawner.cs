@@ -12,7 +12,7 @@ public class CarSpawner : NetworkBehaviour
     [SerializeField] private CarDatabase carDatabase;
     [SerializeField] private CarDatabase enemyCarDatabase;
   //  [SerializeField] private int enemyValue = 5;
-    [SerializeField] private int startTime = 5;
+    [SerializeField] private int startTime = 10;
 
     public event Action<int, bool> OnWaitForStart;
 
@@ -24,7 +24,7 @@ public class CarSpawner : NetworkBehaviour
     {
         DontDestroyOnLoad(gameObject);
         StartCoroutine(InitRotine());
-      
+        start = false;
     }
    
 
@@ -162,15 +162,9 @@ public class CarSpawner : NetworkBehaviour
 
         Debug.Log("Все игроки готовы! Запускаем игру.");
 
-        StartRace();
     }
 
-    private void StartRace()
-    {
-        // Основной код старта
-        Debug.Log("Стартуем гонку!");
-       
-    }
+  
     private GameObject SpawnPlayer(NetworkPlayerProfile profile)
     {
         var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex].upgradePrefab;
@@ -204,36 +198,12 @@ public class CarSpawner : NetworkBehaviour
 
     private void SetupCar(GameObject carObj, string playerName, bool isBot)
     {
-        // Серверная часть (регистрация, добавление в список)
         var controller = carObj.GetComponent<CarControler>();
         RaceManager.Instance.RegisterRaceCar(playerName, carObj);
         allSpawnedCars.Add(controller);
 
-        // Вызов RPC, чтобы настроить машину и на клиенте
-        var carIdentity = carObj.GetComponent<NetworkIdentity>();
-        RpcSetupCar(carIdentity, isBot);
+        controller.RpcSetupCar(isBot);
     }
-    [ClientRpc]
-    private void RpcSetupCar(NetworkIdentity carIdentity, bool isBot)
-    {
-        var carObj = carIdentity.gameObject;
-
-        var rb = carObj.GetComponent<Rigidbody>();
-        var noCol = carObj.GetComponent<NoCollision>();
-        var controller = carObj.GetComponent<CarControler>();
-
-        if (rb != null) rb.isKinematic = true;
-        noCol?.EnablePassiveGhost(999f);
-
-        if (controller != null)
-        {
-            controller.IsPlayerControl = !isBot;
-            controller.IsEnamyControl = isBot;
-        }
-
-        carObj.tag = isBot ? "Enemy" : "Player";
-    }
-
     private IEnumerator ServerStartRaceRoutine()
     {
 
@@ -241,7 +211,7 @@ public class CarSpawner : NetworkBehaviour
 
         if (isServer)
         {
-            RpcStartRace();
+            StartRace();
         }
        
     }
@@ -267,31 +237,26 @@ public class CarSpawner : NetworkBehaviour
         bool ghost = true;
         for (int i = startTime; i > 0; i--)
         {
-            OnWaitForStart?.Invoke(i, ghost);
+            RpcUpdateCountdown(i, ghost);
             yield return new WaitForSeconds(1f);
         }
-        OnWaitForStart?.Invoke(0, false);
+        RpcUpdateCountdown(0, false);
     }
 
-    [ClientRpc]
-    private void RpcStartRace()
+    [Server]
+    private void StartRace()
     {
-        EnableAllCars();
-        start = true;
-    }
+        Debug.Log("Стартуем гонку!");
 
-    private void EnableAllCars()
-    {
         foreach (var car in allSpawnedCars)
         {
-            if (car == null) continue;
-
-            var rb = car.GetComponent<Rigidbody>();
-            var noCol = car.GetComponent<NoCollision>();
-           
-            noCol?.Respawn();
-            rb.isKinematic = false;
+            if (car != null)
+            {
+                car.RpcStartCar();
+            }
         }
+        start = true;
+        
     }
 
     private Transform SetRootForMirrir(GameObject carObj)
@@ -308,6 +273,11 @@ public class CarSpawner : NetworkBehaviour
            
         }
         return null;
+    }
+    [ClientRpc]
+    private void RpcUpdateCountdown(int time, bool ghost)
+    {
+        OnWaitForStart?.Invoke(time, ghost);
     }
     private void OnDisable()
     {

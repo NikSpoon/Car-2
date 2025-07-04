@@ -1489,10 +1489,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0582f6c9d883e4dac6d0caf0da3372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _carPhysic: {fileID: 0}
   _carSpeadText: {fileID: 7513793056725782580}
   _engineRPMText: {fileID: 6283443999366575639}
   _whellTorqueText: {fileID: 3434840448409347239}
+  _timeNoCollision: {fileID: 0}
+  _startTimer: {fileID: 0}
 --- !u!1 &5748625982346272187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2711,11 +2712,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e35ab139b49c97b4a80523bee0c00696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   _carPhysic: {fileID: 361385201684316173}
   _inputServis: {fileID: 4545733920424901916}
-  _enemyCar: {fileID: 0}
-  IsPlayerControl: 1
-  IsEnamyControl: 0
+  _respawn: {fileID: 0}
+  AI: {fileID: 0}
+  _identity: {fileID: 0}
 --- !u!114 &361385201684316173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2746,7 +2750,6 @@ MonoBehaviour:
   _brakeTorque: 0
   _maxSpead: 220
   _maxReverseSpeed: 40
-  _speed: 0
   _currentEngineRPM: 0
   _currentWhellTorque: 0
   _currentSteeringAngle: 0

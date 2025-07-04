@@ -5,7 +5,7 @@ using System.Security.Principal;
 
 
 
-public class CarControler : MonoBehaviour
+public class CarControler : NetworkBehaviour
 {
     
     [SerializeField] private CarPhysic _carPhysic;
@@ -88,5 +88,28 @@ public class CarControler : MonoBehaviour
        // Debug.Log((AI.VerticalInput, AI.HorizontalInput, AI.Brake));
         _carPhysic.Move(AI.VerticalInput, AI.HorizontalInput, AI.Brake);
     }
-  
+
+    [ClientRpc]
+    public void RpcSetupCar(bool isBot)
+    {
+        var rb = GetComponent<Rigidbody>();
+        var noCol = GetComponent<NoCollision>();
+
+        noCol?.EnablePassiveGhost(999f);
+        rb.isKinematic = true;
+
+        IsPlayerControl = !isBot;
+        IsEnamyControl = isBot;
+
+        gameObject.tag = isBot ? "Enemy" : "Player";
+    }
+    [ClientRpc]
+    public void RpcStartCar()
+    {
+        var rb = GetComponent<Rigidbody>();
+        var noCol = GetComponent<NoCollision>();
+
+        noCol?.Respawn();
+        rb.isKinematic = false;
+    }
 }
