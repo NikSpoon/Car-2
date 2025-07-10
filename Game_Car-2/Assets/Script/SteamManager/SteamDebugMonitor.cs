@@ -21,7 +21,7 @@ public class SteamDebugMonitor : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
-            Debug.Log("[SteamDebugMonitor] Initialized and will persist between scenes.");
+            // Debug.Log("[SteamDebugMonitor] Initialized and will persist between scenes.");
         }
         else
         {

@@ -42,10 +42,7 @@ public class RaceManager : MonoBehaviour
         {
             _raceCars.Add(playerName, new RaceCarData(carPrefab));
         }
-        else
-        {
-            Debug.LogWarning($"Машина с именем {playerName} уже зарегистрирована.");
-        }
+      
     }
 
     public RaceCarData GetRaceCarData(string playerName)

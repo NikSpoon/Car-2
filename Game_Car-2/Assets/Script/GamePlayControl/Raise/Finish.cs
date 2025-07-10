@@ -9,21 +9,7 @@ public class Finish : MonoBehaviour
     private List<GameObject> _CarColliders = new List<GameObject>();
 
     [SerializeField] private string[] targetTags;
-
-    [SerializeField] private Canvas _finishUI;
-
-    private void Awake()
-    {
-        if (_finishUI == null)
-        {
-            Debug.LogError("_finishUI не назначен!");
-        }
-        else
-        {
-            _finishUI.gameObject.SetActive(false);
-            Debug.Log("_finishUI отключён");
-        }
-    }
+    private CarGamePanel _gamePanel;
 
     private void Start()
     {
@@ -54,9 +40,14 @@ public class Finish : MonoBehaviour
             Debug.Log($"Проверяем тег {collider.tag}");
             if (other.tag == collider.tag)
             {
-                Debug.Log("Теги совпали! Показываем UI.");
-                _finishUI.gameObject.SetActive(true);
-                break;
+                _gamePanel = other.gameObject.GetComponent<CarGamePanel>();
+                if (_gamePanel != null)
+                {
+                    _gamePanel.ActivePanel(true);
+
+                    break;
+                }
+                
             }
         }
     }

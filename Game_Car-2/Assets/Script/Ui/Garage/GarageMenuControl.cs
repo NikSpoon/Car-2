@@ -5,31 +5,20 @@ using UnityEngine;
 public class GarageMenuControl : MonoBehaviour
 {
     [SerializeField] private InputServis _input;
-    [SerializeField] private RaiceStarter _raiceStarter;
-
-
-    [SerializeField] private GameObject _creator;
+   
     [SerializeField] private GameObject _bust;
     [SerializeField] private GameObject _options;
 
-
-
-    [SerializeField] private GameObject _creatorNull;
     [SerializeField] private GameObject _buy;
 
+    [SerializeField] private GameObject _panelMulti;
 
     private float _escapeHoldTime = 0f;
     private const float ESCAPE_HOLD_DURATION = 1.5f; // секунда(ы) удержания для полного закрытия
 
 
 
-    private void Start()
-    {
-        
-        
-        _creator.SetActive(true);
-        _creator.SetActive(false);
-    }
+    
     private void Update()
     {
         if (_input == null) return;
@@ -62,23 +51,10 @@ public class GarageMenuControl : MonoBehaviour
 
     public void OnClickStart()
     {
-
-        if (_raiceStarter != null && _raiceStarter.IsRaiceStarterFul)
-        {
-            
-            PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
-        }
-        else
-            _creatorNull.SetActive(true);
+        _panelMulti.SetActive(true);
+        _panelMulti.GetComponent<UISessionPanel>().OnClickStartGame();
     }
-    public void OnClickCeator()
-    {
-        if (ActivePanel() == null)
-            _creator.SetActive(true);
-        else
-            _creator.SetActive(false);
-
-    }
+   
     public void OnClickBust()
     {
         if (ActivePanel() == null)
@@ -124,9 +100,6 @@ public class GarageMenuControl : MonoBehaviour
     }
     private GameObject ActivePanel()
     {
-
-        if (_creatorNull.activeSelf) return _creatorNull;
-        if (_creator.activeSelf) return _creator;
         if (_bust.activeSelf) return _bust;
         if (_options.activeSelf) return _options;
         if (_buy.activeSelf) return _buy;
@@ -134,12 +107,10 @@ public class GarageMenuControl : MonoBehaviour
     }
     private void CloseAllPanels()
     {
-        _creatorNull.SetActive(false);
-        _creator.SetActive(false);
+      
         _bust.SetActive(false);
         _options.SetActive(false);
         _buy.SetActive(false);
-       
     }
 }
 

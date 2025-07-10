@@ -50,7 +50,7 @@ public class CarSpawner : NetworkBehaviour
             if (conn != null)
             {
                 
-                Debug.Log($"✅ Привязали машину к игроку {profile.playerName}");
+              //  Debug.Log($"✅ Привязали машину к игроку {profile.playerName}");
             }
            
             if (!bot)
@@ -67,17 +67,7 @@ public class CarSpawner : NetworkBehaviour
 
                     SetupCar(car, profile.playerName, false);
 
-                    Debug.Log($"[Server] Назначено управление машиной:{car}" +
-          $"Игрок: {profile.playerName}\n" +
-          $"NetID машины: {carIdentity.netId}\n" +
-          $"AssetID машины: {carIdentity.assetId}\n" +
-          $"Connection ID: {conn.connectionId}\n" +
-          $"isOwned: {carIdentity.isOwned}\n" +
-          $"isServer: {carIdentity.isServer}\n" +
-          $"isClient: {carIdentity.isClient}");
-
-
-                    // Получаем PlayerFollowCar из профиля игрока (например, компонент камеры)
+                   
                     var followCar = profile.gameObject.GetComponentInChildren<PlayerFollowCar>();
                     if (followCar != null)
                     {
@@ -160,7 +150,7 @@ public class CarSpawner : NetworkBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        Debug.Log("Все игроки готовы! Запускаем игру.");
+      //  Debug.Log("Все игроки готовы! Запускаем игру.");
 
     }
 
@@ -206,8 +196,7 @@ public class CarSpawner : NetworkBehaviour
     }
     private IEnumerator ServerStartRaceRoutine()
     {
-
-        yield return CountdownBeforeStart();
+        yield return new WaitForSeconds(0.1f);
 
         if (isServer)
         {
@@ -220,14 +209,16 @@ public class CarSpawner : NetworkBehaviour
         while (!NetworkServer.active)
             yield return null;
 
-        Debug.Log("✅ Server is active — waiting for players ready");
+        // Debug.Log("✅ Server is active — waiting for players ready");
 
         yield return WaitForAllPlayersReady();
 
-        Debug.Log("✅ Все игроки готовы — спавним машины");
+       // Debug.Log("✅ Все игроки готовы — спавним машины");
 
         SpawnMiror();
-        
+
+        yield return CountdownBeforeStart();
+
         yield return ServerStartRaceRoutine();
 
 
@@ -246,7 +237,6 @@ public class CarSpawner : NetworkBehaviour
     [Server]
     private void StartRace()
     {
-        Debug.Log("Стартуем гонку!");
 
         foreach (var car in allSpawnedCars)
         {

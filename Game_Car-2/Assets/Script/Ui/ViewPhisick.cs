@@ -23,7 +23,7 @@ public class ViewPhisick : MonoBehaviour
 
         while (_resp == null || _start == null || _carPhysic == null)
         {
-            Debug.LogError("Не найден объект NoCollision - " + _resp + ". CarSpawner -  " + _start);
+          
 
             GameObject car = GameObject.FindGameObjectWithTag("Player");
             GameObject StartObj = GameObject.FindGameObjectWithTag("Start");

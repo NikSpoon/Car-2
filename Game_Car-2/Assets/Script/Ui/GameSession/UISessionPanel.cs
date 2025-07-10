@@ -82,7 +82,25 @@ public class UISessionPanel : MonoBehaviour
     {
         panelSessionRoot.SetActive(false);
 
+    }
+    public void OnClickStartGame() 
+    {
+        if (lobbyUIManager.activeSessions.Count > 0)
+        {
+            foreach (var kvp in lobbyUIManager.activeSessions)
+            {
+                CSteamID firstLobbyId = kvp.Key;
 
+                Debug.Log($"🔗 Подключаемся к первому найденному лобби: {firstLobbyId}");
+                JoinById(firstLobbyId);
+                return; 
+            }
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Не удалось получить ID первого лобби — создаём новое.");
+            OnClickCreate();
+        }
     }
 
     private void OnLobbyCreated(CSteamID cSteamID)
@@ -111,22 +129,15 @@ public class UISessionPanel : MonoBehaviour
         updateTimer += Time.deltaTime;
         if (updateTimer >= updateInterval)
         {
-            
             updateTimer = 0f;
 
-
-
-            // Обновляем данные своего лобби, чтобы другие видели актуальное состояние
             steamLobbyManager.UpdateMyLobbyData();
            
-
-            // Запрашиваем новый список лобби
             steamLobbyManager.RequestLobbies();
 
             steamLobbyManager.UpdateLobbyListUI();
             
-            // Обновляем счётчик UI
-            sessionsCountText.text = $"Lobbies = {lobbyUIManager.activeSessions.Count}";
+            sessionsCountText.text = $"Lobbies : {lobbyUIManager.activeSessions.Count}";
         }
     }
 }

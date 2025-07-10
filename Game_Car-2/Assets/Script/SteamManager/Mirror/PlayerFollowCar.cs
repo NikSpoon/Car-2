@@ -19,7 +19,7 @@ public class PlayerFollowCar : NetworkBehaviour
     {
         if (bodyTransform == null)
         {
-            Debug.LogWarning("bodyTransform не назначен!");
+
             return;
         }
 

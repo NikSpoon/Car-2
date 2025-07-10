@@ -8,8 +8,8 @@ public class MainMenuControl : MonoBehaviour
     
     
     [SerializeField] private GameObject _options;
-    [SerializeField] private GameObject _save;
-    [SerializeField] private GameObject _multiplayer;
+   
+    [SerializeField] private GameObject _crerators;
   
 
 
@@ -58,19 +58,11 @@ public class MainMenuControl : MonoBehaviour
         }
     }
 
-    public void OnClickSave()
+    public void OnClickCrerators()
     {
         if (ActivePanel() == null)
         {
-            _save.SetActive(!_save.activeSelf);
-        }
-    }
-
-    public void OnClickMultiplayer()
-    {
-        if (ActivePanel() == null)
-        {
-            _multiplayer.SetActive(!_multiplayer.activeSelf);
+            _crerators.SetActive(!_crerators.activeSelf);
         }
     }
 
@@ -94,8 +86,8 @@ public class MainMenuControl : MonoBehaviour
     private GameObject ActivePanel()
     {
         if (_options.activeSelf) return _options;
-        if (_save.activeSelf) return _save;
-        if (_multiplayer.activeSelf) return _multiplayer;
+      
+        if (_crerators.activeSelf) return _crerators;
 
         return null;
     }
@@ -103,7 +95,7 @@ public class MainMenuControl : MonoBehaviour
     private void CloseAllPanels()
     {
         _options.SetActive(false);
-        _save.SetActive(false);
-        _multiplayer.SetActive(false);
+
+        _crerators.SetActive(false);
     }
 }

@@ -156,7 +156,7 @@ public class SteamLobbyManager : MonoBehaviour
         if (!networkManager.isNetworkActive)
         {
             networkManager.StartHost();
-            Debug.Log("Host started, SteamID: " + SteamUser.GetSteamID());
+           // Debug.Log("Host started, SteamID: " + SteamUser.GetSteamID());
         }
 
         // Ждём, пока сервер не станет активным
