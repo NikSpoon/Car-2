@@ -45,6 +45,8 @@ public class CarControler : NetworkBehaviour
             IsPlayerControl = true;
         else if (gameObject.tag == "Enemy")
             IsEnamyControl = true;
+
+     
     }
     void FixedUpdate()
     {
