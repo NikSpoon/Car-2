@@ -8,7 +8,7 @@ public class Chekpoint : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == GameObject.FindGameObjectWithTag(_targetTags))
-        {
+         {
             RaiseChekpoint manager = FindFirstObjectByType<RaiseChekpoint>();
             if (manager != null)
             {

@@ -24,16 +24,18 @@ public class CarUiChenger : NetworkBehaviour
         {
             _canvasForEnemy.SetActive(true);
             _bot.SetActive(true);
+            return;
+        }
+        else if (car.IsPlayerControl && !isOwned)
+        {
+            _canvasForEnemy.SetActive(true);
+            _other.SetActive(true);
+            return;
         }
         else if (car.IsPlayerControl)
         {
             _lokal.SetActive(true);
            
-        }
-        else if (car.IsPlayerControl && !isLocalPlayer)
-        {
-            _canvasForEnemy.SetActive(true);
-            _other.SetActive(true);
         }
     }
 }

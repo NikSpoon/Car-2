@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Finish : MonoBehaviour
+public class Finish : NetworkBehaviour
 {
     private List<GameObject> _CarColliders = new List<GameObject>();
 
@@ -34,19 +34,22 @@ public class Finish : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+       
         Debug.Log($"OnTriggerEnter: объект с тегом {other.tag} вошел в триггер");
         foreach (var collider in _CarColliders)
         {
             Debug.Log($"Проверяем тег {collider.tag}");
             if (other.tag == collider.tag)
             {
-                _gamePanel = other.gameObject.GetComponent<CarGamePanel>();
-                if (_gamePanel != null)
-                {
-                    _gamePanel.ActivePanel(true);
+               
+                    _gamePanel = other.gameObject.GetComponent<CarGamePanel>();
+                    if (_gamePanel != null)
+                    {
+                        _gamePanel.ActivePanel(true);
 
-                    break;
-                }
+                        break;
+                    }
+               
                 
             }
         }
