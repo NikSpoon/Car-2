@@ -11,7 +11,7 @@ public class CarSpawner : NetworkBehaviour
     [SerializeField] private Transform _start;
     [SerializeField] private CarDatabase carDatabase;
     [SerializeField] private CarDatabase enemyCarDatabase;
-  //  [SerializeField] private int enemyValue = 5;
+    //  [SerializeField] private int enemyValue = 5;
     [SerializeField] private int startTime = 10;
 
     public event Action<int, bool> OnWaitForStart;
@@ -26,12 +26,12 @@ public class CarSpawner : NetworkBehaviour
         StartCoroutine(InitRotine());
         start = false;
     }
-   
+
 
     [Server]
     private void SpawnMiror()
     {
-       
+
         // Берём всех игроков из сессии — и игроков с подключением, и ботов
         var session = FindFirstObjectByType<NetworkGameSession>();
         if (session == null)
@@ -42,21 +42,21 @@ public class CarSpawner : NetworkBehaviour
         foreach (var profile in session.syncedPlayers)
         {
             if (profile == null) continue;
-            
+
             var bot = profile.isBot;
 
             var conn = profile.connectionToClient;
 
             if (conn != null)
             {
-                
-              //  Debug.Log($"✅ Привязали машину к игроку {profile.playerName}");
+
+                //  Debug.Log($"✅ Привязали машину к игроку {profile.playerName}");
             }
-           
+
             if (!bot)
             {
                 var car = SpawnPlayer(profile);
-             
+
 
                 if (conn != null && conn.isReady)
                 {
@@ -67,7 +67,7 @@ public class CarSpawner : NetworkBehaviour
 
                     SetupCar(car, profile.playerName, false);
 
-                   
+
                     var followCar = profile.gameObject.GetComponentInChildren<PlayerFollowCar>();
                     if (followCar != null)
                     {
@@ -82,7 +82,7 @@ public class CarSpawner : NetworkBehaviour
                 }
 
                 SetupCar(car, profile.playerName, false);
-                
+
             }
             else
             {
@@ -115,7 +115,7 @@ public class CarSpawner : NetworkBehaviour
 
                 var conn = profile.connectionToClient;
 
-                
+
                 if (!profile.isBot)
                 {
                     if (conn != null)
@@ -130,17 +130,17 @@ public class CarSpawner : NetworkBehaviour
                     {
                         if (!(NetworkServer.active && NetworkClient.activeHost))
                         {
-                            
+
                             allReady = false;
                             break;
                         }
-                       
+
                     }
                 }
                 else
                 {
                     // Для ботов можно считать их всегда готовыми
-                    
+
                 }
             }
 
@@ -150,11 +150,11 @@ public class CarSpawner : NetworkBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-      //  Debug.Log("Все игроки готовы! Запускаем игру.");
+        //  Debug.Log("Все игроки готовы! Запускаем игру.");
 
     }
 
-  
+
     private GameObject SpawnPlayer(NetworkPlayerProfile profile)
     {
         var carPrefab = carDatabase.carUpgrades[profile.selectedCarIndex].upgrades[profile.selectedBodyUpgradeIndex].upgradePrefab;
@@ -202,20 +202,18 @@ public class CarSpawner : NetworkBehaviour
         {
             StartRace();
         }
-       
+
     }
     private IEnumerator InitRotine()
     {
         while (!NetworkServer.active)
             yield return null;
 
-        // Debug.Log("✅ Server is active — waiting for players ready");
-
         yield return WaitForAllPlayersReady();
 
-       // Debug.Log("✅ Все игроки готовы — спавним машины");
-
         SpawnMiror();
+
+        yield return WaitForAllPlayersInCars(); 
 
         yield return CountdownBeforeStart();
 
@@ -223,17 +221,78 @@ public class CarSpawner : NetworkBehaviour
 
 
     }
+    private IEnumerator WaitForAllPlayersInCars()
+    {
+        var session = FindFirstObjectByType<NetworkGameSession>();
+        if (session == null)
+        {
+            yield break;
+        }
+
+        while (true)
+        {
+            bool allInCars = true;
+
+            foreach (var profile in session.syncedPlayers)
+            {
+                if (profile == null) continue;
+
+                // Игнорируем ботов — считаем, что они уже "в машине"
+                if (profile.isBot)
+                    continue;
+
+                // Проверка: есть ли у игрока машина?
+                if (profile.carIdentity == null || profile.carIdentity.gameObject == null)
+                {
+                    allInCars = false;
+                    break;
+                }
+
+                // Опционально: Проверка, стоит ли машина на старте
+                var carPos = profile.carIdentity.transform.position;
+                var distanceToStart = Vector3.Distance(carPos, _start.position);
+                if (distanceToStart > 2f) // допуск ±2 метра
+                {
+                    allInCars = false;
+                    break;
+                }
+            }
+
+            if (allInCars)
+                break;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        Debug.Log("✅ Все игроки находятся в своих машинах на старте");
+    }
     private IEnumerator CountdownBeforeStart()
     {
         bool ghost = true;
+        var session = FindFirstObjectByType<NetworkGameSession>();
+
         for (int i = startTime; i > 0; i--)
         {
-            RpcUpdateCountdown(i, ghost);
+            foreach (var profile in session.syncedPlayers)
+            {
+                if (!profile.isBot && profile.connectionToClient != null)
+                {
+                    TargetUpdateCountdown(profile.connectionToClient, i, ghost);
+                }
+            }
+
             yield return new WaitForSeconds(1f);
         }
-        RpcUpdateCountdown(0, false);
-    }
 
+       
+        foreach (var profile in session.syncedPlayers)
+        {
+            if (!profile.isBot && profile.connectionToClient != null)
+            {
+                TargetUpdateCountdown(profile.connectionToClient, 0, false);
+            }
+        }
+    }
     [Server]
     private void StartRace()
     {
@@ -246,7 +305,7 @@ public class CarSpawner : NetworkBehaviour
             }
         }
         start = true;
-        
+
     }
 
     private Transform SetRootForMirrir(GameObject carObj)
@@ -256,16 +315,17 @@ public class CarSpawner : NetworkBehaviour
             if (child.CompareTag("Body"))
             {
                 // Нашли объект с тегом "Body"
-               // Debug.Log("Найден объект с тегом Body: " + child.name);
+                // Debug.Log("Найден объект с тегом Body: " + child.name);
                 // Можно вернуть child или что-то сделать
                 return child;
             }
-           
+
         }
         return null;
     }
-    [ClientRpc]
-    private void RpcUpdateCountdown(int time, bool ghost)
+    
+    [TargetRpc]
+    private void TargetUpdateCountdown(NetworkConnection conn, int time, bool ghost)
     {
         OnWaitForStart?.Invoke(time, ghost);
     }
@@ -274,8 +334,5 @@ public class CarSpawner : NetworkBehaviour
 
         Debug.Log("🚫 CarSpawner disabled!");
     }
-    private void Update()
-    {
-        
-    }
+    
 }

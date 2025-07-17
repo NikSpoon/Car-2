@@ -61,5 +61,5 @@ public class SteamLobbyUIManager : MonoBehaviour
             activeSessions.Add(lobbyId, panel);
         }
     }
-  
+
 }

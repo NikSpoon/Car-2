@@ -1,55 +1,54 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class ViewPhisick : MonoBehaviour
+public class ViewPhysics : MonoBehaviour
 {
-    private CarPhysic _carPhysic;
-    private NoCollision _resp;
     private CarSpawner _start;
+    
+    [SerializeField] private CarPhysic _carPhysic;
+    [SerializeField] private NoCollision _resp;
+    [SerializeField] private NetworkIdentity _networkIdentity;
+    
     [SerializeField] private TextMeshProUGUI _carSpeadText;
     [SerializeField] private TextMeshProUGUI _engineRPMText;
     [SerializeField] private TextMeshProUGUI _whellTorqueText;
 
     [SerializeField] private TextMeshProUGUI _timeNoCollision;
     [SerializeField] private TextMeshProUGUI _startTimer;
+
     private void Start()
     {
+            if (!_networkIdentity.isOwned) return;
+        
+        
         StartCoroutine(MyAwake());
     }
     private IEnumerator MyAwake()
     {
-        yield return new WaitForSeconds(1f);
 
         while (_resp == null || _start == null || _carPhysic == null)
         {
-          
-
-            GameObject car = GameObject.FindGameObjectWithTag("Player");
             GameObject StartObj = GameObject.FindGameObjectWithTag("Start");
-
-            if (car != null)
-            {
-                _carPhysic = car.GetComponent<CarPhysic>();
-                _resp = car.GetComponent<NoCollision>();
-            }
 
             if (StartObj != null)
             {
                 _start = StartObj.GetComponent<CarSpawner>();
             }
-
-            yield return new WaitForSeconds(1);
+            yield return _start;
         }
 
         // ✅ Подписывайся на события здесь, когда всё точно найдено!
+
         _carPhysic.OnSpeadChanged += OnSpead;
         _resp.OnNoCollision += OnNoCollision;
         _start.OnWaitForStart += OnWaitForStart;
 
-        if (_carSpeadText != null) _carSpeadText.text = "Spead = 0";
-        if (_engineRPMText != null) _engineRPMText.text = "EngineRPM = 0";
-        if (_whellTorqueText != null) _whellTorqueText.text = "WhellTorque = 0";
+
+        _carSpeadText.text = "Speed = 0";
+        _engineRPMText.text = "EngineRPM = 0";
+        _whellTorqueText.text = "WheelTorque = 0";
 
         if (_timeNoCollision != null)
         {
@@ -58,12 +57,15 @@ public class ViewPhisick : MonoBehaviour
         }
     }
 
-   
+
     private void OnDestroy()
     {
         _carPhysic.OnSpeadChanged -= OnSpead;
         _resp.OnNoCollision -= OnNoCollision;
-        _start.OnWaitForStart -= OnWaitForStart;
+       
+        if (_start != null) 
+            _start.OnWaitForStart -= OnWaitForStart;
+
     }
     private void OnWaitForStart(int time, bool IsTimerActive)
     {

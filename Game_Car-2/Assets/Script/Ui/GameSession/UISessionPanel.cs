@@ -38,6 +38,11 @@ public class UISessionPanel : MonoBehaviour
 
     public void OnClickCreate()
     {
+        if (NetworkServer.active && NetworkServer.activeHost)
+        {
+            panelSessionRoot.SetActive(true);
+            return;
+        }
         steamLobbyManager.CreateLobby();
 
         panelSessionRoot.SetActive(true);
@@ -70,6 +75,11 @@ public class UISessionPanel : MonoBehaviour
     }
     public void JoinById(CSteamID id)
     {
+        if (NetworkServer.active)
+        {
+            panelSessionRoot.SetActive(true);
+            return;
+        }
         StartCoroutine(ConnectAndJoin(id));
         panelSessionRoot.SetActive(true);
     }
@@ -85,20 +95,21 @@ public class UISessionPanel : MonoBehaviour
     }
     public void OnClickStartGame() 
     {
-        if (lobbyUIManager.activeSessions.Count > 0)
+        if (NetworkServer.active && NetworkServer.activeHost)
+        {
+            panelSessionRoot.SetActive(true);
+        }
+        else if (lobbyUIManager.activeSessions.Count > 0)
         {
             foreach (var kvp in lobbyUIManager.activeSessions)
             {
                 CSteamID firstLobbyId = kvp.Key;
-
-                Debug.Log($"🔗 Подключаемся к первому найденному лобби: {firstLobbyId}");
                 JoinById(firstLobbyId);
                 return; 
             }
         }
         else
         {
-            Debug.LogWarning("⚠️ Не удалось получить ID первого лобби — создаём новое.");
             OnClickCreate();
         }
     }
@@ -126,6 +137,10 @@ public class UISessionPanel : MonoBehaviour
 
     private void Update()
     {
+        if (!NetworkServer.active && !NetworkServer.activeHost) 
+        {
+           return;
+        }
         updateTimer += Time.deltaTime;
         if (updateTimer >= updateInterval)
         {

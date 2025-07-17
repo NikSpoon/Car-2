@@ -25,8 +25,6 @@ public class UIGameSession : MonoBehaviour
     private void OnEnable()
     {
         startPanel.SetActive(false);
-
-
     }
 
     public void SetSession(NetworkGameSession session)
@@ -84,11 +82,9 @@ public class UIGameSession : MonoBehaviour
 
     public void RefreshSessionUI()
     {
-        if (currentSession == null)
-        {
-            Debug.LogWarning("RefreshSessionUI: currentSession is null");
-            return;
-        }
+        if (currentSession == null) return;
+
+     
         sessionNameText.text = $"Сессия: {currentSession.sessionName}";
         sessionMapName.text = $"Карта: {currentSession.mapName}";
         sessionPlayersValue.text = $"Игроков: {currentSession.syncedPlayers.Count}";
@@ -147,14 +143,20 @@ public class UIGameSession : MonoBehaviour
         startPanel.SetActive(false);
     }
 
-
+    public void ShowSessionClosedMessage()
+    {
+        // Покажи сообщение "Сессия завершена хостом" или открой окно
+        Debug.Log("⚠️ Вы были удалены, потому что хост покинул игру.");
+        // Пример: OpenPopup("Сессия завершена", "Хост покинул игру.");
+    }
     public void StartRace()
     {
         if (currentSession != null && currentSession.isServer)
         {
             currentSession.RequestStartRace();
-            //PlayerDataManager.Instance.AppSystem.Trigger(FSM.App.AppTriger.ToGameplay);
+           
         }
+        
     }
     public void AddBot()
     {

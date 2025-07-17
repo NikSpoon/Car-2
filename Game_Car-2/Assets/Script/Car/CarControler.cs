@@ -38,7 +38,10 @@ public class CarControler : NetworkBehaviour
                 AI = GetComponentInChildren<BaseAIController>();
         }
     }
-
+    public CarPhysic GetPhisic(CarPhysic carPhysic)
+    {
+       return _carPhysic;
+    }
     private void Start()
     {
         if (gameObject.tag == ("Player"))

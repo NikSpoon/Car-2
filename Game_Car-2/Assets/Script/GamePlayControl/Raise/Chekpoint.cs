@@ -1,27 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using Mirror;
 using UnityEngine;
 
-public class Chekpoint : MonoBehaviour
+public class Checkpoint : NetworkBehaviour
 {
-    [SerializeField] private string _targetTags = "Player";
+    [SerializeField] private string _targetTag = "Player";
     public int checkpointIndex = 0;
-    public void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == GameObject.FindGameObjectWithTag(_targetTags))
-         {
-            RaiseChekpoint manager = FindFirstObjectByType<RaiseChekpoint>();
-            if (manager != null)
-            {
-                manager.UpdateCheckpoint(transform);
-            }
+        if (other.CompareTag(_targetTag))
+        {
+            var player = other.GetComponent<NetworkIdentity>();
 
-            var meshRenderer = GetComponent<MeshRenderer>();
-            if (meshRenderer != null)
+            if (player != null && player.connectionToClient != null)
             {
-                meshRenderer.enabled = false;
-            }
+                RaiseChekpoint manager = FindFirstObjectByType<RaiseChekpoint>();
+                if (manager != null)
+                {
+                    manager.UpdateCheckpoint(transform);
+                }
 
+                TargetHideCheckpoint(player.connectionToClient);
+            }
         }
+    
 
 
         if (other.CompareTag("Enemy"))
@@ -37,6 +39,16 @@ public class Chekpoint : MonoBehaviour
 
                 }
             }
+        }
+    }
+
+    [TargetRpc]
+    private void TargetHideCheckpoint(NetworkConnection target)
+    {
+        var meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer != null)
+        {
+            meshRenderer.enabled = false;
         }
     }
 }

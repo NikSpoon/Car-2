@@ -23,6 +23,8 @@ public class NetworkGameSession : NetworkBehaviour
     public UIGameSession uIGameSession { get; set; }
     public SteamLobbyManager SteamLobbyManager { get; private set; }
 
+    public bool StartRaceSession { get; private set; }
+
     [SerializeField] private GameObject botPrefab;
     [SerializeField] private RaceDatabase raceDatabase;
     private string pendingSessionId;
@@ -31,8 +33,7 @@ public class NetworkGameSession : NetworkBehaviour
     public RaceData currentRaceData;
     private BotCreator botCreator;
 
-    public bool onStart;
-    public int timeToStart;
+    private int timeToStart;
 
     private void Awake()
     {
@@ -73,7 +74,7 @@ public class NetworkGameSession : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-
+        StartRaceSession = false;
         sessionId = pendingSessionId ;
         sessionName =  pendingSessionName;
 
@@ -139,16 +140,45 @@ public class NetworkGameSession : NetworkBehaviour
         syncedPlayers.Remove(profile);
         Debug.Log($"👋 Игрок удалён из сессии: {profile.playerName}");
         if (profile == hostPlayer)
-        
-        { 
-
-
+        {
+            Debug.Log("🚨 Хост покинул сессию. Закрытие сессии...");
+            CloseSession();
         }
 
-            
-
     }
+    [Server]
+    private void CloseSession()
+    {
+        // Удаляем всех игроков
+        syncedPlayers.Clear();
 
+        // Оповестим клиентов, что сессия закрыта
+        RpcSessionClosed();
+
+        // Удаляем из Steam лобби
+        if (SteamManager.Initialized && lobbyId.IsValid())
+        {
+            SteamMatchmaking.LeaveLobby(lobbyId);
+            SteamMatchmaking.SetLobbyData(lobbyId, "MapName", "");
+            SteamMatchmaking.SetLobbyData(lobbyId, "MaxPlayers", "0");
+        }
+
+        // Удаляем объект сессии с сервера
+        NetworkServer.Destroy(gameObject);
+    }
+    [ClientRpc]
+    private void RpcSessionClosed()
+    {
+        Debug.Log("❌ Сессия завершена хостом");
+
+        if (uIGameSession != null)
+        {
+            uIGameSession.ShowSessionClosedMessage();
+        }
+
+        // Например, вернуться в главное меню:
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
     [Server]
     public void SetRaceData(RaceData data)
     {
@@ -201,14 +231,13 @@ public class NetworkGameSession : NetworkBehaviour
 
     public void RequestStartRace()
     {
+
         if (isServer)
         {
-            // Если вызвал сервер (хост), сразу запускаем гонку
             StartRace();
         }
         else if (authority)
         {
-            // Если клиент с authority, отправляем запрос серверу
             CmdRequestStartRace();
         }
         else
@@ -237,23 +266,28 @@ public class NetworkGameSession : NetworkBehaviour
             Debug.LogError("StartRace: нет данных гонки");
             return;
         }
-
-        raceStarted = true;
         
+       
+        if (SteamManager.Initialized && SteamLobbyManager != null && SteamLobbyManager.CurrentLobbyID.IsValid())
+        {
+            SteamMatchmaking.SetLobbyType(SteamLobbyManager.CurrentLobbyID, ELobbyType.k_ELobbyTypePrivate);
+            SteamMatchmaking.SetLobbyData(SteamLobbyManager.CurrentLobbyID, "Joinable", "false");
+            
+        }
 
-        // Запускаем корутину обратного отсчёта
+        StartRaceSession = true;
+        raceStarted = true;
+
         StartCoroutine(StartTimer());
      
     }
    
-    // Таймер с обратным отсчётом и рассылкой времени всем клиентам
     [Server]
     private IEnumerator StartTimer()
     {
         int time = 10;
         timeToStart = time;
-        onStart = true;
-
+        
         while (timeToStart > 0)
         {
             RpcUpdateTimer(timeToStart);
@@ -262,8 +296,7 @@ public class NetworkGameSession : NetworkBehaviour
         }
 
         RpcUpdateTimer(0);
-        onStart = false;
-
+        
         // После таймера переключаем сцену и уведомляем клиентов переключить UI
         NetworkManager.singleton.ServerChangeScene(mapName);
 

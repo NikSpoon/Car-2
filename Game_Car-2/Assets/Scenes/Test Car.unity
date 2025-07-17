@@ -18964,6 +18964,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3938497207869904307, guid: a444ede2d035e1643b5c674c36c08b89, type: 3}
+      propertyPath: sceneId
+      value: 3689234023
+      objectReference: {fileID: 0}
     - target: {fileID: 6386637524472633186, guid: a444ede2d035e1643b5c674c36c08b89, type: 3}
       propertyPath: m_Name
       value: Finish
@@ -70772,6 +70776,7 @@ GameObject:
   - component: {fileID: 489133813}
   - component: {fileID: 489133812}
   - component: {fileID: 489133811}
+  - component: {fileID: 489133815}
   m_Layer: 9
   m_Name: ChekPoint (4)
   m_TagString: Chekpoint
@@ -70880,8 +70885,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &489133815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489133809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3619337261
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &492439515
 GameObject:
   m_ObjectHideFlags: 0
@@ -85994,6 +86019,7 @@ GameObject:
   - component: {fileID: 593510714}
   - component: {fileID: 593510713}
   - component: {fileID: 593510712}
+  - component: {fileID: 593510716}
   m_Layer: 9
   m_Name: ChekPoint (5)
   m_TagString: Chekpoint
@@ -86102,8 +86128,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &593510716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593510710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1128847045
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &593614378
 GameObject:
   m_ObjectHideFlags: 0
@@ -102940,6 +102986,7 @@ GameObject:
   - component: {fileID: 723894919}
   - component: {fileID: 723894918}
   - component: {fileID: 723894917}
+  - component: {fileID: 723894921}
   m_Layer: 9
   m_Name: ChekPoint (3)
   m_TagString: Chekpoint
@@ -103048,8 +103095,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &723894921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723894915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 212493284
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &725148777
 GameObject:
   m_ObjectHideFlags: 0
@@ -139652,6 +139719,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 441724a6b87351541b190c1145406d9d, type: 3}
+--- !u!114 &954110818 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5264517438565025541, guid: 441724a6b87351541b190c1145406d9d, type: 3}
+  m_PrefabInstance: {fileID: 954110817}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e224b38542963cd43bda83ca8eb64a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &954638324
 GameObject:
   m_ObjectHideFlags: 0
@@ -176075,6 +176153,7 @@ GameObject:
   - component: {fileID: 1185168434}
   - component: {fileID: 1185168433}
   - component: {fileID: 1185168432}
+  - component: {fileID: 1185168436}
   m_Layer: 9
   m_Name: ChekPoint (6)
   m_TagString: Chekpoint
@@ -176183,8 +176262,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1185168436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185168430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 4116872128
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1185551117
 GameObject:
   m_ObjectHideFlags: 0
@@ -190694,6 +190793,7 @@ GameObject:
   - component: {fileID: 1283378328}
   - component: {fileID: 1283378327}
   - component: {fileID: 1283378326}
+  - component: {fileID: 1283378330}
   m_Layer: 9
   m_Name: ChekPoint
   m_TagString: Chekpoint
@@ -190802,8 +190902,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1283378330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283378324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2407572788
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1283968645
 GameObject:
   m_ObjectHideFlags: 0
@@ -190817,6 +190937,7 @@ GameObject:
   - component: {fileID: 1283968649}
   - component: {fileID: 1283968648}
   - component: {fileID: 1283968647}
+  - component: {fileID: 1283968651}
   m_Layer: 9
   m_Name: ChekPoint (2)
   m_TagString: Chekpoint
@@ -190925,8 +191046,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1283968651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283968645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2570270366
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1286332949
 GameObject:
   m_ObjectHideFlags: 0
@@ -200038,6 +200179,7 @@ GameObject:
   - component: {fileID: 1360653800}
   - component: {fileID: 1360653799}
   - component: {fileID: 1360653798}
+  - component: {fileID: 1360653802}
   m_Layer: 9
   m_Name: ChekPoint (12)
   m_TagString: Chekpoint
@@ -200146,8 +200288,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1360653802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360653796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 4011245478
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1360857063
 GameObject:
   m_ObjectHideFlags: 0
@@ -217502,6 +217664,7 @@ GameObject:
   - component: {fileID: 1483594537}
   - component: {fileID: 1483594536}
   - component: {fileID: 1483594535}
+  - component: {fileID: 1483594539}
   m_Layer: 9
   m_Name: ChekPoint (7)
   m_TagString: Chekpoint
@@ -217610,8 +217773,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1483594539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483594533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1100577931
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1484766042
 GameObject:
   m_ObjectHideFlags: 0
@@ -256723,6 +256906,7 @@ GameObject:
   - component: {fileID: 1770095628}
   - component: {fileID: 1770095627}
   - component: {fileID: 1770095626}
+  - component: {fileID: 1770095630}
   m_Layer: 9
   m_Name: ChekPoint (9)
   m_TagString: Chekpoint
@@ -256831,8 +257015,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1770095630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770095624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1388101506
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1770203317
 GameObject:
   m_ObjectHideFlags: 0
@@ -266520,6 +266724,7 @@ GameObject:
   - component: {fileID: 1825456945}
   - component: {fileID: 1825456944}
   - component: {fileID: 1825456943}
+  - component: {fileID: 1825456947}
   m_Layer: 9
   m_Name: ChekPoint (10)
   m_TagString: Chekpoint
@@ -266628,8 +266833,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1825456947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825456941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 2864015698
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1826645083
 GameObject:
   m_ObjectHideFlags: 0
@@ -267951,6 +268176,7 @@ GameObject:
   - component: {fileID: 1833914326}
   - component: {fileID: 1833914325}
   - component: {fileID: 1833914324}
+  - component: {fileID: 1833914328}
   m_Layer: 9
   m_Name: ChekPoint (1)
   m_TagString: Chekpoint
@@ -268059,8 +268285,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1833914328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833914322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 406279157
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1834220083
 GameObject:
   m_ObjectHideFlags: 0
@@ -274210,6 +274456,7 @@ GameObject:
   - component: {fileID: 1879827465}
   - component: {fileID: 1879827464}
   - component: {fileID: 1879827463}
+  - component: {fileID: 1879827467}
   m_Layer: 9
   m_Name: ChekPoint (11)
   m_TagString: Chekpoint
@@ -274318,8 +274565,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &1879827467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879827461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3853592420
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &1880797616
 GameObject:
   m_ObjectHideFlags: 0
@@ -302907,6 +303174,7 @@ GameObject:
   - component: {fileID: 2011771413}
   - component: {fileID: 2011771412}
   - component: {fileID: 2011771411}
+  - component: {fileID: 2011771415}
   m_Layer: 9
   m_Name: ChekPoint (8)
   m_TagString: Chekpoint
@@ -303015,8 +303283,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 0
+--- !u!114 &2011771415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011771409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1000587028
+  _assetId: 0
+  serverOnly: 0
+  visibility: 0
+  hasSpawned: 0
 --- !u!1 &2013467266
 GameObject:
   m_ObjectHideFlags: 0
@@ -324989,6 +325277,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4878069714887311951, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
+      propertyPath: sceneId
+      value: 563136448
+      objectReference: {fileID: 0}
     - target: {fileID: 5202970209009377150, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.11
@@ -324996,7 +325288,7 @@ PrefabInstance:
     - target: {fileID: 5814051734608434233, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
       propertyPath: _carSpawner
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 954110818}
     - target: {fileID: 7388808088295807905, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -601.5205
@@ -325041,9 +325333,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8153767626456280210, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
+      propertyPath: sceneId
+      value: 955100666
+      objectReference: {fileID: 0}
     - target: {fileID: 8329834057855403782, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8871986720483554644, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}
+      propertyPath: sceneId
+      value: 3744339461
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 87854834912844883, guid: e32f434dffb4a3b4489e8fe44d99983b, type: 3}

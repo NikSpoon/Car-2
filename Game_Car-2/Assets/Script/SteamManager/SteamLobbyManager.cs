@@ -142,11 +142,9 @@ public class SteamLobbyManager : MonoBehaviour
         CSteamID hostAddress = SteamUser.GetSteamID();
         // Сохраняем Steam ID созданного лобби
         CurrentLobbyID = new CSteamID(result.m_ulSteamIDLobby);
-        Debug.Log("Лобби создано: " + CurrentLobbyID);
-
+     
         // Устанавливаем в данных лобби адрес хоста — SteamID пользователя, который создал лобби
         SteamMatchmaking.SetLobbyData(CurrentLobbyID, "HostAddress", SteamUser.GetSteamID().ToString());
-
 
         // Запускаем хост-сервер Mirror (сервер + клиент на одном ПК)
         StartCoroutine(StartHostAndSpawnSession());
@@ -414,6 +412,13 @@ public class SteamLobbyManager : MonoBehaviour
            
         }
     }
+    public void CloseLobby() 
+    {
+        SteamMatchmaking.LeaveLobby(CurrentLobbyID);
+        OnLobbyEmpty?.Invoke(CurrentLobbyID);
+        CurrentLobbyID = CSteamID.Nil;
+    }
+
     public void DestroySessionAndCloseLobby()
     {
         // 1️⃣ Уничтожаем сетевую сессию, если есть
@@ -481,5 +486,5 @@ public class SteamLobbyManager : MonoBehaviour
     {
         DestroySessionAndCloseLobby();
     }
-
+  
 }

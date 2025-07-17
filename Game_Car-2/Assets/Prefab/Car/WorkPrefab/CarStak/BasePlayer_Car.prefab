@@ -821,8 +821,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855f8d512ad7bc044bfdb3c45f0d4cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   _panel: {fileID: 4387895079877310631}
-  _identity: {fileID: -3602775841264415536}
 --- !u!114 &6018674657223827035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2844,6 +2846,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8525389794429708724, guid: 61701663047c2e74297ab027985c8bc8, type: 3}
+      propertyPath: _resp
+      value: 
+      objectReference: {fileID: 2452975436662182850}
+    - target: {fileID: 8525389794429708724, guid: 61701663047c2e74297ab027985c8bc8, type: 3}
+      propertyPath: _carPhysic
+      value: 
+      objectReference: {fileID: 5999757151370468787}
+    - target: {fileID: 8525389794429708724, guid: 61701663047c2e74297ab027985c8bc8, type: 3}
+      propertyPath: _networkIdentity
+      value: 
+      objectReference: {fileID: -3602775841264415536}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

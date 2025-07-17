@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7188719344388708661}
   - component: {fileID: 5841697708321560379}
   - component: {fileID: 4400116315067443035}
-  - component: {fileID: -4255284791844832954}
+  - component: {fileID: 3938497207869904307}
   m_Layer: 0
   m_Name: Finish
   m_TagString: Finish
@@ -85,9 +85,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449e0d74dc3a4a4582d2408d528615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags: Player
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  _targetTag: Player
   checkpointIndex: 5
---- !u!114 &-4255284791844832954
+--- !u!114 &3938497207869904307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
